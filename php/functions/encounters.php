@@ -18,21 +18,21 @@ function PAcalculateLife($level,$heroes,$game,$stamina,$mlevel,$might1,$might2,$
 	else if ($more_monsters_later == 3){$x = 9;}
 	else if ($more_monsters_later == 4){$x = 7;}
 	else {$x = 1;}
-	switch (mt_rand(0,$x))
+	switch (mt_rand(0, max((int)(0), (int)($x))))
 	{
-		case 0:		$monsters_here = mt_rand(1,$heroes);				break;
-		case 1:		$monsters_here = mt_rand(1,$heroes);				break;
-		case 2:		$monsters_here = mt_rand(1,$heroes);				break;
-		case 3:		$monsters_here = mt_rand(1,$heroes);				break;
-		case 4:		$monsters_here = mt_rand(1,$heroes);				break;
-		case 5:		$monsters_here = floor(mt_rand(1,($heroes*1.5)));	break;
-		case 6:		$monsters_here = floor(mt_rand(1,($heroes*1.5)));	break;
-		case 7:		$monsters_here = floor(mt_rand(1,($heroes*1.5)));	break;
-		case 8:		$monsters_here = floor(mt_rand(1,($heroes*1.75)));	break;
-		case 9:		$monsters_here = floor(mt_rand(1,($heroes*1.75)));	break;
-		case 10:	$monsters_here = mt_rand(1,($heroes*2));			break;
-		case 11:	$monsters_here = mt_rand(1,($heroes*2));			break;
-		case 12:	$monsters_here = mt_rand(1,($heroes*3));			break;
+		case 0:		$monsters_here = mt_rand(1, max((int)(1), (int)($heroes)));				break;
+		case 1:		$monsters_here = mt_rand(1, max((int)(1), (int)($heroes)));				break;
+		case 2:		$monsters_here = mt_rand(1, max((int)(1), (int)($heroes)));				break;
+		case 3:		$monsters_here = mt_rand(1, max((int)(1), (int)($heroes)));				break;
+		case 4:		$monsters_here = mt_rand(1, max((int)(1), (int)($heroes)));				break;
+		case 5:		$monsters_here = floor(mt_rand(1, max((int)(1), (int)(($heroes*1.5)))));	break;
+		case 6:		$monsters_here = floor(mt_rand(1, max((int)(1), (int)(($heroes*1.5)))));	break;
+		case 7:		$monsters_here = floor(mt_rand(1, max((int)(1), (int)(($heroes*1.5)))));	break;
+		case 8:		$monsters_here = floor(mt_rand(1, max((int)(1), (int)(($heroes*1.75)))));	break;
+		case 9:		$monsters_here = floor(mt_rand(1, max((int)(1), (int)(($heroes*1.75)))));	break;
+		case 10:	$monsters_here = mt_rand(1, max((int)(1), (int)(($heroes*2))));			break;
+		case 11:	$monsters_here = mt_rand(1, max((int)(1), (int)(($heroes*2))));			break;
+		case 12:	$monsters_here = mt_rand(1, max((int)(1), (int)(($heroes*3))));			break;
 	}
 
 	if ($monsters_here > 1){$adj = "are";} else {$adj = "is";}
@@ -40,14 +40,14 @@ function PAcalculateLife($level,$heroes,$game,$stamina,$mlevel,$might1,$might2,$
 
 	while ($monsters_here > 0) :
 
-		if ($game == "Mutant Future"){ $hit_dice = mt_rand($might1, $might2); }
+		if ($game == "Mutant Future"){ $hit_dice = mt_rand($might1, max((int)($might1), (int)($might2))); }
 		else
 		{
 			$life_cycle = $mlevel;
 			$hit_dice = 0;
 
 			while ($life_cycle > 0) :
-				$hit_dice = $hit_dice + mt_rand($might1,($might1 *$might2));
+				$hit_dice = $hit_dice + mt_rand($might1, max((int)($might1), (int)(($might1 *$might2))));
 				$life_cycle = $life_cycle - 1;
 			endwhile;
 
@@ -85,7 +85,7 @@ function calculateLife($level,$heroes,$m_app_min,$m_app_max,$m_hp_min,$m_hp_max,
 
 		if ($more_monsters_later > 1){$monsters_here = CEIL($monsters_here / $more_monsters_later);} // FOR MORE THAN ONE TYPE OF MONSTER IN A ROOM //
 
-		if ($tt_vary > 0){$monsters_here = mt_rand(1,$monsters_here);}
+		if ($tt_vary > 0){$monsters_here = mt_rand(1, max((int)(1), (int)($monsters_here)));}
 
 		if ($monsters_here < 1){$monsters_here = 1;}
 		if ($monsters_here > 1){$adj = "are";} else {$adj = "is";}
@@ -117,13 +117,21 @@ function calculateLife($level,$heroes,$m_app_min,$m_app_max,$m_hp_min,$m_hp_max,
 		$monster_life = $m_hp_max;											// 				   8hp
 		$monsters_here = round($character_life / $monster_life);			//	120hp / 8hp = 15 monsters
 			if ($monster_life < 1){$monsters_here = 1;}						// FOR THE MOLDS AND PHANTOMS
-			if ($monsters_here > $m_app_max){$monsters_here = $m_app_max;}
 
-		$monsters_here = mt_rand($m_app_min,$monsters_here);
-		if ($monsters_here > (mt_rand($heroes,($level * $heroes)))){$monsters_here = mt_rand($heroes,($level * $heroes) + mt_rand(1,$level));}
+            if ($monsters_here > $m_app_max){$monsters_here = $m_app_max;}
+        // PHP 8 Safety: Guarantee the max boundary is at least equal to the min boundary
+        if ($monsters_here < $m_app_min) { $monsters_here = $m_app_min; }
+
+        $monsters_here = mt_rand($m_app_min, max((int)($m_app_min), (int)($monsters_here)));
+
+        $max_boundary_1 = max($heroes, ($level * $heroes));
+        if ($monsters_here > mt_rand($heroes, max((int)($heroes), (int)($max_boundary_1)))) {
+            $max_boundary_2 = max($heroes, ($level * $heroes) + mt_rand(1, max((int)(1), (int)(max(1, $level)))));
+            $monsters_here = mt_rand($heroes, max((int)($heroes), (int)($max_boundary_2)));
+        }
 		$monsters_min = $monsters_here - 2;		if ($monsters_min < 1){$monsters_min = 1;}
 		$monsters_max = $monsters_here + 2;
-		$monsters_here = mt_rand($monsters_min,$monsters_max);
+		$monsters_here = mt_rand($monsters_min, max((int)($monsters_min), (int)($monsters_max)));
 			if ($level > 0){} else {$monsters_here = mt_rand(1,10);}
 		if ($more_monsters_later > 1){$monsters_here = CEIL($monsters_here / $more_monsters_later);} // FOR MORE THAN ONE TYPE OF MONSTER IN A ROOM //
 		if ($monsters_here < 1){$monsters_here = 1;}
@@ -133,7 +141,7 @@ function calculateLife($level,$heroes,$m_app_min,$m_app_max,$m_hp_min,$m_hp_max,
 		$hit_points = "&nbsp;--&nbsp;There&nbsp;" . $adj . "&nbsp;" . $monsters_here . "&nbsp;in&nbsp;this&nbsp;area&nbsp;[" . $myhp . ":&nbsp;";
 
 		while ($monsters_here > 0) :
-			$my_hit_points = mt_rand($m_hp_min,$m_hp_max);
+			$my_hit_points = mt_rand($m_hp_min, max((int)($m_hp_min), (int)($m_hp_max)));
 			if ($my_hit_points < 1){$my_hit_points = 1;}
 			$hit_points = $hit_points . $my_hit_points . ",&nbsp;";
 			$monsters_here = $monsters_here - 1;
@@ -150,11 +158,11 @@ function calculateLife($level,$heroes,$m_app_min,$m_app_max,$m_hp_min,$m_hp_max,
 			if ($monster_life < 1){$monsters_here = 1;}						// FOR THE MOLDS AND PHANTOMS
 			if ($monsters_here > $m_app_max){$monsters_here = $m_app_max;}
 
-		$monsters_here = mt_rand($m_app_min,$monsters_here);
-		if ($monsters_here > (mt_rand($heroes,($level * $heroes)))){$monsters_here = mt_rand($heroes,($level * $heroes) + mt_rand(1,$level));}
+		$monsters_here = mt_rand($m_app_min, max((int)($m_app_min), (int)($monsters_here)));
+		if ($monsters_here > (mt_rand($heroes, max((int)($heroes), (int)(($level * $heroes)))))){$monsters_here = mt_rand($heroes, max((int)($heroes), (int)(($level * $heroes))) + mt_rand(1, max((int)(1), (int)($level))));}
 		$monsters_min = $monsters_here - 2;		if ($monsters_min < 1){$monsters_min = 1;}
 		$monsters_max = $monsters_here + 2;
-		$monsters_here = mt_rand($monsters_min,$monsters_max);
+		$monsters_here = mt_rand($monsters_min, max((int)($monsters_min), (int)($monsters_max)));
 			if ($level > 0){} else {$monsters_here = mt_rand(1,10);}
 		if ($more_monsters_later > 1){$monsters_here = CEIL($monsters_here / $more_monsters_later);} // FOR MORE THAN ONE TYPE OF MONSTER IN A ROOM //
 		if ($monsters_here < 1){$monsters_here = 1;}
@@ -164,7 +172,7 @@ function calculateLife($level,$heroes,$m_app_min,$m_app_max,$m_hp_min,$m_hp_max,
 		$hit_points = "&nbsp;--&nbsp;There&nbsp;" . $adj . "&nbsp;" . $monsters_here . "&nbsp;in&nbsp;this&nbsp;area&nbsp;[" . $myhp . ":&nbsp;";
 
 		while ($monsters_here > 0) :
-			$my_hit_points = mt_rand($m_hp_min,$m_hp_max);
+			$my_hit_points = mt_rand($m_hp_min, max((int)($m_hp_min), (int)($m_hp_max)));
 			if ($my_hit_points < 1){$my_hit_points = 1;}
 			$hit_points = $hit_points . $my_hit_points . ",&nbsp;";
 			$monsters_here = $monsters_here - 1;
@@ -185,11 +193,11 @@ function calculateLife($level,$heroes,$m_app_min,$m_app_max,$m_hp_min,$m_hp_max,
 			if ($monster_life < 1){$monsters_here = 1;}						// FOR THE MOLDS AND PHANTOMS
 			if ($monsters_here > $m_app_max){$monsters_here = $m_app_max;}
 
-		$monsters_here = mt_rand($m_app_min,$monsters_here);
-		if ($monsters_here > (mt_rand($heroes,($level * $heroes)))){$monsters_here = mt_rand($heroes,($level * $heroes) + mt_rand(1,$level));}
+		$monsters_here = mt_rand($m_app_min, max((int)($m_app_min), (int)($monsters_here)));
+		if ($monsters_here > (mt_rand($heroes, max((int)($heroes), (int)(($level * $heroes)))))){$monsters_here = mt_rand($heroes, max((int)($heroes), (int)(($level * $heroes))) + mt_rand(1, max((int)(1), (int)($level))));}
 		$monsters_min = $monsters_here - 2;		if ($monsters_min < 1){$monsters_min = 1;}
 		$monsters_max = $monsters_here + 2;
-		$monsters_here = mt_rand($monsters_min,$monsters_max);
+		$monsters_here = mt_rand($monsters_min, max((int)($monsters_min), (int)($monsters_max)));
 			if ($level > 0){} else {$monsters_here = mt_rand(1,10);}
 		if ($more_monsters_later > 1){$monsters_here = CEIL($monsters_here / $more_monsters_later);} // FOR MORE THAN ONE TYPE OF MONSTER IN A ROOM //
 		if ($monsters_here < 1){$monsters_here = 1;}
@@ -211,11 +219,11 @@ function calculateLife($level,$heroes,$m_app_min,$m_app_max,$m_hp_min,$m_hp_max,
 				else if (($m_hp_min < 1) && ($m_hp_max < 1) && ($m_hp_mod == 3)){$life = mt_rand(1,3);} 	// FOR 1d3 hp
 				else if (($m_hp_min < 1) && ($m_hp_max < 1) && ($m_hp_mod == 6)){$life = mt_rand(1,6);} 	// FOR 1d6 hp
 
-			$hit_dice = mt_rand($m_hp_min,$m_hp_max);
+			$hit_dice = mt_rand($m_hp_min, max((int)($m_hp_min), (int)($m_hp_max)));
 
 			while ($hit_dice > 0) :
 
-				$life = $life + mt_rand(1,$monster_hit_dice);
+				$life = $life + mt_rand(1, max((int)(1), (int)($monster_hit_dice)));
 				$hit_dice = $hit_dice - 1;
 
 			endwhile;

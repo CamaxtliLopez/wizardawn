@@ -1,6 +1,6 @@
 <?php
 
-$key_array = array();
+$key_array = [];
 
 // DUMP THE TILES INTO A TEMP TABLE FIRST //
 $tablez = "myland" . createRandomCode();
@@ -9,7 +9,7 @@ $tablez = "myland" . createRandomCode();
 		$sqry = "SELECT * FROM worldmap WHERE lm_amount>1 AND lm_done=1";
 		$sres = mysqli_query( $connection, $sqry ); /* sqry. */
 			while ($sary=mysqli_fetch_assoc($sres)) :
-				$my_amounts = $sary[lm_amount]-1;
+				$my_amounts = $sary['lm_amount']-1;
 					while ($my_amounts > 0):
 						$aqry = "INSERT INTO $tablez (lm_category, lm_hexes) VALUES ('$sary[lm_category]', '$sary[lm_hexes]')";
 						mysqli_query( $connection, $aqry ); /* aqry. */
@@ -477,7 +477,7 @@ while ($higher > 0): if ($mixgenre == 1){ switch (mt_rand(0,1)){ case 0:	$genre 
 
 				$i = 0;
 
-				$l__hex = explode("_", $ary[lm_hexes]);
+				$l__hex = explode("_", $ary['lm_hexes']);
 
 				$zx__width = 5;
 				$zx__height = 16;
@@ -548,7 +548,7 @@ while ($higher > 0): if ($mixgenre == 1){ switch (mt_rand(0,1)){ case 0:	$genre 
 							}
 
 							/// DOES THE TERRAIN INHERIT TERRAIN FROM THE NORTH?
-							$terrain_changes = explode("_", $terrain_tracker);
+							$terrain_changes = explode("_", (string) $terrain_tracker);
 							$ter_num = $terrain_latitude - 1;
 							$terrain = $terrain_changes[$terrain_latitude];
 							if ($ter_num >=0)
@@ -656,7 +656,7 @@ while ($higher > 0): if ($mixgenre == 1){ switch (mt_rand(0,1)){ case 0:	$genre 
 								if ($genre == "Fantasy")
 								{
 									if ($this_app_is == "Hex Crawl"){$h=0; $g=5;} else {$h=1; $g=8;}
-									switch (mt_rand($h,$g))
+									switch (mt_rand($h, max((int)($h), (int)($g))))
 									{
 										case 0: $my_land = "boat.png"; $sunken = 1; break;
 										case 1:	$my_land = "castle.png"; if (mt_rand(1,2) == 1){$my_land = "castle_evil.png";} if (mt_rand(1,4) == 1){$my_land = "dungeon.png";} break;
@@ -756,7 +756,7 @@ while ($higher > 0): if ($mixgenre == 1){ switch (mt_rand(0,1)){ case 0:	$genre 
 								else 
 								{
 									if ($this_app_is == "Hex Crawl"){$h=0; $g=10;} else {$h=1; $g=13;}
-									switch (mt_rand($h,$g))
+									switch (mt_rand($h, max((int)($h), (int)($g))))
 									{
 										case 0: $my_land = "pa_boat.png"; $sunken = 1; break;
 										case 1:	$my_land = "pa_oil.png"; if (mt_rand(1,2) == 1){$my_land = "power.png";}	break;
@@ -788,7 +788,7 @@ while ($higher > 0): if ($mixgenre == 1){ switch (mt_rand(0,1)){ case 0:	$genre 
 								if ($genre == "Fantasy")
 								{
 									if ($this_app_is == "Hex Crawl"){$h=2;} else {$h=0;}
-									switch (mt_rand($h,3))
+									switch (mt_rand($h, max((int)($h), (int)(3))))
 									{
 										case 0:	$my_land = "dock.png";		break;
 										case 1:	$my_land = "waterfall.png";	break;
@@ -877,7 +877,7 @@ while ($higher > 0): if ($mixgenre == 1){ switch (mt_rand(0,1)){ case 0:	$genre 
 								else 
 								{
 									if ($this_app_is == "Hex Crawl"){$h=2;} else {$h=0;}
-									switch (mt_rand($h,3))
+									switch (mt_rand($h, max((int)($h), (int)(3))))
 									{
 										case 0:	$my_land = "dock.png";			break;
 										case 1:	$my_land = "waterfall.png";		break;
@@ -891,7 +891,7 @@ while ($higher > 0): if ($mixgenre == 1){ switch (mt_rand(0,1)){ case 0:	$genre 
 								if ($genre == "Fantasy")
 								{
 									if ($this_app_is == "Hex Crawl"){$h=0; $g=8;} else {$h=0; $g=10;}
-									switch (mt_rand($h,$g))
+									switch (mt_rand($h, max((int)($h), (int)($g))))
 									{
 										case 0:	$my_land = "skull.png";		if (mt_rand(1,4) == 1){$my_land = "dungeon.png";} 	break;
 										case 1:	$my_land = "mine.png";		if (mt_rand(1,10) == 1){$my_land = "dungeon.png";} 	break;
@@ -995,7 +995,7 @@ while ($higher > 0): if ($mixgenre == 1){ switch (mt_rand(0,1)){ case 0:	$genre 
 								else 
 								{
 									if ($this_app_is == "Hex Crawl"){$h=0; $g=10;} else {$h=0; $g=12;}
-									switch (mt_rand($h,$g))
+									switch (mt_rand($h, max((int)($h), (int)($g))))
 									{
 										case 0:	$my_land = "pa_oil.png"; if (mt_rand(1,2) == 1){$my_land = "mine.png";} 					break;
 										case 1:	$my_land = "pa_military.png"; if (mt_rand(1,4) == 1){$my_land = "sf_military.png";}			break;
@@ -1196,14 +1196,14 @@ while ($higher > 0): if ($mixgenre == 1){ switch (mt_rand(0,1)){ case 0:	$genre 
 
 							if (in_array($my_search, $key_array)){} else { array_push($key_array, $my_search); }
 
-							$my__x = $my__x + $shift__hex__right;
+							$my__x = $my__x + num($shift__hex__right);
 							$my__width=$my__width-1;
 
 							$i = $i + 1;
 
 						endwhile;
 
-						$my__y = $my__y + $shift__hex__down; $my__height=$my__height-1;
+						$my__y = $my__y + num($shift__hex__down); $my__height=$my__height-1;
 
 					endwhile;
 

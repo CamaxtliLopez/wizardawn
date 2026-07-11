@@ -112,14 +112,14 @@ $qry9 = "SELECT * FROM geomorphs WHERE done=1 AND image LIKE 'dgside%' AND spot=
 
 		if (($x_delve == "Complex") || ($x_delve == "Progressive"))
 		{
-			$gridz = explode("_", $tile[more]);
+			$gridz = explode("_", $tile['more']);
 		}
 		else
 		{
-			$grids = explode("_", $tile[coord]);
+			$grids = explode("_", $tile['coord']);
 		}
 	?>
-		<td style="background: url(maps/<?php echo $tile[image]; ?>) no-repeat 0 0;" height="<?php echo $x; ?>" width="<?php echo $y; ?>">
+		<td style="background: url(maps/<?php echo $tile['image']; ?>) no-repeat 0 0;" height="<?php echo $x; ?>" width="<?php echo $y; ?>">
 
 <?php if ($keyed > 0){?>
 
@@ -133,7 +133,7 @@ $qry9 = "SELECT * FROM geomorphs WHERE done=1 AND image LIKE 'dgside%' AND spot=
 
 						if (($x_delve == "Complex") || ($x_delve == "Progressive"))
 						{
-							$grids = explode("^", $gridz[$cyc]);
+							$grids = explode("^", (string) $gridz[$cyc]);
 							if (($grid == $grids[0]) && (mt_rand(1,100) >= $x_floor))
 							{
 								$key=$key+1;
@@ -262,7 +262,7 @@ $higher=$map_high+2; while ($higher > 0): $wider = $map_wide+2; while ($wider > 
 			}
 			else /////////////////////////// LEFT SIDE
 			{
-				$coorx = 2; $x=10; $y=$y+$do_y; $do_x=150; $do_y = 300;
+				$coorx = 2; $x=10; $y = $y + num($do_y); $do_x=150; $do_y = 300;
 				if (($making_kingdom == 1) && (mt_rand(1,4) == 1) && ($keep_left_gate != 1)){$res = mysqli_query( $connection, $qry6z ); /* qry. */ $keep_left_gate = 1;}
 				else {$res = mysqli_query( $connection, $qry6 ); /* qry. */}
 			}
@@ -288,19 +288,19 @@ $higher=$map_high+2; while ($higher > 0): $wider = $map_wide+2; while ($wider > 
 		{
 			if ($higher == ($map_high+2)) // TOP
 			{
-				$coorx = 4; $x=$x+$do_x; $y=10; $do_x=300;
+				$coorx = 4; $x = $x + num($do_x); $y=10; $do_x=300;
 				if (($making_kingdom == 1) && (mt_rand(1,4) == 1) && ($keep_top_gate != 1)){$res = mysqli_query( $connection, $qry5z ); /* qry. */ $keep_top_gate = 1;}
 				else {$res = mysqli_query( $connection, $qry5 ); /* qry. */}
 			}
 			else if ($higher == 1) //////// BOTTOM
 			{
-				$coorx = 4; $x=$x+$do_x; $y=$y; $do_x=300;
+				$coorx = 4; $x = $x + num($do_x); $y=$y; $do_x=300;
 				if (($making_kingdom == 1) && (mt_rand(1,4) == 1) && ($keep_bottom_gate != 1)){$res = mysqli_query( $connection, $qry8z ); /* qry. */ $keep_bottom_gate = 1;}
 				else {$res = mysqli_query( $connection, $qry8 ); /* qry. */}
 			}
 			else ////////////////////////// MAIN
 			{
-				$coorx = 3; $x=$x+$do_x; $y=$y; $do_x=300;
+				$coorx = 3; $x = $x + num($do_x); $y=$y; $do_x=300;
 
 				$main_tile_count = $main_tile_count + 1; // COUNT THE MAIN TILES AS THEY ARE USED
 
@@ -326,8 +326,8 @@ $higher=$map_high+2; while ($higher > 0): $wider = $map_wide+2; while ($wider > 
 					else if ($noah_tic == (($map_high * $map_wide) - ($map_wide - 1))){ $noah_t = "bleft.jpg"; }
 					else if ($noah_tic == ($map_high * $map_wide)){ $noah_t = "bright.jpg"; }
 					else if ($noah_tic > (($map_high * $map_wide) - ($map_wide - 1))){ $noah_t = "bottom.jpg"; }
-					else if ($noah_tic == $noah_new){ $noah_t = "xleft.jpg"; $noah_new = $noah_new + $map_wide; }
-					else if ($noah_tic == $noah_end){ $noah_t = "xright.jpg"; $noah_end = $noah_end + $map_wide; }
+					else if ($noah_tic == $noah_new){ $noah_t = "xleft.jpg"; $noah_new = $noah_new + num($map_wide); }
+					else if ($noah_tic == $noah_end){ $noah_t = "xright.jpg"; $noah_end = $noah_end + num($map_wide); }
 					else {$noah_t = "";}
 
 					if (($x_mappack == "Exodus Spaceship") && ($noah_t != ""))
@@ -349,9 +349,9 @@ $higher=$map_high+2; while ($higher > 0): $wider = $map_wide+2; while ($wider > 
 
 		$tile = mysqli_fetch_assoc($res);
 
-		$grids = explode("_", $tile[coord]);
+		$grids = explode("_", $tile['coord']);
 	?>
-		<div style="position:absolute;top:<?php echo $y; ?>px; left:<?php echo $x; ?>px; z-index:1;"><img src="maps/<?php echo $hx_tl_px . $tile[image]; ?>">
+		<div style="position:absolute;top:<?php echo $y; ?>px; left:<?php echo $x; ?>px; z-index:1;"><img src="maps/<?php echo $hx_tl_px . $tile['image']; ?>">
 
 		<?php if ($keyed == 1)
 			{

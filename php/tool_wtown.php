@@ -177,8 +177,8 @@ echo "</head><body>";
 $map_wide = $_POST['map_wide'];
 $map_high = $_POST['map_high'];
 $empty = $_POST['empty'];
-$might1 = $_POST['might1']+0;	if ($might1 > 0){} else {$might1 = 1;}
-$might2 = $_POST['might2']+0;	if ($might2 > 0){} else {$might2 = 8;}
+$might1 = num($_POST['might1']);	if ($might1 > 0){} else {$might1 = 1;}
+$might2 = num($_POST['might2']);	if ($might2 > 0){} else {$might2 = 8;}
 
 $game = $_POST['x_game'];
 
@@ -196,7 +196,7 @@ $x_lvl2 = $_POST['x_lvl2'];
 	if ($x_lvl1 > $x_lvl2){$x_lvl1 = $x_lvl2;}
 
 $columns = $_POST['columns'];
-$name = stripslashes($_POST['name']);
+$name = stripslashes((string) $_POST['name']);
 $dres = $_POST['dress'];
 $stores = $_POST['stores'];
 $ruler = $_POST['ruler'];
@@ -234,7 +234,7 @@ if ($ruler > 0)
 	else if ($kingdom >= 20){$castle = "terrain='keep_prince'"; if (mt_rand(1,2) == 1){$castle = "terrain='keep_king'";}}
 	else if ($kingdom >= 5){$castle = "terrain='keep_prince'"; if (mt_rand(1,2) == 1){$castle = "terrain='keep_baron'";}}
 	else {$castle = "terrain='keep_baron'";}
-	$place_castle = mt_rand(1,$kingdom);
+	$place_castle = mt_rand(1, max((int)(1), (int)($kingdom)));
 
 	if ($kingdom >= 60){$r_m_title = "King"; $r_f_title = "Queen"; $royal_guards = 1; $royal_guards = mt_rand(4,9);}
 	else if ($kingdom >= 50){$r_m_title = "Grand Duke"; $r_f_title = "Grand Duchess"; $royal_guards = mt_rand(4,8);}
@@ -299,25 +299,25 @@ if ($ruler > 0){ echo "<br><div style='page-break-after: always; height:1px;'>&n
 	if (mt_rand(1,4) > 1)
 	{
 		$royal_title = $r_m_title; $royal_gender = "Male";
-		$dude = makeAdventurer(Fighter,$royal_race,0,$x_lvl2,$x_lvl2,1,$royal_gender);
+		$dude = makeAdventurer('Fighter',$royal_race,0,$x_lvl2,$x_lvl2,1,$royal_gender);
 		$adv_list_tp = 1;
-			echo "<font size='2'><b>" . strtoupper($royal_title) . ":</b> "; 
+			echo "<font size='2'><b>" . strtoupper((string) $royal_title) . ":</b> "; 
 				include("functions/stat_adventurer.php");
 			echo "</font>";
 		$royal_title = $r_f_title; $royal_gender = "Female";
 		if (($p_race == "Half-Elf") || ($p_race == "Half-Orc")){$royal_race = "Human";} else {$royal_race = $p_race;}
 		$dude = makeAdventurer(0,$royal_race,0,$x_lvl1,$x_lvl2,1,$royal_gender);
 		$adv_list_tp = 1;
-			echo "<hr color='#C0C0C0' size='1'><font size='2'><b>" . strtoupper($royal_title) . ":</b> "; 
+			echo "<hr color='#C0C0C0' size='1'><font size='2'><b>" . strtoupper((string) $royal_title) . ":</b> "; 
 				include("functions/stat_adventurer.php");
 			echo "</font>";
 	}
 	else
 	{
 		if (mt_rand(1,3) > 1){$royal_title = $r_m_title; $royal_gender = "Male";} else {$royal_title = $r_f_title; $royal_gender = "Female";}
-		$dude = makeAdventurer(Fighter,$royal_race,0,$x_lvl2,$x_lvl2,1,$royal_gender);
+		$dude = makeAdventurer('Fighter',$royal_race,0,$x_lvl2,$x_lvl2,1,$royal_gender);
 		$adv_list_tp = 1;
-			echo "<font size='2'><b>" . strtoupper($royal_title) . ":</b> "; 
+			echo "<font size='2'><b>" . strtoupper((string) $royal_title) . ":</b> "; 
 				include("functions/stat_adventurer.php");
 			echo "</font>";
 	}
@@ -326,8 +326,8 @@ if ($ruler > 0){ echo "<br><div style='page-break-after: always; height:1px;'>&n
 					$riches = "<hr color='#C0C0C0' size='1'><b>ROYAL VAULT:</b> ";
 					while ($rich_limits > 0) :
 						$my_reward = mt_rand(1,100);
-						if ($my_reward > 60){$my_prize = "GEMS&nbsp;[" . mt_rand(1,3) . " each]:&nbsp;" . ucwords(gemCreator(mt_rand(10,100)));}
-						else if ($my_reward > 20){$my_prize = "JEWELRY:&nbsp;" . ucwords(jewelCreator(mt_rand(10,100)));}
+						if ($my_reward > 60){$my_prize = "GEMS&nbsp;[" . mt_rand(1,3) . " each]:&nbsp;" . ucwords((string) gemCreator(mt_rand(10,100)));}
+						else if ($my_reward > 20){$my_prize = "JEWELRY:&nbsp;" . ucwords((string) jewelCreator(mt_rand(10,100)));}
 						else {$my_prize = OsricMagicItem('',1,'',0,0); $my_prize = $my_prize[0]; }
 							$riches = $riches . $my_prize . "&nbsp;---&nbsp;";
 						$rich_limits = $rich_limits - 1;
@@ -348,7 +348,7 @@ if ($ruler > 0){ echo "<br><div style='page-break-after: always; height:1px;'>&n
 		if ($realm >= mt_rand(1,20))
 		{
 			if ($xracep >= mt_rand(1,100)){$royal_race = $xrace;} else {$royal_race = "none";}
-			$dude = makeAdventurer(Thief,$royal_race,0,$x_lvl1,$x_lvl2,1,0);
+			$dude = makeAdventurer('Thief',$royal_race,0,$x_lvl1,$x_lvl2,1,0);
 			$adv_list_tp = 1;
 				echo "<hr color='#C0C0C0' size='1'><font size='2'><b>ROYAL JESTER:</b> "; 
 					include("functions/stat_adventurer.php");
@@ -357,7 +357,7 @@ if ($ruler > 0){ echo "<br><div style='page-break-after: always; height:1px;'>&n
 		if ($realm >= mt_rand(1,15))
 		{
 			if ($xracep >= mt_rand(1,100)){$royal_race = $xrace;} else {$royal_race = "none";}
-			$dude = makeAdventurer(Assassin,$royal_race,0,$x_lvl1,$x_lvl2,1,0);
+			$dude = makeAdventurer('Assassin',$royal_race,0,$x_lvl1,$x_lvl2,1,0);
 			$adv_list_tp = 1;
 				echo "<hr color='#C0C0C0' size='1'><font size='2'><b>ROYAL SPY:</b> "; 
 					include("functions/stat_adventurer.php");
@@ -378,7 +378,7 @@ if ($ruler > 0){ echo "<br><div style='page-break-after: always; height:1px;'>&n
 		{
 			while ($royal_guards > 0) :
 				if ($xracep >= mt_rand(1,100)){$racy = $xrace;} else {$racy = "none";}
-				$dude = makeAdventurer(Fighter,$racy,0,$x_lvl1,$x_lvl2,1,0);
+				$dude = makeAdventurer('Fighter',$racy,0,$x_lvl1,$x_lvl2,1,0);
 				$adv_list_tp = 1;
 					echo "<hr color='#C0C0C0' size='1'><font size='2'><b>ROYAL GUARD:</b> "; 
 						include("functions/stat_adventurer.php");
@@ -392,7 +392,7 @@ if ($empty != 1)
 { 
 	while ($key > 0) : $city_size = $city_size + 1;
 		if ($xracep >= mt_rand(1,100)){$racy = $xrace;} else {$racy = "none";}
-		$citizen = wizardCitizen($game,$racy,$might1,$might2,$dres,$poss,adult,none);
+		$citizen = wizardCitizen($game,$racy,$might1,$might2,$dres,$poss,'adult','none');
 		$dwell = $dwell + 1;
 		$shopinq = "INSERT INTO shop_track (building, owner, info, stats, gender, shop, type, didit) VALUES ('$dwell', '$citizen[3]', '$citizen[2]', '$citizen[4]', '$citizen[0]', '0', '', '0')";
 		mysqli_query( $connection, $shopinq ); /*shopinq*/
@@ -413,19 +413,19 @@ else
 	}
 	else
 	{
-		if ($xracep >= mt_rand(1,100)){$racy = $xrace;} else {$racy = "none";} $citizen = wizardCitizen($game,$racy,$might1,$might2,$dres,$poss,adult,none); ?>
+		if ($xracep >= mt_rand(1,100)){$racy = $xrace;} else {$racy = "none";} $citizen = wizardCitizen($game,$racy,$might1,$might2,$dres,$poss,'adult','none'); ?>
 		<hr><b><i><font size="3"><?php $dwell = $dwell + 1; echo $dwell; ?></font></i></b><font size="2">&nbsp;-&nbsp;<?php echo $citizen[2]; ?></font><?php
 
 		$shopinq = "INSERT INTO shop_track (building, owner, info, stats, gender, shop, type, didit) VALUES ('$dwell', '$citizen[3]', '$citizen[2]', '$citizen[4]', '$citizen[0]', '0', '', '0')";
 		mysqli_query( $connection, $shopinq ); /*shopinq*/
 
-		if (mt_rand(1,100) > 50){$citizen = wizardCitizen($game,$citizen[1],$might1,$might2,$dres,$poss,adult,$citizen[0]); ?>
+		if (mt_rand(1,100) > 50){$citizen = wizardCitizen($game,$citizen[1],$might1,$might2,$dres,$poss,'adult',$citizen[0]); ?>
 			<hr color='#C0C0C0' size='1'><font size="2">&nbsp;-&nbsp;-&nbsp;<?php echo $citizen[2]; ?></font><?php } 
 
-		if (mt_rand(1,100) > 70){$citizen = wizardCitizen($game,$citizen[1],$might1,$might2,$dres,$poss,child,$citizen[0]); ?>
+		if (mt_rand(1,100) > 70){$citizen = wizardCitizen($game,$citizen[1],$might1,$might2,$dres,$poss,'child',$citizen[0]); ?>
 			<hr color='#C0C0C0' size='1'><font size="2">&nbsp;-&nbsp;-&nbsp;-&nbsp;<?php echo $citizen[2]; ?></font><?php } 
 
-		if (mt_rand(1,100) > 90){$citizen = wizardCitizen($game,$citizen[1],$might1,$might2,$dres,$poss,child,$citizen[0]); ?>
+		if (mt_rand(1,100) > 90){$citizen = wizardCitizen($game,$citizen[1],$might1,$might2,$dres,$poss,'child',$citizen[0]); ?>
 			<hr color='#C0C0C0' size='1'><font size="2">&nbsp;-&nbsp;-&nbsp;-&nbsp;<?php echo $citizen[2]; ?></font><?php } 
 	}
 	$key = $key - 1; endwhile;

@@ -469,8 +469,8 @@ function zombieItems($type)
 			case 360: $item = "wrist watch"; break;
 			case 361: $item = "yarn (" . number_format(mt_rand(5,3000)) . "ft)"; break;
 			case 362: $item = "yo-yo"; break;
-			case 363: $item = zombieItems(toy); break;
-			case 364: $item = zombieItems(book); break;
+			case 363: $item = zombieItems('toy'); break;
+			case 364: $item = zombieItems('book'); break;
 		}
 	}
 	else if ($type == "toy")
@@ -907,7 +907,7 @@ function zombieItems($type)
 			case 210: $item = "tooth brush"; break;
 			case 211: $item = "tooth paste"; break;
 			case 212: $item = "towel"; break;
-			case 213: $item = zombieItems(toy); break;
+			case 213: $item = zombieItems('toy'); break;
 			case 214: $item = "turpentine (1gal)"; break;
 			case 215: $item = "TV, flat screen (36in)"; break;
 			case 216: $item = "tweezers"; break;
@@ -1831,7 +1831,7 @@ function zombieItems($type)
 			case 60: $item = "lighter"; break;
 			case 61: $item = "lighter fluid"; break;
 			case 62: $item = "lock box"; break;
-			case 63: $item = zombieItems(magazine); break;
+			case 63: $item = zombieItems('magazine'); break;
 			case 64: $item = "marker, permanent"; break;
 			case 65: $item = "matches (" . mt_rand(5,100) . "ea)"; break;
 			case 66: $item = "microwave oven"; break;
@@ -2060,7 +2060,7 @@ function zombieItems($type)
 			case 168: $item = "lip stick"; break;
 			case 169: $item = "luggage, wheeled with handle"; break;
 			case 170: $item = "lunchbox"; break;
-			case 171: $item = zombieItems(magazine); break;
+			case 171: $item = zombieItems('magazine'); break;
 			case 172: $item = "mallet, rubber"; break;
 			case 173: $item = "map"; break;
 			case 174: $item = "marker, permanent"; break;
@@ -2167,7 +2167,7 @@ function zombieItems($type)
 			case 275: $item = "toothbrush"; break;
 			case 276: $item = "toothbrush, electric"; break;
 			case 277: $item = "towel"; break;
-			case 278: $item = zombieItems(toy); break;
+			case 278: $item = zombieItems('toy'); break;
 			case 279: $item = "toy car, remote control, 50mph"; break;
 			case 280: $item = "trash can, stainless steel, 1.3 gallon"; break;
 			case 281: $item = "turpentine, 1 gallon"; break;

@@ -62,7 +62,7 @@ function PAgetWeapon($type,$game)
 			}
 			else
 			{
-				switch (mt_rand($mt,22))
+				switch (mt_rand($mt, max((int)($mt), (int)(22))))
 				{
 					case 0:	$weapon = "gunpowder pistol (1d10 dmg)";			break;
 					case 1:	$weapon = "gunpowder rifle (1d12 dmg)";				break;
@@ -113,7 +113,7 @@ function PAgetWeapon($type,$game)
 			}
 			else
 			{
-				switch (mt_rand($mt,22))
+				switch (mt_rand($mt, max((int)($mt), (int)(22))))
 				{
 					case 0:	$weapon = "gyrojet pistol (2d10 dmg)";							break;
 					case 1:	$weapon = "frag gun (2d10 dmg)";								break;
@@ -169,7 +169,7 @@ function PAgetWeapon($type,$game)
 			}
 			else
 			{
-				switch (mt_rand($mt,16))
+				switch (mt_rand($mt, max((int)($mt), (int)(16))))
 				{
 					case 0:	$weapon = "pulse axe (1d10 dmg)";					break;
 					case 1:	$weapon = "pulse battle axe (1d12 dmg)";			break;

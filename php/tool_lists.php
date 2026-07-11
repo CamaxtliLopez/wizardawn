@@ -217,7 +217,7 @@ $x_describe = $_POST['x_describe'];
 	$show_detail_monster_info = $x_describe;
 $statb = $_POST['statb'];
 $mom = $_POST['mom'];
-$aec = $_POST['aec']+0;
+$aec = num($_POST['aec']);
 $type = $_POST['type'];
 $ttlvl = $_POST['ttlvl'];
 $wwlvl = $_POST['wwlvl'];
@@ -662,21 +662,21 @@ if ($listing == 1) ///////////////////////////////////////// AD&D
 		</tr>
 		<?php while ($ary=mysqli_fetch_assoc($res)) :
 
-			$add_freq = str_replace('FREQ: ', '', $ary[freq]);
-			$add_enc = str_replace('APP: ', '', $ary[enc]);
-			$add_size = str_replace('SZ: ', '', $ary[size]);
-			$add_move = str_replace('MV: ', '', $ary[move]);
-			$add_ac = str_replace('AC: ', '', $ary[ac]);
-			$add_hd = str_replace('HD: ', '', $ary[hd]);
-			$add_hp = str_replace('HP: ', '', $ary[description]);
-			$add_atk = str_replace('ATK: ', '', $ary[atk]);
-			$add_dmg = str_replace('DMG: ', '', $ary[dmg]);
-			$add_mr = str_replace('MR: ', '', $ary[mr]); $ary[mr];
-			$add_thaco = str_replace('THAC0: ', '', $ary[thaco]);
-			$add_iq = str_replace('INT: ', '', $ary[iq]); $ary[iq];
-			$add_al = str_replace('AL: ', '', $ary[al]); $ary[al];
-			$add_xp = str_replace('XP: ', '', $ary[xp]); $ary[xp];
-			$add_src = str_replace('SRC: ', '', $ary[creator]);
+			$add_freq = str_replace('FREQ: ', '', $ary['freq']);
+			$add_enc = str_replace('APP: ', '', $ary['enc']);
+			$add_size = str_replace('SZ: ', '', $ary['size']);
+			$add_move = str_replace('MV: ', '', $ary['move']);
+			$add_ac = str_replace('AC: ', '', $ary['ac']);
+			$add_hd = str_replace('HD: ', '', $ary['hd']);
+			$add_hp = str_replace('HP: ', '', $ary['description']);
+			$add_atk = str_replace('ATK: ', '', $ary['atk']);
+			$add_dmg = str_replace('DMG: ', '', $ary['dmg']);
+			$add_mr = str_replace('MR: ', '', $ary['mr']); $ary['mr'];
+			$add_thaco = str_replace('THAC0: ', '', $ary['thaco']);
+			$add_iq = str_replace('INT: ', '', $ary['iq']); $ary['iq'];
+			$add_al = str_replace('AL: ', '', $ary['al']); $ary['al'];
+			$add_xp = str_replace('XP: ', '', $ary['xp']); $ary['xp'];
+			$add_src = str_replace('SRC: ', '', $ary['creator']);
 
 			$add_freq = str_replace(';', '', $add_freq);
 			$add_enc = str_replace(';', '', $add_enc);
@@ -694,13 +694,13 @@ if ($listing == 1) ///////////////////////////////////////// AD&D
 			$add_xp = str_replace(';', '', $add_xp);
 			$add_src = str_replace(';', '', $add_src);
 
-			$add_spc = str_replace('SPATK', 'ATTACK', $ary[treasure]);
+			$add_spc = str_replace('SPATK', 'ATTACK', $ary['treasure']);
 			$add_spc = str_replace('SPDEF', 'DEFENSE', $add_spc);
 			$add_spc = str_replace(';', '', $add_spc);
 		?>
 			<tr>
 				<?php if ($type == 2){?><td NOWRAP style="border-top-style: solid; border-top-width: 1px"><?php echo $terrain; ?>&nbsp;</td><?php } ?>
-				<td NOWRAP style="border-top-style: solid; border-top-width: 1px"><?php echo $ary[name]; ?>&nbsp;</td>
+				<td NOWRAP style="border-top-style: solid; border-top-width: 1px"><?php echo $ary['name']; ?>&nbsp;</td>
 				<td NOWRAP align="center" style="border-top-style: solid; border-top-width: 1px">&nbsp;<?php echo $add_freq; ?>&nbsp;</td>
 				<td NOWRAP align="center" style="border-top-style: solid; border-top-width: 1px">&nbsp;<?php echo $add_enc; ?>&nbsp;</td>
 				<td NOWRAP align="center" style="border-top-style: solid; border-top-width: 1px">&nbsp;<?php echo $add_size; ?>&nbsp;</td>
@@ -714,10 +714,10 @@ if ($listing == 1) ///////////////////////////////////////// AD&D
 				<td NOWRAP align="center" style="border-top-style: solid; border-top-width: 1px">&nbsp;<?php echo $add_thaco; ?>&nbsp;</td>
 				<td NOWRAP align="center" style="border-top-style: solid; border-top-width: 1px">&nbsp;<?php echo $add_iq; ?>&nbsp;</td>
 				<td NOWRAP align="center" style="border-top-style: solid; border-top-width: 1px">&nbsp;<?php echo $add_al; ?>&nbsp;</td>
-				<td NOWRAP align="center" style="border-top-style: solid; border-top-width: 1px">&nbsp;<?php echo $ary[level]; ?>&nbsp;</td>
+				<td NOWRAP align="center" style="border-top-style: solid; border-top-width: 1px">&nbsp;<?php echo $ary['level']; ?>&nbsp;</td>
 				<td NOWRAP align="center" style="border-top-style: solid; border-top-width: 1px">&nbsp;<?php echo $add_xp; ?>&nbsp;</td>
 				<td NOWRAP align="center" style="border-top-style: solid; border-top-width: 1px"><?php echo $add_src; ?>&nbsp;</td>
-				<?php if ($show_terrain > 0 && $type != 2){ ?><td style="border-top-style: solid; border-top-width: 1px"><?php echo getTerrains($x_game, $ary[location], $ary[swimmer]); ?></td><?php } ?>
+				<?php if ($show_terrain > 0 && $type != 2){ ?><td style="border-top-style: solid; border-top-width: 1px"><?php echo getTerrains($x_game, $ary['location'], $ary['swimmer']); ?></td><?php } ?>
 				<?php if ($show_detail_monster_info > 0){ ?><td style="border-top-style: solid; border-top-width: 1px"><?php echo $add_spc; ?>&nbsp;</td><?php } ?>
 			</tr>
 		<?php endwhile;
@@ -788,25 +788,25 @@ if ($listing == 1) ///////////////////////////////////////// AD&D
 		<?php while ($ary=mysqli_fetch_assoc($res)) : ?>
 			<tr>
 				<?php if ($type == 2){?><td NOWRAP style="border-top-style: solid; border-top-width: 1px"><?php echo $terrain; ?>&nbsp;</td><?php } ?>
-				<td NOWRAP style="border-top-style: solid; border-top-width: 1px"><?php echo $ary[name]; ?>&nbsp;</td>
-				<td NOWRAP align="center" style="border-top-style: solid; border-top-width: 1px">&nbsp;<?php echo $ary[freq]; ?>&nbsp;</td>
-				<td NOWRAP align="center" style="border-top-style: solid; border-top-width: 1px">&nbsp;<?php echo $ary[enc]; ?>&nbsp;</td>
-				<td NOWRAP align="center" style="border-top-style: solid; border-top-width: 1px">&nbsp;<?php echo $ary[size]; ?>&nbsp;</td>
-				<td NOWRAP align="center" style="border-top-style: solid; border-top-width: 1px">&nbsp;<?php echo $ary[move]; ?>&nbsp;</td>
-				<td NOWRAP align="center" style="border-top-style: solid; border-top-width: 1px">&nbsp;<?php echo $ary[ac]; ?>&nbsp;</td>
-				<td NOWRAP align="center" style="border-top-style: solid; border-top-width: 1px">&nbsp;<?php echo $ary[hd]; ?>&nbsp;</td>
-				<td NOWRAP align="center" style="border-top-style: solid; border-top-width: 1px">&nbsp;<?php echo $ary[atk]; ?>&nbsp;</td>
-				<td NOWRAP align="center" style="border-top-style: solid; border-top-width: 1px">&nbsp;<?php echo $ary[dmg]; ?>&nbsp;</td>
-				<td NOWRAP style="border-top-style: solid; border-top-width: 1px"><?php echo $ary[spatk]; ?>&nbsp;</td>
-				<td NOWRAP style="border-top-style: solid; border-top-width: 1px"><?php echo $ary[spdef]; ?>&nbsp;</td>
-				<td NOWRAP align="center" style="border-top-style: solid; border-top-width: 1px">&nbsp;<?php echo $ary[mr]; ?>&nbsp;</td>
-				<td NOWRAP align="center" style="border-top-style: solid; border-top-width: 1px">&nbsp;<?php echo $ary[lair]; ?>&nbsp;</td>
-				<td NOWRAP align="center" style="border-top-style: solid; border-top-width: 1px">&nbsp;<?php echo $ary[iq]; ?>&nbsp;</td>
-				<td NOWRAP align="center" style="border-top-style: solid; border-top-width: 1px">&nbsp;<?php echo $ary[al]; ?>&nbsp;</td>
-				<td NOWRAP align="center" style="border-top-style: solid; border-top-width: 1px">&nbsp;<?php echo $ary[level]; ?>&nbsp;</td>
-				<td NOWRAP align="center" style="border-top-style: solid; border-top-width: 1px">&nbsp;<?php echo $ary[xp]; ?>&nbsp;</td>
-				<td NOWRAP align="center" style="border-top-style: solid; border-top-width: 1px"><?php echo $ary[creator]; ?>&nbsp;</td>
-				<?php if ($show_terrain > 0 && $type != 2){ ?><td style="border-top-style: solid; border-top-width: 1px"><?php echo getTerrains($x_game, $ary[location], $ary[swimmer]); ?></td><?php } ?>
+				<td NOWRAP style="border-top-style: solid; border-top-width: 1px"><?php echo $ary['name']; ?>&nbsp;</td>
+				<td NOWRAP align="center" style="border-top-style: solid; border-top-width: 1px">&nbsp;<?php echo $ary['freq']; ?>&nbsp;</td>
+				<td NOWRAP align="center" style="border-top-style: solid; border-top-width: 1px">&nbsp;<?php echo $ary['enc']; ?>&nbsp;</td>
+				<td NOWRAP align="center" style="border-top-style: solid; border-top-width: 1px">&nbsp;<?php echo $ary['size']; ?>&nbsp;</td>
+				<td NOWRAP align="center" style="border-top-style: solid; border-top-width: 1px">&nbsp;<?php echo $ary['move']; ?>&nbsp;</td>
+				<td NOWRAP align="center" style="border-top-style: solid; border-top-width: 1px">&nbsp;<?php echo $ary['ac']; ?>&nbsp;</td>
+				<td NOWRAP align="center" style="border-top-style: solid; border-top-width: 1px">&nbsp;<?php echo $ary['hd']; ?>&nbsp;</td>
+				<td NOWRAP align="center" style="border-top-style: solid; border-top-width: 1px">&nbsp;<?php echo $ary['atk']; ?>&nbsp;</td>
+				<td NOWRAP align="center" style="border-top-style: solid; border-top-width: 1px">&nbsp;<?php echo $ary['dmg']; ?>&nbsp;</td>
+				<td NOWRAP style="border-top-style: solid; border-top-width: 1px"><?php echo $ary['spatk']; ?>&nbsp;</td>
+				<td NOWRAP style="border-top-style: solid; border-top-width: 1px"><?php echo $ary['spdef']; ?>&nbsp;</td>
+				<td NOWRAP align="center" style="border-top-style: solid; border-top-width: 1px">&nbsp;<?php echo $ary['mr']; ?>&nbsp;</td>
+				<td NOWRAP align="center" style="border-top-style: solid; border-top-width: 1px">&nbsp;<?php echo $ary['lair']; ?>&nbsp;</td>
+				<td NOWRAP align="center" style="border-top-style: solid; border-top-width: 1px">&nbsp;<?php echo $ary['iq']; ?>&nbsp;</td>
+				<td NOWRAP align="center" style="border-top-style: solid; border-top-width: 1px">&nbsp;<?php echo $ary['al']; ?>&nbsp;</td>
+				<td NOWRAP align="center" style="border-top-style: solid; border-top-width: 1px">&nbsp;<?php echo $ary['level']; ?>&nbsp;</td>
+				<td NOWRAP align="center" style="border-top-style: solid; border-top-width: 1px">&nbsp;<?php echo $ary['xp']; ?>&nbsp;</td>
+				<td NOWRAP align="center" style="border-top-style: solid; border-top-width: 1px"><?php echo $ary['creator']; ?>&nbsp;</td>
+				<?php if ($show_terrain > 0 && $type != 2){ ?><td style="border-top-style: solid; border-top-width: 1px"><?php echo getTerrains($x_game, $ary['location'], $ary['swimmer']); ?></td><?php } ?>
 			</tr>
 		<?php endwhile;
 	}
@@ -868,21 +868,21 @@ if ($listing == 1) ///////////////////////////////////////// AD&D
 		<?php while ($ary=mysqli_fetch_assoc($res)) : ?>
 			<tr>
 				<?php if ($type == 2){?><td NOWRAP style="border-top-style: solid; border-top-width: 1px"><?php echo $terrain; ?>&nbsp;</td><?php } ?>
-				<td NOWRAP style="border-top-style: solid; border-top-width: 1px"><?php echo $ary[name]; ?>&nbsp;</td>
-				<td NOWRAP align="center" style="border-top-style: solid; border-top-width: 1px">&nbsp;<?php echo $ary[enc]; ?>&nbsp;</td>
-				<td NOWRAP align="center" style="border-top-style: solid; border-top-width: 1px">&nbsp;<?php echo $ary[al]; ?>&nbsp;</td>
-				<td NOWRAP align="center" style="border-top-style: solid; border-top-width: 1px">&nbsp;<?php echo $ary[move]; ?>&nbsp;</td>
-				<td NOWRAP align="center" style="border-top-style: solid; border-top-width: 1px">&nbsp;<?php echo $ary[ac]; ?>&nbsp;</td>
-				<td NOWRAP align="center" style="border-top-style: solid; border-top-width: 1px">&nbsp;<?php echo $ary[hd]; ?>&nbsp;</td>
-				<td NOWRAP align="center" style="border-top-style: solid; border-top-width: 1px">&nbsp;<?php echo $ary[atk]; ?>&nbsp;</td>
-				<td NOWRAP align="center" style="border-top-style: solid; border-top-width: 1px">&nbsp;<?php echo $ary[dmg]; ?>&nbsp;</td>
-				<td NOWRAP align="center" style="border-top-style: solid; border-top-width: 1px">&nbsp;<?php echo $ary[spdef]; ?>&nbsp;</td>
-				<td NOWRAP align="center" style="border-top-style: solid; border-top-width: 1px">&nbsp;<?php echo $ary[level]; ?>&nbsp;</td>
-				<td NOWRAP align="center" style="border-top-style: solid; border-top-width: 1px">&nbsp;<?php echo $ary[bravery]; ?>&nbsp;</td>
-				<td NOWRAP align="center" style="border-top-style: solid; border-top-width: 1px">&nbsp;<?php echo $ary[loot]; ?>&nbsp;</td>
-				<td NOWRAP align="center" style="border-top-style: solid; border-top-width: 1px">&nbsp;<?php echo $ary[xp]; ?>&nbsp;</td>
-				<td NOWRAP align="center" style="border-top-style: solid; border-top-width: 1px"><?php echo $ary[creator]; ?>&nbsp;</td>
-				<?php if ($show_terrain > 0 && $type != 2){ ?><td style="border-top-style: solid; border-top-width: 1px"><?php echo getTerrains($x_game, $ary[location], $ary[swimmer]); ?></td><?php } ?>
+				<td NOWRAP style="border-top-style: solid; border-top-width: 1px"><?php echo $ary['name']; ?>&nbsp;</td>
+				<td NOWRAP align="center" style="border-top-style: solid; border-top-width: 1px">&nbsp;<?php echo $ary['enc']; ?>&nbsp;</td>
+				<td NOWRAP align="center" style="border-top-style: solid; border-top-width: 1px">&nbsp;<?php echo $ary['al']; ?>&nbsp;</td>
+				<td NOWRAP align="center" style="border-top-style: solid; border-top-width: 1px">&nbsp;<?php echo $ary['move']; ?>&nbsp;</td>
+				<td NOWRAP align="center" style="border-top-style: solid; border-top-width: 1px">&nbsp;<?php echo $ary['ac']; ?>&nbsp;</td>
+				<td NOWRAP align="center" style="border-top-style: solid; border-top-width: 1px">&nbsp;<?php echo $ary['hd']; ?>&nbsp;</td>
+				<td NOWRAP align="center" style="border-top-style: solid; border-top-width: 1px">&nbsp;<?php echo $ary['atk']; ?>&nbsp;</td>
+				<td NOWRAP align="center" style="border-top-style: solid; border-top-width: 1px">&nbsp;<?php echo $ary['dmg']; ?>&nbsp;</td>
+				<td NOWRAP align="center" style="border-top-style: solid; border-top-width: 1px">&nbsp;<?php echo $ary['spdef']; ?>&nbsp;</td>
+				<td NOWRAP align="center" style="border-top-style: solid; border-top-width: 1px">&nbsp;<?php echo $ary['level']; ?>&nbsp;</td>
+				<td NOWRAP align="center" style="border-top-style: solid; border-top-width: 1px">&nbsp;<?php echo $ary['bravery']; ?>&nbsp;</td>
+				<td NOWRAP align="center" style="border-top-style: solid; border-top-width: 1px">&nbsp;<?php echo $ary['loot']; ?>&nbsp;</td>
+				<td NOWRAP align="center" style="border-top-style: solid; border-top-width: 1px">&nbsp;<?php echo $ary['xp']; ?>&nbsp;</td>
+				<td NOWRAP align="center" style="border-top-style: solid; border-top-width: 1px"><?php echo $ary['creator']; ?>&nbsp;</td>
+				<?php if ($show_terrain > 0 && $type != 2){ ?><td style="border-top-style: solid; border-top-width: 1px"><?php echo getTerrains($x_game, $ary['location'], $ary['swimmer']); ?></td><?php } ?>
 			</tr>
 		<?php endwhile;
 	}
@@ -933,25 +933,25 @@ if ($listing == 1) ///////////////////////////////////////// AD&D
 			<?php if ($show_terrain > 0 && $type != 2){ ?><td NOWRAP><b>TERRAIN</b></td><?php } ?>
 		</tr>
 		<?php while ($ary=mysqli_fetch_assoc($res)) :
-			if ( $ary[thaco] < 1 ){ $svsx = $ary[thaco]; } else { $svsx = "+" . $ary[thaco]; }
+			if ( $ary['thaco'] < 1 ){ $svsx = $ary['thaco']; } else { $svsx = "+" . $ary['thaco']; }
 		?>
 			<tr>
 				<?php if ($type == 2){?><td NOWRAP style="border-top-style: solid; border-top-width: 1px"><?php echo $terrain; ?>&nbsp;</td><?php } ?>
-				<td NOWRAP style="border-top-style: solid; border-top-width: 1px"><?php echo $ary[name]; ?>&nbsp;</td>
-				<td NOWRAP align="center" style="border-top-style: solid; border-top-width: 1px">&nbsp;<?php echo $ary[al]; ?>&nbsp;</td>
-				<td NOWRAP align="center" style="border-top-style: solid; border-top-width: 1px">&nbsp;<?php echo $ary[ac]; ?>&nbsp;</td>
-				<td NOWRAP align="center" style="border-top-style: solid; border-top-width: 1px">&nbsp;<?php echo $ary[atk]; ?>&nbsp;</td>
+				<td NOWRAP style="border-top-style: solid; border-top-width: 1px"><?php echo $ary['name']; ?>&nbsp;</td>
+				<td NOWRAP align="center" style="border-top-style: solid; border-top-width: 1px">&nbsp;<?php echo $ary['al']; ?>&nbsp;</td>
+				<td NOWRAP align="center" style="border-top-style: solid; border-top-width: 1px">&nbsp;<?php echo $ary['ac']; ?>&nbsp;</td>
+				<td NOWRAP align="center" style="border-top-style: solid; border-top-width: 1px">&nbsp;<?php echo $ary['atk']; ?>&nbsp;</td>
 				<td NOWRAP align="center" style="border-top-style: solid; border-top-width: 1px">&nbsp;<?php echo $svsx; ?>&nbsp;</td>
-				<td NOWRAP align="center" style="border-top-style: solid; border-top-width: 1px">&nbsp;<?php echo $ary[dmg]; ?>&nbsp;</td>
+				<td NOWRAP align="center" style="border-top-style: solid; border-top-width: 1px">&nbsp;<?php echo $ary['dmg']; ?>&nbsp;</td>
 				<td NOWRAP align="center" style="border-top-style: solid; border-top-width: 1px">&nbsp;<?php echo $svsx; ?>&nbsp;</td>
-				<td NOWRAP align="center" style="border-top-style: solid; border-top-width: 1px">&nbsp;<?php echo $ary[type]; ?>&nbsp;</td>
-				<td NOWRAP align="center" style="border-top-style: solid; border-top-width: 1px">&nbsp;<?php echo $ary[spdef]; ?>&nbsp;</td>
-				<?php if ($show_terrain > 0 && $type != 2){ ?><td style="border-top-style: solid; border-top-width: 1px"><?php echo getTerrains($x_game, $ary[location], $ary[swimmer]); ?></td><?php } ?>
+				<td NOWRAP align="center" style="border-top-style: solid; border-top-width: 1px">&nbsp;<?php echo $ary['type']; ?>&nbsp;</td>
+				<td NOWRAP align="center" style="border-top-style: solid; border-top-width: 1px">&nbsp;<?php echo $ary['spdef']; ?>&nbsp;</td>
+				<?php if ($show_terrain > 0 && $type != 2){ ?><td style="border-top-style: solid; border-top-width: 1px"><?php echo getTerrains($x_game, $ary['location'], $ary['swimmer']); ?></td><?php } ?>
 			</tr>
-			<?php if ( $ary[description] != "" && $show_detail_monster_info > 0 ){ ?>
+			<?php if ( $ary['description'] != "" && $show_detail_monster_info > 0 ){ ?>
 				<tr>
 					<?php if ($type == 2){?><td NOWRAP>&nbsp;</td><?php } ?>
-					<td colspan="9"><?php echo $ary[description]; ?></td>
+					<td colspan="9"><?php echo $ary['description']; ?></td>
 				</tr>
 			<?php } ?>
 		<?php endwhile;
@@ -1008,18 +1008,18 @@ if ($listing == 1) ///////////////////////////////////////// AD&D
 		<?php while ($ary=mysqli_fetch_assoc($res)) : ?>
 			<tr>
 				<?php if ($type == 2){?><td NOWRAP style="border-top-style: solid; border-top-width: 1px"><?php echo $terrain; ?>&nbsp;</td><?php } ?>
-				<td NOWRAP style="border-top-style: solid; border-top-width: 1px"><?php echo $ary[name]; ?>&nbsp;</td>
-				<td NOWRAP align="center" style="border-top-style: solid; border-top-width: 1px">&nbsp;<?php $ac = str_replace("‡", "&#8225;", $ary[ac]); $ac = str_replace("†", "&#8224;", $ac); echo $ac; ?>&nbsp;</td>
-				<td NOWRAP align="center" style="border-top-style: solid; border-top-width: 1px">&nbsp;<?php echo $ary[hd]; ?>&nbsp;</td>
-				<td NOWRAP align="center" style="border-top-style: solid; border-top-width: 1px">&nbsp;<?php echo $ary[atk]; ?>&nbsp;</td>
-				<td NOWRAP align="center" style="border-top-style: solid; border-top-width: 1px">&nbsp;<?php echo $ary[dmg]; ?>&nbsp;</td>
-				<td NOWRAP align="center" style="border-top-style: solid; border-top-width: 1px">&nbsp;<?php echo $ary[move]; ?>&nbsp;</td>
-				<td NOWRAP align="center" style="border-top-style: solid; border-top-width: 1px">&nbsp;<?php echo $ary[enc]; ?>&nbsp;</td>
-				<td NOWRAP align="center" style="border-top-style: solid; border-top-width: 1px">&nbsp;<?php echo $ary[spdef]; ?>&nbsp;</td>
-				<td NOWRAP align="center" style="border-top-style: solid; border-top-width: 1px">&nbsp;<?php echo $ary[bravery]; ?>&nbsp;</td>
-				<td NOWRAP align="center" style="border-top-style: solid; border-top-width: 1px">&nbsp;<?php echo $ary[treasure]; ?>&nbsp;</td>
-				<td NOWRAP align="center" style="border-top-style: solid; border-top-width: 1px">&nbsp;<?php echo $ary[xp]; ?>&nbsp;</td>
-				<?php if ($show_terrain > 0 && $type != 2){ ?><td style="border-top-style: solid; border-top-width: 1px"><?php echo getTerrains($x_game, $ary[location], $ary[swimmer]); ?></td><?php } ?>
+				<td NOWRAP style="border-top-style: solid; border-top-width: 1px"><?php echo $ary['name']; ?>&nbsp;</td>
+				<td NOWRAP align="center" style="border-top-style: solid; border-top-width: 1px">&nbsp;<?php $ac = str_replace("‡", "&#8225;", $ary['ac']); $ac = str_replace("†", "&#8224;", $ac); echo $ac; ?>&nbsp;</td>
+				<td NOWRAP align="center" style="border-top-style: solid; border-top-width: 1px">&nbsp;<?php echo $ary['hd']; ?>&nbsp;</td>
+				<td NOWRAP align="center" style="border-top-style: solid; border-top-width: 1px">&nbsp;<?php echo $ary['atk']; ?>&nbsp;</td>
+				<td NOWRAP align="center" style="border-top-style: solid; border-top-width: 1px">&nbsp;<?php echo $ary['dmg']; ?>&nbsp;</td>
+				<td NOWRAP align="center" style="border-top-style: solid; border-top-width: 1px">&nbsp;<?php echo $ary['move']; ?>&nbsp;</td>
+				<td NOWRAP align="center" style="border-top-style: solid; border-top-width: 1px">&nbsp;<?php echo $ary['enc']; ?>&nbsp;</td>
+				<td NOWRAP align="center" style="border-top-style: solid; border-top-width: 1px">&nbsp;<?php echo $ary['spdef']; ?>&nbsp;</td>
+				<td NOWRAP align="center" style="border-top-style: solid; border-top-width: 1px">&nbsp;<?php echo $ary['bravery']; ?>&nbsp;</td>
+				<td NOWRAP align="center" style="border-top-style: solid; border-top-width: 1px">&nbsp;<?php echo $ary['treasure']; ?>&nbsp;</td>
+				<td NOWRAP align="center" style="border-top-style: solid; border-top-width: 1px">&nbsp;<?php echo $ary['xp']; ?>&nbsp;</td>
+				<?php if ($show_terrain > 0 && $type != 2){ ?><td style="border-top-style: solid; border-top-width: 1px"><?php echo getTerrains($x_game, $ary['location'], $ary['swimmer']); ?></td><?php } ?>
 			</tr>
 		<?php endwhile;
 	}
@@ -1075,18 +1075,18 @@ if ($listing == 1) ///////////////////////////////////////// AD&D
 		<?php while ($ary=mysqli_fetch_assoc($res)) : ?>
 			<tr>
 				<?php if ($type == 2){?><td NOWRAP style="border-top-style: solid; border-top-width: 1px"><?php echo $terrain; ?>&nbsp;</td><?php } ?>
-				<td NOWRAP style="border-top-style: solid; border-top-width: 1px"><?php echo $ary[name]; ?>&nbsp;</td>
-				<td NOWRAP align="center" style="border-top-style: solid; border-top-width: 1px">&nbsp;<?php echo $ary[level]; ?>&nbsp;</td>
-				<td NOWRAP align="center" style="border-top-style: solid; border-top-width: 1px">&nbsp;<?php echo $ary[hd]; ?>&nbsp;</td>
-				<td NOWRAP align="center" style="border-top-style: solid; border-top-width: 1px">&nbsp;<?php echo $ary[ac]; ?>&nbsp;</td>
-				<td NOWRAP align="center" style="border-top-style: solid; border-top-width: 1px">&nbsp;<?php echo $ary[atk]; ?>&nbsp;</td>
-				<td NOWRAP align="center" style="border-top-style: solid; border-top-width: 1px">&nbsp;<?php echo $ary[spdef]; ?>&nbsp;</td>
-				<td NOWRAP align="center" style="border-top-style: solid; border-top-width: 1px">&nbsp;<?php echo $ary[spatk]; ?>&nbsp;</td>
-				<td NOWRAP align="center" style="border-top-style: solid; border-top-width: 1px">&nbsp;<?php echo $ary[move]; ?>&nbsp;</td>
-				<td NOWRAP align="center" style="border-top-style: solid; border-top-width: 1px">&nbsp;<?php echo $ary[al]; ?>&nbsp;</td>
-				<td NOWRAP align="center" style="border-top-style: solid; border-top-width: 1px">&nbsp;<?php echo $ary[xp]; ?>&nbsp;</td>
-				<td NOWRAP align="center" style="border-top-style: solid; border-top-width: 1px">&nbsp;<?php echo $ary[thaco]; ?>&nbsp;</td>
-				<?php if ($show_terrain > 0 && $type != 2){ ?><td style="border-top-style: solid; border-top-width: 1px"><?php echo getTerrains($x_game, $ary[location], $ary[swimmer]); ?></td><?php } ?>
+				<td NOWRAP style="border-top-style: solid; border-top-width: 1px"><?php echo $ary['name']; ?>&nbsp;</td>
+				<td NOWRAP align="center" style="border-top-style: solid; border-top-width: 1px">&nbsp;<?php echo $ary['level']; ?>&nbsp;</td>
+				<td NOWRAP align="center" style="border-top-style: solid; border-top-width: 1px">&nbsp;<?php echo $ary['hd']; ?>&nbsp;</td>
+				<td NOWRAP align="center" style="border-top-style: solid; border-top-width: 1px">&nbsp;<?php echo $ary['ac']; ?>&nbsp;</td>
+				<td NOWRAP align="center" style="border-top-style: solid; border-top-width: 1px">&nbsp;<?php echo $ary['atk']; ?>&nbsp;</td>
+				<td NOWRAP align="center" style="border-top-style: solid; border-top-width: 1px">&nbsp;<?php echo $ary['spdef']; ?>&nbsp;</td>
+				<td NOWRAP align="center" style="border-top-style: solid; border-top-width: 1px">&nbsp;<?php echo $ary['spatk']; ?>&nbsp;</td>
+				<td NOWRAP align="center" style="border-top-style: solid; border-top-width: 1px">&nbsp;<?php echo $ary['move']; ?>&nbsp;</td>
+				<td NOWRAP align="center" style="border-top-style: solid; border-top-width: 1px">&nbsp;<?php echo $ary['al']; ?>&nbsp;</td>
+				<td NOWRAP align="center" style="border-top-style: solid; border-top-width: 1px">&nbsp;<?php echo $ary['xp']; ?>&nbsp;</td>
+				<td NOWRAP align="center" style="border-top-style: solid; border-top-width: 1px">&nbsp;<?php echo $ary['thaco']; ?>&nbsp;</td>
+				<?php if ($show_terrain > 0 && $type != 2){ ?><td style="border-top-style: solid; border-top-width: 1px"><?php echo getTerrains($x_game, $ary['location'], $ary['swimmer']); ?></td><?php } ?>
 			</tr>
 		<?php endwhile;
 	}
@@ -1138,19 +1138,19 @@ if ($listing == 1) ///////////////////////////////////////// AD&D
 			<?php if ($show_terrain > 0 && $type != 2){ ?><td NOWRAP><b>Terrain</b></td><?php } ?>
 			<td NOWRAP><b>Notes</b></td>
 		</tr>
-		<?php	while ($ary=mysqli_fetch_assoc($res)) :	include("functions/monsters_tt.php");	if ($my_real_name != ""){$creature_name = $my_real_name;} else {$creature_name = $ary[name];} ?>
+		<?php	while ($ary=mysqli_fetch_assoc($res)) :	include("functions/monsters_tt.php");	if ($my_real_name != ""){$creature_name = $my_real_name;} else {$creature_name = $ary['name'];} ?>
 			<tr>
 				<?php if ($type == 2){?><td NOWRAP valign="top" style="border-top-style: solid; border-top-width: 1px"><?php echo $terrain; ?>&nbsp;</td><?php } ?>
 				<td NOWRAP valign="top" style="border-top-style: solid; border-top-width: 1px"><?php echo $creature_name; ?>&nbsp;</td>
-				<?php if ($listing == 5){?><td NOWRAP valign="top" align="center" style="border-top-style: solid; border-top-width: 1px">&nbsp;<?php echo $ary[type]; ?>&nbsp;</td><?php } ?>
+				<?php if ($listing == 5){?><td NOWRAP valign="top" align="center" style="border-top-style: solid; border-top-width: 1px">&nbsp;<?php echo $ary['type']; ?>&nbsp;</td><?php } ?>
 				<td NOWRAP valign="top" align="center" style="border-top-style: solid; border-top-width: 1px">&nbsp;<?php echo $my_mr_is; ?>&nbsp;</td>
 				<?php if ($_SESSION["SESSION_SECTION"] == 173){?><td NOWRAP valign="top" align="center" style="border-top-style: solid; border-top-width: 1px">&nbsp;<?php echo CEIL($my_mr_is/25); ?>&nbsp;</td><?php } ?>
 				<td NOWRAP valign="top" align="center" style="border-top-style: solid; border-top-width: 1px">&nbsp;<?php echo $my_dc_is; ?>&nbsp;</td>
-				<?php if ($listing == 5){?><td NOWRAP valign="top" align="center" style="border-top-style: solid; border-top-width: 1px">&nbsp;<?php echo $ary[enc]; ?>&nbsp;</td><?php } ?>
-				<td NOWRAP valign="top" align="center" style="border-top-style: solid; border-top-width: 1px">&nbsp;<?php echo $ary[size]; ?>&nbsp;</td>
-				<td NOWRAP valign="top" align="center" style="border-top-style: solid; border-top-width: 1px">&nbsp;<?php echo $ary[move]; ?>&nbsp;</td>
-				<?php if ($listing == 5){?><td valign="top" align="center" style="border-top-style: solid; border-top-width: 1px">&nbsp;<?php echo $ary[spdef]; ?>&nbsp;</td><?php } ?>
-				<?php if ($show_terrain > 0 && $type != 2){ ?><td style="border-top-style: solid; border-top-width: 1px"><?php echo getTerrains($x_game, $ary[location], $ary[swimmer]); ?></td><?php } ?>
+				<?php if ($listing == 5){?><td NOWRAP valign="top" align="center" style="border-top-style: solid; border-top-width: 1px">&nbsp;<?php echo $ary['enc']; ?>&nbsp;</td><?php } ?>
+				<td NOWRAP valign="top" align="center" style="border-top-style: solid; border-top-width: 1px">&nbsp;<?php echo $ary['size']; ?>&nbsp;</td>
+				<td NOWRAP valign="top" align="center" style="border-top-style: solid; border-top-width: 1px">&nbsp;<?php echo $ary['move']; ?>&nbsp;</td>
+				<?php if ($listing == 5){?><td valign="top" align="center" style="border-top-style: solid; border-top-width: 1px">&nbsp;<?php echo $ary['spdef']; ?>&nbsp;</td><?php } ?>
+				<?php if ($show_terrain > 0 && $type != 2){ ?><td style="border-top-style: solid; border-top-width: 1px"><?php echo getTerrains($x_game, $ary['location'], $ary['swimmer']); ?></td><?php } ?>
 				<td style="border-top-style: solid; border-top-width: 1px"><?php echo $description; ?>&nbsp;</td>
 			</tr>
 		<?php endwhile;
@@ -1209,20 +1209,20 @@ if ($listing == 1) ///////////////////////////////////////// AD&D
 		<?php	while ($ary=mysqli_fetch_assoc($res)) :	include("functions/monsters_tt.php"); ?>
 			<tr>
 				<?php if ($type == 2){?><td NOWRAP valign="top" style="border-top-style: solid; border-top-width: 1px"><?php echo $terrain; ?>&nbsp;</td><?php } ?>
-				<td NOWRAP valign="top" style="border-top-style: solid; border-top-width: 1px"><?php echo $ary[name]; ?>&nbsp;</td>
+				<td NOWRAP valign="top" style="border-top-style: solid; border-top-width: 1px"><?php echo $ary['name']; ?>&nbsp;</td>
 
-				<td NOWRAP valign="top" align="center" style="border-top-style: solid; border-top-width: 1px">&nbsp;<?php echo $ary[difficulty]; ?>&nbsp;</td>
-				<td NOWRAP valign="top" align="center" style="border-top-style: solid; border-top-width: 1px">&nbsp;<?php echo $ary[type]; ?>&nbsp;</td>
-				<td NOWRAP valign="top" align="center" style="border-top-style: solid; border-top-width: 1px">&nbsp;<?php echo $ary[enc]; ?>&nbsp;</td>
-				<td NOWRAP valign="top" align="center" style="border-top-style: solid; border-top-width: 1px">&nbsp;<?php echo $ary[size]; ?>&nbsp;</td>
-				<td NOWRAP valign="top" align="center" style="border-top-style: solid; border-top-width: 1px">&nbsp;<?php echo $ary[move]; ?>&nbsp;</td>
+				<td NOWRAP valign="top" align="center" style="border-top-style: solid; border-top-width: 1px">&nbsp;<?php echo $ary['difficulty']; ?>&nbsp;</td>
+				<td NOWRAP valign="top" align="center" style="border-top-style: solid; border-top-width: 1px">&nbsp;<?php echo $ary['type']; ?>&nbsp;</td>
+				<td NOWRAP valign="top" align="center" style="border-top-style: solid; border-top-width: 1px">&nbsp;<?php echo $ary['enc']; ?>&nbsp;</td>
+				<td NOWRAP valign="top" align="center" style="border-top-style: solid; border-top-width: 1px">&nbsp;<?php echo $ary['size']; ?>&nbsp;</td>
+				<td NOWRAP valign="top" align="center" style="border-top-style: solid; border-top-width: 1px">&nbsp;<?php echo $ary['move']; ?>&nbsp;</td>
 				<td NOWRAP valign="top" align="center" style="border-top-style: solid; border-top-width: 1px">&nbsp;<?php echo $my_mr_is; ?>&nbsp;</td>
 				<td NOWRAP valign="top" align="center" style="border-top-style: solid; border-top-width: 1px">&nbsp;+<?php echo $mn_mod_attack; ?>&nbsp;</td>
 				<td NOWRAP valign="top" align="center" style="border-top-style: solid; border-top-width: 1px">&nbsp;1d6+<?php echo $mn_mod_damage; ?>&nbsp;</td>
 				<td NOWRAP valign="top" align="center" style="border-top-style: solid; border-top-width: 1px">&nbsp;<?php echo $mn_mod_level; ?>&nbsp;<i>(<?php echo $cr_monster; ?>)</i>&nbsp;</td>
-				<td valign="top" align="center" style="border-top-style: solid; border-top-width: 1px">&nbsp;<?php echo $ary[spdef]; ?>&nbsp;</td>
+				<td valign="top" align="center" style="border-top-style: solid; border-top-width: 1px">&nbsp;<?php echo $ary['spdef']; ?>&nbsp;</td>
 				<td NOWRAP valign="top" align="center" style="border-top-style: solid; border-top-width: 1px">&nbsp;<?php echo $my_mr_is; ?>&nbsp;</td>
-				<?php if ($show_terrain > 0 && $type != 2){ ?><td style="border-top-style: solid; border-top-width: 1px"><?php echo getTerrains($x_game, $ary[location], $ary[swimmer]); ?></td><?php } ?>
+				<?php if ($show_terrain > 0 && $type != 2){ ?><td style="border-top-style: solid; border-top-width: 1px"><?php echo getTerrains($x_game, $ary['location'], $ary['swimmer']); ?></td><?php } ?>
 				<td style="border-top-style: solid; border-top-width: 1px"><?php echo $description; ?>&nbsp;</td>
 			</tr>
 		<?php endwhile;
@@ -1286,27 +1286,27 @@ if ($listing == 1) ///////////////////////////////////////// AD&D
 		<?php while ($ary=mysqli_fetch_assoc($res)) : ?>
 			<tr>
 				<?php if ($type == 2){?><td NOWRAP style="border-top-style: solid; border-top-width: 1px"><?php echo $terrain; ?>&nbsp;</td><?php } ?>
-				<td NOWRAP style="border-top-style: solid; border-top-width: 1px"><?php echo $ary[name]; ?>&nbsp;</td>
-				<td NOWRAP align="center" style="border-top-style: solid; border-top-width: 1px">&nbsp;<?php echo $ary[ac]; ?>&nbsp;</td>
-				<td NOWRAP align="center" style="border-top-style: solid; border-top-width: 1px">&nbsp;<?php echo $ary[hd]; ?>&nbsp;</td>
-				<td NOWRAP align="center" style="border-top-style: solid; border-top-width: 1px">&nbsp;<?php echo $ary[move]; ?>&nbsp;</td>
-				<td NOWRAP align="center" style="border-top-style: solid; border-top-width: 1px">&nbsp;<?php echo $ary[thaco]; ?>&nbsp;</td>
-				<td NOWRAP align="center" style="border-top-style: solid; border-top-width: 1px">&nbsp;<?php echo $ary[atk]; ?>&nbsp;</td>
-				<td NOWRAP align="center" style="border-top-style: solid; border-top-width: 1px">&nbsp;<?php echo $ary[dmg]; ?>&nbsp;</td>
-				<td NOWRAP align="center" style="border-top-style: solid; border-top-width: 1px">&nbsp;<?php echo $ary[enc]; ?>&nbsp;</td>
-				<td NOWRAP align="center" style="border-top-style: solid; border-top-width: 1px">&nbsp;<?php echo $ary[spdef]; ?>&nbsp;</td>
-				<td NOWRAP align="center" style="border-top-style: solid; border-top-width: 1px">&nbsp;<?php echo $ary[bravery]; ?>&nbsp;</td>
-				<td NOWRAP align="center" style="border-top-style: solid; border-top-width: 1px">&nbsp;<?php echo $ary[loot]; ?>&nbsp;</td>
-				<td NOWRAP align="center" style="border-top-style: solid; border-top-width: 1px">&nbsp;<?php echo $ary[al]; ?>&nbsp;</td>
-				<td NOWRAP align="center" style="border-top-style: solid; border-top-width: 1px">&nbsp;<?php echo $ary[difficulty]; ?>&nbsp;</td>
-				<td NOWRAP align="center" style="border-top-style: solid; border-top-width: 1px">&nbsp;<?php echo $ary[xp]; ?>&nbsp;</td>
-				<td NOWRAP align="center" style="border-top-style: solid; border-top-width: 1px">&nbsp;<?php echo $ary[lair]; ?>&nbsp;</td>
-				<?php if ($show_terrain > 0 && $type != 2){ ?><td style="border-top-style: solid; border-top-width: 1px"><?php echo getTerrains($x_game, $ary[location], $ary[swimmer]); ?></td><?php } ?>
+				<td NOWRAP style="border-top-style: solid; border-top-width: 1px"><?php echo $ary['name']; ?>&nbsp;</td>
+				<td NOWRAP align="center" style="border-top-style: solid; border-top-width: 1px">&nbsp;<?php echo $ary['ac']; ?>&nbsp;</td>
+				<td NOWRAP align="center" style="border-top-style: solid; border-top-width: 1px">&nbsp;<?php echo $ary['hd']; ?>&nbsp;</td>
+				<td NOWRAP align="center" style="border-top-style: solid; border-top-width: 1px">&nbsp;<?php echo $ary['move']; ?>&nbsp;</td>
+				<td NOWRAP align="center" style="border-top-style: solid; border-top-width: 1px">&nbsp;<?php echo $ary['thaco']; ?>&nbsp;</td>
+				<td NOWRAP align="center" style="border-top-style: solid; border-top-width: 1px">&nbsp;<?php echo $ary['atk']; ?>&nbsp;</td>
+				<td NOWRAP align="center" style="border-top-style: solid; border-top-width: 1px">&nbsp;<?php echo $ary['dmg']; ?>&nbsp;</td>
+				<td NOWRAP align="center" style="border-top-style: solid; border-top-width: 1px">&nbsp;<?php echo $ary['enc']; ?>&nbsp;</td>
+				<td NOWRAP align="center" style="border-top-style: solid; border-top-width: 1px">&nbsp;<?php echo $ary['spdef']; ?>&nbsp;</td>
+				<td NOWRAP align="center" style="border-top-style: solid; border-top-width: 1px">&nbsp;<?php echo $ary['bravery']; ?>&nbsp;</td>
+				<td NOWRAP align="center" style="border-top-style: solid; border-top-width: 1px">&nbsp;<?php echo $ary['loot']; ?>&nbsp;</td>
+				<td NOWRAP align="center" style="border-top-style: solid; border-top-width: 1px">&nbsp;<?php echo $ary['al']; ?>&nbsp;</td>
+				<td NOWRAP align="center" style="border-top-style: solid; border-top-width: 1px">&nbsp;<?php echo $ary['difficulty']; ?>&nbsp;</td>
+				<td NOWRAP align="center" style="border-top-style: solid; border-top-width: 1px">&nbsp;<?php echo $ary['xp']; ?>&nbsp;</td>
+				<td NOWRAP align="center" style="border-top-style: solid; border-top-width: 1px">&nbsp;<?php echo $ary['lair']; ?>&nbsp;</td>
+				<?php if ($show_terrain > 0 && $type != 2){ ?><td style="border-top-style: solid; border-top-width: 1px"><?php echo getTerrains($x_game, $ary['location'], $ary['swimmer']); ?></td><?php } ?>
 			</tr>
-			<?php if ( $ary[description] != "" && $show_detail_monster_info > 0 ){ ?>
+			<?php if ( $ary['description'] != "" && $show_detail_monster_info > 0 ){ ?>
 				<tr>
 					<?php if ($type == 2){?><td NOWRAP>&nbsp;</td><?php } ?>
-					<td colspan="15"><?php echo $ary[description]; ?></td>
+					<td colspan="15"><?php echo $ary['description']; ?></td>
 				</tr>
 			<?php } ?>
 		<?php endwhile;
@@ -1373,24 +1373,24 @@ if ($listing == 1) ///////////////////////////////////////// AD&D
 	<?php while ($ary=mysqli_fetch_assoc($res)) : ?>
 			<tr>
 				<?php if ($type == 2){?><td NOWRAP style="border-top-style: solid; border-top-width: 1px"><?php echo $terrain; ?>&nbsp;</td><?php } ?>
-				<td NOWRAP style="border-top-style: solid; border-top-width: 1px"><?php echo $ary[name]; ?>&nbsp;</td>
-				<td NOWRAP align="center" style="border-top-style: solid; border-top-width: 1px">&nbsp;<?php echo $ary[freq]; ?>&nbsp;</td>
-				<td NOWRAP align="center" style="border-top-style: solid; border-top-width: 1px">&nbsp;<?php echo $ary[enc]; ?>&nbsp;</td>
-				<td NOWRAP align="center" style="border-top-style: solid; border-top-width: 1px">&nbsp;<?php echo $ary[size]; ?>&nbsp;</td>
-				<td NOWRAP align="center" style="border-top-style: solid; border-top-width: 1px">&nbsp;<?php echo $ary[move]; ?>&nbsp;</td>
-				<td NOWRAP align="center" style="border-top-style: solid; border-top-width: 1px">&nbsp;<?php echo $ary[ac]; ?>&nbsp;</td>
-				<td NOWRAP align="center" style="border-top-style: solid; border-top-width: 1px">&nbsp;<?php echo $ary[hd]; ?>&nbsp;</td>
-				<td NOWRAP align="center" style="border-top-style: solid; border-top-width: 1px">&nbsp;<?php echo $ary[atk]; ?>&nbsp;</td>
-				<td NOWRAP align="center" style="border-top-style: solid; border-top-width: 1px">&nbsp;<?php echo $ary[dmg]; ?>&nbsp;</td>
-				<td NOWRAP align="center" style="border-top-style: solid; border-top-width: 1px">&nbsp;<?php echo $ary[thaco]; ?>&nbsp;</td>
-				<td NOWRAP style="border-top-style: solid; border-top-width: 1px"><?php echo $ary[spatk]; ?>&nbsp;</td>
-				<td NOWRAP style="border-top-style: solid; border-top-width: 1px"><?php echo $ary[spdef]; ?>&nbsp;</td>
-				<td NOWRAP align="center" style="border-top-style: solid; border-top-width: 1px">&nbsp;<?php echo $ary[mr]; ?>&nbsp;</td>
-				<td NOWRAP align="center" style="border-top-style: solid; border-top-width: 1px">&nbsp;<?php echo $ary[lair]; ?>&nbsp;</td>
-				<td NOWRAP align="center" style="border-top-style: solid; border-top-width: 1px">&nbsp;<?php echo $ary[iq]; ?>&nbsp;</td>
-				<td NOWRAP align="center" style="border-top-style: solid; border-top-width: 1px"><?php echo $ary[al]; ?>&nbsp;</td>
-				<td NOWRAP align="center" style="border-top-style: solid; border-top-width: 1px">&nbsp;<?php echo $ary[level]; ?>&nbsp;</td>
-				<?php if ($show_terrain > 0 && $type != 2){ ?><td style="border-top-style: solid; border-top-width: 1px"><?php echo getTerrains($x_game, $ary[location], $ary[swimmer]); ?></td><?php } ?>
+				<td NOWRAP style="border-top-style: solid; border-top-width: 1px"><?php echo $ary['name']; ?>&nbsp;</td>
+				<td NOWRAP align="center" style="border-top-style: solid; border-top-width: 1px">&nbsp;<?php echo $ary['freq']; ?>&nbsp;</td>
+				<td NOWRAP align="center" style="border-top-style: solid; border-top-width: 1px">&nbsp;<?php echo $ary['enc']; ?>&nbsp;</td>
+				<td NOWRAP align="center" style="border-top-style: solid; border-top-width: 1px">&nbsp;<?php echo $ary['size']; ?>&nbsp;</td>
+				<td NOWRAP align="center" style="border-top-style: solid; border-top-width: 1px">&nbsp;<?php echo $ary['move']; ?>&nbsp;</td>
+				<td NOWRAP align="center" style="border-top-style: solid; border-top-width: 1px">&nbsp;<?php echo $ary['ac']; ?>&nbsp;</td>
+				<td NOWRAP align="center" style="border-top-style: solid; border-top-width: 1px">&nbsp;<?php echo $ary['hd']; ?>&nbsp;</td>
+				<td NOWRAP align="center" style="border-top-style: solid; border-top-width: 1px">&nbsp;<?php echo $ary['atk']; ?>&nbsp;</td>
+				<td NOWRAP align="center" style="border-top-style: solid; border-top-width: 1px">&nbsp;<?php echo $ary['dmg']; ?>&nbsp;</td>
+				<td NOWRAP align="center" style="border-top-style: solid; border-top-width: 1px">&nbsp;<?php echo $ary['thaco']; ?>&nbsp;</td>
+				<td NOWRAP style="border-top-style: solid; border-top-width: 1px"><?php echo $ary['spatk']; ?>&nbsp;</td>
+				<td NOWRAP style="border-top-style: solid; border-top-width: 1px"><?php echo $ary['spdef']; ?>&nbsp;</td>
+				<td NOWRAP align="center" style="border-top-style: solid; border-top-width: 1px">&nbsp;<?php echo $ary['mr']; ?>&nbsp;</td>
+				<td NOWRAP align="center" style="border-top-style: solid; border-top-width: 1px">&nbsp;<?php echo $ary['lair']; ?>&nbsp;</td>
+				<td NOWRAP align="center" style="border-top-style: solid; border-top-width: 1px">&nbsp;<?php echo $ary['iq']; ?>&nbsp;</td>
+				<td NOWRAP align="center" style="border-top-style: solid; border-top-width: 1px"><?php echo $ary['al']; ?>&nbsp;</td>
+				<td NOWRAP align="center" style="border-top-style: solid; border-top-width: 1px">&nbsp;<?php echo $ary['level']; ?>&nbsp;</td>
+				<?php if ($show_terrain > 0 && $type != 2){ ?><td style="border-top-style: solid; border-top-width: 1px"><?php echo getTerrains($x_game, $ary['location'], $ary['swimmer']); ?></td><?php } ?>
 			</tr>
 		<?php endwhile;
 	}

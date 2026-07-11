@@ -2,7 +2,7 @@
 
 function PArandomMonster($level,$type,$game,$mutate,$might1,$might2)
 {
-	$level = $level + 0;		if ($level > 15){$level = 15;}		if ($level < 2){$level = 2;}		$level_max = $level+4;
+	$level = num($level);		if ($level > 15){$level = 15;}		if ($level < 2){$level = 2;}		$level_max = $level+4;
 
 	include("db.php");
 
@@ -58,7 +58,7 @@ function PArandomMonster($level,$type,$game,$mutate,$might1,$might2)
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
 function randomMonster($level,$type,$game,$extra,$undead)
 {
-	$level = $level + 0;
+	$level = num($level);
 
 	if ($game == "Swords & Six-Siders")
 	{

@@ -2,7 +2,7 @@
 
 function getTerrains($game, $dwell, $swim)
 {
-	$lives = explode(" ", $dwell);
+	$lives = explode(" ", (string) $dwell);
 	$c_lives = count($lives);
 	$u_lives = 0;
 
@@ -127,11 +127,11 @@ function activeGame($connection,$game,$webdir)
 // THIS FUNCTION GENERATES A RANDOM NUMBER //
 function createRandomCode() {
     $chars = "abcdefghijkmnopqrstuvwxyz023456789";
-    srand((double)microtime()*1000000);
+    mt_srand((double)microtime()*1000000);
     $i = 0;
     $pass = '' ;
     while ($i <= 5) {
-        $num = rand() % 33;
+        $num = random_int(0, mt_getrandmax()) % 33;
         $tmp = substr($chars, $num, 1);
         $pass = $pass . $tmp;
         $i++;
@@ -143,11 +143,11 @@ function createRandomCode() {
 function createRandomLetter($qty)
 {
 	if ($qty > 0){} else {$qty = 1;}
-	$let = array('a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z');
+	$let = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
 	$chars = count($let)-1;
     $letter = "";
     while ($qty > 0) :
-		$letter = $letter . $let['mt_rand(0,$chars)'];
+		$letter = $letter . $let['mt_rand(0, max((int)(0), (int)($chars)))'];
         $qty = $qty - 1;
     endwhile;
 

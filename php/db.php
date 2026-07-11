@@ -1,10 +1,17 @@
 <?php
 
-//ini_set('display_errors', 1);
-//error_reporting(E_ALL);
+include("config.php");
 
-ini_set('display_errors', 0);
-error_reporting(0);
+if ( !empty($debug_mode) )
+{
+    ini_set('display_errors', 1);
+    error_reporting(E_ALL);
+}
+else
+{
+    ini_set('display_errors', 0);
+    error_reporting(0);
+}
 
 if ( session_id() == '' || !isset($_SESSION) )
 {
@@ -13,17 +20,11 @@ if ( session_id() == '' || !isset($_SESSION) )
 
 include("vars.php");
 
-$allow_image_download = 1; // SET TO "1" IF YOU WANT TO ALLOW PEOPLE TO DOWNLOAD MAPS TO JPG
-
-mysqli_connect('localhost', 'root', '') or die ("Unable to connect!");
-
-$webdir = "localhost:808";
-$webfld = substr(__FILE__, 0, 1) . ":/Wizardawn/htdocs/";
-$webadd = "http://" . $webdir . "/";
-$webnot = "http://localhost:808/lic/";
-
-$database = "wizardawn";
-$connection = new mysqli('localhost', 'root', '', $database);
+$connection = new mysqli($db_host, $db_user, $db_pass, $database);
+if ( $connection->connect_error )
+{
+    die("Unable to connect: " . $connection->connect_error);
+}
 
 set_time_limit(300);
 

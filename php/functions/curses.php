@@ -208,7 +208,7 @@ function destroyMe()
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
 function tailType()
 {
-	$value = array('lion', 'lizard', 'rabbit', 'dog', 'wolf', 'cat', 'horse', 'devil', 'cow');
+	$value = ['lion', 'lizard', 'rabbit', 'dog', 'wolf', 'cat', 'horse', 'devil', 'cow'];
 	return $value[mt_rand(0,8)];
 }
 ?>

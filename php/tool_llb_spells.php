@@ -121,7 +121,7 @@ echo "</head><body>";
 
 $bottom_notices = 2;
 
-$level = $_POST['level']+0;
+$level = num($_POST['level']);
 
 $sort = $_POST['sort'];
 	if ($sort == 2){$sort_list = "ORDER BY ls_class, ls_name";}
@@ -167,7 +167,7 @@ else
 	$res = mysqli_query( $connection, $qry ); /*qry*/
 	$cmd = "(ls_id=0";
 		while ($ary=mysqli_fetch_assoc($res)) :
-			$v = "spell_" . $ary[ls_id];
+			$v = "spell_" . $ary['ls_id'];
 			$spell = $_POST["$v"];
 				if ($spell > 0){$cmd = $cmd . " OR ls_id=" . $spell;}
 		endwhile;
@@ -183,29 +183,29 @@ $res = mysqli_query( $connection, $qry ); /*qry*/
 		<tr>
 			<td>
 			<img border="0" src="pics_tools/tools_spell_book.jpg">
-		<?php while ($ary=mysqli_fetch_assoc($res)) : if ($ary[ls_class] == "Cleric"){$my_class = "Cleric";} else {$my_class = "Magic-User/Elf";} ?>
+		<?php while ($ary=mysqli_fetch_assoc($res)) : if ($ary['ls_class'] == "Cleric"){$my_class = "Cleric";} else {$my_class = "Magic-User/Elf";} ?>
 			<hr color="#000000" size="1">
-			<p style="margin-top: 0; margin-bottom: 0"><font size="4"><?php echo $ary[ls_name]; if ($ary[ls_reverse] > 0){ echo "&nbsp;&nbsp;<i>(Reversible)</i>"; } ?></font></p>
+			<p style="margin-top: 0; margin-bottom: 0"><font size="4"><?php echo $ary['ls_name']; if ($ary['ls_reverse'] > 0){ echo "&nbsp;&nbsp;<i>(Reversible)</i>"; } ?></font></p>
 			<table border="0" cellpadding="5" style="border-collapse: collapse" width="100%" bordercolorlight="#000000" bordercolordark="#000000">
 				<tr>
 					<td width="25%"><font size="2"><b>Class:</b> <?php echo $my_class; ?></font></td>
-					<td width="25%"><font size="2"><b>Level:</b> <?php echo $ary[ls_level]; ?></font></td>
-					<td width="25%"><font size="2"><b>Duration:</b> <?php echo $ary[ls_duration]; ?></font></td>
-					<td width="25%" align="right"><font size="2"><b>Range:</b> <?php echo $ary[ls_range]; ?></font></td>
+					<td width="25%"><font size="2"><b>Level:</b> <?php echo $ary['ls_level']; ?></font></td>
+					<td width="25%"><font size="2"><b>Duration:</b> <?php echo $ary['ls_duration']; ?></font></td>
+					<td width="25%" align="right"><font size="2"><b>Range:</b> <?php echo $ary['ls_range']; ?></font></td>
 				</tr>
 				</table>
 			<p style="margin-top: 0; margin-bottom: 0"><font size="2"><?php
-				$notes = str_replace("\n", "<br>", $ary[ls_text]);
+				$notes = str_replace("\n", "<br>", $ary['ls_text']);
 				$notes = str_replace("<table ", "<table style='font-size:13px;' ", $notes);
 				$notes = str_replace("</table>\r<br>", "</table>", $notes);
 				echo $notes;
 
-				if (($extra > 0) && ($ary[ls_ref] > 0))
+				if (($extra > 0) && ($ary['ls_ref'] > 0))
 				{
 					$rqry = "SELECT * FROM lablord_spells WHERE ls_id=$ary[ls_ref]";
 					$rres = mysqli_query( $connection, $rqry ); /*rqry*/
 					$rary = mysqli_fetch_assoc($rres);
-					$more = str_replace("\n", "<br>", $rary[ls_text]);
+					$more = str_replace("\n", "<br>", $rary['ls_text']);
 					$more = str_replace("<table ", "<table style='font-size:13px;' ", $more);
 					$more = str_replace("</table>\r<br>", "</table>", $more);
 					echo "<br><br><b>SPELL REFERENCE:&nbsp;</b>" . $more;

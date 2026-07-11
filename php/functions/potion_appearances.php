@@ -2,10 +2,10 @@
 
 function potionPretty()
 {
-	$pot_look = array("bubbling", "cloudy", "effervescent", "fuming", "oily", "smoky", "syrupy", "vaporous", "viscous", "watery", "clear", "flecked", "layered", "luminous", "rainbowed");
-	$pot_feel = array("acidic", "bilious", "bitter", "burning", "buttery", "dusty", "earthy", "fiery", "fishy", "greasy", "herbal", "honeyed", "lemony", "meaty", "metallic", "milky", "musty", "oniony", "peppery", "perfumy", "salty", "sugary", "sour", "spicy", "sweet", "tart", "vinegary", "watery");
-	$pot_color = array("brassy (metallic)", "bronze (metallic)", "coppery (metallic)", "gold (metallic)", "silvery (metallic)", "steely (metallic)", "fuchsia (violet)", "heliotrope (violet)", "lake (violet)", "lavender (violet)", "lilac (violet)", "magenta (violet)", "mauve (violet)", "plum (violet)", "puce (violet)", "purple (violet)", "bone (white)", "colorless (white)", "ivory (white)", "pearl (white)", "amber (yellow)", "buff (yellow)", "citrine (yellow)", "cream (yellow)", "fallow (yellow)", "flaxen (yellow)", "ochre (yellow)", "peach (yellow)", "saffron (yellow)", "straw (yellow)", "dove (gray)", "dun (gray)", "neutral (gray)", "carmine (red)", "cerise (red)", "cherry (red)", "cinnabar (red)", "coral (red)", "crimson (red)", "madder (red)", "maroon (red)", "pink (red)", "rose (red)", "ruby (red)", "russet (red)", "rust (red)", "sanguine (red)", "scarlet (red)", "vermilion (red)", "chocolate (brown)", "ecru (brown)", "fawn (brown)", "mahogany (brown)", "tan (brown)", "terra cotta (brown)", "aquamarine (brown)", "emerald (brown)", "olive (brown)", "azure (blue)", "cerulean (blue)", "indigo (blue)", "sapphire (blue)", "turquoise (blue)", "ultramarine (blue)", "ebony (black)", "inky (black)", "pitchy (black)", "sable (black)", "sooty (black)", "apricot (orange)", "flame (orange)", "golden (orange)", "salmon (orange)", "tawny (orange)");
-	$pot_culur = array("brown", "sea green", "midnight blue", "aquamarine", "lemon yellow", "mint", "dandelion", "carrot orange", "wild strawberry", "scarlet", "gold", "umber", "canary", "eggplant", "blue", "magenta", "fuchsia", "gray", "jungle green", "bluish gray", "apricot", "forest green", "white", "snow white", "pine green", "silver", "copper", "spring green", "turquoise blue", "bluish violet", "violet", "bluish green", "blush", "pink", "salmon", "orchid", "maize", "lime", "desert sand", "orange", "blood red", "tan", "almond", "yellow", "shamrock", "burnt sienna", "reddish purple", "chestnut", "yellowish orange", "black", "royal purple", "sunset orange", "purple", "asparagus", "fern", "sky blue", "green", "peach", "cornflower", "burnt orange", "teal blue", "plum", "indigo", "reddish orange", "yellowish green", "red", "mulberry", "antique brass", "lavender", "mahogany", "sunglow", "thistle", "reddish brown", "olive green");
+	$pot_look = ["bubbling", "cloudy", "effervescent", "fuming", "oily", "smoky", "syrupy", "vaporous", "viscous", "watery", "clear", "flecked", "layered", "luminous", "rainbowed"];
+	$pot_feel = ["acidic", "bilious", "bitter", "burning", "buttery", "dusty", "earthy", "fiery", "fishy", "greasy", "herbal", "honeyed", "lemony", "meaty", "metallic", "milky", "musty", "oniony", "peppery", "perfumy", "salty", "sugary", "sour", "spicy", "sweet", "tart", "vinegary", "watery"];
+	$pot_color = ["brassy (metallic)", "bronze (metallic)", "coppery (metallic)", "gold (metallic)", "silvery (metallic)", "steely (metallic)", "fuchsia (violet)", "heliotrope (violet)", "lake (violet)", "lavender (violet)", "lilac (violet)", "magenta (violet)", "mauve (violet)", "plum (violet)", "puce (violet)", "purple (violet)", "bone (white)", "colorless (white)", "ivory (white)", "pearl (white)", "amber (yellow)", "buff (yellow)", "citrine (yellow)", "cream (yellow)", "fallow (yellow)", "flaxen (yellow)", "ochre (yellow)", "peach (yellow)", "saffron (yellow)", "straw (yellow)", "dove (gray)", "dun (gray)", "neutral (gray)", "carmine (red)", "cerise (red)", "cherry (red)", "cinnabar (red)", "coral (red)", "crimson (red)", "madder (red)", "maroon (red)", "pink (red)", "rose (red)", "ruby (red)", "russet (red)", "rust (red)", "sanguine (red)", "scarlet (red)", "vermilion (red)", "chocolate (brown)", "ecru (brown)", "fawn (brown)", "mahogany (brown)", "tan (brown)", "terra cotta (brown)", "aquamarine (brown)", "emerald (brown)", "olive (brown)", "azure (blue)", "cerulean (blue)", "indigo (blue)", "sapphire (blue)", "turquoise (blue)", "ultramarine (blue)", "ebony (black)", "inky (black)", "pitchy (black)", "sable (black)", "sooty (black)", "apricot (orange)", "flame (orange)", "golden (orange)", "salmon (orange)", "tawny (orange)"];
+	$pot_culur = ["brown", "sea green", "midnight blue", "aquamarine", "lemon yellow", "mint", "dandelion", "carrot orange", "wild strawberry", "scarlet", "gold", "umber", "canary", "eggplant", "blue", "magenta", "fuchsia", "gray", "jungle green", "bluish gray", "apricot", "forest green", "white", "snow white", "pine green", "silver", "copper", "spring green", "turquoise blue", "bluish violet", "violet", "bluish green", "blush", "pink", "salmon", "orchid", "maize", "lime", "desert sand", "orange", "blood red", "tan", "almond", "yellow", "shamrock", "burnt sienna", "reddish purple", "chestnut", "yellowish orange", "black", "royal purple", "sunset orange", "purple", "asparagus", "fern", "sky blue", "green", "peach", "cornflower", "burnt orange", "teal blue", "plum", "indigo", "reddish orange", "yellowish green", "red", "mulberry", "antique brass", "lavender", "mahogany", "sunglow", "thistle", "reddish brown", "olive green"];
 
 	$pot_luk = mt_rand(0,14);
 
@@ -101,7 +101,7 @@ function ttPotionStage($stage)
 		}
 		else
 		{
-			$item = strtolower(animalPicker()) . " blood";
+			$item = strtolower((string) animalPicker()) . " blood";
 			switch (mt_rand(0,15))
 			{
 				case 0: $item = "sheep blood";	break;
@@ -136,7 +136,7 @@ function ttPotionStage($stage)
 			case 2:	$item = "cold";		break;
 		}
 	}
-	return array($item,$limit);
+	return [$item,$limit];
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -185,7 +185,7 @@ function ttPotionMixer($game)
 	if (mt_rand(1,2) == 1){$recipe = $ing1 . "&nbsp; " . $ing2 . "&nbsp; " . $ing3;}
 	else {$recipe = $ing2 . "&nbsp; " . $ing1 . "&nbsp; " . $ing3;}
 
-	return array($mix1,$mix2,$mix3,$mix4,$mix5,$recipe);
+	return [$mix1,$mix2,$mix3,$mix4,$mix5,$recipe];
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -212,8 +212,8 @@ function ttPotionMaker($game,$potion)
 		case 4: $item = "Cleansing " . $lqud; $does = "drinker will have a curse lifted, or it can be poured on an item to remove a curse from it"; $level = "L1SR"; break;
 		case 5: $item = "Cold Resistance " . $lqud; $does = "lasts for " . ($level+1) . " hours"; $level = "L2SR"; break;
 		case 6:	$item = "Curing " . $lqud; $does = "cures disease and illness"; $level = "L1SR"; break;
-		case 7: $item = "Cursed " . $lqud; $does = "" . curseType($level,drinker,item,$game) . ""; $level = "L2SR"; break;
-		case 8: $item = "Dexterity " . $lqud; $does = "increases the drinker's " . abilityTranslate($game,DEX) . " by 5 for " . ($level+1) . " hours"; $level = "L1SR"; break;
+		case 7: $item = "Cursed " . $lqud; $does = "" . curseType($level,'drinker','item',$game) . ""; $level = "L2SR"; break;
+		case 8: $item = "Dexterity " . $lqud; $does = "increases the drinker's " . abilityTranslate($game,'DEX') . " by 5 for " . ($level+1) . " hours"; $level = "L1SR"; break;
 		case 9: $item = "Disenchanting " . $lqud; $does = "remove enchantments on those it is rubbed on"; $level = "L3SR"; break;
 		case 10:$item = "Dragon Breath " . $lqud; $does = "drinker can breath fire instead of a normal attack with a 6+6"; $level = "L3SR"; break;
 		case 11:$item = "Dragon Domination " . $lqud; $does = "lasts for " . ($level+1) . " hours"; $level = "L4SR"; break;
@@ -223,19 +223,19 @@ function ttPotionMaker($game,$potion)
 		case 15:$item = "Flaming " . $lqud; $does = "burns as soon as it is exposed to air for " . ($level+1) . " hours"; $level = "L1SR"; break;
 		case 16:$item = "Flying " . $lqud; $does = "lasts for " . ($level+10) . " minutes"; $level = "L2SR"; break;
 		case 17:$item = "Giant Domination " . $lqud; $does = "lasts for " . ($level+1) . " hours"; $level = "L4SR"; break;
-		case 18:$item = "Giant Strength " . $lqud; $does = "increases the drinker's " . abilityTranslate($game,STR) . " by 10 for " . ($level+1) . " hours"; $level = "L3SR"; break;
+		case 18:$item = "Giant Strength " . $lqud; $does = "increases the drinker's " . abilityTranslate($game,'STR') . " by 10 for " . ($level+1) . " hours"; $level = "L3SR"; break;
 		case 19:$item = "Growing " . $lqud; $does = "drinker and items grow to 4x normal size for " . ($level+1) . " minutes"; $level = "L2SR"; break;
-		case 20:$item = "Healing " . $lqud; $does = "restores " . mt_rand(1,2) . "d6+" . $level . " " . abilityTranslate($game,CON) . ""; $level = "L1SR"; break;
+		case 20:$item = "Healing " . $lqud; $does = "restores " . mt_rand(1,2) . "d6+" . $level . " " . abilityTranslate($game,'CON') . ""; $level = "L1SR"; break;
 		case 21:$item = "Heroic " . $lqud; $does = "drinker gets to add an extra dice to everything they do for " . ($level *2) . " minutes"; $level = "L1SR"; break;
 		case 22:$item = "Humanoid Domination " . $lqud; $does = "lasts for " . ($level+1) . " hours"; $level = "L2SR"; break;
-		case 23:$item = "Infernal " . $lqud; $does = "" . curseType($level,drinker,item,$game) . ""; $level = "L2SR"; break;
-		case 24:$item = "Intellect " . $lqud; $does = "increases the drinker's " . abilityTranslate($game,INT) . " by 5 for " . ($level+1) . " hours"; $level = "L1SR"; break;
+		case 23:$item = "Infernal " . $lqud; $does = "" . curseType($level,'drinker','item',$game) . ""; $level = "L2SR"; break;
+		case 24:$item = "Intellect " . $lqud; $does = "increases the drinker's " . abilityTranslate($game,'INT') . " by 5 for " . ($level+1) . " hours"; $level = "L1SR"; break;
 		case 25:$item = "Invisibility " . $lqud; $does = "lasts for " . ($level+1) . " minutes"; $level = "L2SR"; break;
 		case 26:$item = "Invulnerable " . $lqud; $does = "lasts for " . ($level *2) . " minutes"; $level = "L4SR"; break;
 		case 27:$item = "Levitation " . $lqud; $does = "can levitate " . mt_rand(1,6) . " feet off the ground for " . ($level+10) . " minutes"; $level = "L2SR"; break;
 		case 28:$item = "Life Giving " . $lqud; $does = "brings those back from the dead"; $level = "L5SR"; break;
 		case 29:$item = "Lore " . $lqud; $does = "can identify and appraise any item " . (($level+1)*10) . " minutes"; $level = "L1SR"; break;
-		case 30:$item = "Luck " . $lqud; $does = "increases the drinker's " . abilityTranslate($game,LCK) . " by 5 for " . ($level+1) . " hours"; $level = "L1SR"; break;
+		case 30:$item = "Luck " . $lqud; $does = "increases the drinker's " . abilityTranslate($game,'LCK') . " by 5 for " . ($level+1) . " hours"; $level = "L1SR"; break;
 		case 31:$item = "Lycanthropy " . $lqud; $does = "drinker will turn into a " . lycanthrope() . " for " . mt_rand(2,12) . " hours, but is not permanent and it unaffects those suffering from lycanthropy"; $level = "L3SR"; break;
 		case 32:$item = "Lying " . $lqud; $does = "drinker can convincely tell lies for " . mt_rand(10,20) . " minutes"; $level = "L1SR"; break;
 		case 33:$item = "Mind Reading " . $lqud; $does = "lasts for " . ($level *2) . " minutes"; $level = "L3SR"; break;
@@ -252,19 +252,19 @@ function ttPotionMaker($game,$potion)
 		case 44:$item = "Shrinking " . $lqud; $does = "drinker and items shrink to 5% normal size for " . ($level+1) . " minutes"; $level = "L2SR"; break;
 		case 45:$item = "Slippery " . $lqud; $does = "poured on the floor where anyone slips and falls"; $level = "L1SR"; break;
 		case 46:$item = "Speech " . $lqud; $does = "can talk in the same language as the one you are trying to converse with for " . (($level+1)*10) . " minutes"; $level = "L3SR"; break;
-		case 47:$item = "Speed " . $lqud; $does = "increases the drinker's " . abilityTranslate($game,SPD) . " by 5 for " . ($level+1) . " hours"; $level = "L1SR"; break;
+		case 47:$item = "Speed " . $lqud; $does = "increases the drinker's " . abilityTranslate($game,'SPD') . " by 5 for " . ($level+1) . " hours"; $level = "L1SR"; break;
 		case 48:$item = "Spider " . $lqud; $does = "can walk on walls and ceilings for " . (($level+1)*10) . " minutes"; $level = "L3SR"; break;
 		case 49:$item = "Super Heroic " . $lqud; $does = "drinker gets to add two extra dice to everything they do for " . ($level *2) . " minutes"; $level = "L3SR"; break;
 		case 50:$item = "Swimming " . $lqud; $does = "drinker can move through water as though they are moving on land for an hour"; $level = "L2SR"; break;
 		case 51:$item = "Treasure Seeking " . $lqud; $does = "can find nearby treasure for " . ($level*2) . " minutes"; $level = "L4SR"; break;
-		case 52:$item = "Truthfulness " . $lqud; $does = "drinker tells nothing but the truth for " . mt_rand(10,20) . " minutes unless they may an " . TTSaves($level,$game) . " vs. " . abilityTranslate($game,INT) . ""; $level = "L1SR"; break;
+		case 52:$item = "Truthfulness " . $lqud; $does = "drinker tells nothing but the truth for " . mt_rand(10,20) . " minutes unless they may an " . TTSaves($level,$game) . " vs. " . abilityTranslate($game,'INT') . ""; $level = "L1SR"; break;
 		case 53:$item = "Undead Domination " . $lqud; $does = "lasts for " . ($level+1) . " hours"; $level = "L3SR"; break;
 		case 54:$item = "Underwater Breathing " . $lqud; $does = "lasts for " . ($level + 1) . " hours"; $level = "L2SR"; break;
 		case 55:$item = "Ventriloquism " . $lqud; $does = "drinker can throw their voice " . mt_rand(10,20) . " minutes"; $level = "L1SR"; break;
-		case 56:$item = "Vile " . $lqud; $does = "" . curseType($level,drinker,item,$game) . ""; $level = "L2SR"; break;
+		case 56:$item = "Vile " . $lqud; $does = "" . curseType($level,'drinker','item',$game) . ""; $level = "L2SR"; break;
 		case 57:$item = "Youth " . $lqud; $does = "drinker becomes " . mt_rand(2,20) . " years younger"; $level = "L6SR"; break;
 	}
-	return array($item,$does,$level);
+	return [$item,$does,$level];
 }
 
 ?>

@@ -6,10 +6,10 @@
 		if ($ttlvl == 9){$ttlvl = 0.5;} // FOR EASY MONSTERS
 		if ($ttlvl > 4){$roll = 10;} else if ($ttlvl > 2){$roll = 5;} else {$roll = 0;}
 
-		$my_mr_is = ROUND( $ttlvl * ($ary[m_hp_min] + $ary[ac]) ) + ($roll * $ary[difficulty]);	// MR
+		$my_mr_is = ROUND( $ttlvl * ($ary['m_hp_min'] + $ary['ac']) ) + ($roll * $ary['difficulty']);	// MR
 		if (($x_game == "Millenniums & Mutations 5th Edition") || ($x_game == "Millenniums & Mutations 7th Edition"))
 		{
-			$my_mr_is = ROUND( $ttlvl * ((($ary[difficulty]*2)+$ary[ac]+15) + ($ary[ac]+20)) ) + ($roll * $ary[difficulty]);	// MR
+			$my_mr_is = ROUND( $ttlvl * ((($ary['difficulty']*2)+$ary['ac']+15) + ($ary['ac']+20)) ) + ($roll * $ary['difficulty']);	// MR
 		}
 
 		if ($x_game == "Tunnels & Trolls Deluxe"){ $my_ad_is = FLOOR($my_mr_is/2); }
@@ -33,18 +33,18 @@
 
 			if ($x_game == "Millenniums & Mutations 5th Edition") ////////////////////////////////////////////////////////////////////////////////////////////////
 			{
-				if ($ary[iq] == "Instinctual"){$my_int_is = "1";}
-				else if ($ary[iq] == "Animal"){$my_int_is = "5";}
-				else if ($ary[iq] == "Primitive"){$my_int_is = "10";}
-				else if ($ary[iq] == "Industrial"){$my_int_is = "15";}
-				else if ($ary[iq] == "Modern"){$my_int_is = "20";}
+				if ($ary['iq'] == "Instinctual"){$my_int_is = "1";}
+				else if ($ary['iq'] == "Animal"){$my_int_is = "5";}
+				else if ($ary['iq'] == "Primitive"){$my_int_is = "10";}
+				else if ($ary['iq'] == "Industrial"){$my_int_is = "15";}
+				else if ($ary['iq'] == "Modern"){$my_int_is = "20";}
 				else {$my_int_is = "25";}
 				$my_int_is = CEIL($my_int_is + $modifer_for_difficulty);							// INT
-					if ($ary[iq] < 1){$my_int_is = "1";}
+					if ($ary['iq'] < 1){$my_int_is = "1";}
 
 				$my_total_adds = $my_ad_is / 6;
 
-				$abilities = explode("|", $ary[spatk]);
+				$abilities = explode("|", (string) $ary['spatk']);
 				$body_build = 3;
 				$body_i = 0;
 
@@ -71,28 +71,28 @@
 
 				endwhile;
 
-				$my_chr_is = FLOOR((($ary[ac]+15+$ary[difficulty])/2) + $my_int_is); if ($my_chr_is < 1){$my_chr_is = 1;}
+				$my_chr_is = FLOOR((($ary['ac']+15+$ary['difficulty'])/2) + $my_int_is); if ($my_chr_is < 1){$my_chr_is = 1;}
 
 				$monster_statistics = "STR:" . $my_str_is . "&nbsp;/ DEX:" . $my_dex_is . "&nbsp;/ LCK:" . $my_lck_is . "&nbsp;/ CON:" . $my_mr_is . "&nbsp;/ INT:" . $my_int_is . "&nbsp;/ CHR:" . $my_chr_is . "";
 			}
 			else if ($x_game == "Millenniums & Mutations 7th Edition") ////////////////////////////////////////////////////////////////////////////////////////////////
 			{
-				if ($ary[iq] == "Instinctual"){$my_int_is = "1";}
-				else if ($ary[iq] == "Animal"){$my_int_is = "5";}
-				else if ($ary[iq] == "Primitive"){$my_int_is = "10";}
-				else if ($ary[iq] == "Industrial"){$my_int_is = "15";}
-				else if ($ary[iq] == "Modern"){$my_int_is = "20";}
+				if ($ary['iq'] == "Instinctual"){$my_int_is = "1";}
+				else if ($ary['iq'] == "Animal"){$my_int_is = "5";}
+				else if ($ary['iq'] == "Primitive"){$my_int_is = "10";}
+				else if ($ary['iq'] == "Industrial"){$my_int_is = "15";}
+				else if ($ary['iq'] == "Modern"){$my_int_is = "20";}
 				else {$my_int_is = "25";}
 				if ($my_int_is > 5){$my_int_is = CEIL($my_int_is + $modifer_for_difficulty);}		// INT
 					if ($my_int_is < 1){$my_int_is = "1";}
 
 				$my_wiz_is = $modifer_for_difficulty + $my_int_is;									// WIZ
 					if ($my_int_is < 6){$my_wiz_is = "0";}
-					if ($ary[type] == "R"){$my_wiz_is = "0";} // ROBOTS HAVE NO WIZ
+					if ($ary['type'] == "R"){$my_wiz_is = "0";} // ROBOTS HAVE NO WIZ
 
 				$my_total_adds = $my_ad_is / 10;
 
-				$attribute_priority = str_replace("d", "d|x", $ary[spatk]);
+				$attribute_priority = str_replace("d", "d|x", $ary['spatk']);
 				$abilities = explode("|", $attribute_priority);
 				$body_build = 4;
 				$body_i = 0;
@@ -125,18 +125,18 @@
 
 				endwhile;
 
-				$my_chr_is = FLOOR((($ary[ac]+15+$ary[difficulty])/2) + $my_int_is); if ($my_chr_is < 1){$my_chr_is = 1;}
+				$my_chr_is = FLOOR((($ary['ac']+15+$ary['difficulty'])/2) + $my_int_is); if ($my_chr_is < 1){$my_chr_is = 1;}
 
 				$monster_statistics = "STR:" . $my_str_is . "&nbsp;/ DEX:" . $my_dex_is . "&nbsp;/ LCK:" . $my_lck_is . "&nbsp;/ SPD:" . $my_spd_is . "&nbsp;/ CON:" . $my_mr_is . "&nbsp;/ INT:" . $my_int_is . "&nbsp;/ WIZ:" . $my_wiz_is . "&nbsp;/ CHR:" . $my_chr_is . "";
 			}
 			else if ($x_game == "Tunnels & Trolls 5th Edition") ////////////////////////////////////////////////////////////////////////////////////////////////
 			{
-				$my_int_is = CEIL($ary[iq] + $modifer_for_difficulty);							// INT
-					if ($ary[iq] < 1){$my_int_is = "1";}
+				$my_int_is = CEIL($ary['iq'] + $modifer_for_difficulty);							// INT
+					if ($ary['iq'] < 1){$my_int_is = "1";}
 
 				$my_total_adds = $my_ad_is / 6;
 
-				$abilities = explode("|", $ary[spatk]);
+				$abilities = explode("|", (string) $ary['spatk']);
 				$body_build = 3;
 				$body_i = 0;
 
@@ -163,22 +163,22 @@
 
 				endwhile;
 
-				$my_chr_is = FLOOR(($ary[bravery]/2) + $my_int_is); if ($my_chr_is < 1){$my_chr_is = 1;}
+				$my_chr_is = FLOOR(($ary['bravery']/2) + $my_int_is); if ($my_chr_is < 1){$my_chr_is = 1;}
 
 				$monster_statistics = "STR:" . $my_str_is . "&nbsp;/ DEX:" . $my_dex_is . "&nbsp;/ LCK:" . $my_lck_is . "&nbsp;/ CON:" . $my_mr_is . "&nbsp;/ INT:" . $my_int_is . "&nbsp;/ CHR:" . $my_chr_is . "";
 			}
 			else ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 			{
-				$my_int_is = CEIL($ary[iq] + $modifer_for_difficulty + ($ary[mr]*2));				// INT
-					if ($ary[iq] < 5){$my_int_is = $ary[iq];}
-					if ($ary[iq] < 1){$my_int_is = "1";}
+				$my_int_is = CEIL($ary['iq'] + $modifer_for_difficulty + ($ary['mr']*2));				// INT
+					if ($ary['iq'] < 5){$my_int_is = $ary['iq'];}
+					if ($ary['iq'] < 1){$my_int_is = "1";}
 
-				$my_wiz_is = $ary[mr] + $modifer_for_difficulty + $ary[iq];							// WIZ
-					if (($ary[iq] < 5) && (($ary[mr]+0) < 1)){$my_wiz_is = "0";}
+				$my_wiz_is = $ary['mr'] + $modifer_for_difficulty + $ary['iq'];							// WIZ
+					if (($ary['iq'] < 5) && ((num($ary['mr'])) < 1)){$my_wiz_is = "0";}
 
 				$my_total_adds = $my_ad_is / 10;
 
-				$attribute_priority = str_replace("d", "d|x", $ary[spatk]);
+				$attribute_priority = str_replace("d", "d|x", $ary['spatk']);
 				$abilities = explode("|", $attribute_priority);
 				$body_build = 4;
 				$body_i = 0;
@@ -211,7 +211,7 @@
 
 				endwhile;
 
-				$my_chr_is = FLOOR(($ary[bravery]/2) + $ary[iq]); if ($my_chr_is < 1){$my_chr_is = 1;}
+				$my_chr_is = FLOOR(($ary['bravery']/2) + $ary['iq']); if ($my_chr_is < 1){$my_chr_is = 1;}
 
 				$monster_statistics = "STR:" . $my_str_is . "&nbsp;/ DEX:" . $my_dex_is . "&nbsp;/ LCK:" . $my_lck_is . "&nbsp;/ SPD:" . $my_spd_is . "&nbsp;/ CON:" . $my_mr_is . "&nbsp;/ INT:" . $my_int_is . "&nbsp;/ WIZ:" . $my_wiz_is . "&nbsp;/ CHR:" . $my_chr_is . "";
 			}
@@ -219,39 +219,39 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-			$my_real_name = $ary[name];
+			$my_real_name = $ary['name'];
 
 			if (($x_game == "Millenniums & Mutations 5th Edition") || ($x_game == "Millenniums & Mutations 7th Edition"))
 			{
-				if ($ary[type] == "R")
+				if ($ary['type'] == "R")
 				{
-					if ($ary[atk] != ""){ $description = $ary[description] . " They are programmed to attack with: " . trim($ary[atk]) . "."; } else { $description = $ary[description]; }
+					if ($ary['atk'] != ""){ $description = $ary['description'] . " They are programmed to attack with: " . trim((string) $ary['atk']) . "."; } else { $description = $ary['description']; }
 					$description = retroBot($description,$x_game);
 				}
 				else
 				{
-					if (($x_mutants > 0) && ($ary[treasure] != ""))
+					if (($x_mutants > 0) && ($ary['treasure'] != ""))
 					{
-						$description = $ary[description];
+						$description = $ary['description'];
 						$description = str_replace("This is a creature from Urthe`s ancient past that once were extinct, but have somehow reappeared in recent centuries.", "", $description);
 						$description = str_replace("This is a creature from Urthe`s past that still exists today.", "", $description);
 						$description = str_replace("This is a creature from Urthe`s past that still exists today, although mutated or evolved somewhat.", "", $description);
-						$description = $ary[treasure] . " " . $description;
+						$description = $ary['treasure'] . " " . $description;
 						$description = retroNotes($description,$x_game,0);
-						$my_real_name = $ary[loot];
+						$my_real_name = $ary['loot'];
 					}
-					else { $description = retroNotes($ary[description],$x_game,0); }
+					else { $description = retroNotes($ary['description'],$x_game,0); }
 				}
 			}
-			else { $description = $ary[description]; }
+			else { $description = $ary['description']; }
 
-			if ($ary[difficulty] < 6){$description = str_replace("HURT", "1d6", $description);}
-			else if ($ary[difficulty] < 11){$description = str_replace("HURT", "2d6", $description);}
-			else if ($ary[difficulty] < 16){$description = str_replace("HURT", "3d6", $description);}
-			else if ($ary[difficulty] < 21){$description = str_replace("HURT", "4d6", $description);}
+			if ($ary['difficulty'] < 6){$description = str_replace("HURT", "1d6", $description);}
+			else if ($ary['difficulty'] < 11){$description = str_replace("HURT", "2d6", $description);}
+			else if ($ary['difficulty'] < 16){$description = str_replace("HURT", "3d6", $description);}
+			else if ($ary['difficulty'] < 21){$description = str_replace("HURT", "4d6", $description);}
 			else {$description = str_replace("HURT", "5d6", $description);}
 
-			$description = str_replace("SAVE", TTSaves($ary[difficulty],$x_game), $description);
+			$description = str_replace("SAVE", TTSaves($ary['difficulty'],$x_game), $description);
 
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

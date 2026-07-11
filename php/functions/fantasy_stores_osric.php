@@ -67,34 +67,34 @@ $shopres = mysqli_query( $connection, $shopqry ); /* shopqry. */
 
 while ($shopary=mysqli_fetch_assoc($shopres)) :
 
-	if ($shopary[shop] == 1){$owned = "Bartender";}
-	else if ($shopary[shop] == 2){$owned = "Inn Keeper";}
-	else if ($shopary[shop] == 3){$owned = "Merchant";}
-	else if ($shopary[shop] == 4){$owned = "Blacksmith";}
-	else if ($shopary[shop] == 5){$owned = "Fletcher"; if (mt_rand(1,2) == 1){$owned = "Bowyer";} }
-	else if ($shopary[shop] == 6){$owned = "Tanner"; if (mt_rand(1,2) == 1){$owned = "Leatherworker";} }
-	else if ($shopary[shop] == 7){$owned = "Tailor"; if (mt_rand(1,2) == 1){$owned = "Dressmaker";} }
-	else if ($shopary[shop] == 8){$owned = "Animal Trainer"; if (mt_rand(1,2) == 1){$owned = "Stable Master";} }
-	else if ($shopary[shop] == 9){$owned = "Woodworker"; if (mt_rand(1,2) == 1){$owned = "Carpenter";} }
-	else if ($shopary[shop] == 10){$owned = "Alchemist"; if (mt_rand(1,2) == 1){$owned = "Herbalist";} }
-	else if ($shopary[shop] == 11){$owned = "Cook"; if (mt_rand(1,2) == 1){$owned = "Baker";} }
-	else if ($shopary[shop] == 12){$owned = "Librarian";}
-	else if ($shopary[shop] == 13){$owned = "Jeweler";}
-	else if ($shopary[shop] == 14){$owned = "Musician";}
-	else if ($shopary[shop] == 15){$owned = "Banker";}
+	if ($shopary['shop'] == 1){$owned = "Bartender";}
+	else if ($shopary['shop'] == 2){$owned = "Inn Keeper";}
+	else if ($shopary['shop'] == 3){$owned = "Merchant";}
+	else if ($shopary['shop'] == 4){$owned = "Blacksmith";}
+	else if ($shopary['shop'] == 5){$owned = "Fletcher"; if (mt_rand(1,2) == 1){$owned = "Bowyer";} }
+	else if ($shopary['shop'] == 6){$owned = "Tanner"; if (mt_rand(1,2) == 1){$owned = "Leatherworker";} }
+	else if ($shopary['shop'] == 7){$owned = "Tailor"; if (mt_rand(1,2) == 1){$owned = "Dressmaker";} }
+	else if ($shopary['shop'] == 8){$owned = "Animal Trainer"; if (mt_rand(1,2) == 1){$owned = "Stable Master";} }
+	else if ($shopary['shop'] == 9){$owned = "Woodworker"; if (mt_rand(1,2) == 1){$owned = "Carpenter";} }
+	else if ($shopary['shop'] == 10){$owned = "Alchemist"; if (mt_rand(1,2) == 1){$owned = "Herbalist";} }
+	else if ($shopary['shop'] == 11){$owned = "Cook"; if (mt_rand(1,2) == 1){$owned = "Baker";} }
+	else if ($shopary['shop'] == 12){$owned = "Librarian";}
+	else if ($shopary['shop'] == 13){$owned = "Jeweler";}
+	else if ($shopary['shop'] == 14){$owned = "Musician";}
+	else if ($shopary['shop'] == 15){$owned = "Banker";}
 	else {$owned = "Caretaker";}
 
-	$business = wizardBusiness($shopary[shop],$game,$stock,$jack,$columns,$shelf);
+	$business = wizardBusiness($shopary['shop'],$game,$stock,$jack,$columns,$shelf);
 
 	$shopuqry = "UPDATE shop_track SET shop=99 WHERE building=$shopary[building]";
 	mysqli_query( $connection, $shopuqry ); /* shopuqry. */
 ?>
 
-<hr><b><i><font size="3"><?php echo $shopary[building]; ?></font></i></b><font size="2">&nbsp;-&nbsp;<b><?php echo $business[0]; ?></b>&nbsp;
+<hr><b><i><font size="3"><?php echo $shopary['building']; ?></font></i></b><font size="2">&nbsp;-&nbsp;<b><?php echo $business[0]; ?></b>&nbsp;
 	<?php	if ($owned != "Caretaker"){echo " [" . number_format(mt_rand(50,3000)) . "gp] ";}
-			else {echo " [" . $shopary[type] . "] ";}
+			else {echo " [" . $shopary['type'] . "] ";}
 			//if ($empty > 0){ echo "<b>" . $owned . ":</b> " . $shopary[owner] . " " . $shopary[stats];} else {echo "<b>" . $owned . ":</b> " . $shopary[info]; }
-			echo "<b>" . $owned . ":</b> " . $shopary[info];
+			echo "<b>" . $owned . ":</b> " . $shopary['info'];
 
 			echo "<hr color='#C0C0C0' size='1'>";
 			if ($owned == "Banker")
@@ -109,8 +109,8 @@ while ($shopary=mysqli_fetch_assoc($shopres)) :
 					$bankboxes = $bankboxes . "<b>IRON CHEST #" . $bank_line . ":</b> ";
 					while ($bank_limits > 0) :
 						$my_reward = mt_rand(1,100);
-						if ($my_reward > 55){$my_prize = "GEMS&nbsp;[" . mt_rand(1,3) . " each]:&nbsp;" . ucwords(gemCreator(mt_rand(10,100)));}
-						else if ($my_reward > 10){$my_prize = "JEWELRY:&nbsp;" . ucwords(jewelCreator(mt_rand(10,100)));}
+						if ($my_reward > 55){$my_prize = "GEMS&nbsp;[" . mt_rand(1,3) . " each]:&nbsp;" . ucwords((string) gemCreator(mt_rand(10,100)));}
+						else if ($my_reward > 10){$my_prize = "JEWELRY:&nbsp;" . ucwords((string) jewelCreator(mt_rand(10,100)));}
 						else {$my_prize = OsricMagicItem('',0,'',0,0); $my_prize = $my_prize[0]; }
 							$bankboxes = $bankboxes . $my_prize . "&nbsp;---&nbsp;";
 						$bank_limits = $bank_limits - 1;
@@ -122,7 +122,7 @@ while ($shopary=mysqli_fetch_assoc($shopres)) :
 				$guards = mt_rand(1,3);
 				while ($guards > 0) :
 					if ($xracep >= mt_rand(1,100)){$racy = $xrace;} else {$racy = "none";}
-					$dude = makeAdventurer(Fighter,$racy,0,$x_lvl1,$x_lvl2,0,0);
+					$dude = makeAdventurer('Fighter',$racy,0,$x_lvl1,$x_lvl2,0,0);
 					$adv_list_tp = 1;
 						echo "<hr color='#C0C0C0' size='1'><font size='2'><b>BANK GUARD:</b> "; 
 							include("functions/stat_adventurer.php");
@@ -130,12 +130,12 @@ while ($shopary=mysqli_fetch_assoc($shopres)) :
 					$guards = $guards - 1;
 				endwhile;
 			}
-			else if ($shopary[shop] == 17)
+			else if ($shopary['shop'] == 17)
 			{
 				$guards = mt_rand(2,5); $line_up = $guards;
 				while ($guards > 0) :
 					if ($xracep >= mt_rand(1,100)){$racy = $xrace;} else {$racy = "none";}
-					$dude = makeAdventurer(Fighter,$racy,0,$x_lvl1,$x_lvl2,0,0);
+					$dude = makeAdventurer('Fighter',$racy,0,$x_lvl1,$x_lvl2,0,0);
 					$adv_list_tp = 1;
 					if ($guards != $line_up){echo "<hr color='#C0C0C0' size='1'>";}
 						echo "<font size='2'><b>GUARD:</b> "; 
@@ -144,20 +144,20 @@ while ($shopary=mysqli_fetch_assoc($shopres)) :
 					$guards = $guards - 1;
 				endwhile;
 			}
-			else if ($shopary[shop] > 17)
+			else if ($shopary['shop'] > 17)
 			{
 				$guildy = mt_rand(2,5); $line_up = $guildy;
 				$guild_leader = 0;
 				while ($guildy > 0) :
-					if ($shopary[shop] == 18){$guild_class = "Fighter"; if (mt_rand(1,4) == 1){$guild_class = "Paladin";} $guild_title = "FIGHTERS GUILD MEMBER"; }
-					else if ($shopary[shop] == 19){$guild_class = "Magic-User"; if (mt_rand(1,3) == 1){$guild_class = "Illusionist";} $guild_title = "WIZARDS GUILD MEMBER";}
-					else if ($shopary[shop] == 20){$guild_class = "Thief"; $guild_title = "THIEVES GUILD MEMBER";}
-					else if ($shopary[shop] == 21){$guild_class = "Ranger"; if (mt_rand(1,4) == 1){$guild_class = "Druid";} $guild_title = "RANGERS GUILD MEMBER";}
-					else if ($shopary[shop] == 22){$guild_class = "Assassin"; $guild_title = "ASSASSINS GUILD MEMBER";}
-					else if ($shopary[shop] == 23){$guild_class = "Bard"; $guild_title = "BARDS GUILD MEMBER";}
+					if ($shopary['shop'] == 18){$guild_class = "Fighter"; if (mt_rand(1,4) == 1){$guild_class = "Paladin";} $guild_title = "FIGHTERS GUILD MEMBER"; }
+					else if ($shopary['shop'] == 19){$guild_class = "Magic-User"; if (mt_rand(1,3) == 1){$guild_class = "Illusionist";} $guild_title = "WIZARDS GUILD MEMBER";}
+					else if ($shopary['shop'] == 20){$guild_class = "Thief"; $guild_title = "THIEVES GUILD MEMBER";}
+					else if ($shopary['shop'] == 21){$guild_class = "Ranger"; if (mt_rand(1,4) == 1){$guild_class = "Druid";} $guild_title = "RANGERS GUILD MEMBER";}
+					else if ($shopary['shop'] == 22){$guild_class = "Assassin"; $guild_title = "ASSASSINS GUILD MEMBER";}
+					else if ($shopary['shop'] == 23){$guild_class = "Bard"; $guild_title = "BARDS GUILD MEMBER";}
 
 					if ($xracep >= mt_rand(1,100)){$racy = $xrace;} else {$racy = "none";}
-					if ($guild_leader == 0){$dude = makeAdventurer($guild_class,$racy,0,$x_lvl2,$x_lvl2,1,0); $guild_leader = 1; $guild_title = substr($guild_title, 0, -7) . " LEADER";}
+					if ($guild_leader == 0){$dude = makeAdventurer($guild_class,$racy,0,$x_lvl2,$x_lvl2,1,0); $guild_leader = 1; $guild_title = substr((string) $guild_title, 0, -7) . " LEADER";}
 					else {$dude = makeAdventurer($guild_class,$racy,0,$x_lvl1,$x_lvl2,1,0); }
 					$adv_list_tp = 1;
 					if ($guildy != $line_up){echo "<hr color='#C0C0C0' size='1'>";}
@@ -167,7 +167,7 @@ while ($shopary=mysqli_fetch_assoc($shopres)) :
 					$guildy = $guildy - 1;
 				endwhile;
 			}
-			else if ($shopary[shop] == 16)
+			else if ($shopary['shop'] == 16)
 			{
 				echo $business[1];
 				$guildy = mt_rand(2,5);

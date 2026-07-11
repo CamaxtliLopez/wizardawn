@@ -93,7 +93,7 @@ else if ($x_game == "BD&D"){ $bottom_notices = 13; }
 				$line = $line + 1;
 
 				echo "<tr><td width='40' align='center' valign='top' style='border-bottom-style: solid; border-bottom-width: 1px'><font size='2'>" . $line . "</font></td>";
-				echo "<td style='border-bottom-style: solid; border-bottom-width: 1px'><font size='2'>" . packBuilder($eat,1,Any,$x_game) . "</font></td></tr>";
+				echo "<td style='border-bottom-style: solid; border-bottom-width: 1px'><font size='2'>" . packBuilder($eat,1,'Any',$x_game) . "</font></td></tr>";
 
 			endwhile; ?>
 

@@ -6,7 +6,7 @@ $xls = 0; if ( isset($_POST['xls']) ){ $xls = $_POST['xls']; }
 
 if ($xls > 0)
 {
-	if(strpos($_SERVER['HTTP_USER_AGENT'], 'MSIE')) {
+	if(strpos((string) $_SERVER['HTTP_USER_AGENT'], 'MSIE')) {
 		header("Expires: Sat, 01 Jan 2100 00:00:00 GMT");
 		header("Last-Modified: ".gmdate("D, d M Y H:i:s")." GMT");
 		header("Pragma: public");

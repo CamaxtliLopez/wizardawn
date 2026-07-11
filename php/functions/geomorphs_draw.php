@@ -136,8 +136,8 @@ if ($map_type == "suburb map"){$divide_x_and_y_by = 2; $add_more_div_height = -1
 							else if ($noah_tic == (($map_high * $map_wide) - ($map_wide - 1))){ $noah_t = "bleft.jpg"; }
 							else if ($noah_tic == ($map_high * $map_wide)){ $noah_t = "bright.jpg"; }
 							else if ($noah_tic > (($map_high * $map_wide) - ($map_wide - 1))){ $noah_t = "bottom.jpg"; }
-							else if ($noah_tic == $noah_new){ $noah_t = "xleft.jpg"; $noah_new = $noah_new + $map_wide; }
-							else if ($noah_tic == $noah_end){ $noah_t = "xright.jpg"; $noah_end = $noah_end + $map_wide; }
+							else if ($noah_tic == $noah_new){ $noah_t = "xleft.jpg"; $noah_new = $noah_new + num($map_wide); }
+							else if ($noah_tic == $noah_end){ $noah_t = "xright.jpg"; $noah_end = $noah_end + num($map_wide); }
 							else {$noah_t = "";}
 								if ($noah_t != ""){$this_tile = preg_grep("/$noah_t/", $geomorphic_tiles); $this_tile = preg_grep("/BBBCCC/", $this_tile);}
 								else {$this_tile = preg_grep("/BBBCCC/", $geomorphic_tiles); $this_tile = preg_grep("/tleft.jpg|top.jpg|tright.jpg|bleft.jpg|bright.jpg|bottom.jpg|xleft.jpg|xright.jpg/", $this_tile, PREG_GREP_INVERT); $this_tile = preg_grep("/$inner_climate/", $this_tile);}
@@ -160,8 +160,8 @@ if ($map_type == "suburb map"){$divide_x_and_y_by = 2; $add_more_div_height = -1
 
 		if ($keyed > 0)
 		{
-			if (($x_delve == "Complex") || ($x_delve == "Progressive")){ $grids = explode("_", $used_tile[3]); }
-			else { $grids = explode("_", $used_tile[1]); }
+			if (($x_delve == "Complex") || ($x_delve == "Progressive")){ $grids = explode("_", (string) $used_tile[3]); }
+			else { $grids = explode("_", (string) $used_tile[1]); }
 
 			$cyc = 0;
 			$room_count = count($grids);
@@ -176,7 +176,7 @@ if ($map_type == "suburb map"){$divide_x_and_y_by = 2; $add_more_div_height = -1
 
 				if (($x_delve == "Complex") || ($x_delve == "Progressive"))
 				{
-					$grids = explode("^", $gridz[$cyc]);
+					$grids = explode("^", (string) $gridz[$cyc]);
 					if (($grid == $grids[0]) && (mt_rand(1,100) >= $x_floor))
 					{
 						$key=$key+1;
@@ -200,7 +200,7 @@ if ($map_type == "suburb map"){$divide_x_and_y_by = 2; $add_more_div_height = -1
 					$cyc=$cyc+1;
 				}
 
-				if (strpos($this_tile[$pick_tile], '0cave0') !== FALSE){ $has_a_cave = $has_a_cave . "-" . $room_numb; }
+				if (str_contains((string) $this_tile[$pick_tile], '0cave0')){ $has_a_cave = $has_a_cave . "-" . $room_numb; }
 
 				$room_count = $room_count - 1;
 
@@ -211,7 +211,7 @@ if ($map_type == "suburb map"){$divide_x_and_y_by = 2; $add_more_div_height = -1
 
 	$higher=$higher-1; endwhile;
 
-	if (strpos($this_tile[$pick_tile], '0cave0') !== FALSE){ $has_a_cave = $has_a_cave . "-"; }
+	if (str_contains((string) $this_tile[$pick_tile], '0cave0')){ $has_a_cave = $has_a_cave . "-"; }
 
 if ( $sep_map != 1 )
 {

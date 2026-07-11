@@ -209,8 +209,8 @@ $maps = $_POST['use_maps'];
 $dose = $_POST['dose'];
 $empty = $_POST['empty'];
 $techy = $_POST['techy'];
-$might1 = $_POST['might1']+0;	if ($might1 > 0){} else {$might1 = 1;}
-$might2 = $_POST['might2']+0;	if ($might2 > 0){} else {$might2 = 8;}
+$might1 = num($_POST['might1']);	if ($might1 > 0){} else {$might1 = 1;}
+$might2 = num($_POST['might2']);	if ($might2 > 0){} else {$might2 = 8;}
 $game = $_POST['x_game'];
 	if ($game == "Mutant Future"){$bottom_notices = 3;}
 	else if ($game == "Broken Urthe"){$bottom_notices = 8;}
@@ -223,7 +223,7 @@ $categor = $map_wide * $map_high;
   else if ($categor > 8){$jpgs = "Village";}
   else {$jpgs = "Hamlet";}
 
-$name = stripslashes($_POST['name']);
+$name = stripslashes((string) $_POST['name']);
 	if ($name == ""){$name = $jpgs;}
 $dres = $_POST['dress'];
 $law = $_POST['law'];
@@ -234,13 +234,13 @@ $poss = $_POST['possessions'];
 $map_rooms = $_POST['map_rooms'];
 $keyed = 1;
 
-$species_array = array();
-	$species_human = $_POST['species_human']+0;			if ($species_human > 0){array_push($species_array, "Human");}
-	$species_mhuman = $_POST['species_mhuman']+0;		if ($species_mhuman > 0){array_push($species_array, "Mutant Human");}
-	$species_insect = $_POST['species_insect']+0;		if ($species_insect > 0){array_push($species_array, "Humanoid Insect");}
-	$species_animal = $_POST['species_animal']+0;		if ($species_animal > 0){array_push($species_array, "Humanoid Animal");}
-	$species_plant = $_POST['species_plant']+0;			if ($species_plant > 0){array_push($species_array, "Humanoid Plant");}
-	$species_robot = $_POST['species_robot']+0;			if ($species_robot > 0){array_push($species_array, "Robot");}
+$species_array = [];
+	$species_human = num($_POST['species_human']);			if ($species_human > 0){array_push($species_array, "Human");}
+	$species_mhuman = num($_POST['species_mhuman']);		if ($species_mhuman > 0){array_push($species_array, "Mutant Human");}
+	$species_insect = num($_POST['species_insect']);		if ($species_insect > 0){array_push($species_array, "Humanoid Insect");}
+	$species_animal = num($_POST['species_animal']);		if ($species_animal > 0){array_push($species_array, "Humanoid Animal");}
+	$species_plant = num($_POST['species_plant']);			if ($species_plant > 0){array_push($species_array, "Humanoid Plant");}
+	$species_robot = num($_POST['species_robot']);			if ($species_robot > 0){array_push($species_array, "Robot");}
 	$species_used = $species_human + $species_mhuman + $species_insect + $species_animal + $species_plant + $species_robot;
 
 if ($map_rooms > 0){$key = $map_rooms;} else {
@@ -271,8 +271,8 @@ mysqli_query( $connection, $shoptq ); /*shoptq*/
 if ($empty != 1){ 
 
 while ($key > 0) : $city_size = $city_size + 1;
-	if ($species_used > 0){$race_pick = $species_array[mt_rand(0,($species_used-1))];} else {$race_pick = "none";}
-	$citizen = nuclearCitizen($game,$race_pick,$might1,$might2,$cash,$dres,$poss,adult,none,$dose,none,none);
+	if ($species_used > 0){$race_pick = $species_array[mt_rand(0, max((int)(0), (int)(($species_used-1))))];} else {$race_pick = "none";}
+	$citizen = nuclearCitizen($game,$race_pick,$might1,$might2,$cash,$dres,$poss,'adult','none',$dose,'none','none');
 	$dwell = $dwell + 1;
 	$shopinq = "INSERT INTO shop_track (building, owner, info, stats, type, shop) VALUES ('$dwell', '$citizen[5]', '$citizen[4]', '$citizen[6]', '', '0')";
 	mysqli_query( $connection, $shopinq ); /*shopinq*/
@@ -297,7 +297,7 @@ endwhile;
     <td style="border-top-style: solid; border-top-width: 1" NOWRAP align="center" width="80"><font size="2"><?php $dwell = $dwell + 1; echo $dwell; ?></font></td>
 	<td colspan="3" style="border-top-style: solid; border-top-width: 1"><font size="2">This building is empty.</font></td>
   </tr>
-<?php } else { if ($species_used > 0){$race_pick = $species_array[mt_rand(0,($species_used-1))];} else {$race_pick = "none";} $citizen = nuclearCitizen($game,$race_pick,$might1,$might2,$cash,$dres,$poss,adult,none,$dose,none,none); ?>
+<?php } else { if ($species_used > 0){$race_pick = $species_array[mt_rand(0, max((int)(0), (int)(($species_used-1))))];} else {$race_pick = "none";} $citizen = nuclearCitizen($game,$race_pick,$might1,$might2,$cash,$dres,$poss,'adult','none',$dose,'none','none'); ?>
   <tr>
     <td style="border-top-style: solid; border-top-width: 1" NOWRAP align="center" width="80"><font size="2"><?php $dwell = $dwell + 1; echo $dwell; ?></font></td>
 	<td colspan="3" style="border-top-style: solid; border-top-width: 1"><font size="2"><?php echo $citizen[4]; ?></font></td>
@@ -307,14 +307,14 @@ endwhile;
 	$shopinq = "INSERT INTO shop_track (building, owner, info, stats, type, shop) VALUES ('$dwell', '$citizen[5]', '$citizen[4]', '$citizen[6]', '', '0')";
 	mysqli_query( $connection, $shopinq ); /*shopinq*/
 
-	if ((mt_rand(1,100) > 50) && ($citizen[1] != "Robot")){$citizen = nuclearCitizen($game,$citizen[1],$might1,$might2,$cash,$dres,$poss,adult,$citizen[0],$dose,$citizen[2],$citizen[3]); ?>
+	if ((mt_rand(1,100) > 50) && ($citizen[1] != "Robot")){$citizen = nuclearCitizen($game,$citizen[1],$might1,$might2,$cash,$dres,$poss,'adult',$citizen[0],$dose,$citizen[2],$citizen[3]); ?>
   <tr>
     <td NOWRAP align="center" width="80"><font size="2">&nbsp;</font></td>
 	<td width="40"><font size="2">&nbsp;</font></td>
 	<td colspan="2" style="border-top-style: solid; border-top-width: 1"><font size="2"><?php echo $citizen[4]; ?></font></td>
   </tr>
 <?php } ?>
-<?php if ((mt_rand(1,100) > 70) && ($citizen[1] != "Robot")){$citizen = nuclearCitizen($game,$citizen[1],$might1,$might2,$cash,$dres,$poss,child,$citizen[0],$dose,$citizen[2],$citizen[3]); ?>
+<?php if ((mt_rand(1,100) > 70) && ($citizen[1] != "Robot")){$citizen = nuclearCitizen($game,$citizen[1],$might1,$might2,$cash,$dres,$poss,'child',$citizen[0],$dose,$citizen[2],$citizen[3]); ?>
   <tr>
     <td NOWRAP align="center" width="80"><font size="2">&nbsp;</font></td>
 	<td width="40"><font size="2">&nbsp;</font></td>
@@ -322,7 +322,7 @@ endwhile;
 	<td style="border-top-style: solid; border-top-width: 1"><font size="2"><?php echo $citizen[4]; ?></font></td>
   </tr>
 <?php } ?>
-<?php if ((mt_rand(1,100) > 90) && ($citizen[1] != "Robot")){$citizen = nuclearCitizen($game,$citizen[1],$might1,$might2,$cash,$dres,$poss,child,$citizen[0],$dose,$citizen[2],$citizen[3]); ?>
+<?php if ((mt_rand(1,100) > 90) && ($citizen[1] != "Robot")){$citizen = nuclearCitizen($game,$citizen[1],$might1,$might2,$cash,$dres,$poss,'child',$citizen[0],$dose,$citizen[2],$citizen[3]); ?>
   <tr>
     <td NOWRAP align="center" width="80"><font size="2">&nbsp;</font></td>
 	<td width="40"><font size="2">&nbsp;</font></td>
@@ -383,17 +383,17 @@ $shopres = mysqli_query( $connection, $shopqry ); /*shopqry*/
 
 while ($shopary=mysqli_fetch_assoc($shopres)) : 
 
-	if ($shopary[shop] == 9){$owned = "Banker";}				else if ($shopary[shop] == 2){$owned = "Bartender";}
-	else if ($shopary[shop] == 4){$owned = "Doctor";}
-	else if ($shopary[shop] == 7){$owned = "Pawn Broker";}		else {$owned = "Owner (" . $shopary[type] . ")";}
+	if ($shopary['shop'] == 9){$owned = "Banker";}				else if ($shopary['shop'] == 2){$owned = "Bartender";}
+	else if ($shopary['shop'] == 4){$owned = "Doctor";}
+	else if ($shopary['shop'] == 7){$owned = "Pawn Broker";}		else {$owned = "Owner (" . $shopary['type'] . ")";}
 
-	$business = PABusiness($shopary[shop],$game,$techy,$cash,$stock,$shelf);
+	$business = PABusiness($shopary['shop'],$game,$techy,$cash,$stock,$shelf);
 ?>
 
   <tr>
-    <td style="border-bottom-style: solid; border-bottom-width: 1" valign="top"><font size="2"><?php echo $shopary[building]; ?>&nbsp;-&nbsp;<b><?php echo $business[0]; ?></b>&nbsp;
+    <td style="border-bottom-style: solid; border-bottom-width: 1" valign="top"><font size="2"><?php echo $shopary['building']; ?>&nbsp;-&nbsp;<b><?php echo $business[0]; ?></b>&nbsp;
 	<?php echo " [" . number_format(mt_rand(50,3000)) . $cash . "] ";
-		  if ($empty < 1){ echo "<b>" . $owned . ":</b> " . $shopary[info] . "<br>"; } else { echo "<b>" . $owned . ":</b> " . $shopary[owner] . " " . $shopary[stats] . "<br>";}
+		  if ($empty < 1){ echo "<b>" . $owned . ":</b> " . $shopary['info'] . "<br>"; } else { echo "<b>" . $owned . ":</b> " . $shopary['owner'] . " " . $shopary['stats'] . "<br>";}
 
 			if ($owned == "Banker")
 			{
@@ -411,13 +411,13 @@ while ($shopary=mysqli_fetch_assoc($shopres)) :
 						$junker = PickJunk();
 
 						$condition = mt_rand(1,5);
-							if ($condition == 1){$cond = "ruined"; $valu = $bary[val1]; $valu = $junker[2]; }
-							else if ($condition == 2){$cond = "rough"; $valu = $bary[val2]; $valu = $junker[3]; }
-							else if ($condition == 3){$cond = "average"; $valu = $bary[val3]; $valu = $junker[4]; }
-							else if ($condition == 4){$cond = "good"; $valu = $bary[val4]; $valu = $junker[5]; }
-							else {$cond = "perfect"; $valu = $bary[val5]; $valu = $junker[6]; }
+							if ($condition == 1){$cond = "ruined"; $valu = $bary['val1']; $valu = $junker[2]; }
+							else if ($condition == 2){$cond = "rough"; $valu = $bary['val2']; $valu = $junker[3]; }
+							else if ($condition == 3){$cond = "average"; $valu = $bary['val3']; $valu = $junker[4]; }
+							else if ($condition == 4){$cond = "good"; $valu = $bary['val4']; $valu = $junker[5]; }
+							else {$cond = "perfect"; $valu = $bary['val5']; $valu = $junker[6]; }
 
-						$tabx = $tabx . "<td NOWRAP><font size='2'>" . ucwords($junker[0]) . " - " . number_format($price) . "" . $cash . "</font></td>";
+						$tabx = $tabx . "<td NOWRAP><font size='2'>" . ucwords((string) $junker[0]) . " - " . number_format($price) . "" . $cash . "</font></td>";
 
 						$bankboxes = $bankboxes . "" . $cond . "&nbsp;" . $junker[0] . "&nbsp;[" . number_format($valu) . "" . $cash . "]&nbsp;---&nbsp; ";
 
@@ -425,7 +425,7 @@ while ($shopary=mysqli_fetch_assoc($shopres)) :
 
 					$boxes = $boxes - 1;
 
-					$bankboxes = $bankboxes . PAbagCreator(none) . " filled with [" . number_format(mt_rand(5,5000)) . $cash . "]<br>";
+					$bankboxes = $bankboxes . PAbagCreator('none') . " filled with [" . number_format(mt_rand(5,5000)) . $cash . "]<br>";
 
 				endwhile;
 
@@ -477,13 +477,13 @@ while ($popary=mysqli_fetch_assoc($popres)) :
 	if ($police != 1)
 	{
 		$police = 1;
-		if ($empty < 1){ echo "<font size='2'><b>" . strtoupper($official) . ":</b> " . $popary[info] . " (Lives in #" . $popary[building] . ").<br>"; }
-		else { echo "<font size='2'><b>" . strtoupper($official) . ": " . $popary[owner] . "</b> " . $popary[stats] . " (Lives in #" . $popary[building] . ").<br>"; }
+		if ($empty < 1){ echo "<font size='2'><b>" . strtoupper($official) . ":</b> " . $popary['info'] . " (Lives in #" . $popary['building'] . ").<br>"; }
+		else { echo "<font size='2'><b>" . strtoupper($official) . ": " . $popary['owner'] . "</b> " . $popary['stats'] . " (Lives in #" . $popary['building'] . ").<br>"; }
 	}
 	else
 	{
-		if ($empty < 1){ echo "<font size='2'><b>LAW ENFORCEMENT:</b> " . $popary[info] . " (Lives in #" . $popary[building] . " and carries a " . strtolower(PAgetWeapon($ptype,$game)) . " while on duty).<br>"; }
-		else { echo "<font size='2'><b>LAW ENFORCEMENT: " . $popary[owner] . "</b> " . $popary[stats] . " (Lives in #" . $popary[building] . " and carries a " . strtolower(PAgetWeapon($ptype,$game)) . " while on duty).<br>"; }
+		if ($empty < 1){ echo "<font size='2'><b>LAW ENFORCEMENT:</b> " . $popary['info'] . " (Lives in #" . $popary['building'] . " and carries a " . strtolower((string) PAgetWeapon($ptype,$game)) . " while on duty).<br>"; }
+		else { echo "<font size='2'><b>LAW ENFORCEMENT: " . $popary['owner'] . "</b> " . $popary['stats'] . " (Lives in #" . $popary['building'] . " and carries a " . strtolower((string) PAgetWeapon($ptype,$game)) . " while on duty).<br>"; }
 	}
 	echo "<hr>";
 

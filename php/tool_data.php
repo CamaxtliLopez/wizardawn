@@ -129,8 +129,8 @@ else if ($lists == "Dungeon Treasure (5 Denominations)")
 				$item = currencyBuilder(mt_rand(1,20),mt_rand(1,3),0,mt_rand(1,30),0,$game);
 				if (mt_rand(1,5) == 1){$item = otherThanCoins(mt_rand(1,3),mt_rand(1,30),$game,1,mt_rand(1,20));}
 			}
-			else if ($roll < 90){$item = "GEM:&nbsp;" . ucwords(gemCreator(mt_rand(1,30)));}
-			else {$item = "JEWELRY:&nbsp;" . ucwords(jewelCreator(mt_rand(1,30)));}
+			else if ($roll < 90){$item = "GEM:&nbsp;" . ucwords((string) gemCreator(mt_rand(1,30)));}
+			else {$item = "JEWELRY:&nbsp;" . ucwords((string) jewelCreator(mt_rand(1,30)));}
 		echo $item . "&nbsp;&nbsp;&nbsp;1&nbsp;&nbsp;&nbsp;0<br>";
 		$m_cycle = $m_cycle - 1;
 	endwhile;
@@ -167,8 +167,8 @@ else if (($lists == "Dungeon Treasure (3 Denominations)") || ($lists == "T&T 5e 
 				$item = currencyBuilder(mt_rand(1,20),mt_rand(1,3),0,mt_rand(1,30),0,$game);
 				if (mt_rand(1,5) == 1){$item = otherThanCoins(mt_rand(1,3),mt_rand(1,30),$game,1,mt_rand(1,20));}
 			}
-			else if ($roll < 90){$item = "GEM:&nbsp;" . ucwords(gemCreator(mt_rand(1,30)));}
-			else {$item = "JEWELRY:&nbsp;" . ucwords(jewelCreator(mt_rand(1,30)));}
+			else if ($roll < 90){$item = "GEM:&nbsp;" . ucwords((string) gemCreator(mt_rand(1,30)));}
+			else {$item = "JEWELRY:&nbsp;" . ucwords((string) jewelCreator(mt_rand(1,30)));}
 		echo $item . "&nbsp;&nbsp;&nbsp;1&nbsp;&nbsp;&nbsp;0<br>";
 		$m_cycle = $m_cycle - 1;
 	endwhile;
@@ -183,7 +183,7 @@ else if (($lists == "Dungeon Treasure (3 Denominations)") || ($lists == "T&T 5e 
 else if ($lists == "Post-Apocalyptic Containers")
 {
 	while ($cycle > 0):
-		if (mt_rand(1,3) > 1){$item = PAboxMakerRoom(1);} else {$item = PAbagCreator(Spaceship);}
+		if (mt_rand(1,3) > 1){$item = PAboxMakerRoom(1);} else {$item = PAbagCreator('Spaceship');}
 		echo $item . "<br>";
 		$cycle = $cycle - 1;
 	endwhile;
@@ -191,7 +191,7 @@ else if ($lists == "Post-Apocalyptic Containers")
 else if ($lists == "Post-Apocalyptic Decorations")
 {
 	while ($cycle > 0):
-		$item = PAstuffMakerRoom(1,"$",ROOM,Ruins,"Gamma World",mt_rand(30,100)); $item = $item[0];
+		$item = PAstuffMakerRoom(1,"$",'ROOM','Ruins',"Gamma World",mt_rand(30,100)); $item = $item[0];
 		echo $item . "<br>";
 		$cycle = $cycle - 1;
 	endwhile;
@@ -199,7 +199,7 @@ else if ($lists == "Post-Apocalyptic Decorations")
 else if ($lists == "Post-Apocalyptic Traps")
 {
 	while ($cycle > 0):
-		$item = PAtrapMaker(mt_rand(1,20),"list","Gamma World",0,1,8,1,ROOM); $item = $item[0];
+		$item = PAtrapMaker(mt_rand(1,20),"list","Gamma World",0,1,8,1,'ROOM'); $item = $item[0];
 		echo $item . "<br>";
 		$cycle = $cycle - 1;
 	endwhile;
@@ -211,14 +211,14 @@ else if ($lists == "Post-Apocalyptic Treasure")
 	$t_cycle = $cycle - $m_cycle;
 	while ($m_cycle > 0):
 		$roll = mt_rand(1,100);
-			$item = PAcurrencyBuilder(mt_rand(1,20),mt_rand(1,3),0,mt_rand(1,30),0,"$",Spaceship);
+			$item = PAcurrencyBuilder(mt_rand(1,20),mt_rand(1,3),0,mt_rand(1,30),0,"$",'Spaceship');
 		echo $item . "&nbsp;&nbsp;&nbsp;1&nbsp;&nbsp;&nbsp;0<br>";
 		$m_cycle = $m_cycle - 1;
 	endwhile;
 		echo "--END--<br>";
 	while ($t_cycle > 0):
 			if (90 >= mt_rand(1,100)){$item = makePAItem(mt_rand(1,20),mt_rand(1,3));}
-			else {$item = ucfirst(PAmakeNormalItem(1,1,"$",1,"Gamma World"));}
+			else {$item = ucfirst((string) PAmakeNormalItem(1,1,"$",1,"Gamma World"));}
 		echo $item . "&nbsp;&nbsp;&nbsp;1&nbsp;&nbsp;&nbsp;0<br>";
 		$t_cycle = $t_cycle - 1;
 	endwhile;
@@ -226,7 +226,7 @@ else if ($lists == "Post-Apocalyptic Treasure")
 else if ($lists == "Sci-Fi Containers")
 {
 	while ($cycle > 0):
-		if (mt_rand(1,3) > 1){$item = PAboxMakerRoom(1);} else {$item = PAbagCreator(Spaceship);}
+		if (mt_rand(1,3) > 1){$item = PAboxMakerRoom(1);} else {$item = PAbagCreator('Spaceship');}
 		echo $item . "<br>";
 		$cycle = $cycle - 1;
 	endwhile;
@@ -234,7 +234,7 @@ else if ($lists == "Sci-Fi Containers")
 else if ($lists == "Sci-Fi Decorations")
 {
 	while ($cycle > 0):
-		$item = PAstuffMakerRoom(1,"pc",ROOM,Spaceship,"Metamorphosis Alpha",mt_rand(30,100)); $item = $item[0];
+		$item = PAstuffMakerRoom(1,"pc",'ROOM','Spaceship',"Metamorphosis Alpha",mt_rand(30,100)); $item = $item[0];
 		echo $item . "<br>";
 		$cycle = $cycle - 1;
 	endwhile;
@@ -242,7 +242,7 @@ else if ($lists == "Sci-Fi Decorations")
 else if ($lists == "Sci-Fi Traps")
 {
 	while ($cycle > 0):
-		$item = PAtrapMaker(mt_rand(1,20),"list","Metamorphosis Alpha",0,1,6,1,ROOM); $item = $item[0];
+		$item = PAtrapMaker(mt_rand(1,20),"list","Metamorphosis Alpha",0,1,6,1,'ROOM'); $item = $item[0];
 		echo $item . "<br>";
 		$cycle = $cycle - 1;
 	endwhile;
@@ -254,14 +254,14 @@ else if ($lists == "Sci-Fi Treasure")
 	$t_cycle = $cycle - $m_cycle;
 	while ($m_cycle > 0):
 		$roll = mt_rand(1,100);
-			$item = PAcurrencyBuilder(mt_rand(1,20),mt_rand(1,3),0,mt_rand(1,30),0,"pc",Spaceship);
+			$item = PAcurrencyBuilder(mt_rand(1,20),mt_rand(1,3),0,mt_rand(1,30),0,"pc",'Spaceship');
 		echo $item . "&nbsp;&nbsp;&nbsp;1&nbsp;&nbsp;&nbsp;0<br>";
 		$m_cycle = $m_cycle - 1;
 	endwhile;
 		echo "--END--<br>";
 	while ($t_cycle > 0):
 			if (90 >= mt_rand(1,100)){$item = makeMAItem(mt_rand(1,20),mt_rand(1,3));}
-			else {$item = ucfirst(PAmakeNormalItem(1,1,"pc",1,"Metamorphosis Alpha"));}
+			else {$item = ucfirst((string) PAmakeNormalItem(1,1,"pc",1,"Metamorphosis Alpha"));}
 		echo $item . "&nbsp;&nbsp;&nbsp;1&nbsp;&nbsp;&nbsp;0<br>";
 		$t_cycle = $t_cycle - 1;
 	endwhile;

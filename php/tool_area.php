@@ -172,8 +172,8 @@ $process_2 = 1;
 $process_3 = 1;
 $process_4 = 1;
 
-$x_area = stripslashes($_POST['x_area']);
-$x_level = $_POST['x_level']+0;
+$x_area = stripslashes((string) $_POST['x_area']);
+$x_level = num($_POST['x_level']);
 $x_areas = $_POST['x_areas'];
 $x_code = $_POST['x_code'];
 
@@ -184,32 +184,32 @@ $x_rigged_chance = $_POST['x_rigged_chance'];
 
 $x_main = $_POST['x_main'];
 $x_main_chance = $_POST['x_main_chance'];
-	$x_mcreatures = explode("\n", $x_main);
+	$x_mcreatures = explode("\n", (string) $x_main);
 	$t_mcreatures = count($x_mcreatures);
 	$c_mcreatures = count($x_mcreatures)-1;
 
 $x_c_c = $_POST['x_c_c']; // ENEMY
 $x_c_c_min = $_POST['x_c_c_min']; // MIN
 $x_c_c_max = $_POST['x_c_c_max']; // MAX
-$x_c_c_low = 0 + $_POST['x_c_c_low']; // LOW
+$x_c_c_low = num($_POST['x_c_c_low'] ?? 0); // LOW
 	if ($x_c_c_min > $x_c_c_max){$x_c_c_min = $x_c_c_max;}
 
 $x_t_c = $_POST['x_t_c']; // TRAP
 $x_t_c_min = $_POST['x_t_c_min']; // MIN
 $x_t_c_max = $_POST['x_t_c_max']; // MAX
-$x_t_c_low = 0 + $_POST['x_t_c_low']; // LOW
+$x_t_c_low = num($_POST['x_t_c_low'] ?? 0); // LOW
 	if ($x_t_c_min > $x_t_c_max){$x_t_c_min = $x_t_c_max;}
 
 $x_u_c = $_POST['x_u_c']; // DECO
 $x_u_c_min = $_POST['x_u_c_min']; // MIN
 $x_u_c_max = $_POST['x_u_c_max']; // MAX
-$x_u_c_low = 0 + $_POST['x_u_c_low']; // LOW
+$x_u_c_low = num($_POST['x_u_c_low'] ?? 0); // LOW
 	if ($x_u_c_min > $x_u_c_max){$x_u_c_min = $x_u_c_max;}
 
 $x_l_c = $_POST['x_l_c']; // LOOT
 $x_l_c_min = $_POST['x_l_c_min']; // MIN
 $x_l_c_max = $_POST['x_l_c_max']; // MAX
-$x_l_c_low = 0 + $_POST['x_l_c_low']; // LOW
+$x_l_c_low = num($_POST['x_l_c_low'] ?? 0); // LOW
 	if ($x_l_c_min > $x_l_c_max){$x_l_c_min = $x_l_c_max;}
 
 $x_webs = $_POST['x_webs'];
@@ -235,6 +235,7 @@ include("functions/data_process.php");
 
 	echo "<hr size='1' color='#000000'>";
 
+    $x_line = 0;
 	while ($x_areas > 0) :
 
 		$uhoh = 0;
@@ -246,35 +247,35 @@ include("functions/data_process.php");
 
 /////////////////////////////// PUT ANY ENEMIES IN THE ROOM ///////////////////////////////////////////////////////////////////////////////////////////////
 
-		$monster_mash = mt_rand($x_c_c_min,$x_c_c_max);
+		$monster_mash = mt_rand($x_c_c_min, max((int)($x_c_c_min), (int)($x_c_c_max)));
 		$monster_mish = $x_c_c_low;
 		while ($monster_mash > 0) :
 		if (($x_c_c-($monster_mish-$x_c_c_low)) >= mt_rand(1,100))
 		{
-			$y_mcreature = $x_mcreatures[mt_rand(0,$c_mcreatures)];
+			$y_mcreature = $x_mcreatures[mt_rand(0, max((int)(0), (int)($c_mcreatures)))];
 			if (($t_mcreatures > 0) && ($x_main_chance >= mt_rand(1,100)) && (trim($y_mcreature) != ""))
 			{
 				$z_mcreature = explode("\t", $y_mcreature);
 				if (stripslashes($z_mcreature[0]) != ""){$xdash1 = " - ";} else {$xdash1 = "";}
 				echo "ENCOUNTER:&nbsp;" . stripslashes($z_mcreature[0]) . "" . $xdash1 . "" . stripslashes($z_mcreature[4]) . "<br>";
-				$elevel = ($z_mcreature[1] + 0);
+				$elevel = (num($z_mcreature[1]));
 			}
 			else if ($u_creatures > 0)
 			{
-				$my_enemy_pick = explode("^^^", $my_enemy_array[mt_rand(0,$my_enemy_max)]);
+				$my_enemy_pick = explode("^^^", (string) $my_enemy_array[mt_rand(0, max((int)(0), (int)($my_enemy_max)))]);
 
 				echo "ENCOUNTER:&nbsp;" . $my_enemy_pick[0] . "<br>";
 
 				$elevel = $my_enemy_pick[1];
 			}
 		}
-		$monster_mish = $monster_mish + $x_c_c_low;
+		$monster_mish = $monster_mish + num($x_c_c_low);
 		$monster_mash = $monster_mash - 1;
 		endwhile;
 
 /////////////////////////////// FILL THE ROOM WITH RANDOM STUFF ///////////////////////////////////////////////////////////////////////////////////////////////
 
-		$random_mash = mt_rand($x_u_c_min,$x_u_c_max);
+		$random_mash = mt_rand($x_u_c_min, max((int)($x_u_c_min), (int)($x_u_c_max)));
 		$random_mish = $x_u_c_low;
 		$random_junk = 0;
 		$dfilled = "";
@@ -282,10 +283,10 @@ include("functions/data_process.php");
 			if (($x_u_c-($random_mish-$x_u_c_low)) >= mt_rand(1,100))
 			{
 				$random_junk = 1;
-				$dthisone = str_replace(" ", "&nbsp;", $my_decos_array[mt_rand(0,$my_decos_max)]);
+				$dthisone = str_replace(" ", "&nbsp;", $my_decos_array[mt_rand(0, max((int)(0), (int)($my_decos_max)))]);
 				$dfilled = $dfilled . "" . $dthisone . "&nbsp;&nbsp;&nbsp;&nbsp; ";
 			}
-			$random_mish = $random_mish + $x_l_c_low;
+			$random_mish = $random_mish + num($x_l_c_low);
 			$random_mash = $random_mash - 1;
 		endwhile;
 		if ($random_junk > 0){echo "CONTENTS&nbsp;:&nbsp;" . stripslashes($dfilled) . "<br>";}
@@ -301,7 +302,7 @@ include("functions/data_process.php");
 
 /////////////////////////////// FILL THE ROOM WITH TREASURE ///////////////////////////////////////////////////////////////////////////////////////////////////
 
-		$loot_mash = mt_rand($x_l_c_min,$x_l_c_max);
+		$loot_mash = mt_rand($x_l_c_min, max((int)($x_l_c_min), (int)($x_l_c_max)));
 		$loot_mish = $x_l_c_low;
 		$loot_nums = 0;
 		$filled = "";
@@ -314,9 +315,9 @@ include("functions/data_process.php");
 				$res5 = mysqli_query( $connection, $qry5 ); /*qry5*/
 				$ary5 = mysqli_fetch_assoc($res5);
 
-				if ($ary5[sublist] > 0){$sub_lists = 1;} else {$sub_lists = 0;}
-				$treasure_item = $ary5[treasure];
-				$mylisting = $ary5[sublist];
+				if ($ary5['sublist'] > 0){$sub_lists = 1;} else {$sub_lists = 0;}
+				$treasure_item = $ary5['treasure'];
+				$mylisting = $ary5['sublist'];
 
 				while ($sub_lists > 0) :
 
@@ -324,23 +325,23 @@ include("functions/data_process.php");
 					$res5s = mysqli_query( $connection, $qry5s ); /*qry5s*/
 					$ary5s = mysqli_fetch_assoc($res5s);
 
-					if ($ary5s[sublist] > 0){$mylisting = $ary5s[sublist];} else {$sub_lists = 0;}
+					if ($ary5s['sublist'] > 0){$mylisting = $ary5s['sublist'];} else {$sub_lists = 0;}
 
-					if ($ary5s[treasure] != ""){$treasure_item = $treasure_item . ", " . $ary5s[treasure];}
+					if ($ary5s['treasure'] != ""){$treasure_item = $treasure_item . ", " . $ary5s['treasure'];}
 
 				endwhile;
 
 				$thisone = str_replace(" ", "&nbsp;", $treasure_item);
 				$filled = $filled . "" . $thisone . "&nbsp;&nbsp;&nbsp;&nbsp; ";
 			}
-			$loot_mish = $loot_mish + $x_l_c_low;
+			$loot_mish = $loot_mish + num($x_l_c_low);
 			$loot_mash = $loot_mash - 1;
 		endwhile;
 		if ($loot_nums > 0)
 		{
 			if ($x_rigged_chance >= mt_rand(1,100))
 			{
-				$my_trap = $my_traps_array[mt_rand(0,$my_traps_max)];
+				$my_trap = $my_traps_array[mt_rand(0, max((int)(0), (int)($my_traps_max)))];
 				$rigged = "&nbsp;-&nbsp;TRAPPED: " . $my_trap . "]"; $uhoh = 1;
 			}
 			else
@@ -348,22 +349,22 @@ include("functions/data_process.php");
 				$rigged = "]";
 			}
 
-			echo "LOOT&nbsp;:&nbsp;[" . $my_boxes_array[mt_rand(0,$my_boxes_max)] . "" . $rigged . ":&nbsp;" . stripslashes($filled) . "<br>";
+			echo "LOOT&nbsp;:&nbsp;[" . $my_boxes_array[mt_rand(0, max((int)(0), (int)($my_boxes_max)))] . "" . $rigged . ":&nbsp;" . stripslashes($filled) . "<br>";
 		}
 
 /////////////////////////////// PUT TRAPS IN THE ROOM /////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		$trap_jaw = mt_rand($x_t_c_min,$x_t_c_max) - $uhoh;
+		$trap_jaw = mt_rand($x_t_c_min, max((int)($x_t_c_min), (int)($x_t_c_max))) - $uhoh;
 		$zapper = $x_t_c_low;
 		while ($trap_jaw > 0):
 			if ((($x_t_c-($zapper-$x_t_c_low)) >= mt_rand(1,100)) && ($trap_jaw > 0))
 			{
-				$my_trap = $my_traps_array[mt_rand(0,$my_traps_max)];
+				$my_trap = $my_traps_array[mt_rand(0, max((int)(0), (int)($my_traps_max)))];
 
 				echo "ROOM TRAP: " . $my_trap . "<br>";
 			}
 			$trap_jaw = $trap_jaw - 1;
-			$zapper = $zapper + $x_t_c_low;
+			$zapper = $zapper + num($x_t_c_low);
 		endwhile;
 
 

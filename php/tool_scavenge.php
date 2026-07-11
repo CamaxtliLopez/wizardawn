@@ -181,7 +181,7 @@ $genre = $_POST['genre'];
 			<hr>
 			<table border="0" cellpadding="0" cellspacing="0" width="100%">
 				<?php while ($sets > 0) :
-					$qty = mt_rand($amount1,$amount2);
+					$qty = mt_rand($amount1, max((int)($amount1), (int)($amount2)));
 					$num=1;
 					$snum=ceil($qty/2)+1;
 
@@ -259,7 +259,7 @@ $genre = $_POST['genre'];
 			<hr>
 			<table border="0" cellpadding="0" cellspacing="0" width="100%">
 				<?php while ($csets > 0) :
-					$qty = mt_rand($camount1,$camount2);
+					$qty = mt_rand($camount1, max((int)($camount1), (int)($camount2)));
 					$num=1;
 					$snum=ceil($qty/2)+1;
 					$zombie = makeZombie(1);
@@ -278,7 +278,7 @@ $genre = $_POST['genre'];
 						case 9:	$mname = goblinName();		break;
 						case 10:$mname = impName();			break;
 						case 11:$mname = wolfName(1);		break;
-						case 12:$mname = catName(any);		break;
+						case 12:$mname = catName('any');		break;
 					}
 					switch (mt_rand(0,5))
 					{
@@ -311,14 +311,14 @@ $genre = $_POST['genre'];
 									{
 										if ($genre == "urthe" || $genre == "gammaworld" || $genre == "metalpha")
 										{
-											if ($genre == "urthe"){$this_odd_things = strtolower(makeBUItem(mt_rand(1,20),mt_rand(1,3),1)); }
-											else if ($genre == "gammaworld"){$this_odd_things = strtolower(makeGWItem(mt_rand(1,20),mt_rand(1,3),1)); }
-											else if ($genre == "metalpha"){$this_odd_things = strtolower(makeMAItem(mt_rand(1,20),mt_rand(1,3),1)); }
+											if ($genre == "urthe"){$this_odd_things = strtolower((string) makeBUItem(mt_rand(1,20),mt_rand(1,3),1)); }
+											else if ($genre == "gammaworld"){$this_odd_things = strtolower((string) makeGWItem(mt_rand(1,20),mt_rand(1,3),1)); }
+											else if ($genre == "metalpha"){$this_odd_things = strtolower((string) makeMAItem(mt_rand(1,20),mt_rand(1,3),1)); }
 											$this_odd_thing = explode( ' [', $this_odd_things );
 											if ($quality > 0){ $this_quality = zombieQuality(); }
 											echo $this_odd_thing[0] . $this_quality;
 										}
-										else {echo strtolower(makePAItem(mt_rand(1,20),mt_rand(1,3),1)); if ($quality > 0){ echo zombieQuality(); } }
+										else {echo strtolower((string) makePAItem(mt_rand(1,20),mt_rand(1,3),1)); if ($quality > 0){ echo zombieQuality(); } }
 									}
 									else { echo zombieItems($person); if ($quality > 0){ echo zombieQuality(); } }
 								}
@@ -333,14 +333,14 @@ $genre = $_POST['genre'];
 									{
 										if ($genre == "urthe" || $genre == "gammaworld" || $genre == "metalpha")
 										{
-											if ($genre == "urthe"){$this_odd_things = strtolower(makeBUItem(mt_rand(1,20),mt_rand(1,3),1)); }
-											else if ($genre == "gammaworld"){$this_odd_things = strtolower(makeGWItem(mt_rand(1,20),mt_rand(1,3),1)); }
-											else if ($genre == "metalpha"){$this_odd_things = strtolower(makeMAItem(mt_rand(1,20),mt_rand(1,3),1)); }
+											if ($genre == "urthe"){$this_odd_things = strtolower((string) makeBUItem(mt_rand(1,20),mt_rand(1,3),1)); }
+											else if ($genre == "gammaworld"){$this_odd_things = strtolower((string) makeGWItem(mt_rand(1,20),mt_rand(1,3),1)); }
+											else if ($genre == "metalpha"){$this_odd_things = strtolower((string) makeMAItem(mt_rand(1,20),mt_rand(1,3),1)); }
 											$this_odd_thing = explode( ' [', $this_odd_things );
 											if ($quality > 0){ $this_quality = zombieQuality(); }
 											echo $this_odd_thing[0] . $this_quality;
 										}
-										else {echo strtolower(makePAItem(mt_rand(1,20),mt_rand(1,3),1)); if ($quality > 0){ echo zombieQuality(); } }
+										else {echo strtolower((string) makePAItem(mt_rand(1,20),mt_rand(1,3),1)); if ($quality > 0){ echo zombieQuality(); } }
 									}
 									else { echo zombieItems($person); if ($quality > 0){ echo zombieQuality(); } }
 								}

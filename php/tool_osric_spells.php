@@ -110,22 +110,22 @@ if ($menu_section == 3)
 			<div class="row">
 				<span class="cell" style="font-size: 10px;">
 					<?php while ($ary_c=mysqli_fetch_assoc($res_c)) : ?>
-						<input type="checkbox" name="spell_<?php echo $ary_c[id]; ?>" value="<?php echo $ary_c[id]; ?>"><?php echo str_replace(" radius)", ")", "$ary_c[name]"); ?><br>
+						<input type="checkbox" name="spell_<?php echo $ary_c['id']; ?>" value="<?php echo $ary_c['id']; ?>"><?php echo str_replace(" radius)", ")", "$ary_c[name]"); ?><br>
 					<?php endwhile; ?>
 				</span>
 				<span class="cell" style="font-size: 10px;">
 					<?php while ($ary_d=mysqli_fetch_assoc($res_d)) : ?>
-						<input type="checkbox" name="spell_<?php echo $ary_d[id]; ?>" value="<?php echo $ary_d[id]; ?>"><?php echo str_replace(" radius)", ")", "$ary_d[name]"); ?><br>
+						<input type="checkbox" name="spell_<?php echo $ary_d['id']; ?>" value="<?php echo $ary_d['id']; ?>"><?php echo str_replace(" radius)", ")", "$ary_d[name]"); ?><br>
 					<?php endwhile; ?>
 				</span>
 				<span class="cell" style="font-size: 10px;">
 					<?php while ($ary_i=mysqli_fetch_assoc($res_i)) : ?>
-						<input type="checkbox" name="spell_<?php echo $ary_i[id]; ?>" value="<?php echo $ary_i[id]; ?>"><?php echo str_replace(" radius)", ")", "$ary_i[name]"); ?><br>
+						<input type="checkbox" name="spell_<?php echo $ary_i['id']; ?>" value="<?php echo $ary_i['id']; ?>"><?php echo str_replace(" radius)", ")", "$ary_i[name]"); ?><br>
 					<?php endwhile; ?>
 				</span>
 				<span class="cell" style="font-size: 10px;">
 					<?php while ($ary_m=mysqli_fetch_assoc($res_m)) : ?>
-						<input type="checkbox" name="spell_<?php echo $ary_m[id]; ?>" value="<?php echo $ary_m[id]; ?>"><?php echo str_replace(" radius)", ")", "$ary_m[name]"); ?><br>
+						<input type="checkbox" name="spell_<?php echo $ary_m['id']; ?>" value="<?php echo $ary_m['id']; ?>"><?php echo str_replace(" radius)", ")", "$ary_m[name]"); ?><br>
 					<?php endwhile; ?>
 				</span>
 			</div>
@@ -146,7 +146,7 @@ $program_user = $_POST['program_user'];	if ($program_user != 1){header("Location
 
 echo "</head><body>";
 
-$level = $_POST['level']+0;
+$level = num($_POST['level']);
 
 $sort = $_POST['sort'];
 	if ($sort == 2){$sort_list = "ORDER BY mage, name";}
@@ -198,7 +198,7 @@ else
 	$res = mysqli_query( $connection, $qry ); /*qry*/
 	$cmd = "(id=0";
 		while ($ary=mysqli_fetch_assoc($res)) :
-			$v = "spell_" . $ary[id];
+			$v = "spell_" . $ary['id'];
 			$spell = $_POST["$v"];
 				if ($spell > 0){$cmd = $cmd . " OR id=" . $spell;}
 		endwhile;
@@ -216,35 +216,35 @@ $res = mysqli_query( $connection, $qry ); /*qry*/
 			<img border="0" src="pics_tools/tools_spell_book.jpg">
 		<?php while ($ary=mysqli_fetch_assoc($res)) : ?>
 			<hr color="#000000" size="1">
-			<p style="margin-top: 0; margin-bottom: 0"><font size="4"><?php echo $ary[name]; if ($ary[reverse] > 0){ echo "&nbsp;&nbsp;<i>(Reversible)</i>"; } ?></font></p>
+			<p style="margin-top: 0; margin-bottom: 0"><font size="4"><?php echo $ary['name']; if ($ary['reverse'] > 0){ echo "&nbsp;&nbsp;<i>(Reversible)</i>"; } ?></font></p>
 			<table border="0" cellpadding="0" style="border-collapse: collapse" width="100%" bordercolorlight="#000000" bordercolordark="#000000">
 				<tr>
-					<td width="50%" colspan="2"><i><font size="2">&nbsp; <?php echo $ary[type]; ?></font></i></td>
+					<td width="50%" colspan="2"><i><font size="2">&nbsp; <?php echo $ary['type']; ?></font></i></td>
 					<td width="13%"><b><font size="2">Area of Effect:</font></b></td>
-					<td width="37%"><font size="2"><?php echo ucfirst($ary[area]); ?></font></td>
+					<td width="37%"><font size="2"><?php echo ucfirst($ary['area']); ?></font></td>
 				</tr>
 				<tr>
 					<td width="12%"><b><font size="2">&nbsp; Level:</font></b></td>
-					<td width="38%"><font size="2"><?php echo $ary[mage]; ?> <?php echo $ary[level]; ?></font></td>
+					<td width="38%"><font size="2"><?php echo $ary['mage']; ?> <?php echo $ary['level']; ?></font></td>
 					<td width="13%"><b><font size="2">Components:</font></b></td>
-					<td width="37%"><font size="2"><?php echo ucfirst($ary[components]); ?></font></td>
+					<td width="37%"><font size="2"><?php echo ucfirst($ary['components']); ?></font></td>
 				</tr>
 				<tr>
 					<td width="12%"><b><font size="2">&nbsp; Range:</font></b></td>
-					<td width="38%"><font size="2"><?php echo ucfirst($ary[range]); ?></font></td>
+					<td width="38%"><font size="2"><?php echo ucfirst($ary['range']); ?></font></td>
 					<td width="13%"><b><font size="2">Casting Time:</font></b></td>
-					<td width="37%"><font size="2"><?php echo ucfirst($ary[casting]); ?></font></td>
+					<td width="37%"><font size="2"><?php echo ucfirst($ary['casting']); ?></font></td>
 				</tr>
 				<tr>
 					<td width="12%"><b><font size="2">&nbsp; Duration:</font></b></td>
-					<td width="38%"><font size="2"><?php echo ucfirst($ary[duration]); ?></font></td>
+					<td width="38%"><font size="2"><?php echo ucfirst($ary['duration']); ?></font></td>
 					<td width="13%"><b><font size="2">Saving Throw:</font></b></td>
-					<td width="37%"><font size="2"><?php echo ucfirst($ary[save]); ?></font></td>
+					<td width="37%"><font size="2"><?php echo ucfirst($ary['save']); ?></font></td>
 				</tr>
 				</table>
 			<p style="margin-top: 0; margin-bottom: 0"><font size="1">&nbsp;</font></p>
 			<p style="margin-top: 0; margin-bottom: 0"><font size="2"><?php $notes = str_replace("", "", "$ary[description]"); echo $notes; ?>
-				<?php	if (($extra > 0) && ($ary[refs] > 0))
+				<?php	if (($extra > 0) && ($ary['refs'] > 0))
 						{
 							$rqry = "SELECT * FROM osric_spells WHERE id=$ary[refs]";
 							$rres = mysqli_query( $connection, $rqry ); /*rqry*/

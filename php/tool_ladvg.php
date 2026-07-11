@@ -147,8 +147,8 @@ echo "</head><body>";
 include("functions/ll_rules.php");
 
 $x_output = $_POST['x_output'];
-$x_img = $_POST['x_img']+0;
-$x_maxhp = $_POST['x_maxhp']+0;
+$x_img = num($_POST['x_img']);
+$x_maxhp = num($_POST['x_maxhp']);
 
 $x_qty_cleric = $_POST['x_qty_cleric'];
 $x_qty_dwarf = $_POST['x_qty_dwarf'];
@@ -161,26 +161,26 @@ $x_qty_thief = $_POST['x_qty_thief'];
 $x_qty = $x_qty_halfling + $x_qty_cleric + $x_qty_dwarf + $x_qty_fighter + $x_qty_elf + $x_qty_mage + $x_qty_thief;
 if ($x_qty > 0){} else {$x_qty=1; $x_qty_fighter=1;}
 
-$x_relics = $_POST['x_relics']+0;
-$x_name = $_POST['x_name']+0;
+$x_relics = num($_POST['x_relics']);
+$x_name = num($_POST['x_name']);
 $x_sex = $_POST['x_sex'];
 
-$x_lvl1 = $_POST['x_lvl1']+0;
-$x_lvl2 = $_POST['x_lvl2']+0;
+$x_lvl1 = num($_POST['x_lvl1']);
+$x_lvl2 = num($_POST['x_lvl2']);
 	if ($x_lvl1 > $x_lvl2){$x_lvl1 = $x_lvl2;}
 
-$x_show_sk = $_POST['x_show_sk']+0;
-$x_show_eq = $_POST['x_show_eq']+0;
-$x_show_me = $_POST['x_show_me']+0;
-$x_show_ss = $_POST['x_show_ss']+0;
-$x_rand_xp = $_POST['x_rand_xp']+0;
-$x_show_al = $_POST['x_show_al']+0;
-$x_show_age = $_POST['x_show_age']+0;
-$x_used_sh = $_POST['x_used_sh']+0;
-$x_lang_set = $_POST['x_lang_set']+0;
-$x_lang_aec = $_POST['x_lang_aec']+0;
+$x_show_sk = num($_POST['x_show_sk']);
+$x_show_eq = num($_POST['x_show_eq']);
+$x_show_me = num($_POST['x_show_me']);
+$x_show_ss = num($_POST['x_show_ss']);
+$x_rand_xp = num($_POST['x_rand_xp']);
+$x_show_al = num($_POST['x_show_al']);
+$x_show_age = num($_POST['x_show_age']);
+$x_used_sh = num($_POST['x_used_sh']);
+$x_lang_set = num($_POST['x_lang_set']);
+$x_lang_aec = num($_POST['x_lang_aec']);
 	if ($x_lang_aec > 0){$_SESSION["SESSION_ADD_AEC"] = 1;}
-$x_book_sp = $_POST['x_book_sp']+0;
+$x_book_sp = num($_POST['x_book_sp']);
 
 if ( $x_used_sh > 0 ){ $sheet_used = "ll_char_sheet_basic_aec.jpg"; $mod_stat_version = 1; $mod_font_size=15; $mod_font_move=8; $x_show_age = 1; $_SESSION["SESSION_ADD_AEC"] = 1; }
 else if ( $x_show_age > 0 ){ $sheet_used = "ll_char_sheet_basic_age.jpg"; $mod_stat_version = 0; $mod_font_size=20; $mod_font_move=0; }
@@ -188,7 +188,7 @@ else { $sheet_used = "ll_char_sheet_basic.jpg"; $mod_stat_version = 0; $mod_font
 
 while ($x_qty > 0) :
 
-	$cha_level = mt_rand($x_lvl1,$x_lvl2);
+	$cha_level = mt_rand($x_lvl1, max((int)($x_lvl1), (int)($x_lvl2)));
 
 	$str_min=3; 	$dex_min=3; 	$con_min=3; 	$int_min=3; 	$wis_min=3; 	$cha_min=3;
 	$str_max=18;	$dex_max=18;	$con_max=18;	$int_max=18;	$wis_max=18;	$cha_max=18;
@@ -211,7 +211,7 @@ while ($x_qty > 0) :
 	$saving_throws = ll_basic_saves($class, $cha_level);
 
 	$attack_table = ll_basic_attacks($class, $cha_level);
-		$attacks = explode("_", $attack_table);
+		$attacks = explode("_", (string) $attack_table);
 
 	$level_table = ll_basic_level($class, $cha_level, $x_rand_xp, $max_spells_known, $stat_dex[0], $mod_stat_version);
 
@@ -259,17 +259,17 @@ while ($x_qty > 0) :
 		?>
 		<div style="position:relative; left:40; top:20;" width="700" height="905">
 			<img style="position:relative; left:0; top:20;" src="pics_tools/<?php echo $sheet_used; ?>" width="700" height="905">
-			<p style="z-index:100; position:absolute; color:black; font-size:16px; left:293px; top:<?php echo 70+$sheet_high_adjust; ?>px; width: 220;"><?php echo $my_name; ?></p>
+			<p style="z-index:100; position:absolute; color:black; font-size:16px; left:293px; top:<?php echo 7num($sheet_high_adjust ?? 0); ?>px; width: 220;"><?php echo $my_name; ?></p>
 			<p style="z-index:100; position:absolute; color:black; font-size:16px; left:538px; top:<?php echo 52+$sheet_high_adjust; ?>px; width: 220;"><?php echo $my_gender; ?></p>
-			<p style="z-index:100; position:absolute; color:black; font-size:16px; left:538px; top:<?php echo 70+$sheet_high_adjust; ?>px; width: 89px;"><?php echo $class; ?></p>
+			<p style="z-index:100; position:absolute; color:black; font-size:16px; left:538px; top:<?php echo 7num($sheet_high_adjust ?? 0); ?>px; width: 89px;"><?php echo $class; ?></p>
 
 			<p style="z-index:100; position:absolute; color:black; font-size:16px; left:293px; top:<?php echo 127+$sheet_high_adjust; ?>px; width: 80px;"><?php if ($x_show_al>0){echo ll_basic_alignment();} ?></p>
 			<p style="z-index:100; position:absolute; color:black; font-size:16px; left:395px; top:<?php echo 127+$sheet_high_adjust; ?>px; width: 80px; text-align: center;"><?php echo $cha_level; ?></p>
 
-			<?php if ($x_show_age>0){ ?><p style="z-index:100; position:absolute; color:black; font-size:16px; left:275px; top:<?php echo 180+$sheet_high_adjust; ?>px; width: 80px; text-align: center;"><?php echo $character_age; ?></p><?php } ?>
+			<?php if ($x_show_age>0){ ?><p style="z-index:100; position:absolute; color:black; font-size:16px; left:275px; top:<?php echo 18num($sheet_high_adjust ?? 0); ?>px; width: 80px; text-align: center;"><?php echo $character_age; ?></p><?php } ?>
 
 			<p style="z-index:100; position:absolute; color:black; font-size:24px; left:75px; top:<?php echo 378+$sheet_high_adjust; ?>px; width: 31px; text-align: center;"><?php echo $stat_str[0]; ?></p>
-			<p style="z-index:100; position:absolute; color:black; font-size:24px; left:75px; top:<?php echo 430+$sheet_high_adjust; ?>px; width: 31px; text-align: center;"><?php echo $stat_dex[0]; ?></p>
+			<p style="z-index:100; position:absolute; color:black; font-size:24px; left:75px; top:<?php echo 43num($sheet_high_adjust ?? 0); ?>px; width: 31px; text-align: center;"><?php echo $stat_dex[0]; ?></p>
 			<p style="z-index:100; position:absolute; color:black; font-size:24px; left:75px; top:<?php echo 482+$sheet_high_adjust; ?>px; width: 31px; text-align: center;"><?php echo $stat_con[0]; ?></p>
 			<p style="z-index:100; position:absolute; color:black; font-size:24px; left:75px; top:<?php echo 533+$sheet_high_adjust; ?>px; width: 31px; text-align: center;"><?php echo $stat_int[0]; ?></p>
 			<p style="z-index:100; position:absolute; color:black; font-size:24px; left:75px; top:<?php echo 584+$sheet_high_adjust; ?>px; width: 31px; text-align: center;"><?php echo $stat_wis[0]; ?></p>
@@ -278,10 +278,10 @@ while ($x_qty > 0) :
 			<p style="z-index:100; position:absolute; color:black; font-size:24px; left:390px; top:<?php echo 383+$sheet_high_adjust; ?>px; width: 31px; text-align: center;"><?php echo $saving_throws[0]; ?></p>
 			<p style="z-index:100; position:absolute; color:black; font-size:24px; left:391px; top:<?php echo 447+$sheet_high_adjust; ?>px; width: 31px; text-align: center;"><?php echo $saving_throws[1]; ?></p>
 			<p style="z-index:100; position:absolute; color:black; font-size:24px; left:390px; top:<?php echo 507+$sheet_high_adjust; ?>px; width: 31px; text-align: center;"><?php echo $saving_throws[2]; ?></p>
-			<p style="z-index:100; position:absolute; color:black; font-size:24px; left:391px; top:<?php echo 570+$sheet_high_adjust; ?>px; width: 31px; text-align: center;"><?php echo $saving_throws[3]; ?></p>
+			<p style="z-index:100; position:absolute; color:black; font-size:24px; left:391px; top:<?php echo 57num($sheet_high_adjust ?? 0); ?>px; width: 31px; text-align: center;"><?php echo $saving_throws[3]; ?></p>
 			<p style="z-index:100; position:absolute; color:black; font-size:24px; left:391px; top:<?php echo 632+$sheet_high_adjust; ?>px; width: 31px; text-align: center;"><?php echo $saving_throws[4]; ?></p>
 
-			<p style="z-index:100; position:absolute; color:black; font-size:24px; left:355px; top:<?php echo 260+$sheet_high_adjust; ?>px; width: 31px; text-align: center;"><?php echo $hit_points; ?></p>
+			<p style="z-index:100; position:absolute; color:black; font-size:24px; left:355px; top:<?php echo 26num($sheet_high_adjust ?? 0); ?>px; width: 31px; text-align: center;"><?php echo $hit_points; ?></p>
 			<p style="z-index:100; position:absolute; color:black; font-size:24px; left:519px; top:<?php echo 252+$sheet_high_adjust; ?>px; width: 31px; text-align: center;"><?php $my_armor = (9+$my_stuff[1]); if ($my_armor > 9){$my_armor=9;} echo $my_armor; ?></p>
 
 			<p style="z-index:100; position:absolute; color:black; font-size:18px; left:177px; top:<?php echo 871+$sheet_high_adjust; ?>px; width: 31px; text-align: center;"><?php echo $attacks[0]; ?></p>
@@ -298,12 +298,12 @@ while ($x_qty > 0) :
 			<p style="z-index:100; position:absolute; color:black; font-size:18px; left:552px; top:<?php echo 871+$sheet_high_adjust; ?>px; width: 31px; text-align: center;"><?php echo $attacks[11]; ?></p>
 			<p style="z-index:100; position:absolute; color:black; font-size:18px; left:587px; top:<?php echo 871+$sheet_high_adjust; ?>px; width: 31px; text-align: center;"><?php echo $attacks[12]; ?></p>
 
-			<p style="z-index:100; position:absolute; color:black; font-size:14px; left:175px; top:<?php echo 700+$sheet_high_adjust; ?>px; width: 555px; text-align: left; height: 72px;"><?php echo ll_languages($x_lang_set,$class,$languages_known,$x_lang_aec); ?></p>
+			<p style="z-index:100; position:absolute; color:black; font-size:14px; left:175px; top:<?php echo 70num($sheet_high_adjust ?? 0); ?>px; width: 555px; text-align: left; height: 72px;"><?php echo ll_languages($x_lang_set,$class,$languages_known,$x_lang_aec); ?></p>
 
 			<p style="z-index:100; position:absolute; color:black; font-size:14px; left:77px; top:<?php echo 748+$sheet_high_adjust; ?>px; width: 555px; text-align: left; height: 72px;"><?php if ($x_show_sk > 0){echo $level_table[1];} ?></p>
 
 			<p style="z-index:100; position:absolute; color:black; font-size:20px; left:212px; top:<?php echo 387+$sheet_high_adjust; ?>px; width: 160px; text-align: center;"><?php echo $stat_str[1]; ?></p>
-			<p style="z-index:100; position:absolute; color:black; font-size:20px; left:212px; top:<?php echo 440+$sheet_high_adjust; ?>px; width: 160px; text-align: center;"><?php echo $stat_dex[1]; ?></p>
+			<p style="z-index:100; position:absolute; color:black; font-size:20px; left:212px; top:<?php echo 44num($sheet_high_adjust ?? 0); ?>px; width: 160px; text-align: center;"><?php echo $stat_dex[1]; ?></p>
 			<p style="z-index:100; position:absolute; color:black; font-size:<?php echo $mod_font_size; ?>px; left:230px; top:<?php echo 491+$mod_font_move+$sheet_high_adjust; ?>px; width: 141px; text-align: center;"><?php echo $stat_con[1]; ?></p>
 			<p style="z-index:100; position:absolute; color:black; font-size:<?php echo $mod_font_size; ?>px; left:230px; top:<?php echo 542+$mod_font_move+$sheet_high_adjust; ?>px; width: 141px; text-align: center;"><?php echo $stat_int[1]; ?></p>
 			<p style="z-index:100; position:absolute; color:black; font-size:<?php echo $mod_font_size; ?>px; left:212px; top:<?php echo 593+$mod_font_move+$sheet_high_adjust; ?>px; width: 160px; text-align: center;"><?php echo $stat_wis[1]; ?></p>
@@ -313,7 +313,7 @@ while ($x_qty > 0) :
 		<div style="position:relative; left:40; top:20;" width="700" height="905">
 			<img style="position:relative; left:0; top:20;" src="pics_tools/ll_char_sheet_notes.jpg" width="700" height="905">
 			<p style="z-index:100; position:absolute; color:black; font-size:14px; left:77px; top:<?php echo 105+$sheet_high_adjust; ?>px; width: 537px; text-align: left; height: 254px;"><?php echo $my_gear . $magic_items; ?></p>
-			<p style="z-index:100; position:absolute; color:black; font-size:14px; left:77px; top:<?php echo 460+$sheet_high_adjust; ?>px; width: 537px; text-align: left; height: 268px;"><?php echo $my_notes; ?></p>
+			<p style="z-index:100; position:absolute; color:black; font-size:14px; left:77px; top:<?php echo 46num($sheet_high_adjust ?? 0); ?>px; width: 537px; text-align: left; height: 268px;"><?php echo $my_notes; ?></p>
 			<p style="z-index:100; position:absolute; color:black; font-size:16px; left:430px; top:<?php echo 767+$sheet_high_adjust; ?>px; width: 230px; text-align: left; height: 74px;"><?php echo $pocket_change; ?></p>
 			<p style="z-index:100; position:absolute; color:black; font-size:18px; left:134px; top:<?php echo 767+$sheet_high_adjust; ?>px; width: 123px; text-align: center;"><?php if ($level_table[2] != "0"){echo $level_table[2];} ?></p>
 			<p style="z-index:100; position:absolute; color:black; font-size:14px; left:134px; top:<?php echo 805+$sheet_high_adjust; ?>px; width: 123px; text-align: center;"><?php echo $bonus_xp[0]; ?></p>
@@ -354,27 +354,27 @@ while ($x_qty > 0) :
 					</table>
 					<hr color="#000000" size="1">
 				<?php while ($ary=mysqli_fetch_assoc($qry)) : ?>
-					<font size="4"><?php echo $ary[ls_name]; if ($ary[ls_reverse] > 0){ echo "&nbsp;&nbsp;<i>(Reversible)</i>"; } ?></font><br>
+					<font size="4"><?php echo $ary['ls_name']; if ($ary['ls_reverse'] > 0){ echo "&nbsp;&nbsp;<i>(Reversible)</i>"; } ?></font><br>
 					<table border="0" cellpadding="5" style="border-collapse: collapse" width="100%" bordercolorlight="#000000" bordercolordark="#000000">
 						<tr>
 							<td width="25%"><font size="2"><b>Class:</b> <?php echo $class; ?></font></td>
-							<td width="25%"><font size="2"><b>Level:</b> <?php echo $ary[ls_level]; ?></font></td>
-							<td width="25%"><font size="2"><b>Duration:</b> <?php echo $ary[ls_duration]; ?></font></td>
-							<td width="25%" align="right"><font size="2"><b>Range:</b> <?php echo $ary[ls_range]; ?></font></td>
+							<td width="25%"><font size="2"><b>Level:</b> <?php echo $ary['ls_level']; ?></font></td>
+							<td width="25%"><font size="2"><b>Duration:</b> <?php echo $ary['ls_duration']; ?></font></td>
+							<td width="25%" align="right"><font size="2"><b>Range:</b> <?php echo $ary['ls_range']; ?></font></td>
 						</tr>
 						</table>
 					<p style="margin-top: 0; margin-bottom: 0"><font size="2"><?php
-						$notes = str_replace("\n", "<br>", $ary[ls_text]);
+						$notes = str_replace("\n", "<br>", $ary['ls_text']);
 						$notes = str_replace("<table ", "<table style='font-size:13px;' ", $notes);
 						$notes = str_replace("</table>\r<br>", "</table>", $notes);
 						echo $notes;
 
-						if ($ary[ls_ref] > 0)
+						if ($ary['ls_ref'] > 0)
 						{
 							$rqry = "SELECT * FROM lablord_spells WHERE ls_id=$ary[ls_ref]";
 							$rres = mysqli_query( $connection, $rqry ); /*rqry*/
 							$rary = mysqli_fetch_assoc($rres);
-							$more = str_replace("\n", "<br>", $rary[ls_text]);
+							$more = str_replace("\n", "<br>", $rary['ls_text']);
 							$more = str_replace("<table ", "<table style='font-size:13px;' ", $more);
 							$more = str_replace("</table>\r<br>", "</table>", $more);
 							echo "<br><br><b>SPELL REFERENCE:&nbsp;</b>" . $more;
@@ -390,8 +390,8 @@ while ($x_qty > 0) :
 	}
 	else
 	{
-		if (($x_img + $x_show_sk + $x_show_eq + $x_show_me + x_show_ss) > 2){$when_to_break = 1;}
-		else if (($x_img + $x_show_sk + $x_show_eq + $x_show_me + x_show_ss) > 1){$when_to_break = 2;}
+		if (($x_img + $x_show_sk + $x_show_eq + $x_show_me + $x_show_ss) > 2){$when_to_break = 1;}
+		else if (($x_img + $x_show_sk + $x_show_eq + $x_show_me + $x_show_ss) > 1){$when_to_break = 2;}
 		else {$when_to_break = 3;}
 	?>
       <div align='center'><table width="700" border="0" cellspacing="0" cellpadding="0">
@@ -450,7 +450,7 @@ while ($x_qty > 0) :
           <td width="4%"><?php $my_armor = (9+$my_stuff[1]); if ($my_armor > 9){$my_armor=9;} echo $my_armor; ?></td>
           <td width="4%">&nbsp;</td>
           <td width="6%">&nbsp;</td>
-          <td width="5%"><?php if ($x_show_al>0){ echo substr(ll_basic_alignment(), 0, 1);} else { echo "&nbsp;";} ?></td>
+          <td width="5%"><?php if ($x_show_al>0){ echo substr((string) ll_basic_alignment(), 0, 1);} else { echo "&nbsp;";} ?></td>
           <td width="5%"><?php if ($gender == "Male"){echo "M";} else {echo "F";} ?></td>
           <td width="5%"><?php echo $bonus_xp[1]; ?></td>
           <td width="5%"><?php if ($x_show_age>0){ echo $character_age; } else { echo "&nbsp;";} ?></td>
@@ -526,7 +526,7 @@ while ($x_qty > 0) :
 			$my_abilities = "";
 			$my_abilities = $my_abilities . ll_languages($x_lang_set,$class,$languages_known,$x_lang_aec) . "<br>";
 			if ($level_table[1] != ""){ $my_abilities = $my_abilities . $level_table[1] . "<br>"; }
-			if (my_spell_book != ""){ $my_abilities = $my_abilities . $my_spell_book . "<br>"; }
+			if ('my_spell_book' != ""){ $my_abilities = $my_abilities . $my_spell_book . "<br>"; }
 			$my_abilities = substr($my_abilities, 0, -4);
 		if (($x_show_sk > 0) && ($my_abilities != "")){?>
 			<tr style="font-size:12px;">

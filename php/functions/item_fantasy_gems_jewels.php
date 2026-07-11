@@ -147,19 +147,19 @@ function jewelCreator($cut)
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
 function gemChooser()
 {
-	$gem = array('banded agate', 'eye agate', 'moss agate', 'azurite', 'blue quartz', 'hematite', 'lapis lazuli', 'malachite', 'obsidian', 'rhodochrosite', 'tiger eye', 'turquoise', 'freshwater pearl', 'bloodstone', 'carnelian', 'chalcedony', 'chrysoprase', 'citrine', 'iolite', 'jasper', 'moonstone', 'onyx', 'peridot', 'rock crystal', 'sard quartz', 'sardonyx quartz', 'rose quartz', 'smoky quartz', 'star rose quartz', 'zircon', 'amber', 'amethyst', 'chrysoberyl', 'coral', 'garnet', 'jade', 'white pearl', 'golden pearl', 'pink pearl', 'silver pearl', 'red spinel', 'green spinel', 'tourmaline', 'alexandrite', 'aquamarine', 'violet garnet', 'black pearl', 'deep blue spinel', 'golden yellow topaz', 'emerald', 'white opal', 'black opal', 'fire opal', 'blue sapphire', 'fiery yellow corundum', 'rich purple corundum', 'blue star sapphire', 'black star sapphire', 'star ruby', 'green emerald', 'blue-white diamond', 'canary diamond', 'pink diamond', 'brown diamond', 'blue diamond', 'jacinth');
+	$gem = ['banded agate', 'eye agate', 'moss agate', 'azurite', 'blue quartz', 'hematite', 'lapis lazuli', 'malachite', 'obsidian', 'rhodochrosite', 'tiger eye', 'turquoise', 'freshwater pearl', 'bloodstone', 'carnelian', 'chalcedony', 'chrysoprase', 'citrine', 'iolite', 'jasper', 'moonstone', 'onyx', 'peridot', 'rock crystal', 'sard quartz', 'sardonyx quartz', 'rose quartz', 'smoky quartz', 'star rose quartz', 'zircon', 'amber', 'amethyst', 'chrysoberyl', 'coral', 'garnet', 'jade', 'white pearl', 'golden pearl', 'pink pearl', 'silver pearl', 'red spinel', 'green spinel', 'tourmaline', 'alexandrite', 'aquamarine', 'violet garnet', 'black pearl', 'deep blue spinel', 'golden yellow topaz', 'emerald', 'white opal', 'black opal', 'fire opal', 'blue sapphire', 'fiery yellow corundum', 'rich purple corundum', 'blue star sapphire', 'black star sapphire', 'star ruby', 'green emerald', 'blue-white diamond', 'canary diamond', 'pink diamond', 'brown diamond', 'blue diamond', 'jacinth'];
 	return $gem[mt_rand(0,65)];
 }
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
 function preciousChooser()
 {
-	$value = array('copper', 'silver', 'gold', 'platinum', 'iron', 'copper', 'silver', 'gold', 'platinum', 'iron', 'copper', 'silver', 'gold', 'platinum', 'iron', 'bone');
+	$value = ['copper', 'silver', 'gold', 'platinum', 'iron', 'copper', 'silver', 'gold', 'platinum', 'iron', 'copper', 'silver', 'gold', 'platinum', 'iron', 'bone'];
 	return $value[mt_rand(0,15)];
 }
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
 function goodmetalChooser()
 {
-	$value = array('silver', 'gold', 'platinum');
+	$value = ['silver', 'gold', 'platinum'];
 	return $value[mt_rand(0,2)];
 }
 ?>

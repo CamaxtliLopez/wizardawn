@@ -466,8 +466,8 @@ $program_user = $_POST['program_user'];	if ($program_user != 1){header("Location
 echo "</head><body>";
 
 $ttlvl = $_POST['x_ttlvl'];
-$tt_dice = $_POST['tt_dice']+0;
-$tt_adds = $_POST['tt_adds']+0;
+$tt_dice = num($_POST['tt_dice']);
+$tt_adds = num($_POST['tt_adds']);
 $tt_vary = $_POST['tt_vary'];
 $x_extra = $_POST['x_extra'];
 $x_whichmagic = $_POST['x_whichmagic'];
@@ -497,7 +497,7 @@ $x_game = $_POST['x_package'];
 	{
 		$take = "creator='SW'";
 		$bottom_notices = 5;
-		$x_hit_dice = $_POST['x_hit_dice']+0;
+		$x_hit_dice = num($_POST['x_hit_dice']);
 		$sesvar = "SESSION_MM_SW"; $csesvar = "SESSION_CMM_SW"; 
 	}
 	else if ($x_game == "BFRPG")
@@ -514,7 +514,7 @@ $x_game = $_POST['x_package'];
 	}
 	else if ($x_game == "Labyrinth Lord")
 	{
-		$aec = $_SESSION["SESSION_ADD_AEC"] = $_POST['aec']+0;
+		$aec = $_SESSION["SESSION_ADD_AEC"] = num($_POST['aec']);
 		if ($aec > 0){$take = "(creator LIKE 'AEC%' OR creator LIKE 'LL%')";}
 		else {$take = "(creator LIKE 'LL%')";}
 		$bottom_notices = 2;
@@ -530,7 +530,7 @@ $x_game = $_POST['x_package'];
 	{
 		$dd_ff = $_SESSION["SESSION_ADD_FF"] = $_POST['dd_ff'];
 		$dd_mm2 = $_SESSION["SESSION_ADD_MM2"] = $_POST['dd_mm2'];
-		$ua = $_SESSION["SESSION_ADD_UA"] = $_POST['ua']+0;
+		$ua = $_SESSION["SESSION_ADD_UA"] = num($_POST['ua']);
 		$take = "(creator LIKE 'SRC: MM %' OR ";
 		if ($dd_ff > 0){$take = $take . "creator LIKE 'SRC: FF %' OR ";}
 		if ($dd_mm2 > 0){$take = $take . "creator LIKE 'SRC: MM2 %' OR ";}
@@ -562,7 +562,7 @@ $x_mm = $_POST['x_mm'];
 		$x_monster_manual = "";
 		$x_custom_monsters = "";
 	}
-$x_area = stripslashes($_POST['x_area']);
+$x_area = stripslashes((string) $_POST['x_area']);
    if ($x_area == ""){$x_area = "Dungeon";}
 $x_rigged_chance = $_POST['x_rigged_chance'];
 $x_adjust = $_POST['x_adjust'];
@@ -571,12 +571,12 @@ $x_terrain = $_POST['x_terrain'];
 $x_outside = $_POST['x_outside'];
 $x_describe = $_POST['x_describe'];
 	$show_detail_monster_info = $x_describe;
-$x_level = $_POST['x_level']+0;
+$x_level = num($_POST['x_level']);
 $x_max_level = 21;
 	if ( $x_game == "Swords & Six-Siders" ){ $x_max_level = 6; }
 	if (($x_delve == "Progressive") && ($x_level < 1)){$x_level = 1;}
 	if ($x_level > $x_max_level){$x_max_level = $x_level;}
-$x_characters = $_POST['x_characters']+0;
+$x_characters = num($_POST['x_characters']);
 $x_furnish = $_POST['x_furnish'];
 $x_undead = $_POST['x_undead'];
 	if ($x_undead > 0){$haunted = "AND turn>0";}
@@ -596,17 +596,17 @@ $x_undead = $_POST['x_undead'];
 $x_t_c = $_POST['x_t_c']; // TRAP
 $x_t_c_min = $_POST['x_t_c_min']; // MIN
 $x_t_c_max = $_POST['x_t_c_max']; // MAX
-$x_t_c_low = 0 + $_POST['x_t_c_low']; // LOW
+$x_t_c_low = num($_POST['x_t_c_low'] ?? 0); // LOW
 	if ($x_t_c_min > $x_t_c_max){$x_t_c_min = $x_t_c_max;}
 $x_c_c = $_POST['x_c_c']; // ENEMY
 $x_c_c_min = $_POST['x_c_c_min']; // MIN
 $x_c_c_max = $_POST['x_c_c_max']; // MAX
-$x_c_c_low = 0 + $_POST['x_c_c_low']; // LOW
+$x_c_c_low = num($_POST['x_c_c_low'] ?? 0); // LOW
 	if ($x_c_c_min > $x_c_c_max){$x_c_c_min = $x_c_c_max;}
 $x_l_c = $_POST['x_l_c']; // LOOT
 $x_l_c_min = $_POST['x_l_c_min']; // MIN
 $x_l_c_max = $_POST['x_l_c_max']; // MAX
-$x_l_c_low = 0 + $_POST['x_l_c_low']; // LOW
+$x_l_c_low = num($_POST['x_l_c_low'] ?? 0); // LOW
 	if ($x_l_c_min > $x_l_c_max){$x_l_c_min = $x_l_c_max;}
 
 $map_wide = $_POST['map_wide'];
@@ -651,7 +651,7 @@ if (($x_delve == "Complex") || ($x_delve == "Progressive")){echo "<div style='pa
 
 		if ($x_monster_manual != "")
 		{
-			$monster_manual = explode("^", $x_monster_manual);
+			$monster_manual = explode("^", (string) $x_monster_manual);
 			$m = 0;
 
 			while ($monster_picks != 1) :
@@ -677,7 +677,7 @@ if (($x_delve == "Complex") || ($x_delve == "Progressive")){echo "<div style='pa
 		}
 		if ($x_custom_monsters != "")
 		{
-			$monster_manual = explode("|$|", $_SESSION[$csesvar]);
+			$monster_manual = explode("|$|", (string) $_SESSION[$csesvar]);
 			$ci = 0;
 
 			while ($ci < 5) :
@@ -763,14 +763,14 @@ if (($x_delve == "Complex") || ($x_delve == "Progressive")){echo "<div style='pa
 
 			while ($ary=mysqli_fetch_assoc($res)) :
 
-				if ($ary[name] != "ENCOUNTER")
+				if ($ary['name'] != "ENCOUNTER")
 				{
 					$show_detail_monster_info = $x_describe;
 					include("functions/stat_blocks.php");
 				}
 				else
 				{
-					$monster_info = $ary[description];
+					$monster_info = $ary['description'];
 				}
 
 				if ($make_enc > 0)
@@ -852,11 +852,11 @@ if ($x_terrain != "")
 					}
 				} //////////////////////////////////////////////////////////////////////////////////////
 
-				if ($dvary[vtype] == "D")
+				if ($dvary['vtype'] == "D")
 				{
 					$flur = "DUNGEON";
 				}
-				else if ($dvary[vtype] == "T")
+				else if ($dvary['vtype'] == "T")
 				{
 					$flur = "TOMB";
 					if (mt_rand(1,2) == 1)
@@ -864,7 +864,7 @@ if ($x_terrain != "")
 						$flur = "CRYPT";
 					}
 				}
-				else if ($dvary[vtype] == "W")
+				else if ($dvary['vtype'] == "W")
 				{
 					$flur = "UNDERGROUND LAKE";
 					if (mt_rand(1,2) == 1)
@@ -886,11 +886,11 @@ if ($x_terrain != "")
 				}
 
 				if ($x_delve == "Progressive"){$career_lvl = "&nbsp;&nbsp;(Level&nbsp;" . $x_level . "&nbsp;Area)";}
-				echo "<br><br><div style='page-break-after: always; height:1px;'>&nbsp;</div><table border='3' cellpadding='3' cellspacing='3' width='100%' bordercolordark='#000000' bordercolorlight='#000000' bgcolor='#E4E4E4'><tr><td><font size='5'>" . $dvary[vkey] . " - " . $flur . $career_lvl . "</font></td></tr></table><br>";
+				echo "<br><br><div style='page-break-after: always; height:1px;'>&nbsp;</div><table border='3' cellpadding='3' cellspacing='3' width='100%' bordercolordark='#000000' bordercolorlight='#000000' bgcolor='#E4E4E4'><tr><td><font size='5'>" . $dvary['vkey'] . " - " . $flur . $career_lvl . "</font></td></tr></table><br>";
 
-if ($dvary[vtype] == "W"){$map_wide = 1; $map_high = 1;}
-else if ($dvary[vsize] == "S"){$map_wide = 0; $map_high = 0;}
-else if ($dvary[vsize] == "M"){$map_wide = 1; $map_high = 1;}
+if ($dvary['vtype'] == "W"){$map_wide = 1; $map_high = 1;}
+else if ($dvary['vsize'] == "S"){$map_wide = 0; $map_high = 0;}
+else if ($dvary['vsize'] == "M"){$map_wide = 1; $map_high = 1;}
 else {$map_wide = 2; $map_high = 1; if (mt_rand(1,2) == 1){$map_wide = 1; $map_high = 2;}}
 
 $table_wide = ($map_wide * 300) + 300;
@@ -898,12 +898,12 @@ $table_high = ($map_high * 300) + 300;
 $key = 0;
 $room = 0;
 
-if ($dvary[vtype] == "C")
+if ($dvary['vtype'] == "C")
 {
 	$pix = "cave";
 	$dlwt = "AND delve!='W' AND wayout!=1";
 }
-else if ($dvary[vtype] == "W")
+else if ($dvary['vtype'] == "W")
 {
 	$pix = "cave";
 	$dlwt = "AND delve='W' AND wayout!=1";
@@ -958,8 +958,8 @@ while ($key > 0) :
 
 	////////////////////////////////////// CONTENTS //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-	if (($dvary[vtype] != "C") && ($dvary[vtype] != "W") && ($x_furnish > 0)){ $furniture = furnishRoom($x_game,$x_cut,$x_level); $furnitures = $furniture[0]; }
-	else if ((($dvary[vtype] == "C") || ($dvary[vtype] == "W")) && ($x_furnish > 0))
+	if (($dvary['vtype'] != "C") && ($dvary['vtype'] != "W") && ($x_furnish > 0)){ $furniture = furnishRoom($x_game,$x_cut,$x_level); $furnitures = $furniture[0]; }
+	else if ((($dvary['vtype'] == "C") || ($dvary['vtype'] == "W")) && ($x_furnish > 0))
 	{
 		switch (mt_rand(0,7))
 		{
@@ -974,16 +974,16 @@ while ($key > 0) :
 		}
 		if (mt_rand(1,6) == 1){$furnitures = $furnitures . " Water drips from up above in places.";}
 	}
-	else { $furniture = array(); $furnitures = $furniture[0]; }
+	else { $furniture = []; $furnitures = $furniture[0]; }
 
 	if ($x_atmo == 999){ echo "</font><hr color='#C0C0C0' size='8'><b>" . $room . "</b><font size='2'> - " . $furnitures; }
 	else { echo "</font><hr color='#C0C0C0' size='8'><b>" . $room . "</b><font size='2'> - " . $feeling . ". " . $furnitures; }
 
-	if (($dvary[vtype] != "C") && ($dvary[vtype] != "W"))
+	if (($dvary['vtype'] != "C") && ($dvary['vtype'] != "W"))
 	{
 		if ($furniture[2] != "") // IS THERE ODDBALL STUFF IN/ON THE FURNITURE
 		{
-			$fill_shelf = explode("#", $furniture[2]);
+			$fill_shelf = explode("#", (string) $furniture[2]);
 			$fill_shelf_n = count($fill_shelf);
 			$fs = 0;
 
@@ -1065,7 +1065,7 @@ while ($key > 0) :
 			else
 			{
 				$qry = "SELECT * FROM $table WHERE 1=1 $progress_cmd ORDER BY RAND(), RAND(), RAND(), RAND(), RAND(), RAND(), RAND(), RAND(), RAND(), RAND(), RAND(), RAND(), RAND(), RAND(), RAND(), RAND() LIMIT 1";
-				if (($dvary[vtype] == "T") && (mt_rand(1,100) > 20))
+				if (($dvary['vtype'] == "T") && (mt_rand(1,100) > 20))
 				{
 					$qry = "SELECT * FROM $table WHERE turn>0 $progress_cmd ORDER BY RAND(), RAND(), RAND(), RAND(), RAND(), RAND(), RAND(), RAND(), RAND(), RAND(), RAND(), RAND(), RAND(), RAND(), RAND(), RAND() LIMIT 1";
 				}
@@ -1073,7 +1073,7 @@ while ($key > 0) :
 			$res = mysqli_query( $connection, $qry ); /*qry*/
 			$ary = mysqli_fetch_assoc($res);
 
-			if ($ary[name] != "ENCOUNTER")
+			if ($ary['name'] != "ENCOUNTER")
 			{
 				$show_detail_monster_info = $x_describe;
 				include("functions/stat_blocks.php");
@@ -1087,21 +1087,21 @@ while ($key > 0) :
 				if ($do_not_show_creatures != 1)
 				{
 					if ($x_hit_dice == 0){$x_hit_dice = $tt_dice;}
-					echo calculateLife($x_level,$x_characters,$ary[m_app_min],$ary[m_app_max],$ary[m_hp_min],$ary[m_hp_max],$ary[m_hp_mod],$x_game,$my_mr_is,$x_hit_dice,$tt_adds,$tt_vary,$how_many_monsters) . "<br>";
+					echo calculateLife($x_level,$x_characters,$ary['m_app_min'],$ary['m_app_max'],$ary['m_hp_min'],$ary['m_hp_max'],$ary['m_hp_mod'],$x_game,$my_mr_is,$x_hit_dice,$tt_adds,$tt_vary,$how_many_monsters) . "<br>";
 				}
 
-				$cmd_villain = $cmd_villain . " AND id!= " . $ary[id];
+				$cmd_villain = $cmd_villain . " AND id!= " . $ary['id'];
 
-				if ($ary[difficulty] > $level_of_monster){$level_of_monster = $ary[difficulty];}
+				if ($ary['difficulty'] > $level_of_monster){$level_of_monster = $ary['difficulty'];}
 				if ($x_rich > 0)
 				{
-					if ($ary[m_hoard] == 3){$xx_hord = 50;} else if ($ary[m_hoard] == 2){$xx_hord = 90;} else if ($ary[m_hoard] == 1){$xx_hord = 70;}
-					if (($ary[m_hoard] > 0) && ($x_l_c > 0)){$level_of_monster = $xx_hord + $x_l_c;}
+					if ($ary['m_hoard'] == 3){$xx_hord = 50;} else if ($ary['m_hoard'] == 2){$xx_hord = 90;} else if ($ary['m_hoard'] == 1){$xx_hord = 70;}
+					if (($ary['m_hoard'] > 0) && ($x_l_c > 0)){$level_of_monster = $xx_hord + $x_l_c;}
 				}
 			}
 			else
 			{
-				echo "ENCOUNTER:&nbsp;" . $ary[description] . "<br>";
+				echo "ENCOUNTER:&nbsp;" . $ary['description'] . "<br>";
 			}
 
 	    endwhile;
@@ -1120,7 +1120,7 @@ while ($key > 0) :
 		echo "<hr align='center' size='1'>";
 
 	    while ($max_of_traps > 0) :
-		$this_trap = trapMaker($x_level,room,$x_game,$x_extra,$x_undead);
+		$this_trap = trapMaker($x_level,'room',$x_game,$x_extra,$x_undead);
 		if (mt_rand(1,100) <= $roll_for_trap){ echo $this_trap[0] . "<br>"; }
 		$min_of_traps = $min_of_traps - 1;
 			if ($min_of_traps > 0){$roll_for_trap = 100;}
@@ -1139,7 +1139,7 @@ while ($key > 0) :
 
 	if ($furniture[1] != "") // WHERE TO HIDE TREASURE
 	{
-		$fill_shelf = explode("#", $furniture[1]);
+		$fill_shelf = explode("#", (string) $furniture[1]);
 		$fill_shelf_n = count($fill_shelf);
 		$fs = 0;
 
@@ -1171,7 +1171,7 @@ while ($key > 0) :
 
 	if ($x_rigged_chance >= mt_rand(1,100))
 	{
-		$picked_trap = trapMaker($treasure_level,box,$x_game,$x_extra,$x_undead);
+		$picked_trap = trapMaker($treasure_level,'box',$x_game,$x_extra,$x_undead);
 		$treasure_chest = substr($treasure_chest, 0, -5) . ".<br><b>TRAPPED:</b>&nbsp;" . $picked_trap[0] . "<br>";
 	}
 
@@ -1203,7 +1203,7 @@ while ($key > 0) :
 				{
 					if ($x_rigged_chance >= mt_rand(1,100))
 					{
-						$picked_trap = trapMaker($treasure_level,item,$x_game,$x_extra,$x_undead);
+						$picked_trap = trapMaker($treasure_level,'item',$x_game,$x_extra,$x_undead);
 						$trap_zap = "-&nbsp;TRAPPED:&nbsp;" . $picked_trap[0];
 					}
 					else
@@ -1218,12 +1218,12 @@ while ($key > 0) :
 			}
 			if (mt_rand(1,100) <= $roll_for_loot){
 				if ($bags_of_coins > 0){$ghrz = 91;} else {$ghrz = 1;}
-				$my_reward = mt_rand($ghrz,100);
+				$my_reward = mt_rand($ghrz, max((int)($ghrz), (int)(100)));
 				if ($my_reward < 91)
 				{
 					$my_prize = currencyBuilder($treasure_level,$loot_size,0,$x_cut,1,$x_game);
 
-					if (mt_rand(1,$rarecash) == 1)
+					if (mt_rand(1, max((int)(1), (int)($rarecash))) == 1)
 					{
 						$other_coins = mt_rand(1,3);
 						$other_coin = "";
@@ -1239,8 +1239,8 @@ while ($key > 0) :
 					}
 					$bags_of_coins = 1;
 				}
-				else if ($my_reward < 96){$my_prize = "GEMS&nbsp;[" . mt_rand(1,3) . " each]:&nbsp;" . ucwords(gemCreator($x_cut));}
-				else if ($my_reward < 98){$my_prize = "JEWELRY:&nbsp;" . ucwords(jewelCreator($x_cut));}
+				else if ($my_reward < 96){$my_prize = "GEMS&nbsp;[" . mt_rand(1,3) . " each]:&nbsp;" . ucwords((string) gemCreator($x_cut));}
+				else if ($my_reward < 98){$my_prize = "JEWELRY:&nbsp;" . ucwords((string) jewelCreator($x_cut));}
 				else if ($x_low_magic >= mt_rand(1,100))
 				{
 					if ($x_whichmagic >= mt_rand(1,100))
@@ -1251,7 +1251,7 @@ while ($key > 0) :
 					{
 						$my_prize = makeMagicItem($treasure_level,$loot_size,0,$x_game,$x_extra,$x_cut);
 					}
-					$my_list_of_wonders = $my_prize . "^" . $room . "^" . $dvary[vkey] . "___" . $my_list_of_wonders;
+					$my_list_of_wonders = $my_prize . "^" . $room . "^" . $dvary['vkey'] . "___" . $my_list_of_wonders;
 				}
 				else { $my_prize = makeNiceItem($loot_size,$x_cut,$x_game); }
 				echo $my_prize . " " . $chest . "<br>";
@@ -1264,12 +1264,12 @@ while ($key > 0) :
 			{
 				if ($sayit != 1){if ($hide_it > 0){echo "<hr align='center' size='1'>";} echo $treasure_chest; $sayit = 1;}	
 				if ($sack_of_coins > 0){$ghrz = 91;} else {$ghrz = 1;}
-				$my_reward = mt_rand($ghrz,100);
+				$my_reward = mt_rand($ghrz, max((int)($ghrz), (int)(100)));
 				if ($my_reward < 91)
 				{
 					$my_prize = currencyBuilder($treasure_level,$loot_size,1,$x_cut,1,$x_game);
 
-					if (mt_rand(1,$rarecash) == 1)
+					if (mt_rand(1, max((int)(1), (int)($rarecash))) == 1)
 					{
 						$other_coins = mt_rand(1,3);
 						$other_coin = "";
@@ -1285,8 +1285,8 @@ while ($key > 0) :
 					}
 					$sack_of_coins = 1;
 				}
-				else if ($my_reward < 96){$my_prize = "GEMS&nbsp;[" . mt_rand(1,3) . " each]:&nbsp;" . ucwords(gemCreator($x_cut));}
-				else if ($my_reward < 98){$my_prize = "JEWELRY:&nbsp;" . ucwords(jewelCreator($x_cut));}
+				else if ($my_reward < 96){$my_prize = "GEMS&nbsp;[" . mt_rand(1,3) . " each]:&nbsp;" . ucwords((string) gemCreator($x_cut));}
+				else if ($my_reward < 98){$my_prize = "JEWELRY:&nbsp;" . ucwords((string) jewelCreator($x_cut));}
 				else if ($x_low_magic >= mt_rand(1,100))
 				{
 					if ($x_whichmagic >= mt_rand(1,100))
@@ -1297,7 +1297,7 @@ while ($key > 0) :
 					{
 						$my_prize = makeMagicItem($treasure_level,$loot_size,0,$x_game,$x_extra,$x_cut);
 					}
-					$my_list_of_wonders = $my_prize . "^" . $room . "^" . $dvary[vkey] . "___" . $my_list_of_wonders;
+					$my_list_of_wonders = $my_prize . "^" . $room . "^" . $dvary['vkey'] . "___" . $my_list_of_wonders;
 				}
 				else { $my_prize = makeNiceItem($loot_size,$x_cut,$x_game); }
 				echo $my_prize . "<br>";
@@ -1366,7 +1366,7 @@ while ($key > 0) :
 
 	if ($furniture[2] != "") // IS THERE ODDBALL STUFF IN/ON THE FURNITURE
 	{
-		$fill_shelf = explode("#", $furniture[2]);
+		$fill_shelf = explode("#", (string) $furniture[2]);
 		$fill_shelf_n = count($fill_shelf);
 		$fs = 0;
 
@@ -1442,7 +1442,7 @@ while ($key > 0) :
 			$res = mysqli_query( $connection, $qry ); /*qry*/
 			$ary = mysqli_fetch_assoc($res);
 
-			if ($ary[name] != "ENCOUNTER")
+			if ($ary['name'] != "ENCOUNTER")
 			{
 				$show_detail_monster_info = 1;
 				if (($x_game == "Tunnels & Trolls 5th Edition") || ($x_game == "Tunnels & Trolls 7th Edition") || ($x_game == "Tunnels & Trolls Deluxe")){ if ($do_not_show_creatures == 1){$skip_the_num_appearing = 1;} $show_detail_monster_info = $x_describe; include("functions/stat_blocks.php"); $skip_the_num_appearing = 0;}
@@ -1453,21 +1453,21 @@ while ($key > 0) :
 				if ($do_not_show_creatures != 1)
 				{
 					if ($x_hit_dice == 0){$x_hit_dice = $tt_dice;}
-					echo calculateLife($x_level,$x_characters,$ary[m_app_min],$ary[m_app_max],$ary[m_hp_min],$ary[m_hp_max],$ary[m_hp_mod],$x_game,$my_mr_is,$x_hit_dice,$tt_adds,$tt_vary,$how_many_monsters) . "<br>";
+					echo calculateLife($x_level,$x_characters,$ary['m_app_min'],$ary['m_app_max'],$ary['m_hp_min'],$ary['m_hp_max'],$ary['m_hp_mod'],$x_game,$my_mr_is,$x_hit_dice,$tt_adds,$tt_vary,$how_many_monsters) . "<br>";
 				}
 
-				$cmd_villain = $cmd_villain . " AND id!= " . $ary[id];
+				$cmd_villain = $cmd_villain . " AND id!= " . $ary['id'];
 
-				if ($ary[difficulty] > $level_of_monster){$level_of_monster = $ary[difficulty];}
+				if ($ary['difficulty'] > $level_of_monster){$level_of_monster = $ary['difficulty'];}
 				if ($x_rich > 0)
 				{
-					if ($ary[m_hoard] == 3){$xx_hord = 50;} else if ($ary[m_hoard] == 2){$xx_hord = 90;} else if ($ary[m_hoard] == 1){$xx_hord = 70;}
-					if (($ary[m_hoard] > 0) && ($x_l_c > 0)){$level_of_monster = $xx_hord + $x_l_c;}
+					if ($ary['m_hoard'] == 3){$xx_hord = 50;} else if ($ary['m_hoard'] == 2){$xx_hord = 90;} else if ($ary['m_hoard'] == 1){$xx_hord = 70;}
+					if (($ary['m_hoard'] > 0) && ($x_l_c > 0)){$level_of_monster = $xx_hord + $x_l_c;}
 				}
 			}
 			else
 			{
-				echo "ENCOUNTER:&nbsp;" . $ary[description] . "<br>";
+				echo "ENCOUNTER:&nbsp;" . $ary['description'] . "<br>";
 			}
 
 	    endwhile;
@@ -1486,7 +1486,7 @@ while ($key > 0) :
 		echo "<hr align='center' size='1'>";
 
 	    while ($max_of_traps > 0) :
-		$this_trap = trapMaker($x_level,room,$x_game,$x_extra,$x_undead);
+		$this_trap = trapMaker($x_level,'room',$x_game,$x_extra,$x_undead);
 		if (mt_rand(1,100) <= $roll_for_trap){ echo $this_trap[0] . "<br>"; }
 		$min_of_traps = $min_of_traps - 1;
 			if ($min_of_traps > 0){$roll_for_trap = 100;}
@@ -1505,7 +1505,7 @@ while ($key > 0) :
 
 	if ($furniture[1] != "") // WHERE TO HIDE TREASURE
 	{
-		$fill_shelf = explode("#", $furniture[1]);
+		$fill_shelf = explode("#", (string) $furniture[1]);
 		$fill_shelf_n = count($fill_shelf);
 		$fs = 0;
 
@@ -1537,7 +1537,7 @@ while ($key > 0) :
 
 	if ($x_rigged_chance >= mt_rand(1,100))
 	{
-		$picked_trap = trapMaker($treasure_level,box,$x_game,$x_extra,$x_undead);
+		$picked_trap = trapMaker($treasure_level,'box',$x_game,$x_extra,$x_undead);
 		$treasure_chest = substr($treasure_chest, 0, -5) . ".<br><b>TRAPPED:</b>&nbsp;" . $picked_trap[0] . "<br>";
 	}
 
@@ -1569,7 +1569,7 @@ while ($key > 0) :
 				{
 					if ($x_rigged_chance >= mt_rand(1,100))
 					{
-						$picked_trap = trapMaker($treasure_level,item,$x_game,$x_extra,$x_undead);
+						$picked_trap = trapMaker($treasure_level,'item',$x_game,$x_extra,$x_undead);
 						$trap_zap = "-&nbsp;TRAPPED:&nbsp;" . $picked_trap[0];
 					}
 					else
@@ -1584,12 +1584,12 @@ while ($key > 0) :
 			}
 			if (mt_rand(1,100) <= $roll_for_loot){
 				if ($bags_of_coins > 0){$ghrz = 91;} else {$ghrz = 1;}
-				$my_reward = mt_rand($ghrz,100);
+				$my_reward = mt_rand($ghrz, max((int)($ghrz), (int)(100)));
 				if ($my_reward < 91)
 				{
 					$my_prize = currencyBuilder($treasure_level,$loot_size,0,$x_cut,1,$x_game);
 
-					if (mt_rand(1,$rarecash) == 1)
+					if (mt_rand(1, max((int)(1), (int)($rarecash))) == 1)
 					{
 						$other_coins = mt_rand(1,3);
 						$other_coin = "";
@@ -1605,8 +1605,8 @@ while ($key > 0) :
 					}
 					$bags_of_coins = 1;
 				}
-				else if ($my_reward < 96){$my_prize = "GEMS&nbsp;[" . mt_rand(1,3) . " each]:&nbsp;" . ucwords(gemCreator($x_cut));}
-				else if ($my_reward < 98){$my_prize = "JEWELRY:&nbsp;" . ucwords(jewelCreator($x_cut));}
+				else if ($my_reward < 96){$my_prize = "GEMS&nbsp;[" . mt_rand(1,3) . " each]:&nbsp;" . ucwords((string) gemCreator($x_cut));}
+				else if ($my_reward < 98){$my_prize = "JEWELRY:&nbsp;" . ucwords((string) jewelCreator($x_cut));}
 				else if ($x_low_magic >= mt_rand(1,100))
 				{
 					if ($x_whichmagic >= mt_rand(1,100))
@@ -1617,7 +1617,7 @@ while ($key > 0) :
 					{
 						$my_prize = makeMagicItem($treasure_level,$loot_size,0,$x_game,$x_extra,$x_cut);
 					}
-					$my_list_of_wonders = $my_prize . "^" . $room . "^" . $dvary[vkey] . "___" . $my_list_of_wonders;
+					$my_list_of_wonders = $my_prize . "^" . $room . "^" . $dvary['vkey'] . "___" . $my_list_of_wonders;
 				}
 				else { $my_prize = makeNiceItem($loot_size,$x_cut,$x_game); }
 				echo $my_prize . " " . $chest . "<br>";
@@ -1630,12 +1630,12 @@ while ($key > 0) :
 			{
 				if ($sayit != 1){if ($hide_it > 0){echo "<hr align='center' size='1'>";} echo $treasure_chest; $sayit = 1;}	
 				if ($sack_of_coins > 0){$ghrz = 91;} else {$ghrz = 1;}
-				$my_reward = mt_rand($ghrz,100);
+				$my_reward = mt_rand($ghrz, max((int)($ghrz), (int)(100)));
 				if ($my_reward < 91)
 				{
 					$my_prize = currencyBuilder($treasure_level,$loot_size,1,$x_cut,1,$x_game);
 
-					if (mt_rand(1,$rarecash) == 1)
+					if (mt_rand(1, max((int)(1), (int)($rarecash))) == 1)
 					{
 						$other_coins = mt_rand(1,3);
 						$other_coin = "";
@@ -1651,8 +1651,8 @@ while ($key > 0) :
 					}
 					$sack_of_coins = 1;
 				}
-				else if ($my_reward < 96){$my_prize = "GEMS&nbsp;[" . mt_rand(1,3) . " each]:&nbsp;" . ucwords(gemCreator($x_cut));}
-				else if ($my_reward < 98){$my_prize = "JEWELRY:&nbsp;" . ucwords(jewelCreator($x_cut));}
+				else if ($my_reward < 96){$my_prize = "GEMS&nbsp;[" . mt_rand(1,3) . " each]:&nbsp;" . ucwords((string) gemCreator($x_cut));}
+				else if ($my_reward < 98){$my_prize = "JEWELRY:&nbsp;" . ucwords((string) jewelCreator($x_cut));}
 				else if ($x_low_magic >= mt_rand(1,100))
 				{
 					if ($x_whichmagic >= mt_rand(1,100))
@@ -1663,7 +1663,7 @@ while ($key > 0) :
 					{
 						$my_prize = makeMagicItem($treasure_level,$loot_size,0,$x_game,$x_extra,$x_cut);
 					}
-					$my_list_of_wonders = $my_prize . "^" . $room . "^" . $dvary[vkey] . "___" . $my_list_of_wonders;
+					$my_list_of_wonders = $my_prize . "^" . $room . "^" . $dvary['vkey'] . "___" . $my_list_of_wonders;
 				}
 				else { $my_prize = makeNiceItem($loot_size,$x_cut,$x_game); }
 				echo $my_prize . "<br>";
@@ -1704,14 +1704,14 @@ echo "<div style='page-break-after: always; height:1px;'>&nbsp;</div>";
 
 			while ($ary=mysqli_fetch_assoc($res)) :
 
-				if ($ary[name] != "ENCOUNTER")
+				if ($ary['name'] != "ENCOUNTER")
 				{
 					$show_detail_monster_info = $x_describe;
 					include("functions/stat_blocks.php");
 				}
 				else
 				{
-					$monster_info = $ary[description];
+					$monster_info = $ary['description'];
 				}
 
 				if ($make_enc > 0)

@@ -102,9 +102,9 @@ if ($map_to_make_here == "normal_delve_map") ///////////////////////////////////
 				}
 			}
 
-			$grids = explode("_", $tile[coord]);
+			$grids = explode("_", $tile['coord']);
 		?>
-			<td style="background: url(maps/<?php echo $tile[image]; ?>) no-repeat 0 0;" height="<?php echo $x; ?>" width="<?php echo $y; ?>">
+			<td style="background: url(maps/<?php echo $tile['image']; ?>) no-repeat 0 0;" height="<?php echo $x; ?>" width="<?php echo $y; ?>">
 
 				<table border="0" cellpadding="0" cellspacing="0" width="100%" height="100%">
 
@@ -224,9 +224,9 @@ else if ($map_to_make_here == "normal_hex_map") ////////////////////////////////
 				}
 			}
 
-			$grids = explode("_", $tile[coord]);
+			$grids = explode("_", $tile['coord']);
 		?>
-			<td style="background: url(maps/<?php echo $hx_tl_px . $tile[image]; ?>) no-repeat 0 0;" height="<?php echo $x; ?>" width="<?php echo $y; ?>">
+			<td style="background: url(maps/<?php echo $hx_tl_px . $tile['image']; ?>) no-repeat 0 0;" height="<?php echo $x; ?>" width="<?php echo $y; ?>">
 
 				<table border="0" cellpadding="0" cellspacing="0" width="100%" height="100%">
 
@@ -378,9 +378,9 @@ else if ($map_to_make_here == "normal_keep_map") ///////////////////////////////
 				}
 			}
 
-			$grids = explode("_", $tile[coord]);
+			$grids = explode("_", $tile['coord']);
 		?>
-			<td style="background: url(maps/<?php echo $tile[image]; ?>) no-repeat 0 0;" height="<?php echo $x; ?>" width="<?php echo $y; ?>">
+			<td style="background: url(maps/<?php echo $tile['image']; ?>) no-repeat 0 0;" height="<?php echo $x; ?>" width="<?php echo $y; ?>">
 
 				<table border="0" cellpadding="0" cellspacing="0" width="100%" height="100%">
 

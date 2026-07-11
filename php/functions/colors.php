@@ -52,44 +52,44 @@ function militaryColor()
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
 function fogColor()
 {
-	$color = array('dark', 'blue', 'gray', 'gray', 'gray', 'gray', 'green', 'red', 'brown', 'orange', 'yellow', 'purple', 'white', 'white', 'white', 'white');
+	$color = ['dark', 'blue', 'gray', 'gray', 'gray', 'gray', 'green', 'red', 'brown', 'orange', 'yellow', 'purple', 'white', 'white', 'white', 'white'];
 	return $color[mt_rand(0,15)];
 }
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
 function beamColor()
 {
-	$color = array('red', 'blue', 'green', 'orange', 'yellow', 'purple', 'white');
+	$color = ['red', 'blue', 'green', 'orange', 'yellow', 'purple', 'white'];
 	return $color[mt_rand(0,6)];
 }
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
 function candleColor($white)
 {
-	$color = array('black', 'blue', 'gray', 'green', 'red', 'brown', 'orange', 'yellow', 'purple', 'white');
+	$color = ['black', 'blue', 'gray', 'green', 'red', 'brown', 'orange', 'yellow', 'purple', 'white'];
 	if ($white == 1){$zn = 8;} else {$zn = 9;}
-	return $color[mt_rand(0,$zn)];
+	return $color[mt_rand(0, max((int)(0), (int)($zn)))];
 }
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
 function slimeColor()
 {
-	$color = array('dark', 'blue', 'gray', 'black', 'green', 'red', 'brown', 'orange', 'yellow', 'purple', 'clear', 'white');
+	$color = ['dark', 'blue', 'gray', 'black', 'green', 'red', 'brown', 'orange', 'yellow', 'purple', 'clear', 'white'];
 	return $color[mt_rand(0,11)];
 }
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
 function plainColor()
 {
-	$color = array('black', 'blue', 'gray', 'green', 'red', 'brown', 'orange', 'yellow', 'tan', 'purple', 'white', 'gold', 'silver', 'bronze', 'copper', 'platinum');
+	$color = ['black', 'blue', 'gray', 'green', 'red', 'brown', 'orange', 'yellow', 'tan', 'purple', 'white', 'gold', 'silver', 'bronze', 'copper', 'platinum'];
 	return $color[mt_rand(0,15)];
 }
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
 function leatherColor()
 {
-	$color = array('black', 'blue', 'gray', 'green', 'red', 'brown', 'brown', 'brown', 'brown', 'brown', 'brown', 'brown', 'brown', 'brown', 'orange', 'yellow', 'tan', 'purple', 'white');
+	$color = ['black', 'blue', 'gray', 'green', 'red', 'brown', 'brown', 'brown', 'brown', 'brown', 'brown', 'brown', 'brown', 'brown', 'orange', 'yellow', 'tan', 'purple', 'white'];
 	return $color[mt_rand(0,18)];
 }
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
 function designColor()
 {
-	$color = array('gold', 'silver', 'scarlet', 'amber', 'azure', 'emerald', 'indigo', 'ivory', 'jade', 'maroon', 'royal blue', 'violet');
+	$color = ['gold', 'silver', 'scarlet', 'amber', 'azure', 'emerald', 'indigo', 'ivory', 'jade', 'maroon', 'royal blue', 'violet'];
 	return $color[mt_rand(0,11)];
 }
 

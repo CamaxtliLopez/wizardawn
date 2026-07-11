@@ -91,8 +91,8 @@ echo "</head><body>";
 $x_amount = $_POST['x_amount'];
 $x_game = $_POST['x_game'];
 
-$ua = $_SESSION["SESSION_ADD_UA"] = $_POST['ua']+0;
-$aec = $_SESSION["SESSION_ADD_AEC"] = $_POST['aec']+0;
+$ua = $_SESSION["SESSION_ADD_UA"] = num($_POST['ua']);
+$aec = $_SESSION["SESSION_ADD_AEC"] = num($_POST['aec']);
 
 $x_potion = $_POST['x_potion'];
 $x_value1 = $_POST['x_value1'];
@@ -123,7 +123,7 @@ else if ($x_game == "BD&D"){ $bottom_notices = 13; }
 
 					$line = $line + 1;
 
-					if (($x_value1 > 0) && ($x_value2 > 0)){$gold = mt_rand($x_value1,$x_value2);} if ($gold < 1){$gold = 1;}
+					if (($x_value1 > 0) && ($x_value2 > 0)){$gold = mt_rand($x_value1, max((int)($x_value1), (int)($x_value2)));} if ($gold < 1){$gold = 1;}
 
 					echo "<tr>";
 					echo "<td NOWRAP width='40' style='border-bottom-style: solid; border-bottom-width: 1px'><font size='2'>" . $line ."</font></td>";
@@ -132,7 +132,7 @@ else if ($x_game == "BD&D"){ $bottom_notices = 13; }
 					{
 						if (($x_game == "OSRIC") || ($x_game == "Swords & Six-Siders") || ($x_game == "AD&D") || ($x_game == "BD&D") || ($x_game == "BFRPG") || ($x_game == "Swords & Wizardry") || ($x_game == "Labyrinth Lord")){ $brew = makeRPGmagic($x_game,1); }
 						else { $brew = bottlePicker() . " " . makeMagicItem(mt_rand(1,20),3,1,$x_game,0,100); $brew = strtolower($brew); }
-						echo "<td style='border-bottom-style: solid; border-bottom-width: 1px'><font size='2'>" . strtolower($brew) . "</font></td>";
+						echo "<td style='border-bottom-style: solid; border-bottom-width: 1px'><font size='2'>" . strtolower((string) $brew) . "</font></td>";
 						if ($x_value1 > 0){echo "<td NOWRAP width='60' align='right' style='border-bottom-style: solid; border-bottom-width: 1px'><font size='2'>Magic</font></td>";}
 					}
 					else

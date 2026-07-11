@@ -92,7 +92,7 @@ $map_numbers = $_POST['map_numbers']-1;
 $geomorphic_tiles = $geomorphs;
 $geomorphic_city = $geomorphs;
 $kingdom = $map_wide * $map_high;
-$place_castle = mt_rand(1,$kingdom);
+$place_castle = mt_rand(1, max((int)(1), (int)($kingdom)));
 	if (mt_rand(1,2) == 1){$place_castle = 0;}
 
 if ($map_type == "Keep")

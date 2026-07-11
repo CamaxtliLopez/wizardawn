@@ -78,7 +78,7 @@ $map_wide = $_POST['map_wide'];
 $map_high = $_POST['map_high'];
 $keyed = $_POST['keyed'];
 $map_numbers = $_POST['map_numbers']-1;
-$halls = $_POST['halls']+0;
+$halls = num($_POST['halls']);
 $geomorphic_tiles = $geomorphs;
 $map_type = "ruined city map";
 

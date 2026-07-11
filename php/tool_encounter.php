@@ -353,17 +353,17 @@ $program_user = $_POST['program_user'];	if ($program_user != 1){header("Location
 echo "</head><body>";
 
 $ttlvl = $_POST['x_ttlvl'];
-$tt_dice = $_POST['tt_dice']+0;
-$tt_adds = $_POST['tt_adds']+0;
+$tt_dice = num($_POST['tt_dice']);
+$tt_adds = num($_POST['tt_adds']);
 $tt_vary = 1;
 
-$ua = $_SESSION["SESSION_ADD_UA"] = $_POST['ua']+0;
-$aec = $_SESSION["SESSION_ADD_AEC"] = $_POST['aec']+0;
+$ua = $_SESSION["SESSION_ADD_UA"] = num($_POST['ua']);
+$aec = $_SESSION["SESSION_ADD_AEC"] = num($_POST['aec']);
 
 $x_whichmagic = $_POST['x_whichmagic'];
-$x_level = $_POST['x_level']+0;
-$x_cut = $_POST['x_cut']+0;
-$x_characters = $_POST['x_characters']+0;
+$x_level = num($_POST['x_level']);
+$x_cut = num($_POST['x_cut']);
+$x_characters = num($_POST['x_characters']);
 $x_oldway = $_POST['x_oldway']; // USED FOR T&T CLASSIC WEAPONS/ARMOR...OR THE SIMPLE WEAPONS/ARMOR
 	if ($x_oldway == 1){ $_SESSION['tt_easy_items'] = 1; } else { unset($_SESSION['tt_easy_items']); }
 $x_game = $_POST['x_package'];
@@ -396,7 +396,7 @@ $x_might2 = $_POST['x_might2'];
 	{
 		$bottom_notices = 5;
 		$genre = "Fantasy";
-		$x_hit_dice = $_POST['x_hit_dice']+0;
+		$x_hit_dice = num($_POST['x_hit_dice']);
 	}
 	else if ($x_game == "BFRPG")
 	{
@@ -488,22 +488,22 @@ while ($x_amount > 0) :
 			}
 			else
 			{
-				$tbox = "LOCATED IN A " . strtoupper(boxMakerRoom()) . " IS...<br>";
+				$tbox = "LOCATED IN A " . strtoupper((string) boxMakerRoom()) . " IS...<br>";
 			}
 			$loot_size = 3;
 			$loot_max = ceil($ary['difficulty']/2); if ($loot_max < 3){$loot_max = 2;} if ($loot_max > 10){$loot_max = 10;}
-			$max_of_loots = mt_rand(1,$loot_max);
+			$max_of_loots = mt_rand(1, max((int)(1), (int)($loot_max)));
 
 			while ($max_of_loots > 0) :
 
 				if ($sayit != 1){ echo $tbox; $sayit = 1; }	
 				if ($sack_of_coins > 0){$ghrz = 91;} else {$ghrz = 1;}
-				$my_reward = mt_rand($ghrz,100);
+				$my_reward = mt_rand($ghrz, max((int)($ghrz), (int)(100)));
 				if ($my_reward < 91)
 				{
 					$my_prize = currencyBuilder($treasure_level,$loot_size,1,$x_cut,1,$x_game);
 
-					if (mt_rand(1,$rarecash) == 1)
+					if (mt_rand(1, max((int)(1), (int)($rarecash))) == 1)
 					{
 						$other_coins = mt_rand(1,3);
 						$other_coin = "";
@@ -519,8 +519,8 @@ while ($x_amount > 0) :
 					}
 					$sack_of_coins = 1;
 				}
-				else if ($my_reward < 96){$my_prize = "GEMS&nbsp;[" . mt_rand(1,3) . " each]:&nbsp;" . ucwords(gemCreator($x_cut));}
-				else if ($my_reward < 98){$my_prize = "JEWELRY:&nbsp;" . ucwords(jewelCreator($x_cut));}
+				else if ($my_reward < 96){$my_prize = "GEMS&nbsp;[" . mt_rand(1,3) . " each]:&nbsp;" . ucwords((string) gemCreator($x_cut));}
+				else if ($my_reward < 98){$my_prize = "JEWELRY:&nbsp;" . ucwords((string) jewelCreator($x_cut));}
 				else if (80 >= mt_rand(1,100))
 				{
 					if ($x_whichmagic >= mt_rand(1,100))
@@ -554,7 +554,7 @@ while ($x_amount > 0) :
 		echo $monster_info . "<br>";
 
 		if ($x_game == "Mutant Future"){ $x_might1=$ary['m_hp_min']; $x_might2=$ary['m_hp_max']; }
-		echo PAcalculateLife($x_level,$x_characters,$x_game,$ary['hd'],$ary['difficulty'],$x_might1,$x_might2,area,0) . "<br>";
+		echo PAcalculateLife($x_level,$x_characters,$x_game,$ary['hd'],$ary['difficulty'],$x_might1,$x_might2,'area',0) . "<br>";
 
 		/// DO THE TREASURE ///
 		if ($x_loot > 0)
@@ -568,17 +568,17 @@ while ($x_amount > 0) :
 			}
 			else
 			{
-				$tbox = "LOCATED IN A " . strtoupper(PAboxMakerRoom($v_boxt)) . " IS...<br>";
+				$tbox = "LOCATED IN A " . strtoupper((string) PAboxMakerRoom($v_boxt)) . " IS...<br>";
 			}
 			$loot_size = 3;
 			$loot_max = ceil($ary['difficulty']/2); if ($loot_max < 3){$loot_max = 2;} if ($loot_max > 10){$loot_max = 10;}
-			$max_of_loots = mt_rand(1,$loot_max);
+			$max_of_loots = mt_rand(1, max((int)(1), (int)($loot_max)));
 
 			while ($max_of_loots > 0) :
 
 				if ($sayit != 1){ echo $tbox; $sayit = 1; }	
 				if ($sack_of_coins > 0){$ghrz = 91;} else {$ghrz = 1;}
-				$my_reward = mt_rand($ghrz,100);
+				$my_reward = mt_rand($ghrz, max((int)($ghrz), (int)(100)));
 				if ($my_reward < 91){$my_prize = PAcurrencyBuilder($treasure_level,$loot_size,1,$x_cut,1,$x_money,$x_mappack);	$sack_of_coins = 1;}
 				else if (80 >= mt_rand(1,100))
 				{
@@ -588,7 +588,7 @@ while ($x_amount > 0) :
 					else {$my_prize = makeBUItem($treasure_level,$loot_size,0);}
 					$my_list_of_wonders = $my_prize . "^" . $room . "___" . $my_list_of_wonders;
 				}
-				else {$my_prize = ucfirst(PAmakeNormalItem(1,1,$x_money,$v_tech,$x_game));}
+				else {$my_prize = ucfirst((string) PAmakeNormalItem(1,1,$x_money,$v_tech,$x_game));}
 					echo $my_prize . "<br>";
 
 			$max_of_loots = $max_of_loots - 1;

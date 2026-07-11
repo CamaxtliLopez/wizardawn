@@ -40,17 +40,17 @@ function PAstuffMakerRoom($line,$cash,$v_scare,$map,$game,$cut)
 	  }
 	  else
 	  {
-		  switch (mt_rand(0,$xg))
+		  switch (mt_rand(0, max((int)(0), (int)($xg))))
 		  {
-			case 0:		$stuff = mt_rand(2,8) . " " . conditionType(item) . "steel arrows";  if (mt_rand(1,2) == 1){$stuff = mt_rand(2,8) . " " . conditionType(item) . "steel crossbow bolts";}	break;
+			case 0:		$stuff = mt_rand(2,8) . " " . conditionType('item') . "steel arrows";  if (mt_rand(1,2) == 1){$stuff = mt_rand(2,8) . " " . conditionType('item') . "steel crossbow bolts";}	break;
 			case 1:		$stuff = "scattered ashes";														break;
 			case 2:		$stuff = "humanoid bones";	if (mt_rand(1,2) == 1){$stuff = "alien bones";}							break;
-			case 3:		$stuff = conditionType(jar) . " " . PAbottlePicker();											break;
-			case 4:		$stuff = mt_rand(2,5) . " foot long " . conditionType(iron) . "iron chain";								break;
-			case 5:		$stuff = conditionType(iron) . "metal club";												break;
+			case 3:		$stuff = conditionType('jar') . " " . PAbottlePicker();											break;
+			case 4:		$stuff = mt_rand(2,5) . " foot long " . conditionType('iron') . "iron chain";								break;
+			case 5:		$stuff = conditionType('iron') . "metal club";												break;
 			case 6:		$stuff = "splattered " . candleColor(0) . " liquid on the " . dungeonWall();															break;
 			case 7:		$stuff = "dents in the " . dungeonWall();												break;
-			case 8:		$stuff = conditionType(iron) . "knife handle";												break;
+			case 8:		$stuff = conditionType('iron') . "knife handle";												break;
 			case 9:		$stuff = "moisture on the " . dungeonWall();												break;
 			case 10:	$stuff = "blood smears on the " . dungeonWall();											break;
 			case 11:	$stuff = "liquid dripping from the ceiling";												break;
@@ -62,61 +62,61 @@ function PAstuffMakerRoom($line,$cash,$v_scare,$map,$game,$cut)
 			case 17:	$stuff = candleColor(0) . " fungus growing";														break;
 			case 18:	$stuff = "some piles of " . candleColor(0) . " rocks";														break;
 			case 19:	$stuff = "bits of fur and hair";													break;
-			case 20:	$stuff = conditionType(iron) . "metal probe";									break;
-			case 21:	$stuff = conditionType(iron) . "metal dented space helmet";									break;
-			case 22:	$stuff = mt_rand(2,5) . " foot long " . conditionType(iron) . "iron bar";								break;
-			case 23:	$stuff = "blunt " . conditionType(iron) . " scalpel";											break;
+			case 20:	$stuff = conditionType('iron') . "metal probe";									break;
+			case 21:	$stuff = conditionType('iron') . "metal dented space helmet";									break;
+			case 22:	$stuff = mt_rand(2,5) . " foot long " . conditionType('iron') . "iron bar";								break;
+			case 23:	$stuff = "blunt " . conditionType('iron') . " scalpel";											break;
 			case 24:	$stuff = "leather boot";							$loot_place = "inside"; 	$loot_size=1;		break;
 			case 25:	$stuff = "scattered medical tools";													break;
 			case 26:	$stuff = "areas with mold";														break;
-			case 27:	$stuff = "an odd " . conditionType(iron) . " metal tool";												break;
-			case 28:	$stuff = mt_rand(5,10) . " foot " . conditionType(iron) . "metal pole";									break;
+			case 27:	$stuff = "an odd " . conditionType('iron') . " metal tool";												break;
+			case 28:	$stuff = mt_rand(5,10) . " foot " . conditionType('iron') . "metal pole";									break;
 			case 29:	$stuff = "glass shards scattered around";												break;
-			case 30:	$stuff = conditionType(cloth) . "rags";													break;
-			case 31:	$stuff = mt_rand(10,50) . " foot " . conditionType(cloth) . " rope";									break;
+			case 30:	$stuff = conditionType('cloth') . "rags";													break;
+			case 31:	$stuff = mt_rand(10,50) . " foot " . conditionType('cloth') . " rope";									break;
 			case 32:	$stuff = "metal and glass scattered around";												break;
-			case 33:	$stuff = conditionType(item) . "" . PAbagCreator($map);				$loot_place = "inside"; 	$loot_size=1;		break;
+			case 33:	$stuff = conditionType('item') . "" . PAbagCreator($map);				$loot_place = "inside"; 	$loot_size=1;		break;
 			case 34:	$stuff = slimeColor() . " slime on the " . dungeonWall();										break;
-			case 35:	$stuff = mt_rand(2,8) . " " . conditionType(iron) . "" . steelMaker() . " spikes";							break;
+			case 35:	$stuff = mt_rand(2,8) . " " . conditionType('iron') . "" . steelMaker() . " spikes";							break;
 			case 36:	$stuff = mt_rand(2,8) . " pieces of strange ore scattered around";											break;
 			case 37:	$stuff = mt_rand(2,8) . " small glowing stones scattered around";										break;
 			case 38:	$stuff = "pile of " . mt_rand(5,20) . " dirty syringes";							break;
 			case 39:	$stuff = "bloody rags scattered around";													break;
-			case 40:	$stuff = conditionType(iron) . "alien sword blade";												break;
+			case 40:	$stuff = conditionType('iron') . "alien sword blade";												break;
 			case 41:	$stuff = "scattered bits of bones and teeth";												break;
-			case 42:	$stuff = conditionType(item) . "flashlight";													break;
+			case 42:	$stuff = conditionType('item') . "flashlight";													break;
 			case 43:	$stuff = "scratches and claw marks on the " . dungeonWall();										break;
-			case 44:	$stuff = "small puddle of " . conditionType(water) . "water";			$loot_place = "inside"; 	$loot_size=1;		break;
-			case 45:	$stuff = "large puddle of " . conditionType(water) . "water";			$loot_place = "inside"; 	$loot_size=2;		break;
-			case 46:	$stuff = "small " . conditionType(iron) . "" . steelMaker() . " hanging mirror";	$loot_place = "behind"; 	$loot_size=3;		break;
-			case 47:	$stuff = conditionType(iron) . "" . steelMaker() . " bone saw";
-			case 48:	$stuff = mt_rand(2,10) . " pieces of " . conditionType(iron) . "metal";									break;
+			case 44:	$stuff = "small puddle of " . conditionType('water') . "water";			$loot_place = "inside"; 	$loot_size=1;		break;
+			case 45:	$stuff = "large puddle of " . conditionType('water') . "water";			$loot_place = "inside"; 	$loot_size=2;		break;
+			case 46:	$stuff = "small " . conditionType('iron') . "" . steelMaker() . " hanging mirror";	$loot_place = "behind"; 	$loot_size=3;		break;
+			case 47:	$stuff = conditionType('iron') . "" . steelMaker() . " bone saw";
+			case 48:	$stuff = mt_rand(2,10) . " pieces of " . conditionType('iron') . "metal";									break;
 			case 49:	$stuff = AlienfurnitureMake() . " chair";													break;
 			case 50:	$stuff = AlienfurnitureMake() . " bed";			$loot_place = "under"; 		$loot_size=3;		break;
 			case 51:	$stuff = AlienfurnitureMake() . " bench";						$loot_place = "under"; 		$loot_size=3;		break;
 			case 52:	$stuff = AlienpaintingMaker(1);							$loot_place = "behind"; 	$loot_size=3;		break;
 			case 53:	$stuff = "box of odd " . candleColor(0) . " ore";															break;
-			case 54:	$stuff = conditionType(iron) . "metal bucket";			$loot_place = "inside"; 	$loot_size=1;		break;
+			case 54:	$stuff = conditionType('iron') . "metal bucket";			$loot_place = "inside"; 	$loot_size=1;		break;
 			case 55:	$stuff = AlienfurnitureMake() . " bunk bed";			$loot_place = "under"; 		$loot_size=3;		break;
 			case 56:	$stuff = carpetMaker(1);							$loot_place = "under"; 		$loot_size=3;		break;
 			case 57:	$stuff = mt_rand(2,10) . " " . candleColor(0) . " 1 inch glass orbs"; 															break;
 			case 58:	$stuff = AlienfurnitureMake() . " desk chair"; 						$loot_place = "under"; 		$loot_size=1;		break;
 			case 59:	$stuff = "padded " . AlienfurnitureMake() . " chair"; 				$loot_place = "under"; 		$loot_size=1;		break;
-			case 60:	$stuff = conditionType(cloth) . "" . candleColor(0) . " couch";			$loot_place = "under"; 		$loot_size=1;		break;
-			case 61:	$stuff = conditionType(cloth) . "" . candleColor(0) . " cushion";		$loot_place = "inside";		$loot_size=1;		break;
+			case 60:	$stuff = conditionType('cloth') . "" . candleColor(0) . " couch";			$loot_place = "under"; 		$loot_size=1;		break;
+			case 61:	$stuff = conditionType('cloth') . "" . candleColor(0) . " cushion";		$loot_place = "inside";		$loot_size=1;		break;
 			case 62:	$stuff = mt_rand(2,6) . " " . eggMaker();												break;
 			case 63:	$stuff = "metal can with 1 gallon of a " . candleColor(0) . " flammable liquid"; if (mt_rand(1,2) == 1){$stuff = "metal drum with 50 gallons of " . candleColor(0) . " flammable liquid";	$loot_place = "inside";	$loot_size=2;}		break;
 			case 64:	$stuff = "mounted alien animal head";					$loot_place = "inside"; 	$loot_size=1;		break;
-			case 65:	$stuff = conditionType(iron) . "book shelf"; 													break;
-			case 66:	$stuff = conditionType(cloth) . "mat"; 						$loot_place = "under"; 		$loot_size=3;		break;
-			case 67:	$stuff = conditionType(cloth) . "mattress"; 					$loot_place = "inside";		$loot_size=2;		break;
-			case 68:	$stuff = conditionType(iron) . "metal pail"; 			$loot_place = "inside";		$loot_size=1;		break;
+			case 65:	$stuff = conditionType('iron') . "book shelf"; 													break;
+			case 66:	$stuff = conditionType('cloth') . "mat"; 						$loot_place = "under"; 		$loot_size=3;		break;
+			case 67:	$stuff = conditionType('cloth') . "mattress"; 					$loot_place = "inside";		$loot_size=2;		break;
+			case 68:	$stuff = conditionType('iron') . "metal pail"; 			$loot_place = "inside";		$loot_size=1;		break;
 			case 69:	$stuff = candleColor(0) . " plastic pallet";					$loot_place = "under"; 		$loot_size=3;		break;
 			case 70:	$stuff = AlienfurnitureMake() . " pedestal"; 		$loot_trap=1;		$loot_place = "on top of";	$loot_size=3;		break;
 			case 71:	$torches = mt_rand(5,10); $stuff = $torches . " light bulbs on the ceiling held...but only " . ceil($torches/mt_rand(2,4)) . " of them are still useable";	break;
-			case 72:	$stuff = conditionType(cloth) . "" . candleColor(0) . " sheet"; 									break;
+			case 72:	$stuff = conditionType('cloth') . "" . candleColor(0) . " sheet"; 									break;
 			case 73:	$stuff = AlienfurnitureMake() . " shelf"; 						$loot_place = "on top of";	$loot_size=3;		break;
-			case 74:	$stuff = conditionType(iron) . "detached hatch lid";									break;
+			case 74:	$stuff = conditionType('iron') . "detached hatch lid";									break;
 			case 75:	$stuff = "high " . AlienfurnitureMake() . " stool"; 												break;
 			case 76:	$stuff = AlienfurnitureMake() . " stool";										break;
 			case 77:	$stuff = sizeMake() . " " . AlienfurnitureMake() . " table";				$loot_place = "under";		$loot_size=3;		break;
@@ -127,62 +127,62 @@ function PAstuffMakerRoom($line,$cash,$v_scare,$map,$game,$cut)
 			case 82:	$stuff = AlienfurnitureMake() . " drawers " . PAclosetFiller(10,1);	$loot_place = "inside"; $loot_size=2;	break;
 			case 83:	$stuff = AlienfurnitureMake() . " clothes cabinet " . PAclosetFiller(10,1);	$loot_place = "inside"; $loot_size=3;	break;
 			case 84:	$stuff = "broken metal food plate";										break;
-			case 85:	$stuff = mt_rand(2,10) . " " . conditionType(iron) . "metal coat hooks on the wall";						break;
+			case 85:	$stuff = mt_rand(2,10) . " " . conditionType('iron') . "metal coat hooks on the wall";						break;
 			case 86:	$stuff = "shredded and torn clothing";													break;
 			case 87:	$stuff = mt_rand(2,10) . " bandages";	if (mt_rand(1,2) == 1){$stuff = mt_rand(2,10) . " bloody bandages";}				break;
-			case 88:	$stuff = conditionType(iron) . " metal trash can";		$loot_place = "inside";		$loot_size=3;		break;
+			case 88:	$stuff = conditionType('iron') . " metal trash can";		$loot_place = "inside";		$loot_size=3;		break;
 			case 89:	$stuff = "broken " . candleColor(0) . " key card";									break;
 			case 90:	$stuff = AlienfurnitureMake() . " basin";					$loot_place = "inside"; 	$loot_size=2;		break;
 			case 91:	$stuff = AlienfurnitureMake() . " bowl";										break;
-			case 92:	$stuff = conditionType(wood) . "whip";													break;
+			case 92:	$stuff = conditionType('wood') . "whip";													break;
 			case 93:	$stuff = AlienfurnitureMake() . " brush";										break;
 			case 94:	$stuff = cageMaker();									$loot_place = "inside"; $loot_size=3;		break;
-			case 95:	$stuff = "small " . conditionType(iron) . "metal bell";									break;
+			case 95:	$stuff = "small " . conditionType('iron') . "metal bell";									break;
 			case 96:	$stuff = PApreciousChooser() . " candle stick worth " . mt_rand(2,100) . " " . $cash;						break;
-			case 97:	$stuff = conditionType(iron) . "cane";										break;
-			case 98:	$stuff = conditionType(iron) . "pliers";										break;
-			case 99:	$stuff = conditionType(iron) . "metal drawer";	$loot_trap=1;	$loot_place = "inside";		$loot_size=1;		break;
+			case 97:	$stuff = conditionType('iron') . "cane";										break;
+			case 98:	$stuff = conditionType('iron') . "pliers";										break;
+			case 99:	$stuff = conditionType('iron') . "metal drawer";	$loot_trap=1;	$loot_place = "inside";		$loot_size=1;		break;
 			case 100:	$stuff = bottlePicker() . " of water";												break;
 			case 101:	$stuff = PAGemMaker($cut,$cash); break;
-			case 102:	$stuff = conditionType(cloth) . "" . candleColor(0) . " blanket";									break;
-			case 103:	$stuff = conditionType(iron) . "metal dented space helmet with an " . AlienheadoffMaker() . " still in it";				break;
+			case 102:	$stuff = conditionType('cloth') . "" . candleColor(0) . " blanket";									break;
+			case 103:	$stuff = conditionType('iron') . "metal dented space helmet with an " . AlienheadoffMaker() . " still in it";				break;
 			case 104:	$stuff = mt_rand(2,10) . "0 feet of " . candleColor(0) . " string";									break;
-			case 105:	$stuff = conditionType(cloth) . "" . candleColor(0) . " pillow";		$loot_place = "inside"; 	$loot_size=2;		break;
+			case 105:	$stuff = conditionType('cloth') . "" . candleColor(0) . " pillow";		$loot_place = "inside"; 	$loot_size=2;		break;
 			case 106:	$stuff = AlienashMaker();								$loot_place = "inside"; 	$loot_size=2;		break;
 			case 107:	$stuff = "a huge pile of various bones";					$loot_place = "inside";		$loot_size=3;		break;
 			case 108:	$stuff = "a large pile of moon rocks";							$loot_place = "inside"; 	$loot_size=3;		break;
-			case 109:	$stuff = conditionType(item) . "wall clock";												break;
+			case 109:	$stuff = conditionType('item') . "wall clock";												break;
 			case 110:	$stuff = AliencorpseMaker(). " " . PAmakeNormalItem(5,0,$cash,1,$game);				$loot_place = "on"; 		$loot_size=3;		break;
-			case 111:	$stuff = conditionType(iron) . "metal tea pot";										break;
-			case 112:	$stuff = conditionType(iron) . "metal knife";										break;
+			case 111:	$stuff = conditionType('iron') . "metal tea pot";										break;
+			case 112:	$stuff = conditionType('iron') . "metal knife";										break;
 			case 113:	$stuff = "a " . mt_rand(1,4) . " foot wide hole that is about " . mt_rand(2,8) . " feet deep";						break;
-			case 114:	$stuff = conditionType(cloth) . "" . candleColor(0) . " washcloth";									break;
+			case 114:	$stuff = conditionType('cloth') . "" . candleColor(0) . " washcloth";									break;
 			case 115:	$stuff = mt_rand(2,20) . " thumbtacks";															break;
-			case 116:	$stuff = "small " . conditionType(iron) . "metal mirror";								break;
-			case 117:	$stuff = conditionType(iron) . "metal mug";										break;
-			case 118:	$stuff = conditionType(iron) . "metal sewing needle";									break;
+			case 116:	$stuff = "small " . conditionType('iron') . "metal mirror";								break;
+			case 117:	$stuff = conditionType('iron') . "metal mug";										break;
+			case 118:	$stuff = conditionType('iron') . "metal sewing needle";									break;
 			case 119:	$stuff = "pile of dirt";							$loot_place = "inside"; 	$loot_size=3;		break;
-			case 120:	$stuff = conditionType(iron) . "metal dust pan";										break;
-			case 121:	$stuff = mt_rand(2,20) . " pieces of " . conditionType(paper) . " paper";	break;
-			case 122:	$stuff = conditionType(jar) . "glass pitcher";											break;
+			case 120:	$stuff = conditionType('iron') . "metal dust pan";										break;
+			case 121:	$stuff = mt_rand(2,20) . " pieces of " . conditionType('paper') . " paper";	break;
+			case 122:	$stuff = conditionType('jar') . "glass pitcher";											break;
 			case 123:	$stuff = mt_rand(2,10) . "0 feet of wire";												break;
-			case 124:	$stuff = mt_rand(2,4) . " foot long " . conditionType(iron) . "metal pipe";												break;
-			case 125:	$stuff = conditionType(iron) . "metal pot";			$loot_place = "inside"; 	$loot_size=1;		break;
+			case 124:	$stuff = mt_rand(2,4) . " foot long " . conditionType('iron') . "metal pipe";												break;
+			case 125:	$stuff = conditionType('iron') . "metal pot";			$loot_place = "inside"; 	$loot_size=1;		break;
 			case 126:	$stuff = "small bottle of " . candleColor(0) . " liquid";														break;
-			case 127:	$stuff = conditionType(item) . "ink pen";													break;
-			case 128:	$stuff = conditionType(iron) . "metal razor";									break;
+			case 127:	$stuff = conditionType('item') . "ink pen";													break;
+			case 128:	$stuff = conditionType('iron') . "metal razor";									break;
 			case 129:	$stuff = "some " . footprintMaker() . " in various spots";										break;
 			case 130:	$stuff = "a scattered alien chess-type set";												break;
-			case 131:	$stuff = conditionType(iron) . "metal tray";												break;
+			case 131:	$stuff = conditionType('iron') . "metal tray";												break;
 			case 132:	$stuff = mt_rand(2,20) . " hardened blobs of once melted glass"; if (mt_rand(1,2) == 1){$stuff = mt_rand(2,20) . " hardened blobs of once melted steel";}	break;								break;
-			case 133:	$stuff = conditionType(iron) . "metal spoon";										break;
-			case 134:	$stuff = conditionType(iron) . "metal pitcher";										break;
+			case 133:	$stuff = conditionType('iron') . "metal spoon";										break;
+			case 134:	$stuff = conditionType('iron') . "metal pitcher";										break;
 			case 135:	$stuff = candleColor(0) . " string (" . mt_rand(2,10) . "0 feet)";									break;
-			case 136:	$stuff = conditionType(iron) . "plaque";												break;
-			case 137:	$stuff = conditionType(cloth) . "" . candleColor(0) . " towel";										break;
+			case 136:	$stuff = conditionType('iron') . "plaque";												break;
+			case 137:	$stuff = conditionType('cloth') . "" . candleColor(0) . " towel";										break;
 			case 138:	$stuff = AliennormalWeapons(1,3);														break;
 			case 139:	$stuff = AliennormalArmor(1);														break;
-			case 140:	$stuff = conditionType(iron) . " locker " . PAmakeNormalItem(5,0,$cash,1,$game);	$loot_trap=1;	$loot_place = "inside"; 	$loot_size=3;	break;
+			case 140:	$stuff = conditionType('iron') . " locker " . PAmakeNormalItem(5,0,$cash,1,$game);	$loot_trap=1;	$loot_place = "inside"; 	$loot_size=3;	break;
 			case 141:	$stuff = candleColor(0) . " plastic keycard (can unlock " . mt_rand(1,10) . "0% of the containers/doors)";	break;
 			case 142:	$stuff = "a pack of " . mt_rand(2,8) . " batteries";	break;
 			case 143:	$stuff = "a box of " . mt_rand(10,30) . " bullets";		break;
@@ -196,15 +196,15 @@ function PAstuffMakerRoom($line,$cash,$v_scare,$map,$game,$cut)
 	  {
 	  switch (mt_rand(0,143))
 	  {
-		case 0:		$stuff = mt_rand(2,8) . " " . conditionType(item) . "arrows";  if (mt_rand(1,2) == 1){$stuff = mt_rand(2,8) . " " . conditionType(item) . "crossbow bolts";}	break;
+		case 0:		$stuff = mt_rand(2,8) . " " . conditionType('item') . "arrows";  if (mt_rand(1,2) == 1){$stuff = mt_rand(2,8) . " " . conditionType('item') . "crossbow bolts";}	break;
 		case 1:		$stuff = "scattered ashes";														break;
 		case 2:		$stuff = "humanoid bones";	if (mt_rand(1,2) == 1){$stuff = "animal bones";}							break;
-		case 3:		$stuff = conditionType(jar) . " " . PAbottlePicker();											break;
-		case 4:		$stuff = mt_rand(2,5) . " foot long " . conditionType(iron) . "iron chain";								break;
-		case 5:		$stuff = conditionType(wood) . "wooden club";												break;
+		case 3:		$stuff = conditionType('jar') . " " . PAbottlePicker();											break;
+		case 4:		$stuff = mt_rand(2,5) . " foot long " . conditionType('iron') . "iron chain";								break;
+		case 5:		$stuff = conditionType('wood') . "wooden club";												break;
 		case 6:		$stuff = "cobwebs";															break;
 		case 7:		$stuff = "cracks in the " . dungeonWall();												break;
-		case 8:		$stuff = conditionType(iron) . "knife handle";												break;
+		case 8:		$stuff = conditionType('iron') . "knife handle";												break;
 		case 9:		$stuff = "moisture on the " . dungeonWall();												break;
 		case 10:	$stuff = "blood smears on the " . dungeonWall();											break;
 		case 11:	$stuff = "liquid dripping from the ceiling";												break;
@@ -216,127 +216,127 @@ function PAstuffMakerRoom($line,$cash,$v_scare,$map,$game,$cut)
 		case 17:	$stuff = "fungus growing";														break;
 		case 18:	$stuff = "some piles of guano";														break;
 		case 19:	$stuff = "bits of fur and hair";													break;
-		case 20:	$stuff = conditionType(iron) . "" . steelMaker() . " hammer head";									break;
-		case 21:	$stuff = conditionType(iron) . "" . steelMaker() . " dented pot";									break;
-		case 22:	$stuff = mt_rand(2,5) . " foot long " . conditionType(iron) . "iron bar";								break;
-		case 23:	$stuff = "blunt " . conditionType(iron) . "spear head";											break;
+		case 20:	$stuff = conditionType('iron') . "" . steelMaker() . " hammer head";									break;
+		case 21:	$stuff = conditionType('iron') . "" . steelMaker() . " dented pot";									break;
+		case 22:	$stuff = mt_rand(2,5) . " foot long " . conditionType('iron') . "iron bar";								break;
+		case 23:	$stuff = "blunt " . conditionType('iron') . "spear head";											break;
 		case 24:	$stuff = "leather boot";							$loot_place = "inside"; 	$loot_size=1;		break;
 		case 25:	$stuff = "scattered leaves and twigs";													break;
 		case 26:	$stuff = "areas with mold";														break;
-		case 27:	$stuff = conditionType(wood) . "pick handle";												break;
-		case 28:	$stuff = mt_rand(5,10) . " foot " . conditionType(wood) . "wood pole";									break;
+		case 27:	$stuff = conditionType('wood') . "pick handle";												break;
+		case 28:	$stuff = mt_rand(5,10) . " foot " . conditionType('wood') . "wood pole";									break;
 		case 29:	$stuff = "glass shards scattered around";												break;
-		case 30:	$stuff = conditionType(cloth) . "rags";													break;
-		case 31:	$stuff = mt_rand(10,50) . " foot " . conditionType(cloth) . " rope";									break;
+		case 30:	$stuff = conditionType('cloth') . "rags";													break;
+		case 31:	$stuff = mt_rand(10,50) . " foot " . conditionType('cloth') . " rope";									break;
 		case 32:	$stuff = "rubble and dirt scattered around";												break;
-		case 33:	$stuff = conditionType(item) . "" . PAbagCreator($map);				$loot_place = "inside"; 	$loot_size=1;		break;
+		case 33:	$stuff = conditionType('item') . "" . PAbagCreator($map);				$loot_place = "inside"; 	$loot_size=1;		break;
 		case 34:	$stuff = slimeColor() . " slime on the " . dungeonWall();										break;
-		case 35:	$stuff = mt_rand(2,8) . " " . conditionType(iron) . "" . steelMaker() . " spikes";							break;
+		case 35:	$stuff = mt_rand(2,8) . " " . conditionType('iron') . "" . steelMaker() . " spikes";							break;
 		case 36:	$stuff = mt_rand(2,8) . " sticks scattered around";											break;
 		case 37:	$stuff = mt_rand(2,8) . " small stones scattered around";										break;
 		case 38:	$stuff = "pile of straw";							$loot_place = "inside"; 	$loot_size=3;		break;
 		case 39:	$stuff = "straw scattered around";													break;
-		case 40:	$stuff = conditionType(iron) . "sword blade";												break;
+		case 40:	$stuff = conditionType('iron') . "sword blade";												break;
 		case 41:	$stuff = "scattered bits of bones and teeth";												break;
-		case 42:	$stuff = conditionType(item) . "torch";													break;
+		case 42:	$stuff = conditionType('item') . "torch";													break;
 		case 43:	$stuff = "scratches and claw marks on the " . dungeonWall();										break;
-		case 44:	$stuff = "small puddle of " . conditionType(water) . "water";			$loot_place = "inside"; 	$loot_size=1;		break;
-		case 45:	$stuff = "large puddle of " . conditionType(water) . "water";			$loot_place = "inside"; 	$loot_size=2;		break;
-		case 46:	$stuff = "small " . conditionType(iron) . "" . steelMaker() . " hanging mirror";$loot_place = "behind"; 	$loot_size=3;		break;
-		case 47:	$stuff = conditionType(iron) . "" . steelMaker() . " hand saw";		break;
-		case 48:	$stuff = mt_rand(2,10) . " pieces of " . conditionType(wood) . "wood";									break;
+		case 44:	$stuff = "small puddle of " . conditionType('water') . "water";			$loot_place = "inside"; 	$loot_size=1;		break;
+		case 45:	$stuff = "large puddle of " . conditionType('water') . "water";			$loot_place = "inside"; 	$loot_size=2;		break;
+		case 46:	$stuff = "small " . conditionType('iron') . "" . steelMaker() . " hanging mirror";$loot_place = "behind"; 	$loot_size=3;		break;
+		case 47:	$stuff = conditionType('iron') . "" . steelMaker() . " hand saw";		break;
+		case 48:	$stuff = mt_rand(2,10) . " pieces of " . conditionType('wood') . "wood";									break;
 		case 49:	$stuff = PAfurnitureMake() . " chair";													break;
-		case 50:	$stuff = conditionType(wood) . "" . woodenType() . " bed";			$loot_place = "under"; 		$loot_size=3;		break;
+		case 50:	$stuff = conditionType('wood') . "" . woodenType() . " bed";			$loot_place = "under"; 		$loot_size=3;		break;
 		case 51:	$stuff = PAfurnitureMake() . " bench";						$loot_place = "under"; 		$loot_size=3;		break;
 		case 52:	$stuff = PApaintingMaker(1);							$loot_place = "behind"; 	$loot_size=3;		break;
 		case 53:	$stuff = "charcoal";															break;
-		case 54:	$stuff = conditionType(iron) . "" . steelMaker() . " bucket";			$loot_place = "inside"; 	$loot_size=1;		break;
-		case 55:	$stuff = conditionType(wood) . "" . woodenType() . " bunk bed";			$loot_place = "under"; 		$loot_size=3;		break;
+		case 54:	$stuff = conditionType('iron') . "" . steelMaker() . " bucket";			$loot_place = "inside"; 	$loot_size=1;		break;
+		case 55:	$stuff = conditionType('wood') . "" . woodenType() . " bunk bed";			$loot_place = "under"; 		$loot_size=3;		break;
 		case 56:	$stuff = carpetMaker(1);							$loot_place = "under"; 		$loot_size=3;		break;
 		case 57:	$stuff = mt_rand(2,10) . " sand bags"; 															break;
 		case 58:	$stuff = PAfurnitureMake() . " desk chair"; 						$loot_place = "under"; 		$loot_size=1;		break;
 		case 59:	$stuff = "padded " . PAfurnitureMake() . " chair"; 				$loot_place = "under"; 		$loot_size=1;		break;
-		case 60:	$stuff = conditionType(cloth) . "" . candleColor(0) . " couch";			$loot_place = "under"; 		$loot_size=1;		break;
-		case 61:	$stuff = conditionType(cloth) . "" . candleColor(0) . " cushion";		$loot_place = "inside";		$loot_size=1;		break;
+		case 60:	$stuff = conditionType('cloth') . "" . candleColor(0) . " couch";			$loot_place = "under"; 		$loot_size=1;		break;
+		case 61:	$stuff = conditionType('cloth') . "" . candleColor(0) . " cushion";		$loot_place = "inside";		$loot_size=1;		break;
 		case 62:	$stuff = mt_rand(2,6) . " " . eggMaker();												break;
 		case 63:	$stuff = "metal gas can with 1 gallon of gasoline"; if (mt_rand(1,2) == 1){$stuff = "metal drum with 50 gallons of gasoline";	$loot_place = "inside";	$loot_size=2;}		break;
 		case 64:	$stuff = "mounted " . PAheadMount() . " head";					$loot_place = "inside"; 	$loot_size=1;		break;
-		case 65:	$stuff = conditionType(wood) . "book shelf"; 													break;
-		case 66:	$stuff = conditionType(cloth) . "mat"; 						$loot_place = "under"; 		$loot_size=3;		break;
-		case 67:	$stuff = conditionType(cloth) . "mattress"; 					$loot_place = "inside";		$loot_size=2;		break;
-		case 68:	$stuff = conditionType(iron) . "" . steelMaker() . " pail"; 			$loot_place = "inside";		$loot_size=1;		break;
-		case 69:	$stuff = conditionType(wood) . "pallet";					$loot_place = "under"; 		$loot_size=3;		break;
+		case 65:	$stuff = conditionType('wood') . "book shelf"; 													break;
+		case 66:	$stuff = conditionType('cloth') . "mat"; 						$loot_place = "under"; 		$loot_size=3;		break;
+		case 67:	$stuff = conditionType('cloth') . "mattress"; 					$loot_place = "inside";		$loot_size=2;		break;
+		case 68:	$stuff = conditionType('iron') . "" . steelMaker() . " pail"; 			$loot_place = "inside";		$loot_size=1;		break;
+		case 69:	$stuff = conditionType('wood') . "pallet";					$loot_place = "under"; 		$loot_size=3;		break;
 		case 70:	$stuff = PAfurnitureMake() . " pedestal"; 		$loot_trap=1;		$loot_place = "on top of";	$loot_size=3;		break;
 		case 71:	$torches = mt_rand(5,10); $stuff = $torches . " light bulbs on the walls held in " . steelMaker() . " wall sconces...but only " . ceil($torches/mt_rand(2,4)) . " of them are still useable";	break;
-		case 72:	$stuff = conditionType(cloth) . "" . candleColor(0) . " sheet"; 									break;
+		case 72:	$stuff = conditionType('cloth') . "" . candleColor(0) . " sheet"; 									break;
 		case 73:	$stuff = PAfurnitureMake() . " shelf"; 						$loot_place = "on top of";	$loot_size=3;		break;
-		case 74:	$stuff = conditionType(iron) . "" . steelMaker() . " dented shield";									break;
+		case 74:	$stuff = conditionType('iron') . "" . steelMaker() . " dented shield";									break;
 		case 75:	$stuff = "high " . woodenType() . " stool"; 												break;
-		case 76:	$stuff = conditionType(wood) . "" . woodenType() . " stool";										break;
+		case 76:	$stuff = conditionType('wood') . "" . woodenType() . " stool";										break;
 		case 77:	$stuff = sizeMake() . " " . PAfurnitureMake() . " table";				$loot_place = "under";		$loot_size=3;		break;
 		case 78:	$stuff = PAfurnitureMake() . " television stand"; 						$loot_place = "behind";		$loot_size=3;		break;
 		case 79:	$stuff = PAfurnitureMake() . " hutch";						$loot_place = "inside"; 	$loot_size=3;		break;
 		case 80:	$stuff = PAfurnitureMake() . " filing cabinet";					$loot_place = "inside"; 	$loot_size=1;		break;
 		case 81:	$stuff = PAfurnitureMake() . " coffee table";					$loot_place = "under"; 		$loot_size=3;		break;
-		case 82:	$stuff = conditionType(wood) . "" . woodenType() . " drawers " . PAclosetFiller(10,1);	$loot_place = "inside"; $loot_size=2;	break;
-		case 83:	$stuff = conditionType(wood) . "" . woodenType() . " armoire " . PAclosetFiller(10,1);	$loot_place = "inside"; $loot_size=3;	break;
+		case 82:	$stuff = conditionType('wood') . "" . woodenType() . " drawers " . PAclosetFiller(10,1);	$loot_place = "inside"; $loot_size=2;	break;
+		case 83:	$stuff = conditionType('wood') . "" . woodenType() . " armoire " . PAclosetFiller(10,1);	$loot_place = "inside"; $loot_size=3;	break;
 		case 84:	$stuff = "broken dinner plate";										break;
-		case 85:	$stuff = mt_rand(2,10) . " " . conditionType(iron) . "" . steelMaker() . " coat hooks on the wall";						break;
+		case 85:	$stuff = mt_rand(2,10) . " " . conditionType('iron') . "" . steelMaker() . " coat hooks on the wall";						break;
 		case 86:	$stuff = "shredded and torn clothing";													break;
 		case 87:	$stuff = mt_rand(2,10) . " bandages";	if (mt_rand(1,2) == 1){$stuff = mt_rand(2,10) . " bloody bandages";}				break;
-		case 88:	$stuff = conditionType(iron) . "" . steelMaker() . " trash can";			$loot_size=3;		break;
+		case 88:	$stuff = conditionType('iron') . "" . steelMaker() . " trash can";			$loot_size=3;		break;
 		case 89:	$stuff = "fire pit";	if (mt_rand(1,2) == 1){$stuff = "fire pit with ashes";}	if (mt_rand(1,4) == 1){$stuff = "fire pit with wood";}	break;
-		case 90:	$stuff = conditionType(wood) . "basket";					$loot_place = "inside"; 	$loot_size=2;		break;
-		case 91:	$stuff = conditionType(iron) . "" . steelMaker() . " bowl";										break;
-		case 92:	$stuff = conditionType(wood) . "whip";													break;
-		case 93:	$stuff = conditionType(wood) . "" . woodenType() . " brush";										break;
+		case 90:	$stuff = conditionType('wood') . "basket";					$loot_place = "inside"; 	$loot_size=2;		break;
+		case 91:	$stuff = conditionType('iron') . "" . steelMaker() . " bowl";										break;
+		case 92:	$stuff = conditionType('wood') . "whip";													break;
+		case 93:	$stuff = conditionType('wood') . "" . woodenType() . " brush";										break;
 		case 94:	$stuff = cageMaker();									$loot_place = "inside"; $loot_size=3;		break;
-		case 95:	$stuff = conditionType(iron) . "" . steelMaker() . " small bell";									break;
+		case 95:	$stuff = conditionType('iron') . "" . steelMaker() . " small bell";									break;
 		case 96:	$stuff = PApreciousChooser() . " candle stick worth " . mt_rand(2,100) . " " . $cash;						break;
-		case 97:	$stuff = conditionType(wood) . "" . woodenType() . " cane";										break;
-		case 98:	$stuff = conditionType(iron) . "" . steelMaker() . " pliers";										break;
-		case 99:	$stuff = conditionType(wood) . "" . woodenType() . " drawer";	$loot_trap=1;	$loot_place = "inside";		$loot_size=1;		break;
+		case 97:	$stuff = conditionType('wood') . "" . woodenType() . " cane";										break;
+		case 98:	$stuff = conditionType('iron') . "" . steelMaker() . " pliers";										break;
+		case 99:	$stuff = conditionType('wood') . "" . woodenType() . " drawer";	$loot_trap=1;	$loot_place = "inside";		$loot_size=1;		break;
 		case 100:	$stuff = bottlePicker() . " of water";												break;
 		case 101:	$stuff = PApreciousChooser() . " music box worth " . mt_rand(2,100) . " " . $cash;	$loot_place = "inside";	$loot_size=1;		break;
-		case 102:	$stuff = conditionType(cloth) . "" . candleColor(0) . " blanket";									break;
-		case 103:	$stuff = conditionType(iron) . "" . steelMaker() . " dented helmet with a " . PAheadoffMaker() . " still in it";				break;
+		case 102:	$stuff = conditionType('cloth') . "" . candleColor(0) . " blanket";									break;
+		case 103:	$stuff = conditionType('iron') . "" . steelMaker() . " dented helmet with a " . PAheadoffMaker() . " still in it";				break;
 		case 104:	$stuff = mt_rand(2,10) . "0 feet of " . candleColor(0) . " yarn";									break;
-		case 105:	$stuff = conditionType(cloth) . "" . candleColor(0) . " pillow";		$loot_place = "inside"; 	$loot_size=2;		break;
+		case 105:	$stuff = conditionType('cloth') . "" . candleColor(0) . " pillow";		$loot_place = "inside"; 	$loot_size=2;		break;
 		case 106:	$stuff = PAashMaker();								$loot_place = "inside"; 	$loot_size=2;		break;
 		case 107:	$stuff = "a huge pile of various bones";					$loot_place = "inside";		$loot_size=3;		break;
 		case 108:	$stuff = "a large pile of rocks";							$loot_place = "inside"; 	$loot_size=3;		break;
-		case 109:	$stuff = conditionType(item) . "wall clock";												break;
+		case 109:	$stuff = conditionType('item') . "wall clock";												break;
 		case 110:	$stuff = PAcorpseMaker(). " " . PAmakeNormalItem(5,0,$cash,0,$game);				$loot_place = "on"; 		$loot_size=3;		break;
-		case 111:	$stuff = conditionType(iron) . "" . steelMaker() . " tea pot";										break;
-		case 112:	$stuff = conditionType(iron) . "" . steelMaker() . " knife";										break;
+		case 111:	$stuff = conditionType('iron') . "" . steelMaker() . " tea pot";										break;
+		case 112:	$stuff = conditionType('iron') . "" . steelMaker() . " knife";										break;
 		case 113:	$stuff = "a " . mt_rand(1,4) . " foot wide hole that is about " . mt_rand(2,8) . " feet deep";						break;
-		case 114:	$stuff = conditionType(cloth) . "" . candleColor(0) . " washcloth";									break;
+		case 114:	$stuff = conditionType('cloth') . "" . candleColor(0) . " washcloth";									break;
 		case 115:	$stuff = mt_rand(2,20) . " thumbtacks";															break;
-		case 116:	$stuff = "small " . conditionType(iron) . "" . steelMaker() . " mirror";								break;
-		case 117:	$stuff = conditionType(iron) . "" . steelMaker() . " mug";										break;
-		case 118:	$stuff = conditionType(iron) . "" . steelMaker() . " sewing needle";									break;
+		case 116:	$stuff = "small " . conditionType('iron') . "" . steelMaker() . " mirror";								break;
+		case 117:	$stuff = conditionType('iron') . "" . steelMaker() . " mug";										break;
+		case 118:	$stuff = conditionType('iron') . "" . steelMaker() . " sewing needle";									break;
 		case 119:	$stuff = "pile of dirt";							$loot_place = "inside"; 	$loot_size=3;		break;
-		case 120:	$stuff = conditionType(iron) . "" . steelMaker() . " pan";										break;
-		case 121:	$stuff = mt_rand(2,20) . " pieces of " . conditionType(paper) . " paper";	break;
-		case 122:	$stuff = conditionType(jar) . "glass pitcher";											break;
+		case 120:	$stuff = conditionType('iron') . "" . steelMaker() . " pan";										break;
+		case 121:	$stuff = mt_rand(2,20) . " pieces of " . conditionType('paper') . " paper";	break;
+		case 122:	$stuff = conditionType('jar') . "glass pitcher";											break;
 		case 123:	$stuff = mt_rand(2,10) . "0 feet of wire";												break;
-		case 124:	$stuff = conditionType(item) . "smoking pipe";												break;
-		case 125:	$stuff = conditionType(iron) . "" . steelMaker() . " pot";			$loot_place = "inside"; 	$loot_size=1;		break;
+		case 124:	$stuff = conditionType('item') . "smoking pipe";												break;
+		case 125:	$stuff = conditionType('iron') . "" . steelMaker() . " pot";			$loot_place = "inside"; 	$loot_size=1;		break;
 		case 126:	$stuff = "small bottle of cologne";														break;
-		case 127:	$stuff = conditionType(item) . "ink pen";													break;
-		case 128:	$stuff = conditionType(iron) . "" . steelMaker() . " rusty razor";									break;
+		case 127:	$stuff = conditionType('item') . "ink pen";													break;
+		case 128:	$stuff = conditionType('iron') . "" . steelMaker() . " rusty razor";									break;
 		case 129:	$stuff = "some " . footprintMaker() . " in various spots";										break;
 		case 130:	$stuff = "a scattered chess set";	if (mt_rand(1,2) == 1){$stuff = "an incomplete and scattered chess set";}			break;
-		case 131:	$stuff = conditionType(wood) . "wooden tray";												break;
+		case 131:	$stuff = conditionType('wood') . "wooden tray";												break;
 		case 132:	$stuff = mt_rand(2,20) . " hardened blobs of once melted " . steelMaker();								break;
-		case 133:	$stuff = conditionType(iron) . "" . steelMaker() . " spoon";										break;
-		case 134:	$stuff = conditionType(iron) . "" . steelMaker() . " pitcher";										break;
+		case 133:	$stuff = conditionType('iron') . "" . steelMaker() . " spoon";										break;
+		case 134:	$stuff = conditionType('iron') . "" . steelMaker() . " pitcher";										break;
 		case 135:	$stuff = candleColor(0) . " thread (" . mt_rand(2,10) . "0 feet)";									break;
-		case 136:	$stuff = conditionType(wood) . "plaque";												break;
-		case 137:	$stuff = conditionType(cloth) . "" . candleColor(0) . " towel";										break;
+		case 136:	$stuff = conditionType('wood') . "plaque";												break;
+		case 137:	$stuff = conditionType('cloth') . "" . candleColor(0) . " towel";										break;
 		case 138:	$stuff = PAnormalWeapons(1,3);														break;
 		case 139:	$stuff = PAnormalArmor(1);														break;
-		case 140:	$stuff = conditionType(iron) . " locker " . PAmakeNormalItem(5,0,$cash,0,$game);	$loot_trap=1;	$loot_place = "inside"; 	$loot_size=3;	break;
+		case 140:	$stuff = conditionType('iron') . " locker " . PAmakeNormalItem(5,0,$cash,0,$game);	$loot_trap=1;	$loot_place = "inside"; 	$loot_size=3;	break;
 		case 141:	$stuff = "a box of " . mt_rand(10,30) . " bullets";		break;
 		case 142:	$stuff = "a pack of " . mt_rand(2,8) . " batteries";	break;
 		case 143:	$stuff = PAGemMaker($cut,$cash); break;
@@ -345,7 +345,7 @@ function PAstuffMakerRoom($line,$cash,$v_scare,$map,$game,$cut)
 	}
 	if ($line > 0){$stuffing = ", " . $stuff;}
 	else {$stuffing = ". Throughout the " . $v_scare . " is...&nbsp;" . $stuff;}
-	return array($stuff, $loot_place, $loot_size, $loot_trap, $stuffing);
+	return [$stuff, $loot_place, $loot_size, $loot_trap, $stuffing];
 }
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
 function PAbottlePicker()
@@ -370,25 +370,25 @@ function PAbottlePicker()
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
 function PAfurnitureMake()
 {
-	$make = array('wooden', 'oak', 'metal', 'steel', 'maple', 'broken wood', 'rotting wood', 'warped wood', 'ruined wood', 'rusty metal');
+	$make = ['wooden', 'oak', 'metal', 'steel', 'maple', 'broken wood', 'rotting wood', 'warped wood', 'ruined wood', 'rusty metal'];
 	return $make[mt_rand(0,9)];
 }
 function AlienfurnitureMake()
 {
-	$make = array('hard plastic', 'strange metal', 'metal', 'steel', 'dented metal', 'rusty metal');
+	$make = ['hard plastic', 'strange metal', 'metal', 'steel', 'dented metal', 'rusty metal'];
 	return $make[mt_rand(0,5)];
 }
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
 function PAheadMount()
 {
-	$mount = array('bear', 'lion', 'tiger', 'deer', 'boar', 'tiger', 'polar bear', 'cougar', 'grizzly bear', 'deer', 'elk', 'moose', 'antelope');
+	$mount = ['bear', 'lion', 'tiger', 'deer', 'boar', 'tiger', 'polar bear', 'cougar', 'grizzly bear', 'deer', 'elk', 'moose', 'antelope'];
 	$mounted = $mount[mt_rand(0,12)];
 	return $mounted;
 }
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
 function PApreciousChooser()
 {
-	$value = array('copper', 'silver', 'gold', 'platinum', 'iron');
+	$value = ['copper', 'silver', 'gold', 'platinum', 'iron'];
 	return $value[mt_rand(0,4)];
 }
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -408,9 +408,9 @@ function PAheadoffMaker()
 	if (mt_rand(1,100) > 70){$value = "human";}
 	else
 	{
-		$name = array('aardvark', 'alligator', 'ant', 'anteater', 'antelope', 'ape', 'armadillo', 'baboon', 'badger', 'bat', 'bear', 'beaver', 'bee', 'beetle', 'boar', 'buffalo', 'bull', 'camel', 'cat', 'chameleon', 'cheetah', 'chicken', 'chimpanzee', 'chipmunk', 'cobra', 'cockroach', 'cougar', 'cow', 'coyote', 'crab', 'crane', 'cricket', 'crocodile', 'crow', 'deer', 'dog', 'dolphin', 'donkey', 'dragonfly', 'duck', 'eagle', 'eel', 'elephant', 'elk', 'falcon', 'ferret', 'fish', 'fly', 'fox', 'frog', 'gerbil', 'goat', 'gopher', 'gorilla', 'hare', 'hawk', 'hippopotamus', 'hornet', 'horse', 'hyena', 'iguana', 'jackal', 'jaguar', 'kangaroo', 'koala', 'leopard', 'lion', 'lizard', 'lobster', 'locust', 'mantis', 'mink', 'mole', 'monkey', 'moose', 'mosquito', 'mouse', 'mule', 'muskrat', 'opossum', 'ostrich', 'otter', 'owl', 'ox', 'panda', 'panther', 'parrot', 'pelican', 'penguin', 'platypus', 'porcupine', 'puma', 'rabbit', 'raccoon', 'ram', 'rat', 'raven', 'rhinoceros', 'salamander', 'scorpion', 'seahorse', 'seal', 'shark', 'skunk', 'snake', 'squid', 'squirrel', 'tick', 'tiger', 'toad', 'turkey', 'turtle', 'walrus', 'wasp', 'weasel', 'wolf', 'wolverine', 'woodchuck', 'worm', 'zebra');
+		$name = ['aardvark', 'alligator', 'ant', 'anteater', 'antelope', 'ape', 'armadillo', 'baboon', 'badger', 'bat', 'bear', 'beaver', 'bee', 'beetle', 'boar', 'buffalo', 'bull', 'camel', 'cat', 'chameleon', 'cheetah', 'chicken', 'chimpanzee', 'chipmunk', 'cobra', 'cockroach', 'cougar', 'cow', 'coyote', 'crab', 'crane', 'cricket', 'crocodile', 'crow', 'deer', 'dog', 'dolphin', 'donkey', 'dragonfly', 'duck', 'eagle', 'eel', 'elephant', 'elk', 'falcon', 'ferret', 'fish', 'fly', 'fox', 'frog', 'gerbil', 'goat', 'gopher', 'gorilla', 'hare', 'hawk', 'hippopotamus', 'hornet', 'horse', 'hyena', 'iguana', 'jackal', 'jaguar', 'kangaroo', 'koala', 'leopard', 'lion', 'lizard', 'lobster', 'locust', 'mantis', 'mink', 'mole', 'monkey', 'moose', 'mosquito', 'mouse', 'mule', 'muskrat', 'opossum', 'ostrich', 'otter', 'owl', 'ox', 'panda', 'panther', 'parrot', 'pelican', 'penguin', 'platypus', 'porcupine', 'puma', 'rabbit', 'raccoon', 'ram', 'rat', 'raven', 'rhinoceros', 'salamander', 'scorpion', 'seahorse', 'seal', 'shark', 'skunk', 'snake', 'squid', 'squirrel', 'tick', 'tiger', 'toad', 'turkey', 'turtle', 'walrus', 'wasp', 'weasel', 'wolf', 'wolverine', 'woodchuck', 'worm', 'zebra'];
 		$names = count($name)-1;
-		$value = "humanoid " . $name[mt_rand(0,$names)];
+		$value = "humanoid " . $name[mt_rand(0, max((int)(0), (int)($names)))];
 	}
 
 	$head = $look . " head of a " . $sex . " " . $value;
@@ -462,9 +462,9 @@ function PAcorpseMaker()
 	if (mt_rand(1,100) > 70){$value = "human";}
 	else
 	{
-		$name = array('aardvark', 'alligator', 'ant', 'anteater', 'antelope', 'ape', 'armadillo', 'baboon', 'badger', 'bat', 'bear', 'beaver', 'bee', 'beetle', 'boar', 'buffalo', 'bull', 'camel', 'cat', 'chameleon', 'cheetah', 'chicken', 'chimpanzee', 'chipmunk', 'cobra', 'cockroach', 'cougar', 'cow', 'coyote', 'crab', 'crane', 'cricket', 'crocodile', 'crow', 'deer', 'dog', 'dolphin', 'donkey', 'dragonfly', 'duck', 'eagle', 'eel', 'elephant', 'elk', 'falcon', 'ferret', 'fish', 'fly', 'fox', 'frog', 'gerbil', 'goat', 'gopher', 'gorilla', 'hare', 'hawk', 'hippopotamus', 'hornet', 'horse', 'hyena', 'iguana', 'jackal', 'jaguar', 'kangaroo', 'koala', 'leopard', 'lion', 'lizard', 'lobster', 'locust', 'mantis', 'mink', 'mole', 'monkey', 'moose', 'mosquito', 'mouse', 'mule', 'muskrat', 'opossum', 'ostrich', 'otter', 'owl', 'ox', 'panda', 'panther', 'parrot', 'pelican', 'penguin', 'platypus', 'porcupine', 'puma', 'rabbit', 'raccoon', 'ram', 'rat', 'raven', 'rhinoceros', 'salamander', 'scorpion', 'seahorse', 'seal', 'shark', 'skunk', 'snake', 'squid', 'squirrel', 'tick', 'tiger', 'toad', 'turkey', 'turtle', 'walrus', 'wasp', 'weasel', 'wolf', 'wolverine', 'woodchuck', 'worm', 'zebra');
+		$name = ['aardvark', 'alligator', 'ant', 'anteater', 'antelope', 'ape', 'armadillo', 'baboon', 'badger', 'bat', 'bear', 'beaver', 'bee', 'beetle', 'boar', 'buffalo', 'bull', 'camel', 'cat', 'chameleon', 'cheetah', 'chicken', 'chimpanzee', 'chipmunk', 'cobra', 'cockroach', 'cougar', 'cow', 'coyote', 'crab', 'crane', 'cricket', 'crocodile', 'crow', 'deer', 'dog', 'dolphin', 'donkey', 'dragonfly', 'duck', 'eagle', 'eel', 'elephant', 'elk', 'falcon', 'ferret', 'fish', 'fly', 'fox', 'frog', 'gerbil', 'goat', 'gopher', 'gorilla', 'hare', 'hawk', 'hippopotamus', 'hornet', 'horse', 'hyena', 'iguana', 'jackal', 'jaguar', 'kangaroo', 'koala', 'leopard', 'lion', 'lizard', 'lobster', 'locust', 'mantis', 'mink', 'mole', 'monkey', 'moose', 'mosquito', 'mouse', 'mule', 'muskrat', 'opossum', 'ostrich', 'otter', 'owl', 'ox', 'panda', 'panther', 'parrot', 'pelican', 'penguin', 'platypus', 'porcupine', 'puma', 'rabbit', 'raccoon', 'ram', 'rat', 'raven', 'rhinoceros', 'salamander', 'scorpion', 'seahorse', 'seal', 'shark', 'skunk', 'snake', 'squid', 'squirrel', 'tick', 'tiger', 'toad', 'turkey', 'turtle', 'walrus', 'wasp', 'weasel', 'wolf', 'wolverine', 'woodchuck', 'worm', 'zebra'];
 		$names = count($name)-1;
-		$value = "humanoid " . $name[mt_rand(0,$names)];
+		$value = "humanoid " . $name[mt_rand(0, max((int)(0), (int)($names)))];
 	}
 
 	if ($noun == "bones"){$body = $look . " " . $noun . " of a " . $value;}
@@ -523,8 +523,8 @@ function PAashMaker()
 	}
 	switch (mt_rand(0,3))
 	{
-		case 0:	$value = " with a " . conditionType(iron) . "" . steelMaker() . " helmet lying on top of it";		break;
-		case 1:	$value = " with a " . conditionType(cloth) . "" . $hat . " lying on top of it";	break;
+		case 0:	$value = " with a " . conditionType('iron') . "" . steelMaker() . " helmet lying on top of it";		break;
+		case 1:	$value = " with a " . conditionType('cloth') . "" . $hat . " lying on top of it";	break;
 		case 2:	$value = " with a " . PAnormalWeapons(1,3) . " next to it";							break;
 		case 3:	$value = " with a humanoid skull lying on top of it";							break;
 	}
@@ -546,7 +546,7 @@ function AlienashMaker()
 	}
 	switch (mt_rand(0,2))
 	{
-		case 0:	$value = " with a " . conditionType(iron) . "metal space helmet lying on top of it";		break;
+		case 0:	$value = " with a " . conditionType('iron') . "metal space helmet lying on top of it";		break;
 		case 1:	$value = " with a " . AliennormalWeapons(1,3) . " next to it";							break;
 		case 2:	$value = " with a humanoid skull lying on top of it";							break;
 	}
@@ -566,7 +566,7 @@ function PAnormalWeapons($condition,$size)
 		else if ($size == 2){$r_min=0; $r_max = 7;}
 		else {$r_min=0; $r_max = 15;}
 
-		switch (mt_rand($r_min,$r_max))
+		switch (mt_rand($r_min, max((int)($r_min), (int)($r_max))))
 		{
 			case 0:	$item = "small pistol";	break;
 			case 1:	$item = "medium pistol";	break;
@@ -596,7 +596,7 @@ function AliennormalWeapons($condition,$size)
 		else if ($size == 2){$r_min=0; $r_max = 7;}
 		else {$r_min=0; $r_max = 15;}
 
-		switch (mt_rand($r_min,$r_max))
+		switch (mt_rand($r_min, max((int)($r_min), (int)($r_max))))
 		{
 			case 0:	$item = "small beam pistol";	break;
 			case 1:	$item = "medium beam pistol";	break;
@@ -763,7 +763,7 @@ function PAmakeNormalItem($amount,$view,$cash,$tech,$game)
 {
 	if ($amount < 2){$amount = 1; $z = 1;} else {$z = 2;}
 
-	$amount = mt_rand($z,$amount);
+	$amount = mt_rand($z, max((int)($z), (int)($amount)));
 
 	while ($amount > 0) :
 
@@ -806,7 +806,7 @@ function PAmakeNormalItem($amount,$view,$cash,$tech,$game)
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
 function PAclosetFiller($amount,$where)
 {
-	$amount = mt_rand(2,$amount);
+	$amount = mt_rand(2, max((int)(2), (int)($amount)));
 
 	while ($amount > 0) :
 
@@ -898,7 +898,7 @@ function PAGemMaker($cut,$money)
 		}
 		$value = mt_rand(5,20) * 100;
 		$value = ceil($value*(0.01*$cut));
-		$rock = ucfirst($look) . " " . ucfirst(candleColor(0)) . " " . ucfirst($gem) . " (worth " . number_format($value) . " " . $money . ")";
+		$rock = ucfirst($look) . " " . ucfirst((string) candleColor(0)) . " " . ucfirst($gem) . " (worth " . number_format($value) . " " . $money . ")";
 	}
 	else
 	{
@@ -1016,16 +1016,16 @@ function PAGemMaker($cut,$money)
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
 function PAspecialMakerRoom($cut,$room,$game)
 {
-	$room = mt_rand(1,$room);
+	$room = mt_rand(1, max((int)(1), (int)($room)));
 
 	if (mt_rand(1,3) > 1)
 	{
-		$forms = array('aardvark', 'alligator', 'anteater', 'antelope', 'ape', 'armadillo', 'baboon', 'badger', 'bat', 'bear', 'beaver', 'boar', 'buffalo', 'bull', 'camel', 'cat', 'chameleon', 'cheetah', 'chicken', 'chimpanzee', 'chipmunk', 'cobra', 'cougar', 'cow', 'coyote', 'crab', 'crane', 'crocodile', 'crow', 'deer', 'dog', 'donkey', 'duck', 'eagle', 'elephant', 'elk', 'falcon', 'ferret', 'fox', 'frog', 'gerbil', 'giraffe', 'goat', 'gopher', 'gorilla', 'hamster', 'hare', 'hawk', 'hippopotamus', 'horse', 'hyena', 'iguana', 'jackal', 'jaguar', 'kangaroo', 'koala', 'lamb', 'leopard', 'lion', 'lizard', 'mink', 'mole', 'monkey', 'moose', 'mouse', 'mule', 'muskrat', 'opossum', 'ostrich', 'otter', 'owl', 'ox', 'panda', 'panther', 'parrot', 'pelican', 'penguin', 'pig', 'platypus', 'porcupine', 'puma', 'rabbit', 'raccoon', 'ram', 'rat', 'raven', 'rhinoceros', 'salamander', 'seal', 'sheep', 'skunk', 'snail', 'snake', 'squirrel', 'tiger', 'toad', 'turkey', 'turtle', 'walrus', 'weasel', 'wolf', 'wolverine', 'woodchuck', 'worm', 'zebra');
+		$forms = ['aardvark', 'alligator', 'anteater', 'antelope', 'ape', 'armadillo', 'baboon', 'badger', 'bat', 'bear', 'beaver', 'boar', 'buffalo', 'bull', 'camel', 'cat', 'chameleon', 'cheetah', 'chicken', 'chimpanzee', 'chipmunk', 'cobra', 'cougar', 'cow', 'coyote', 'crab', 'crane', 'crocodile', 'crow', 'deer', 'dog', 'donkey', 'duck', 'eagle', 'elephant', 'elk', 'falcon', 'ferret', 'fox', 'frog', 'gerbil', 'giraffe', 'goat', 'gopher', 'gorilla', 'hamster', 'hare', 'hawk', 'hippopotamus', 'horse', 'hyena', 'iguana', 'jackal', 'jaguar', 'kangaroo', 'koala', 'lamb', 'leopard', 'lion', 'lizard', 'mink', 'mole', 'monkey', 'moose', 'mouse', 'mule', 'muskrat', 'opossum', 'ostrich', 'otter', 'owl', 'ox', 'panda', 'panther', 'parrot', 'pelican', 'penguin', 'pig', 'platypus', 'porcupine', 'puma', 'rabbit', 'raccoon', 'ram', 'rat', 'raven', 'rhinoceros', 'salamander', 'seal', 'sheep', 'skunk', 'snail', 'snake', 'squirrel', 'tiger', 'toad', 'turkey', 'turtle', 'walrus', 'weasel', 'wolf', 'wolverine', 'woodchuck', 'worm', 'zebra'];
 		$form = $forms[mt_rand(0,104)];
 	}
 	else
 	{
-		$forms = array('ant', 'bee', 'beetle', 'cockroach', 'cricket', 'dragonfly', 'fly', 'hornet', 'locust', 'mantis', 'mosquito', 'scorpion', 'spider', 'tick', 'wasp');
+		$forms = ['ant', 'bee', 'beetle', 'cockroach', 'cricket', 'dragonfly', 'fly', 'hornet', 'locust', 'mantis', 'mosquito', 'scorpion', 'spider', 'tick', 'wasp'];
 		$form = $forms[mt_rand(0,14)];
 	}
 
@@ -1099,106 +1099,106 @@ function gammaGroundItem($cash,$game,$cut)
 {
 	switch (mt_rand(0,132))
 	{
-		case 0: $stuff = mt_rand(2,8) . " " . conditionType(item) . "arrows";  if (mt_rand(1,2) == 1){$stuff = mt_rand(2,8) . " " . conditionType(item) . "crossbow bolts";} break;
+		case 0: $stuff = mt_rand(2,8) . " " . conditionType('item') . "arrows";  if (mt_rand(1,2) == 1){$stuff = mt_rand(2,8) . " " . conditionType('item') . "crossbow bolts";} break;
 		case 1: $stuff = "scattered ashes"; break;
 		case 2: $stuff = "humanoid bones"; if (mt_rand(1,2) == 1){$stuff = "animal bones";} break;
-		case 3: $stuff = conditionType(jar) . " " . PAbottlePicker(); break;
-		case 4: $stuff = mt_rand(2,5) . " foot long " . conditionType(iron) . "iron chain"; break;
-		case 5: $stuff = conditionType(wood) . "wooden club"; break;
+		case 3: $stuff = conditionType('jar') . " " . PAbottlePicker(); break;
+		case 4: $stuff = mt_rand(2,5) . " foot long " . conditionType('iron') . "iron chain"; break;
+		case 5: $stuff = conditionType('wood') . "wooden club"; break;
 		case 6: $stuff = "a pile of dung"; break;
 		case 7: $stuff = "food scraps"; break;
 		case 8: $stuff = "fungus growing"; break;
 		case 9: $stuff = "some piles of guano"; break;
 		case 10: $stuff = "bits of fur and hair"; break;
-		case 11: $stuff = conditionType(iron) . "" . steelMaker() . " hammer head"; break;
-		case 12: $stuff = conditionType(iron) . "" . steelMaker() . " dented pot"; break;
-		case 13: $stuff = mt_rand(2,5) . " foot long " . conditionType(iron) . "iron bar"; break;
-		case 14: $stuff = "blunt " . conditionType(iron) . "spear head"; break;
+		case 11: $stuff = conditionType('iron') . "" . steelMaker() . " hammer head"; break;
+		case 12: $stuff = conditionType('iron') . "" . steelMaker() . " dented pot"; break;
+		case 13: $stuff = mt_rand(2,5) . " foot long " . conditionType('iron') . "iron bar"; break;
+		case 14: $stuff = "blunt " . conditionType('iron') . "spear head"; break;
 		case 15: $stuff = "leather boot"; break;
 		case 16: $stuff = "scattered sticks"; break;
 		case 17: $stuff = "areas with dried blood"; break;
-		case 18: $stuff = conditionType(wood) . "pick handle"; break;
-		case 19: $stuff = mt_rand(5,10) . " foot " . conditionType(wood) . "wood pole"; break;
+		case 18: $stuff = conditionType('wood') . "pick handle"; break;
+		case 19: $stuff = mt_rand(5,10) . " foot " . conditionType('wood') . "wood pole"; break;
 		case 20: $stuff = "glass shards scattered around"; break;
-		case 21: $stuff = conditionType(cloth) . "rags"; break;
-		case 22: $stuff = mt_rand(10,50) . " foot " . conditionType(cloth) . " rope"; break;
+		case 21: $stuff = conditionType('cloth') . "rags"; break;
+		case 22: $stuff = mt_rand(10,50) . " foot " . conditionType('cloth') . " rope"; break;
 		case 23: $stuff = "rubble and dirt scattered around"; break;
-		case 24: $stuff = conditionType(item) . "" . PAbagCreator($map); break;
-		case 25: $stuff = mt_rand(2,8) . " " . conditionType(iron) . "" . steelMaker() . " spikes"; break;
+		case 24: $stuff = conditionType('item') . "" . PAbagCreator($map); break;
+		case 25: $stuff = mt_rand(2,8) . " " . conditionType('iron') . "" . steelMaker() . " spikes"; break;
 		case 26: $stuff = mt_rand(2,8) . " sticks scattered around"; break;
 		case 27: $stuff = mt_rand(2,8) . " large stones scattered around"; break;
 		case 28: $stuff = "pile of straw"; break;
 		case 29: $stuff = "straw scattered around"; break;
-		case 30: $stuff = conditionType(iron) . "sword blade"; break;
+		case 30: $stuff = conditionType('iron') . "sword blade"; break;
 		case 31: $stuff = "scattered bits of bones and teeth"; break;
-		case 32: $stuff = conditionType(item) . "torch"; break;
-		case 33: $stuff = "small puddle of " . conditionType(water) . "water"; break;
-		case 34: $stuff = "large puddle of " . conditionType(water) . "water"; break;
-		case 35: $stuff = "small " . conditionType(iron) . "" . steelMaker() . " mirror"; break;
-		case 36: $stuff = conditionType(iron) . "" . steelMaker() . " hand saw"; break;
-		case 37: $stuff = mt_rand(2,10) . " pieces of " . conditionType(wood) . "wood"; break;
+		case 32: $stuff = conditionType('item') . "torch"; break;
+		case 33: $stuff = "small puddle of " . conditionType('water') . "water"; break;
+		case 34: $stuff = "large puddle of " . conditionType('water') . "water"; break;
+		case 35: $stuff = "small " . conditionType('iron') . "" . steelMaker() . " mirror"; break;
+		case 36: $stuff = conditionType('iron') . "" . steelMaker() . " hand saw"; break;
+		case 37: $stuff = mt_rand(2,10) . " pieces of " . conditionType('wood') . "wood"; break;
 		case 38: $stuff = "bag of charcoal"; break;
-		case 39: $stuff = conditionType(iron) . "" . steelMaker() . " bucket"; break;
+		case 39: $stuff = conditionType('iron') . "" . steelMaker() . " bucket"; break;
 		case 40: $stuff = mt_rand(2,10) . " sand bags"; break;
 		case 41: $stuff = mt_rand(2,6) . " " . eggMaker(); break;
 		case 42: $stuff = "metal gas can with 1 gallon of gasoline"; if (mt_rand(1,2) == 1){$stuff = "metal drum with 50 gallons of gasoline";} break;
-		case 43: $stuff = conditionType(iron) . "" . steelMaker() . " pail"; break;
-		case 44: $stuff = conditionType(wood) . "pallet"; break;
-		case 45: $stuff = conditionType(iron) . "" . steelMaker() . " dented shield"; break;
+		case 43: $stuff = conditionType('iron') . "" . steelMaker() . " pail"; break;
+		case 44: $stuff = conditionType('wood') . "pallet"; break;
+		case 45: $stuff = conditionType('iron') . "" . steelMaker() . " dented shield"; break;
 		case 46: $stuff = "broken dinner plate"; break;
-		case 47: $stuff = conditionType(iron) . "" . steelMaker() . " coat hook"; break;
+		case 47: $stuff = conditionType('iron') . "" . steelMaker() . " coat hook"; break;
 		case 48: $stuff = "shredded and torn clothing"; break;
 		case 49: $stuff = mt_rand(2,10) . " bandages"; if (mt_rand(1,2) == 1){$stuff = mt_rand(2,10) . " bloody bandages";}break;
-		case 50: $stuff = conditionType(iron) . "" . steelMaker() . " trash can"; break;
+		case 50: $stuff = conditionType('iron') . "" . steelMaker() . " trash can"; break;
 		case 51: $stuff = "fire pit"; if (mt_rand(1,2) == 1){$stuff = "fire pit with ashes";} if (mt_rand(1,4) == 1){$stuff = "fire pit with wood";}break;
-		case 52: $stuff = conditionType(wood) . "basket"; break;
-		case 53: $stuff = conditionType(iron) . "" . steelMaker() . " bowl"; break;
-		case 54: $stuff = conditionType(wood) . "whip"; break;
-		case 55: $stuff = conditionType(wood) . "" . woodenType() . " brush"; break;
+		case 52: $stuff = conditionType('wood') . "basket"; break;
+		case 53: $stuff = conditionType('iron') . "" . steelMaker() . " bowl"; break;
+		case 54: $stuff = conditionType('wood') . "whip"; break;
+		case 55: $stuff = conditionType('wood') . "" . woodenType() . " brush"; break;
 		case 56: $stuff = cageMaker(); break;
-		case 57: $stuff = conditionType(iron) . "" . steelMaker() . " small bell"; break;
+		case 57: $stuff = conditionType('iron') . "" . steelMaker() . " small bell"; break;
 		case 58: $stuff = PApreciousChooser() . " candle stick worth " . mt_rand(2,100) . " " . $cash; break;
-		case 59: $stuff = conditionType(wood) . "" . woodenType() . " cane"; break;
-		case 60: $stuff = conditionType(iron) . "" . steelMaker() . " pliers"; break;
+		case 59: $stuff = conditionType('wood') . "" . woodenType() . " cane"; break;
+		case 60: $stuff = conditionType('iron') . "" . steelMaker() . " pliers"; break;
 		case 61: $stuff = PAmakeNormalItem(1,1,$cash,0,$game); break;
 		case 62: $stuff = bottlePicker() . " of water"; break;
 		case 63: $stuff = PApreciousChooser() . " music box worth " . mt_rand(2,100) . " " . $cash; break;
-		case 64: $stuff = conditionType(cloth) . "" . candleColor(0) . " blanket"; break;
-		case 65: $stuff = conditionType(iron) . "" . steelMaker() . " dented helmet with a " . PAheadoffMaker() . " still in it"; break;
+		case 64: $stuff = conditionType('cloth') . "" . candleColor(0) . " blanket"; break;
+		case 65: $stuff = conditionType('iron') . "" . steelMaker() . " dented helmet with a " . PAheadoffMaker() . " still in it"; break;
 		case 66: $stuff = mt_rand(2,10) . "0 feet of " . candleColor(0) . " yarn"; break;
 		case 67: $stuff = PAmakeNormalItem(1,1,$cash,0,$game); break;
 		case 68: $stuff = PAashMaker(); break;
 		case 69: $stuff = "a huge pile of various bones"; break;
 		case 70: $stuff = "a large pile of rocks"; break;
-		case 71: $stuff = conditionType(item) . "wall clock"; break;
+		case 71: $stuff = conditionType('item') . "wall clock"; break;
 		case 72: $stuff = PAcorpseMaker(); if (mt_rand(1,4) == 1){$stuff = AliencorpseMaker();} break;
-		case 73: $stuff = conditionType(iron) . "" . steelMaker() . " tea pot"; break;
-		case 74: $stuff = conditionType(iron) . "" . steelMaker() . " knife"; break;
+		case 73: $stuff = conditionType('iron') . "" . steelMaker() . " tea pot"; break;
+		case 74: $stuff = conditionType('iron') . "" . steelMaker() . " knife"; break;
 		case 75: $stuff = "a " . mt_rand(1,4) . " foot wide hole that is about " . mt_rand(2,8) . " feet deep"; break;
-		case 76: $stuff = conditionType(cloth) . "" . candleColor(0) . " washcloth"; break;
+		case 76: $stuff = conditionType('cloth') . "" . candleColor(0) . " washcloth"; break;
 		case 77: $stuff = PAmakeNormalItem(1,1,$cash,0,$game); break;
-		case 78: $stuff = "small " . conditionType(iron) . "" . steelMaker() . " mirror"; break;
-		case 79: $stuff = conditionType(iron) . "" . steelMaker() . " mug"; break;
+		case 78: $stuff = "small " . conditionType('iron') . "" . steelMaker() . " mirror"; break;
+		case 79: $stuff = conditionType('iron') . "" . steelMaker() . " mug"; break;
 		case 80: $stuff = PAmakeNormalItem(1,1,$cash,0,$game); break;
 		case 81: $stuff = "pile of dirt"; break;
-		case 82: $stuff = conditionType(iron) . "" . steelMaker() . " pan"; break;
-		case 83: $stuff = mt_rand(2,20) . " pieces of " . conditionType(paper) . " paper"; break;
-		case 84: $stuff = conditionType(jar) . "glass pitcher"; break;
+		case 82: $stuff = conditionType('iron') . "" . steelMaker() . " pan"; break;
+		case 83: $stuff = mt_rand(2,20) . " pieces of " . conditionType('paper') . " paper"; break;
+		case 84: $stuff = conditionType('jar') . "glass pitcher"; break;
 		case 85: $stuff = mt_rand(2,10) . "0 feet of wire"; break;
-		case 86: $stuff = conditionType(item) . "smoking pipe"; break;
-		case 87: $stuff = conditionType(iron) . "" . steelMaker() . " pot"; break;
+		case 86: $stuff = conditionType('item') . "smoking pipe"; break;
+		case 87: $stuff = conditionType('iron') . "" . steelMaker() . " pot"; break;
 		case 88: $stuff = "small bottle of cologne"; break;
-		case 89: $stuff = conditionType(item) . "ink pen"; break;
-		case 90: $stuff = conditionType(iron) . "" . steelMaker() . " rusty razor"; break;
+		case 89: $stuff = conditionType('item') . "ink pen"; break;
+		case 90: $stuff = conditionType('iron') . "" . steelMaker() . " rusty razor"; break;
 		case 91: $stuff = "some " . footprintMaker() . " in various spots"; break;
 		case 92: $stuff = PAmakeNormalItem(1,1,$cash,0,$game); break;
-		case 93: $stuff = conditionType(wood) . "wooden tray"; break;
+		case 93: $stuff = conditionType('wood') . "wooden tray"; break;
 		case 94: $stuff = PAmakeNormalItem(1,1,$cash,0,$game); break;
-		case 95: $stuff = conditionType(iron) . "" . steelMaker() . " spoon"; break;
-		case 96: $stuff = conditionType(iron) . "" . steelMaker() . " pitcher"; break;
+		case 95: $stuff = conditionType('iron') . "" . steelMaker() . " spoon"; break;
+		case 96: $stuff = conditionType('iron') . "" . steelMaker() . " pitcher"; break;
 		case 97: $stuff = candleColor(0) . " thread (" . mt_rand(2,10) . "0 feet)"; break;
-		case 98: $stuff = conditionType(wood) . "plaque"; break;
-		case 99: $stuff = conditionType(cloth) . "" . candleColor(0) . " towel"; break;
+		case 98: $stuff = conditionType('wood') . "plaque"; break;
+		case 99: $stuff = conditionType('cloth') . "" . candleColor(0) . " towel"; break;
 		case 100: $stuff = PAnormalWeapons(1,3); break;
 		case 101: $stuff = PAnormalArmor(1); break;
 		case 102: $stuff = PAmakeNormalItem(1,1,$cash,0,$game); break;
@@ -1541,6 +1541,6 @@ function PickJunk()
 		case 299: $item_pa = "wrist watch"; $item_sf = "wrist communicator"; $item_val1 = 5; $item_val2 = 7; $item_val3 = 11; $item_val4 = 17; $item_val5 = 25; break;
 		case 300: $item_pa = "yarn, 3,000 feet"; $item_sf = "oddly strong string, 3,000 feet, spool"; $item_val1 = 2; $item_val2 = 3; $item_val3 = 4; $item_val4 = 6; $item_val5 = 9; break;
 	}
-	return array($item_pa,$item_sf,$item_val1,$item_val2,$item_val3,$item_val4,$item_val5);
+	return [$item_pa,$item_sf,$item_val1,$item_val2,$item_val3,$item_val4,$item_val5];
 }
 ?>

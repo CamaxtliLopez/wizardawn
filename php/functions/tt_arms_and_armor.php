@@ -28,7 +28,7 @@ function TTArmsArmor($list,$x,$y,$game)
 	{
 		if ($list == 1) // MAJESTYKC WEAPONS
 		{
-			switch (mt_rand($x,$y))
+			switch (mt_rand($x, max((int)($x), (int)($y))))
 			{
 				case 0: $nt_name="Blackjack"; $smith1 = ""; $smith2 = ""; $bow = 0; $pole = 0; $nt_val="35gp"; $nt_hands = 1; $nt_material = "None"; $nt_dice = 2; $nt_str = 3; $nt_dex1 = 6; $nt_dex2 = 0; $nt_range = 0; $nt_type = "Weapon"; $nt_category = "Blackjack"; break; // S
 				case 1: $nt_name="Bola"; $smith1 = ""; $smith2 = ""; $bow = 0; $pole = 0; $nt_val="35gp"; $nt_hands = 1; $nt_material = "None"; $nt_dice = 1; $nt_str = 5; $nt_dex1 = 10; $nt_dex2 = 0; $nt_range = 30; $nt_type = "Weapon"; $nt_category = "Bola"; break; // S
@@ -124,7 +124,7 @@ function TTArmsArmor($list,$x,$y,$game)
 		}
 		else if ($list == 2) // MAJESTYKC ARMOR
 		{
-			switch (mt_rand($x,$y))
+			switch (mt_rand($x, max((int)($x), (int)($y))))
 			{
 				case 0: $nt_name="Buckler"; $smith1 = ""; $smith2 = ""; $bow = 0; $pole = 0; $nt_val="15gp"; $nt_hands = 0; $nt_material = "M"; $nt_dice = 3; $nt_hits = 3; $nt_dex1 = 8; $nt_dex2 = 0; $nt_range = 0; $nt_type = "Shield"; $nt_category = "Buckler"; break; // S
 				case 1: $nt_name="Chain Coif"; $smith1 = ""; $smith2 = ""; $bow = 0; $pole = 0; $nt_val="17gp"; $nt_hands = 0; $nt_material = "M"; $nt_dice = 2; $nt_hits = 3; $nt_dex1 = 0; $nt_dex2 = 0; $nt_range = 0; $nt_type = "Armor"; $nt_category = "Chain Coif"; break; // S
@@ -173,7 +173,7 @@ function TTArmsArmor($list,$x,$y,$game)
 		}
 		else if ($list == 3) // T&T ARMOR
 		{
-			switch (mt_rand($x,$y))
+			switch (mt_rand($x, max((int)($x), (int)($y))))
 			{
 				case 0: $nt_name="Bracers"; $smith1 = ""; $smith2 = ""; $bow = 0; $pole = 0; $nt_val="75gp"; $nt_hands = 0; $nt_material = "L"; $nt_dice = 1; $nt_hits = 1; $nt_dex1 = 0; $nt_dex2 = 0; $nt_range = 0; $nt_type = "Armor"; $nt_category = "Bracers"; break; // S
 				case 1: $nt_name="Chain Coif"; $smith1 = ""; $smith2 = ""; $bow = 0; $pole = 0; $nt_val="17gp"; $nt_hands = 0; $nt_material = "M"; $nt_dice = 2; $nt_hits = 3; $nt_dex1 = 0; $nt_dex2 = 0; $nt_range = 0; $nt_type = "Armor"; $nt_category = "Chain Coif"; break; // S
@@ -222,7 +222,7 @@ function TTArmsArmor($list,$x,$y,$game)
 		}
 		else if ($list == 4) // T&T WEAPONS - HANDED
 		{
-			switch (mt_rand($x,$y))
+			switch (mt_rand($x, max((int)($x), (int)($y))))
 			{
 				case 0: $nt_name="Bich'wa"; $smith1 = "blade"; $smith2 = "handle"; $bow = 0; $pole = 0; $nt_val="35gp"; $nt_hands = 1; $nt_material = "M"; $nt_dice = 2; $nt_str = 10; $nt_dex1 = 12; $nt_dex2 = 0; $nt_range = 0; $nt_type = "Weapon"; $nt_category = "Bich'wa"; break; // S
 				case 1: $nt_name="Boot Dagger"; $smith1 = "blade"; $smith2 = "handle"; $bow = 0; $pole = 0; $nt_val="20gp"; $nt_hands = 1; $nt_material = "M"; $nt_dice = 2; $nt_str = 3; $nt_dex1 = 3; $nt_dex2 = 14; $nt_range = 15; $nt_type = "Weapon"; $nt_category = "Dagger"; break; // S
@@ -393,7 +393,7 @@ function TTArmsArmor($list,$x,$y,$game)
 		}
 		else if ($list == 5) // T&T WEAPONS - RANGED
 		{
-			switch (mt_rand($x,$y))
+			switch (mt_rand($x, max((int)($x), (int)($y))))
 			{
 				case 0: $nt_name="Dagg"; $smith1 = "barrel"; $smith2 = "handle"; $bow = 0; $pole = 0; $nt_val="1,000gp"; $nt_hands = 1; $nt_material = "M"; $nt_dice = 9; $nt_str = 8; $nt_dex1 = 10; $nt_dex2 = 0; $nt_range = 20; $nt_type = "Weapon"; $nt_category = "Dagg"; break; // S
 				case 1: $nt_name="Firelock"; $smith1 = "barrel"; $smith2 = "handle"; $bow = 0; $pole = 0; $nt_val="2,000gp"; $nt_hands = 1; $nt_material = "M"; $nt_dice = 11; $nt_str = 13; $nt_dex1 = 12; $nt_dex2 = 0; $nt_range = 30; $nt_type = "Weapon"; $nt_category = "Firelock"; break; // S
@@ -417,7 +417,7 @@ function TTArmsArmor($list,$x,$y,$game)
 		}
 		else if ($list == 6) // T&T WEAPONS - UNUSUAL
 		{
-			switch (mt_rand($x,$y))
+			switch (mt_rand($x, max((int)($x), (int)($y))))
 			{
 				case 0: $nt_name="Blackjack"; $smith1 = ""; $smith2 = ""; $bow = 0; $pole = 0; $nt_val="35gp"; $nt_hands = 1; $nt_material = "None"; $nt_dice = 2; $nt_str = 3; $nt_dex1 = 6; $nt_dex2 = 0; $nt_range = 0; $nt_type = "Weapon"; $nt_category = "Blackjack"; break; // S
 				case 1: $nt_name="Bola"; $smith1 = ""; $smith2 = ""; $bow = 0; $pole = 0; $nt_val="35gp"; $nt_hands = 1; $nt_material = "None"; $nt_dice = 1; $nt_str = 5; $nt_dex1 = 10; $nt_dex2 = 0; $nt_range = 30; $nt_type = "Weapon"; $nt_category = "Bola"; break; // S
@@ -444,7 +444,7 @@ function TTArmsArmor($list,$x,$y,$game)
 	{
 		if ($list == 1) // MAJESTYKC WEAPONS
 		{
-			switch (mt_rand($x,$y))
+			switch (mt_rand($x, max((int)($x), (int)($y))))
 			{
 				case 0:		$nt_type="Weapon"; $nt_category = "Dagger"; $nt_name = "Knife"; $smith1 = "blade";   $smith2 = "handle"; $nt_dice = "1"; $nt_adds = "2"; $nt_str = "1"; $nt_dex1 = "1"; $nt_dex2 = "7"; $nt_val = "3gp"; $nt_hands = "1"; $nt_range = "5"; break;// SMALL
 				case 1:		$nt_type="Weapon"; $nt_category = "Dagger"; $nt_name = "Stiletto"; $smith1 = "blade";   $smith2 = "handle"; $nt_dice = "2"; $nt_adds = "-2"; $nt_str = "1"; $nt_dex1 = "1"; $nt_dex2 = "8"; $nt_val = "5gp"; $nt_hands = "1"; $nt_range = "5"; break;// SMALL
@@ -545,7 +545,7 @@ function TTArmsArmor($list,$x,$y,$game)
 		}
 		else if ($list == 2) // MAJESTYKC ARMOR
 		{
-			switch (mt_rand($x,$y))
+			switch (mt_rand($x, max((int)($x), (int)($y))))
 			{
 				case 0: $nt_type="Armor"; $nt_category = "Arms"; $nt_name = "Bracers"; $nt_hits = 2; $nt_str = 2; $nt_val = "10gp"; $nt_material = "L"; break;// SMALL
 				case 1: $nt_type="Armor"; $nt_category = "Arms"; $nt_name = "Gauntlets"; $nt_hits = 2; $nt_str = 2; $nt_val = "20gp"; $nt_material = "M"; break;// SMALL
@@ -584,7 +584,7 @@ function TTArmsArmor($list,$x,$y,$game)
 		}
 		else if ($list == 3) // T&T ARMOR
 		{
-			switch (mt_rand($x,$y))
+			switch (mt_rand($x, max((int)($x), (int)($y))))
 			{
 				case 0: $nt_name = "Bracers"; $nt_category = "Bracers"; $nt_type = "Armor/Arms"; $nt_hits = 2; $nt_str = 2; $nt_material = "L"; break;
 				case 1: $nt_name = "Elbow Gauntlets"; $nt_category = "Elbow Gauntlets"; $nt_type = "Armor/Arms"; $nt_hits = 2; $nt_str = 2; $nt_material = "M"; break;
@@ -632,7 +632,7 @@ function TTArmsArmor($list,$x,$y,$game)
 		}
 		else if ($list == 4) // T&T WEAPONS - HANDED
 		{
-			switch (mt_rand($x,$y))
+			switch (mt_rand($x, max((int)($x), (int)($y))))
 			{
 				case 0: $nt_type="Weapon/Dagger"; $nt_name = "Athame"; $nt_category = "Athame"; $nt_dice = 2; $nt_adds = 3; $nt_str = 0; $nt_dex1 = 7; $nt_dex2 = 0; break;
 				case 1: $nt_type="Weapon/Dagger"; $nt_name = "Bank"; $nt_category = "Bank"; $nt_dice = 2; $nt_adds = 3; $nt_str = 1; $nt_dex1 = 1; $nt_dex2 = 0; break;
@@ -760,7 +760,7 @@ function TTArmsArmor($list,$x,$y,$game)
 		}
 		else if ($list == 5) // T&T WEAPONS - RANGED
 		{
-			switch (mt_rand($x,$y))
+			switch (mt_rand($x, max((int)($x), (int)($y))))
 			{
 				case 0: $nt_type="Weapon/Ranged"; $nt_name = "Throwing Stars (" . mt_rand(3,9) . ")"; $nt_category = "Throwing Stars"; $nt_dice = 4; $nt_adds = 0; $nt_str = 2; $nt_dex1 = 10; $nt_dex2 = 0; break;
 				case 1: $nt_type="Weapon/Ranged"; $nt_name = "Porcupine Spines (" . mt_rand(3,9) . ")"; $nt_category = "Porcupine Spines"; $nt_dice = 3; $nt_adds = 0; $nt_str = 4; $nt_dex1 = 9; $nt_dex2 = 0; break;
@@ -793,7 +793,7 @@ function TTArmsArmor($list,$x,$y,$game)
 		}
 		else if ($list == 6) // T&T WEAPONS - UNUSUAL
 		{
-			switch (mt_rand($x,$y))
+			switch (mt_rand($x, max((int)($x), (int)($y))))
 			{
 				case 0: $nt_type="Weapon/Unusual"; $nt_name = "Bagh Nakh"; $nt_category = "Bagh Nakh"; $nt_dice = 1; $nt_adds = 0; $nt_str = 2; $nt_dex1 = 10; $nt_dex2 = 0; break;
 				case 1: $nt_type="Weapon/Unusual"; $nt_name = "Brass Knuckles"; $nt_category = "Brass Knuckles"; $nt_dice = 2; $nt_adds = 0; $nt_str = 2; $nt_dex1 = 3; $nt_dex2 = 0; break;
@@ -814,7 +814,7 @@ function TTArmsArmor($list,$x,$y,$game)
 		}
 	}
 
-	return array($nt_type,$nt_category,$nt_name,$nt_dice,$nt_adds,$nt_str,$nt_dex1,$nt_dex2,$nt_val,$nt_hands,$nt_range,$nt_hits,$nt_material,$bow,$quiver,$pole,$smith2,$smith1,$user);
+	return [$nt_type,$nt_category,$nt_name,$nt_dice,$nt_adds,$nt_str,$nt_dex1,$nt_dex2,$nt_val,$nt_hands,$nt_range,$nt_hits,$nt_material,$bow,$quiver,$pole,$smith2,$smith1,$user];
 }
 
 ?>

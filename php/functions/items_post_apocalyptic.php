@@ -2,13 +2,14 @@
 
 /// THIS MAKES A TREASURE ITEM FOR POST-APOCALYPTIC GAMES ///
 
-function makePAItem($level,$size,$condition)
+function makePAItem($level,$size,$condition = 0)
+
 {
-	if ($level > 0){$level = mt_rand(1,$level);} else {$level = mt_rand(1,20);}
+	if ($level > 0){$level = mt_rand(1, max((int)(1), (int)($level)));} else {$level = mt_rand(1,20);}
 
 	if ($size == 1){$i = 50;} else if ($size == 2){$i = 60;} else {$i = 80;}
 
-	$which_item = mt_rand(1,$i);
+	$which_item = mt_rand(1, max((int)(1), (int)($i)));
 
 	if ($which_item < 11){$the_item = "pistol";}
 	else if ($which_item < 21){$the_item = "grenade";}
@@ -85,7 +86,7 @@ function makePAItem($level,$size,$condition)
 	{
 		$goods = 1;
 		if ($size == 1){$c = 4;} else if ($size == 2){$c = 8;} else {$c = 10;}
-		switch (mt_rand(0,$c))
+		switch (mt_rand(0, max((int)(0), (int)($c))))
 		{
 			case 0:	$artifact = "vibro dagger";			break;
 			case 1:	$artifact = "warp-field dagger";	break;
@@ -131,7 +132,7 @@ function makePAItem($level,$size,$condition)
 		$goods = 1;
 		if ($size < 3){$c = 12;} else {$c = 21;}
 
-		switch (mt_rand(0,$c))
+		switch (mt_rand(0, max((int)(0), (int)($c))))
 		{
 			case 0:	$artifact = "small c-4 pack";			break;
 			case 1:	$artifact = "fission bomb";				break;
@@ -184,7 +185,7 @@ function makePAItem($level,$size,$condition)
 	{
 		if ($size == 1){$c = 32;} else if ($size == 2){$c = 38;} else {$c = 41;}
 
-		switch (mt_rand(1,$c))
+		switch (mt_rand(1, max((int)(1), (int)($c))))
 		{
 			case 1:	$artifact = "energy cloak";				$goods = 1; break;
 			case 2:	$artifact = "communication sender";		$goods = 1; break;
@@ -234,7 +235,7 @@ function makePAItem($level,$size,$condition)
 	{
 		if ($size == 1){$c = 18;} else if ($size == 2){$c = 19;} else {$c = 21;}
 
-		switch (mt_rand(0,$c))
+		switch (mt_rand(0, max((int)(0), (int)($c))))
 		{
 			case 0:	$artifact = "pain reducer";					break;
 			case 1:	$artifact = "mind boosters";				break;
@@ -268,11 +269,11 @@ function makePAItem($level,$size,$condition)
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 function makeBUItem($level,$size,$condition)
 {
-	if ($level > 0){$level = mt_rand(1,$level);} else {$level = mt_rand(1,20);}
+	if ($level > 0){$level = mt_rand(1, max((int)(1), (int)($level)));} else {$level = mt_rand(1,20);}
 
 	if ($size == 1){$i = 50;} else if ($size == 2){$i = 60;} else {$i = 70;}
 
-	$which_item = mt_rand(1,$i);
+	$which_item = mt_rand(1, max((int)(1), (int)($i)));
 
 	if ($which_item < 11){$the_item = "pistol";}
 	else if ($which_item < 21){$the_item = "grenade";}
@@ -345,7 +346,7 @@ function makeBUItem($level,$size,$condition)
 	{
 		if ($size == 1){$c = 3;} else if ($size == 2){$c = 7;} else {$c = 13;}
 		$goods = 1;
-		switch (mt_rand(0,$c))
+		switch (mt_rand(0, max((int)(0), (int)($c))))
 		{
 			case 0:	$artifact = "pulse knife";			break;
 			case 1:	$artifact = "razor disc";			break;
@@ -386,7 +387,7 @@ function makeBUItem($level,$size,$condition)
 	{
 		if ($size < 3){$c = 3;} else {$c = 8;}
 		$goods = 1;
-		switch (mt_rand(0,$c))
+		switch (mt_rand(0, max((int)(0), (int)($c))))
 		{
 			case 0:	$artifact = "metal helmet";			break;
 			case 1:	$artifact = "plastic helmet";		break;
@@ -404,7 +405,7 @@ function makeBUItem($level,$size,$condition)
 	{
 		if ($size == 1){$c = 12;} else if ($size == 2){$c = 15;} else {$c = 18;}
 		$goods = 1;
-		switch (mt_rand(1,$c))
+		switch (mt_rand(1, max((int)(1), (int)($c))))
 		{
 			case 0:	$artifact = "xormite battery casing";	break;
 			case 1:	$artifact = "solar battery";			break;
@@ -451,7 +452,7 @@ function makeMFLLItem($level,$size,$cash,$tech)
 {
 		if ($size == 1){$i = 50;} else if ($size == 2){$i = 60;} else {$i = 70;}
 
-		$which_item = mt_rand(1,$i);
+		$which_item = mt_rand(1, max((int)(1), (int)($i)));
 
 		if ($which_item < 11){$the_item = "pistol";}
 		else if ($which_item < 21){$the_item = "grenade";}
@@ -464,7 +465,7 @@ function makeMFLLItem($level,$size,$cash,$tech)
 		if ($the_item == "pistol")
 		{
 			if ($tech == 1){$g1 = 5; $g2 = 10;} else if ($tech == 2){$g1 = 0; $g2 = 10;} else {$g1 = 0; $g2 = 4;}
-			switch (mt_rand($g1,$g2))
+			switch (mt_rand($g1, max((int)($g1), (int)($g2))))
 			{
 				case 0: $artifact = "Bullets (" . mt_rand(2,12) . ") [ <i>Value: 1 " . $cash . " each | Desc: This small item consists of a metal casing packed with combustible powder.  The top is capped with metal projectile.</i>]"; break;
 				case 1:	$artifact = "Pistol, Small [ <i>Value: 15 " . $cash . " | Type: Light | Dmg: 1d8 | Ammo: 6 bullets can be loaded | Ammo Remaining: " . mt_rand(0,6) . " | Desc: This gun uses combustible powder with metal projectiles (bullets).</i>]"; break;
@@ -483,7 +484,7 @@ function makeMFLLItem($level,$size,$cash,$tech)
 		else if ($the_item == "rifle")
 		{
 			if ($tech == 1){$g1 = 6; $g2 = 10;} else if ($tech == 2){$g1 = 0; $g2 = 10;} else {$g1 = 0; $g2 = 5;}
-			switch (mt_rand($g1,$g2))
+			switch (mt_rand($g1, max((int)($g1), (int)($g2))))
 			{
 				case 0: $artifact = "Bullets (" . mt_rand(2,12) . ") [ <i>Value: 1 " . $cash . " each | Desc: This small item consists of a metal casing packed with combustible powder.  The top is capped with metal projectile.</i>]"; break;
 				case 1:	$artifact = "Rifle, Small [ <i>Value: 25 " . $cash . " | Type: Light | Dmg: 1d10 | Ammo: 6 bullets can be loaded | Ammo Remaining: " . mt_rand(0,6) . " | Desc: This gun uses combustible powder with metal projectiles (bullets).</i>]"; break;
@@ -502,7 +503,7 @@ function makeMFLLItem($level,$size,$cash,$tech)
 		else if ($the_item == "weapon")
 		{
 			if ($size == 1){$c = 3;} else if ($size == 2){$c = 6;} else {$c = 11;}
-			switch (mt_rand(0,$c))
+			switch (mt_rand(0, max((int)(0), (int)($c))))
 			{
 				case 0:	$artifact = "Dagger, Plasma [ <i>Value: 12 " . $cash . " | Dmg: 1d6 | Power: 1 day of use per power clip | Power Remaining: " . mt_rand(0,1) . " | Desc: This weapon looks normal except for the glowing green energy around the blade when activated.</i>]"; break;
 				case 1:	$artifact = "Whip, Pulse [ <i>Value: 50 " . $cash . " | Dmg: 1d8 | Power: 10 hits per power clip | Power Remaining: " . mt_rand(0,10) . " | Desc: This whip will increase the power of physical hits, but only upon impact.  Any misses do not drain the power clip.</i>]"; break;
@@ -536,7 +537,7 @@ function makeMFLLItem($level,$size,$cash,$tech)
 		else if ($the_item == "armor")
 		{
 			if ($size < 3){$c = 2;} else {$c = 8;}
-			switch (mt_rand(0,$c))
+			switch (mt_rand(0, max((int)(0), (int)($c))))
 			{
 				case 0:	$artifact = "Helmet, Polycarbonate [ <i>Value: 30 " . $cash . " | Type: Heavy | Armor Bonus: 1 | Desc: This helmet is made of a very hard plastic.  It is often used by police forces and military personnel.</i>]"; break;
 				case 1:	$artifact = "Trench Coat, Leather [ <i>Value: 15 " . $cash . " | Type: Light | Armor Bonus: 1 | Desc: This long leather coat provides limited protection.</i>]"; break;
@@ -554,7 +555,7 @@ function makeMFLLItem($level,$size,$cash,$tech)
 		{
 			if ($size == 1){$c = 20;} else if ($size == 2){$c = 31;} else {$c = 38;}
 			if ($tech == 1){$ct = 1;} else {$ct=0;} // NO SILENCERS IN LL
-			switch (mt_rand($ct,$c))
+			switch (mt_rand($ct, max((int)($ct), (int)($c))))
 			{
 				case 0:$artifact = "Silencer [ <i>Value: 50 " . $cash . " | Desc: This can be attached to a combustible gun to reduce the sound it creates when fired.</i>]"; break;
 				case 1:$artifact = "Alteration Mask [ <i>Value: 430 " . $cash . " | Power: 1 hour of use per battery | Power Remaining: " . mt_rand(0,1) . " | Desc: This mask will change the facial appearance of the wearer to look like someone else.  It requires a camera picture of the individual, whose appearance is being copied.</i>]"; break;
@@ -607,7 +608,7 @@ function makeMAItem($level,$size)
 {
 		if ($size == 1){$i = 50;} else if ($size == 2){$i = 60;} else {$i = 70;}
 
-		$which_item = mt_rand(1,$i);
+		$which_item = mt_rand(1, max((int)(1), (int)($i)));
 
 		if ($which_item < 11){$the_item = "pistol";}
 		else if ($which_item < 21){$the_item = "grenade";}
@@ -674,7 +675,7 @@ function makeMAItem($level,$size)
 			$ranges = $ranges . "`/" . $rangem . "`/" . $rangel . "`";
 
 			if ($size == 1){$c = 3;} else if ($size == 2){$c = 8;} else {$c = 15;}
-			switch (mt_rand(0,$c))
+			switch (mt_rand(0, max((int)(0), (int)($c))))
 			{
 				case 0:	$artifact = "Dagger, Plasma [ <i>Dmg: 2d4 | Weapon Class: " . mt_rand(7,9) . " | Power: 1 day of use per cell | Power Remaining: " . mt_rand(0,1) . " | Desc: This weapon looks normal except for the glowing green energy around the blade when activated.</i>]"; break;
 				case 1:	$artifact = "Whip, Pulse [ <i>Dmg: 1d12 | Weapon Class: " . mt_rand(5,7) . " | Power: 10 hits per cell | Power Remaining: " . mt_rand(0,10) . " | Desc: This whip will increase the power of physical hits, but only upon impact.  Any misses do not drain the cell.</i>]"; break;
@@ -820,7 +821,7 @@ function makeGWItem($level,$size)
 {
 		if ($size == 1){$i = 50;} else if ($size == 2){$i = 60;} else {$i = 70;}
 
-		$which_item = mt_rand(1,$i);
+		$which_item = mt_rand(1, max((int)(1), (int)($i)));
 
 		if ($which_item < 11){$the_item = "pistol";}
 		else if ($which_item < 21){$the_item = "grenade";}
@@ -884,7 +885,7 @@ function makeGWItem($level,$size)
 			$ranges = $ranges . "`/" . $rangem . "`/" . $rangel . "`";
 
 			if ($size == 1){$c = 3;} else if ($size == 2){$c = 8;} else {$c = 15;}
-			switch (mt_rand(0,$c))
+			switch (mt_rand(0, max((int)(0), (int)($c))))
 			{
 				case 0:	$artifact = "Dagger, Plasma [ <i>Dmg: 2d4 | Weapon Class: " . mt_rand(7,9) . " | Power: 1 day of use per cell | Power Remaining: " . mt_rand(0,1) . " | Desc: This weapon looks normal except for the glowing green energy around the blade when activated.</i>]"; break;
 				case 1:	$artifact = "Whip, Pulse [ <i>Dmg: 1d12 | Weapon Class: " . mt_rand(5,7) . " | Power: 10 hits per cell | Power Remaining: " . mt_rand(0,10) . " | Desc: This whip will increase the power of physical hits, but only upon impact.  Any misses do not drain the cell.</i>]"; break;

@@ -174,7 +174,7 @@ $process_0 = 1;
 
 $ttlvl = $_POST['x_ttlvl'];
 $x_game = $_POST['x_package'];
-$x_level = $_POST['x_level']+0;
+$x_level = num($_POST['x_level']);
 $x_code = $_POST['x_code'];
 $x_describe = $_POST['x_describe'];
 	$show_detail_monster_info = $x_describe;
@@ -207,7 +207,7 @@ $x_extra = $_POST['x_extra'];
 	}
 	else if ($x_game == "Labyrinth Lord")
 	{
-		$aec = $_SESSION["SESSION_ADD_AEC"] = $_POST['aec']+0;
+		$aec = $_SESSION["SESSION_ADD_AEC"] = num($_POST['aec']);
 		if ($aec > 0){$take = "(creator LIKE 'AEC%' OR creator LIKE 'LL%')";}
 		else {$take = "(creator LIKE 'LL%')";}
 		$bottom_notices = 2;
@@ -293,13 +293,13 @@ echo "<table border='0' cellpadding='0' cellspacing='0' width='100%'>";
 
 		while ($x_amount > 0) :
 
-			$my_enemy_pick = explode("^^^", $my_enemy_array[$i]);
+			$my_enemy_pick = explode("^^^", (string) $my_enemy_array[$i]);
 
 			if ( $my_enemy_pick[0] == "")
 			{
 				shuffle($my_enemy_array);
 				$i = 0;
-				$my_enemy_pick = explode("^^^", $my_enemy_array[$i]);
+				$my_enemy_pick = explode("^^^", (string) $my_enemy_array[$i]);
 			}
 
 			if ($ocolor == "FFFFFF"){$ocolor = "D7D7D7";} else {$ocolor = "FFFFFF";} $onct = $onct + 1; if ($s_amount >= $onct){ ?>
@@ -316,7 +316,7 @@ echo "<table border='0' cellpadding='0' cellspacing='0' width='100%'>";
 	else
 	{
 		$table = "creatures" . createRandomCode();
-		if ($x_level > 0){$x_level = $x_level + $lvl_modifier;} else {$x_level = 100;}
+		if ($x_level > 0){$x_level = $x_level + num($lvl_modifier);} else {$x_level = 100;}
 
 		$qry = "CREATE TEMPORARY TABLE $table SELECT id FROM monsters_rpgs WHERE $take AND location LIKE '%$x_terrain%' AND difficulty<=($x_level)";
 		mysqli_query( $connection, $qry ); /*qry*/
@@ -326,14 +326,16 @@ echo "<table border='0' cellpadding='0' cellspacing='0' width='100%'>";
 		$num = mysqli_num_rows($res);
 
 		while ($ary=mysqli_fetch_assoc($res)) :
-			$frequency = $ary[freq_code] - 1;
+			$frequency = $ary['freq_code'] - 1;
 			while ($frequency > 0) :
-				$valids = $valids . $ary[id] . ", ";
+                $valids = $valids . "(" . $ary['id'] . "), ";
+
 				$frequency = $frequency - 1;
 			endwhile;
 		endwhile;
 
-		if ($num > 0){ $valids = substr($valids, 0, -2); mysqli_query($connection, "INSERT INTO $table (id) VALUES ($valids)"); }
+        if ($num > 0){ $valids = substr($valids, 0, -2); mysqli_query($connection, "INSERT INTO $table (id) VALUES $valids"); }   
+
 
 		while ($enc_numbers > 0) :
 

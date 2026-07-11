@@ -176,20 +176,20 @@ function makeZombie($tool)
 	if (mt_rand(1,10) == 1){$shoes = "";}
 
 	/// HAIR
-	$haircolor = array('black', 'brown', 'red', 'auburn', 'gray', 'white', 'blonde');
+	$haircolor = ['black', 'brown', 'red', 'auburn', 'gray', 'white', 'blonde'];
 	$hcolor = $haircolor[mt_rand(0,6)];
-	if ($age == ", child"){$haircolor = array('black', 'brown', 'red', 'auburn', 'blonde'); $hcolor = $haircolor[mt_rand(0,4)];}
+	if ($age == ", child"){$haircolor = ['black', 'brown', 'red', 'auburn', 'blonde']; $hcolor = $haircolor[mt_rand(0,4)];}
 	$h_brd = 1;			$h_mst = 1;			$h_bld = 1;
 	/////////////////////////////////////////////
 	if ($sex == "male")
 	{
 		$hisp = "He";
 		$husp = "his";
-		$hairy = array('bald', 'long', 'short', 'curly');
+		$hairy = ['bald', 'long', 'short', 'curly'];
 		if ((mt_rand(1,100) > 70) && ($h_brd == 1)){$beard = 1;} else if ($h_brd == 2){$beard = 1;}
 		if ((mt_rand(1,100) > 70) && ($h_mst == 1)){$mustc = 1;} else if ($h_mst == 2){$mustc = 1;}
 		if ((mt_rand(1,100) > 70) && ($h_bld == 1)){$bald = 1;} else if ($h_bld == 2){$bald = 1;}
-		$bhair = array('thick', 'long', 'short');
+		$bhair = ['thick', 'long', 'short'];
 		$hare = $hairy[mt_rand(0,3)];
 		if ($age == ", child")
 		{
@@ -200,7 +200,7 @@ function makeZombie($tool)
 	{
 		$hisp = "She";
 		$husp = "her";
-		$hairy = array('braided', 'long', 'short', 'curly');
+		$hairy = ['braided', 'long', 'short', 'curly'];
 		$beard=0; $mustc=0; $bald=0; $hare = $hairy[mt_rand(1,3)];
 	}
 	/////////////////////////////////////////////
@@ -233,7 +233,7 @@ function makeZombie($tool)
 	/// INVENTORY
 	$scavange = mt_rand(2,8);
 	while ($scavange > 0) :
-		$goods = $goods . zombieItems(zombie) . "&nbsp;/ ";
+		$goods = $goods . zombieItems('zombie') . "&nbsp;/ ";
 		$scavange = $scavange - 1;
 	endwhile;
 	$goods = substr($goods, 0, -8);
@@ -287,7 +287,7 @@ function makeZombie($tool)
 	}
 	else {$look = "&nbsp; " . $hisp . " has " . zombieColor() . " skin that is " . zombiePale() . " in appearance.";}
 
-	return array($sex,$age,$fname,$lname,$hat,$shirt,$pants,$shoes,$hairr,$rot,$wearing,$look,$goods);
+	return [$sex,$age,$fname,$lname,$hat,$shirt,$pants,$shoes,$hairr,$rot,$wearing,$look,$goods];
 }
 
 

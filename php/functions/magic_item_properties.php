@@ -19,7 +19,7 @@ function smartSword()
 		case 11:$word = genericName() . " the " . jobName();		break;
 	}
 
-	switch (mt_rand(0,$moral))
+	switch (mt_rand(0, max((int)(0), (int)($moral))))
 	{
 		case 0:	$feel = "good";		break;
 		case 1:	$feel = "neutral";	break;
@@ -191,8 +191,8 @@ function slayerType($type)
 		case 25:$value = "frogs and toads";	if (mt_rand(1,100) > 50){$name = "toad";} else {$name = "frog";}	break;
 		case 26:$value = "fire creatures";	if (mt_rand(1,100) > 50){$name = "fire";} else if (mt_rand(1,100) > 50){$name = "flame";} else {$name = "scorching";}	break;
 		case 27:$value = "frost creatures";	if (mt_rand(1,100) > 50){$name = "cold";} else if (mt_rand(1,100) > 50){$name = "frost";} else {$name = "ice";}	break;
-		case 28:$value = humanType();		if ($value == "dwarves"){$name = "dwarf";} else if ($value == "elves"){$name = "elf";} else {$name = substr($value, 0, -1);}	break;
-		case 29:$value = humanType();		if ($value == "dwarves"){$name = "dwarf";} else if ($value == "elves"){$name = "elf";} else {$name = substr($value, 0, -1);}	break;
+		case 28:$value = humanType();		if ($value == "dwarves"){$name = "dwarf";} else if ($value == "elves"){$name = "elf";} else {$name = substr((string) $value, 0, -1);}	break;
+		case 29:$value = humanType();		if ($value == "dwarves"){$name = "dwarf";} else if ($value == "elves"){$name = "elf";} else {$name = substr((string) $value, 0, -1);}	break;
 	}
 	switch (mt_rand(0,10))
 	{
@@ -224,7 +224,7 @@ function slayerType($type)
 function enchantedType($type)
 {
 	if ($type == "hilt"){$roll = 14;} else {$roll = 11;}
-	switch (mt_rand(0,$roll))
+	switch (mt_rand(0, max((int)(0), (int)($roll))))
 	{
 		case 0:	$value = "of good fortune (1 bonus to saves and " . mt_rand(2,5) . " wishes)";	break;
 		case 1:	$value = "of death dealing (attack roll of 20 drains all life from opponent " . mt_rand(5,9) . " times)";	break;
@@ -294,7 +294,7 @@ function candleMagic($game,$level)
 	{
 		switch (mt_rand(0,6))
 		{
-			case 0:	$value = "those within " . (mt_rand(1,3)*5) . "' must speak the truth when asked questions unless they make an " . TTSaves($level,$game) . " vs. " . abilityTranslate($game,INT) . $burn;	break;
+			case 0:	$value = "those within " . (mt_rand(1,3)*5) . "' must speak the truth when asked questions unless they make an " . TTSaves($level,$game) . " vs. " . abilityTranslate($game,'INT') . $burn;	break;
 			case 1:	$value = "it will never burn down and will illuminate an area of " . mt_rand(1,3) . "0 feet with a " . beamColor(0) . " light";	break;
 			case 2:	$value = "secret doors and compartments will be revealed if within its " . (mt_rand(1,3)*5) . "' glow" . $burn;	break;
 			case 3:	if (mt_rand(1,4) > 1){$feel = "evil";} else {$feel = "good";} $value = "it will glow brighter when someone of " . $feel . " tendencies is within its " . (mt_rand(1,3)*5) . "' glow" . $burn;	break;
@@ -338,7 +338,7 @@ function smartType($owner)
 		case 11:$word = genericName() . " the " . jobName();		break;
 	}
 	if ($owner != ""){$word = $owner . " the " . jobName(); $moral = 2;}
-	switch (mt_rand(0,$moral))
+	switch (mt_rand(0, max((int)(0), (int)($moral))))
 	{
 		case 0:	$feel = "kind";	break;
 		case 1:	$feel = "fair";	break;
@@ -447,7 +447,7 @@ function smartType($owner)
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
 function tomePower($chance,$curst,$level,$cut,$game)
 {
-	$gem = ucwords(gemCreator($cut));
+	$gem = ucwords((string) gemCreator($cut));
 	if ($level > 0){} else {$level = mt_rand(1,20);}
 	if ($level < 4){$spell = "lowest";}
 	else if ($level < 7){$spell = "lower";}
@@ -519,8 +519,8 @@ function tomePower($chance,$curst,$level,$cut,$game)
 	switch (mt_rand(0,2))
 	{
 		case 0:$curse = "cursed - the book is about some sort of fairy tale where the reader gets pulled out of existence and into the story...where they must defeat the story`s villain to escape";	break;
-		case 1:$curse = "cursed - the book causes the reader to keep reading it over and over and not doing anything else...no eating, drinking, moving, etc" . curseDuration(1,reader,$level);	break;
-		case 2:$curse = "cursed - the " . curseType($level,reader,item,$game);																break;
+		case 1:$curse = "cursed - the book causes the reader to keep reading it over and over and not doing anything else...no eating, drinking, moving, etc" . curseDuration(1,'reader',$level);	break;
+		case 2:$curse = "cursed - the " . curseType($level,'reader','item',$game);																break;
 	}
 
 	$power = "";
@@ -532,18 +532,18 @@ function tomePower($chance,$curst,$level,$cut,$game)
 			{
 				case 0:	$power = "the book is magical and will answer " . mt_rand(2,10) . " questions once per " . timesMaker() . " with text appearing on the blank pages with the answer";		break;
 				case 1:	$power = "the book is magical and blank when found, where the owner`s spoken words will magically appear on the pages";								break;
-				case 2:	$power = "the book is written in poisonous ink so if a reader is not wearing gloves they must make an " . TTSaves($level,$game) . " vs. " . abilityTranslate($game,STR) . " or " . abilityTranslate($game,CON) . " or die";	break;
+				case 2:	$power = "the book is written in poisonous ink so if a reader is not wearing gloves they must make an " . TTSaves($level,$game) . " vs. " . abilityTranslate($game,'STR') . " or " . abilityTranslate($game,'CON') . " or die";	break;
 				case 3:
 					switch (mt_rand(0,8))
 					{
-						case 0: $power = "the book contains secrets of a great wizard...where once read...it vanishes and the reader can raise their " . abilityTranslate($game,WIZ) . " by 1 point";	break;
-						case 1: $power = "the book contains secrets of a great sage...where once read...it vanishes and the reader can raise their " . abilityTranslate($game,INT) . " by 1 point";	break;
-						case 2: $power = "the book contains secrets of a great warrior...where once read...it vanishes and the reader can raise their " . abilityTranslate($game,STR) . " by 1 point";	break;
-						case 3: $power = "the book contains secrets of a great thief...where once read...it vanishes and the reader can raise their " . abilityTranslate($game,SPD) . " by 1 point";	break;
-						case 4: $power = "the book contains secrets of a great ranger...where once read...it vanishes and the reader can raise their " . abilityTranslate($game,DEX) . " by 1 point";	break;
-						case 5: $power = "the book contains secrets of a great gambler...where once read...it vanishes and the reader can raise their " . abilityTranslate($game,LCK) . " by 1 point";	break;
-						case 6: $power = "the book contains secrets of a great healer...where once read...it vanishes and the reader can raise their " . abilityTranslate($game,CON) . " by 1 point";	break;
-						case 7: $power = "the book contains secrets of a great leader...where once read...it vanishes and the reader can raise their " . abilityTranslate($game,CHR) . " by 1 point";	break;
+						case 0: $power = "the book contains secrets of a great wizard...where once read...it vanishes and the reader can raise their " . abilityTranslate($game,'WIZ') . " by 1 point";	break;
+						case 1: $power = "the book contains secrets of a great sage...where once read...it vanishes and the reader can raise their " . abilityTranslate($game,'INT') . " by 1 point";	break;
+						case 2: $power = "the book contains secrets of a great warrior...where once read...it vanishes and the reader can raise their " . abilityTranslate($game,'STR') . " by 1 point";	break;
+						case 3: $power = "the book contains secrets of a great thief...where once read...it vanishes and the reader can raise their " . abilityTranslate($game,'SPD') . " by 1 point";	break;
+						case 4: $power = "the book contains secrets of a great ranger...where once read...it vanishes and the reader can raise their " . abilityTranslate($game,'DEX') . " by 1 point";	break;
+						case 5: $power = "the book contains secrets of a great gambler...where once read...it vanishes and the reader can raise their " . abilityTranslate($game,'LCK') . " by 1 point";	break;
+						case 6: $power = "the book contains secrets of a great healer...where once read...it vanishes and the reader can raise their " . abilityTranslate($game,'CON') . " by 1 point";	break;
+						case 7: $power = "the book contains secrets of a great leader...where once read...it vanishes and the reader can raise their " . abilityTranslate($game,'CHR') . " by 1 point";	break;
 						case 8: $power = "the book contains secrets of a great adventurer...where once read...it vanishes and the reader can raise an attribute by 1 point";	break;
 					}
 					break;
@@ -573,7 +573,7 @@ function tomePower($chance,$curst,$level,$cut,$game)
 				case 1:	$power = "the book is magical and blank when found, where the owner`s spoken words will magically appear on the pages";								break;
 				case 2:	$power = "the book is written in poisonous ink so if a reader is not wearing gloves they must make a save for poison or die";							break;
 				case 3: $wiz = mt_rand(1,20); if ($game == "Swords & Six-Siders"){ $wiz = mt_rand(1,6); }
-					$power = "the book gives instructions, for a level " . $wiz . " wizard, on how to summon a level " . mt_rand(1,$wiz) . " demon known as " . demonName() . ". If summoned properly, they will serve the wizard for " . mt_rand(2,16) . " " . timeSpan(round) . "..." . timeSpan(often) . " per " . timeSpan(per) . ".";
+					$power = "the book gives instructions, for a level " . $wiz . " wizard, on how to summon a level " . mt_rand(1, max((int)(1), (int)($wiz))) . " demon known as " . demonName() . ". If summoned properly, they will serve the wizard for " . mt_rand(2,16) . " " . timeSpan('round') . "..." . timeSpan('often') . " per " . timeSpan('per') . ".";
 				break;
 				case 4:	$power = "the book contains clues about the current dungeon or a nearby dungeon";												break;
 				case 5:	$power = "the book can be written in but only the owner can understand what it says";												break;
@@ -655,39 +655,39 @@ function bootPower($curst,$level,$game)
 
 	switch (mt_rand(0,2))
 	{
-		case 0:	$curse = "are cursed and will cause the wearer to dance if they try to fight or flee" . curseDuration(1,wearer,mt_rand(1,20));	break;
-		case 1:	$curse = "are cursed and wearer will be unable to move from the spot they are on" . curseDuration(1,wearer,mt_rand(1,20));	break;
-		case 2:	$curse = "are cursed and the " . curseType(mt_rand(1,20),wearer,equip,$game);								break;
+		case 0:	$curse = "are cursed and will cause the wearer to dance if they try to fight or flee" . curseDuration(1,'wearer',mt_rand(1,20));	break;
+		case 1:	$curse = "are cursed and wearer will be unable to move from the spot they are on" . curseDuration(1,'wearer',mt_rand(1,20));	break;
+		case 2:	$curse = "are cursed and the " . curseType(mt_rand(1,20),'wearer','equip',$game);								break;
 	}
 
 	switch (mt_rand(0,13))
 	{
-		case 0:	$power = "these " . leatherColor() . " " . materialType(leather) . " skin boots allow the wearer to walk on water up to " . mt_rand(10,30) . "0 feet per day";																			break;
-		case 1:	$power = "these " . leatherColor() . " " . materialType(leather) . " skin boots allow one to levitate " . mt_rand(1,10) . "0 feet off the ground at the rate of 10 feet per round...the magic word to activate the boots is `" . castingName() . "` which is " . $written;					break;
+		case 0:	$power = "these " . leatherColor() . " " . materialType('leather') . " skin boots allow the wearer to walk on water up to " . mt_rand(10,30) . "0 feet per day";																			break;
+		case 1:	$power = "these " . leatherColor() . " " . materialType('leather') . " skin boots allow one to levitate " . mt_rand(1,10) . "0 feet off the ground at the rate of 10 feet per round...the magic word to activate the boots is `" . castingName() . "` which is " . $written;					break;
 		case 2:
-				if (($game == "Tunnels & Trolls 5th Edition") || ($game == "Tunnels & Trolls 7th Edition") || ($game == "Tunnels & Trolls Deluxe")){$power = "these " . leatherColor() . " " . materialType(leather) . " skin boots allow one to run as fast as a horse and provides an additional " . mt_rand(2,6) . " hits to their armor";}
-				else if ($game == "Swords & Six-Siders"){$power = "these " . leatherColor() . " " . materialType(leather) . " skin boots allow one to run as fast as a horse and provide +" . mt_rand(1,1) . " to their armor";}
-				else {$power = "these " . leatherColor() . " " . materialType(leather) . " skin boots allow one to run as fast as a horse and provide +" . mt_rand(1,3) . " to their armor";}
+				if (($game == "Tunnels & Trolls 5th Edition") || ($game == "Tunnels & Trolls 7th Edition") || ($game == "Tunnels & Trolls Deluxe")){$power = "these " . leatherColor() . " " . materialType('leather') . " skin boots allow one to run as fast as a horse and provides an additional " . mt_rand(2,6) . " hits to their armor";}
+				else if ($game == "Swords & Six-Siders"){$power = "these " . leatherColor() . " " . materialType('leather') . " skin boots allow one to run as fast as a horse and provide +" . mt_rand(1,1) . " to their armor";}
+				else {$power = "these " . leatherColor() . " " . materialType('leather') . " skin boots allow one to run as fast as a horse and provide +" . mt_rand(1,3) . " to their armor";}
 			break;
-		case 3:	$power = "these " . leatherColor() . " " . materialType(leather) . " skin boots allow one to jump foward and upward about " . mt_rand(1,6) . "0 feet...and half that backwards";																break;
+		case 3:	$power = "these " . leatherColor() . " " . materialType('leather') . " skin boots allow one to jump foward and upward about " . mt_rand(1,6) . "0 feet...and half that backwards";																break;
 		case 4:	$power = "these fur boots allow one to travel snow without slowness or leaving tracks...as well as walk on ice without slipping";																						break;
-		case 5:	$power = "these " . leatherColor() . " " . materialType(leather) . " skin boots will leave tracks of a " . $tracks . " when the wearer walks";																					break;
-		case 6:	$power = "these " . leatherColor() . " " . materialType(leather) . " skin boots allow the wearer to fly " . mt_rand(6,12) . "0 feet per round for up to 2 hours a day...the magic word to activate the boots is `" . castingName() . "` which is " . $written;							break;
-		case 7:	$power = "these " . leatherColor() . " " . materialType(leather) . " skin boots allow the wearer to walk up walls as though they are walking on the ground...but only for " . mt_rand (1,6) . "0 minutes a day";												break;
+		case 5:	$power = "these " . leatherColor() . " " . materialType('leather') . " skin boots will leave tracks of a " . $tracks . " when the wearer walks";																					break;
+		case 6:	$power = "these " . leatherColor() . " " . materialType('leather') . " skin boots allow the wearer to fly " . mt_rand(6,12) . "0 feet per round for up to 2 hours a day...the magic word to activate the boots is `" . castingName() . "` which is " . $written;							break;
+		case 7:	$power = "these " . leatherColor() . " " . materialType('leather') . " skin boots allow the wearer to walk up walls as though they are walking on the ground...but only for " . mt_rand (1,6) . "0 minutes a day";												break;
 		case 8:
 				if (($game == "Tunnels & Trolls 5th Edition") || ($game == "Tunnels & Trolls 7th Edition") || ($game == "Tunnels & Trolls Deluxe")){$power = "anyone walking in these boots will be able to add " . mt_rand(1,3) . " dice to any sneaking SR's";}
 				else if ($game == "Wizardy & Warriors"){$power = "anyone walking in these boots will have a +" . mt_rand(1,3) . " to sneaking SR's";}
 				else if ($game == "Swords & Six-Siders"){$power = "anyone walking in these boots will have a +" . mt_rand(1,2) . " to their dexterity";}
 				else {$power = "anyone walking in these boots will be able to sneak with a " . mt_rand(2,10) . "0% success rate";}
 			break;
-		case 9: $power = "these " . leatherColor() . " " . materialType(leather) . " skin boots allow the wearer to teleport " . mt_rand(2,20) . "0 feet, but only " . mt_rand(2,8) . " times per day...the magic word to activate the boots is `" . castingName() . "` which is " . $written;					break;
-		case 10:$power = "these " . leatherColor() . " " . materialType(leather) . " skin boots give the wearer a cat-like grace...if they jump from a height no greater than " . mt_rand(1,9) . "0 feet (or a pit opens up beneath them) they will always land on their feet, and even safely between spikes, without taking any damage";	break;
-		case 11:$power = "these " . leatherColor() . " " . materialType(leather) . " skin boots allow the wearer to walk on lava up to " . mt_rand(10,30) . "0 feet per day";	break;
-		case 12:$power = "these " . leatherColor() . " " . materialType(leather) . " skin boots will leave no tracks when the wearer walks";	break;
-		case 13:$power = "these " . leatherColor() . " " . materialType(leather) . " skin boots allow the wearer to never be knocked off their feet from a combat move";	break;
+		case 9: $power = "these " . leatherColor() . " " . materialType('leather') . " skin boots allow the wearer to teleport " . mt_rand(2,20) . "0 feet, but only " . mt_rand(2,8) . " times per day...the magic word to activate the boots is `" . castingName() . "` which is " . $written;					break;
+		case 10:$power = "these " . leatherColor() . " " . materialType('leather') . " skin boots give the wearer a cat-like grace...if they jump from a height no greater than " . mt_rand(1,9) . "0 feet (or a pit opens up beneath them) they will always land on their feet, and even safely between spikes, without taking any damage";	break;
+		case 11:$power = "these " . leatherColor() . " " . materialType('leather') . " skin boots allow the wearer to walk on lava up to " . mt_rand(10,30) . "0 feet per day";	break;
+		case 12:$power = "these " . leatherColor() . " " . materialType('leather') . " skin boots will leave no tracks when the wearer walks";	break;
+		case 13:$power = "these " . leatherColor() . " " . materialType('leather') . " skin boots allow the wearer to never be knocked off their feet from a combat move";	break;
 	}
 
-	if ($curst > 0){$power = "these " . leatherColor() . " " . materialType(leather) . " skin boots " . $curse;}
+	if ($curst > 0){$power = "these " . leatherColor() . " " . materialType('leather') . " skin boots " . $curse;}
 	return $power;
 }
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -696,10 +696,10 @@ function cloakPower($curst,$level,$game)
 	switch (mt_rand(0,1))
 	{
 		case 0:
-				if (($game == "Tunnels & Trolls 5th Edition") || ($game == "Tunnels & Trolls 7th Edition") || ($game == "Tunnels & Trolls Deluxe")){$curse = "is cursed and will poison the wearer where they must make an " . TTSaves($level,$game) . " vs. " . abilityTranslate($game,STR) . " or " . abilityTranslate($game,CON) . " or die" . curseDuration(1,wearer,mt_rand(1,20));}
-				else {$curse = "is cursed and will poison the wearer where they must save for poison or die" . curseDuration(1,wearer,mt_rand(1,20));}
+				if (($game == "Tunnels & Trolls 5th Edition") || ($game == "Tunnels & Trolls 7th Edition") || ($game == "Tunnels & Trolls Deluxe")){$curse = "is cursed and will poison the wearer where they must make an " . TTSaves($level,$game) . " vs. " . abilityTranslate($game,'STR') . " or " . abilityTranslate($game,'CON') . " or die" . curseDuration(1,'wearer',mt_rand(1,20));}
+				else {$curse = "is cursed and will poison the wearer where they must save for poison or die" . curseDuration(1,'wearer',mt_rand(1,20));}
 			break;
-		case 1:	$curse = "is cursed and the " . curseType(mt_rand(1,20),wearer,equip,$game);								break;
+		case 1:	$curse = "is cursed and the " . curseType(mt_rand(1,20),'wearer','equip',$game);								break;
 	}
 	if (($game == "Swords & Six-Siders") || ($game == "Tunnels & Trolls 5th Edition") || ($game == "Tunnels & Trolls 7th Edition") || ($game == "Tunnels & Trolls Deluxe")){$written = "learned by identifying the item";} else {$written = "learned from identifying magic";}
 	switch (mt_rand(0,3))
@@ -748,13 +748,13 @@ function robePower($curst,$level,$game)
 {
 	switch (mt_rand(0,2))
 	{
-		case 0:	$curse = "is cursed and the wearer will be bitten by many magical bugs that infest it" . curseDuration(1,wearer,mt_rand(1,20));	break;
+		case 0:	$curse = "is cursed and the wearer will be bitten by many magical bugs that infest it" . curseDuration(1,'wearer',mt_rand(1,20));	break;
 		case 1:
-				if (($game == "Tunnels & Trolls 5th Edition") || ($game == "Tunnels & Trolls 7th Edition") || ($game == "Tunnels & Trolls Deluxe")){$curse = "is cursed and the wearer will suffer a -3 to " . abilityType($game) . curseDuration(1,wearer,mt_rand(1,20));}
-				else if ($game == "Swords & Six-Siders"){$curse = "is cursed and the wearer will suffer a -1 to their " . abilityType($game) . curseDuration(1,wearer,mt_rand(1,20));}
-				else {$curse = "is cursed and the wearer will suffer a -3 to their prime attribute" . curseDuration(1,wearer,mt_rand(1,20));}
+				if (($game == "Tunnels & Trolls 5th Edition") || ($game == "Tunnels & Trolls 7th Edition") || ($game == "Tunnels & Trolls Deluxe")){$curse = "is cursed and the wearer will suffer a -3 to " . abilityType($game) . curseDuration(1,'wearer',mt_rand(1,20));}
+				else if ($game == "Swords & Six-Siders"){$curse = "is cursed and the wearer will suffer a -1 to their " . abilityType($game) . curseDuration(1,'wearer',mt_rand(1,20));}
+				else {$curse = "is cursed and the wearer will suffer a -3 to their prime attribute" . curseDuration(1,'wearer',mt_rand(1,20));}
 			break;
-		case 2:	$curse = "is cursed and the " . curseType(mt_rand(1,20),wearer,equip,$game);								break;
+		case 2:	$curse = "is cursed and the " . curseType(mt_rand(1,20),'wearer','equip',$game);								break;
 	}
 	if (($game == "Swords & Six-Siders") || ($game == "Tunnels & Trolls 5th Edition") || ($game == "Tunnels & Trolls 7th Edition") || ($game == "Tunnels & Trolls Deluxe")){$written = "learned by identifying the item";} else {$written = "learned from identifying magic";}
 	switch (mt_rand(0,5))
@@ -774,7 +774,7 @@ function robePower($curst,$level,$game)
 		case 2:	$power = "this " . candleColor(0) . " robe gives the wearer the ability to appear as some object of equal mass and size by simply concentrating on an item and saying the magic word...the magic word to activate the robe is `" . castingName() . "` which is " . $written;	break;
 		case 3:	$power = "this " . candleColor(0) . " robe gives the wearer the ability to see in all directions, without the need for a light source";																				break;
 		case 4:
-				if (($game == "Tunnels & Trolls 5th Edition") || ($game == "Tunnels & Trolls 7th Edition") || ($game == "Tunnels & Trolls Deluxe")){$power = "this multi-colored robe allows the wearer to cause the robe to shift colors, lights, and patterns up to " . mt_rand(2,6) . " times per day...giving them an extra die to roll for combat...it also causes enemies to be hypnotized for " . mt_rand(2,5) . " rounds, " . mt_rand(2,5) . " times a day, if they fail an " . TTSaves($level,$game) . " vs. " . abilityTranslate($game,WIZ) . "...the magic word to activate the robe is `" . castingName() . "` which is " . $written;}
+				if (($game == "Tunnels & Trolls 5th Edition") || ($game == "Tunnels & Trolls 7th Edition") || ($game == "Tunnels & Trolls Deluxe")){$power = "this multi-colored robe allows the wearer to cause the robe to shift colors, lights, and patterns up to " . mt_rand(2,6) . " times per day...giving them an extra die to roll for combat...it also causes enemies to be hypnotized for " . mt_rand(2,5) . " rounds, " . mt_rand(2,5) . " times a day, if they fail an " . TTSaves($level,$game) . " vs. " . abilityTranslate($game,'WIZ') . "...the magic word to activate the robe is `" . castingName() . "` which is " . $written;}
 				else if ($game == "Swords & Six-Siders"){$power = "this multi-colored robe allows the wearer to cause the robe to shift colors, lights, and patterns up to " . mt_rand(2,6) . " times per day...giving them a +1 for attack rolls...it also causes enemies to be hypnotized for " . mt_rand(2,5) . " rounds, " . mt_rand(2,5) . " times a day, if they fail save against magic...the magic word to activate the robe is `" . castingName() . "` which is " . $written;}
 				else {$power = "this multi-colored robe allows the wearer to cause the robe to shift colors, lights, and patterns up to " . mt_rand(2,6) . " times per day...giving them an extra +1 to armor per combat round to a maximum of +5...it also causes enemies to be hypnotized for " . mt_rand(2,5) . " rounds if they fail a save for magic...the magic word to activate the robe is `" . castingName() . "` which is " . $written;}
 			break;
@@ -794,7 +794,7 @@ function robePower($curst,$level,$game)
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
 function beltPower($curst,$level,$game)
 {
-	$decorate = leatherColor() . " " . materialType(leather) . " skin belt has a " . preciousChooser() . " buckle";
+	$decorate = leatherColor() . " " . materialType('leather') . " skin belt has a " . preciousChooser() . " buckle";
 	if (($game == "Swords & Six-Siders") || ($game == "Tunnels & Trolls 5th Edition") || ($game == "Tunnels & Trolls 7th Edition") || ($game == "Tunnels & Trolls Deluxe")){$written = "learned by identifying the item";} else {$written = "learned from identifying magic";}
 	switch (mt_rand(0,5))
 	{
@@ -807,7 +807,7 @@ function beltPower($curst,$level,$game)
 		switch (mt_rand(4,14))
 		{
 			case 4:	$power = "this " . $decorate . " and allows the wearer to always deal with " . humanType() . " on peaceful terms...unless the wearer does something hostile toward them";		break;
-			case 5:	$power = "this " . $decorate . " and can completely restore the wearer's " . abilityTranslate($game,CON) . "...but only has " . mt_rand(5,20) . " charges";							break;
+			case 5:	$power = "this " . $decorate . " and can completely restore the wearer's " . abilityTranslate($game,'CON') . "...but only has " . mt_rand(5,20) . " charges";							break;
 			case 6:	$power = "this " . $decorate . " and has a pouch permanently connected to it...where it can weightlessly hold " . mt_rand(2,6) . " items without appearing to take up space";	break;
 			case 7:	$power = "this " . $decorate . " and allows the buckle to produce a light in a " . mt_rand(1,5) . "0 foot radius when the magic word is spoken...the magic word to activate the robe is `" . castingName() . "` which is " . $written;	break;
 			case 8:	$power = "this " . $decorate . " and will slightly tighten around the wearer when within " . mt_rand(1,3) . "0 feet of " . searchList() . " and the wearer concentrates";		break;
@@ -850,7 +850,7 @@ function beltPower($curst,$level,$game)
 			case 10:$power = "this " . $decorate . " and causes the wearer to never be hungry or thirsty, but for only " . mt_rand(2,90) . " days after which the magic is drained";			break;
 		}
 	}
-	if ($curst > 0){$power = "this " . $decorate . " but is cursed and the " . curseType(mt_rand(1,20),wearer,equip,$game);}
+	if ($curst > 0){$power = "this " . $decorate . " but is cursed and the " . curseType(mt_rand(1,20),'wearer','equip',$game);}
 	return $power;
 }
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -869,14 +869,14 @@ function glovePower($glove,$curst,$level,$game)
 	switch (mt_rand(0,1))
 	{
 		case 0:
-				if (($game == "Swords & Six-Siders") || ($game == "Tunnels & Trolls 5th Edition") || ($game == "Tunnels & Trolls 7th Edition") || ($game == "Tunnels & Trolls Deluxe")){$curse = "are cursed and will cause the wearer to drop their weapon about 3 out of 6 times each combat round " . curseDuration(1,wearer,mt_rand(1,20));}
-				else {$curse = "are cursed and will cause the wearer to drop their weapon about 50% of the time " . curseDuration(1,wearer,mt_rand(1,20));}
+				if (($game == "Swords & Six-Siders") || ($game == "Tunnels & Trolls 5th Edition") || ($game == "Tunnels & Trolls 7th Edition") || ($game == "Tunnels & Trolls Deluxe")){$curse = "are cursed and will cause the wearer to drop their weapon about 3 out of 6 times each combat round " . curseDuration(1,'wearer',mt_rand(1,20));}
+				else {$curse = "are cursed and will cause the wearer to drop their weapon about 50% of the time " . curseDuration(1,'wearer',mt_rand(1,20));}
 			break;
-		case 1:	$curse = "are cursed and the " . curseType(mt_rand(1,20),wearer,equip,$game);									break;
+		case 1:	$curse = "are cursed and the " . curseType(mt_rand(1,20),'wearer','equip',$game);									break;
 	}
 	if ($glove == "gloves")
 	{
-		if (mt_rand(1,100) > 50){$decorate = leatherColor() . " " . materialType(leather) . " skin gloves";}
+		if (mt_rand(1,100) > 50){$decorate = leatherColor() . " " . materialType('leather') . " skin gloves";}
 		else {$decorate = candleColor(0) . " gloves";}
 		switch (mt_rand(0,2))
 		{
@@ -890,7 +890,7 @@ function glovePower($glove,$curst,$level,$game)
 	}
 	else if ($glove == "bracers")
 	{
-		$decorate = leatherColor() . " " . materialType(leather) . " skin bracers";
+		$decorate = leatherColor() . " " . materialType('leather') . " skin bracers";
 		if (($game == "Tunnels & Trolls 5th Edition") || ($game == "Tunnels & Trolls 7th Edition") || ($game == "Tunnels & Trolls Deluxe"))
 		{
 			switch (mt_rand(0,2))
@@ -1015,7 +1015,7 @@ function amuletPower($amulet,$curst,$level,$game)
 	{
 		case 0:	$curse = "but is cursed and will appear to hide one`s location from magic, but actually enhances it";						break;
 		case 1:	$curse = "but is cursed and strangle those who put it on...killing them in " . mt_rand(2,6) . " rounds unless curse removing magic is used";	break;
-		case 2:	$curse = "but is cursed and the " . curseType(mt_rand(1,20),wearer,equip,$game);										break;
+		case 2:	$curse = "but is cursed and the " . curseType(mt_rand(1,20),'wearer','equip',$game);										break;
 		case 3:	$curse = "but is cursed and will cause the wearer to become a " . lycanthrope() . " unless curse removing magic is used which nullfies the object";	break;
 	}
 	$decorate = preciousChooser() . " " . $amulet . " has a " . gemChooser() . " set in it";
@@ -1035,7 +1035,7 @@ function amuletPower($amulet,$curst,$level,$game)
 			case 13:$power = "this " . $decorate . " and will absorb up to " . (mt_rand(1,10)*10) . "0 points of magical spell damage before being destroyed";			break;
 			case 14:$power = "this " . $decorate . " and grants the wearer the ability to resist any type of disease";							break;
 			case 15:$power = "this " . $decorate . " and grants the wearer the ability to resist any type of poison";							break;
-			case 16:$power = "this " . $decorate . " and will stabalize the wearer if their " . abilityTranslate($game,CON) . " drops below 1...keeping them at 1 " . abilityTranslate($game,CON) . ", but only once a week";	break;
+			case 16:$power = "this " . $decorate . " and will stabalize the wearer if their " . abilityTranslate($game,'CON') . " drops below 1...keeping them at 1 " . abilityTranslate($game,'CON') . ", but only once a week";	break;
 			case 17:$power = "this " . $decorate . " and grants the wearer immunity from having their head severed";							break;
 			case 18:$power = "this " . $decorate . " and will detect any undead that are within " . mt_rand(1,10) . "0 feet but only " . mt_rand(2,6) . " times per day";	break;
 			case 19:$power = "this " . $decorate . " and will release a cloud of " . fogColor() . " smoke in a " . mt_rand(1,3) . "0 foot area that will dissipate in " . mt_rand(2,20) . " minutes...but only once per day and when the word `" . castingName() . "` is spoken";	break;
@@ -1139,7 +1139,7 @@ function rockPower($rock,$curst,$level,$game)
 		case 0:	$light = "in a " . mt_rand(1,5) . "0 foot radius";	break;
 		case 1:	$light = "in a " . mt_rand(3,7) . "0 foot beam";	break;
 		case 2:
-				if (($game == "Tunnels & Trolls 5th Edition") || ($game == "Tunnels & Trolls 7th Edition") || ($game == "Tunnels & Trolls Deluxe")){$light = "a bright flash of light in a  " . mt_rand(2,5) . "0 foot area that one must make an " . TTSaves($level,$game) . " vs. " . abilityTranslate($game,SPD) . " or " . abilityTranslate($game,LCK) . " or be blinded for " . mt_rand(2,8) . " rounds";}
+				if (($game == "Tunnels & Trolls 5th Edition") || ($game == "Tunnels & Trolls 7th Edition") || ($game == "Tunnels & Trolls Deluxe")){$light = "a bright flash of light in a  " . mt_rand(2,5) . "0 foot area that one must make an " . TTSaves($level,$game) . " vs. " . abilityTranslate($game,'SPD') . " or " . abilityTranslate($game,'LCK') . " or be blinded for " . mt_rand(2,8) . " rounds";}
 				else {$light = "a bright flash of light in a  " . mt_rand(2,5) . "0 foot area that one must save for magic or be blinded for " . mt_rand(2,8) . " rounds";}
 			break;
 	}
@@ -1155,15 +1155,15 @@ function rockPower($rock,$curst,$level,$game)
 
 	switch (mt_rand(0,4))
 	{
-		case 0:	$curse = "is cursed where the one who touches it will guard it and begin to think that all others will kill them to possess it" . curseDuration(1,possessor,$level);	break;
-		case 1:	$curse = "is cursed where the one who touches it will protect it and will encounter wandering enemies twice as often" . curseDuration(1,possessor,$level);	break;
+		case 0:	$curse = "is cursed where the one who touches it will guard it and begin to think that all others will kill them to possess it" . curseDuration(1,'possessor',$level);	break;
+		case 1:	$curse = "is cursed where the one who touches it will protect it and will encounter wandering enemies twice as often" . curseDuration(1,'possessor',$level);	break;
 		case 2:
 				if ($game == "Tunnels & Trolls 5th Edition"){$curse = "is cursed where the one who touches it will be pulled into it unless they can make an " . TTSaves($level,$game) . " vs. INT...once inside another can simply utter the command word `" . $magic_word . "` to project an illusion of the one trapped...the " . $rock . " can only hold one soul and cannot be replaced by another soul...one can be freed from the " . $rock . " if it is destroyed";}
 				else if ($game == "Tunnels & Trolls 7th Edition" || $game == "Tunnels & Trolls Deluxe"){$curse = "is cursed where the one who touches it will be pulled into it unless they can make an " . TTSaves($level,$game) . " vs. INT or WIZ...once inside another can simply utter the command word `" . $magic_word . "` to project an illusion of the one trapped...the " . $rock . " can only hold one soul and cannot be replaced by another soul...one can be freed from the " . $rock . " if it is destroyed";}
 				else {$curse = "is cursed where the one who touches it will be pulled into it unless they can save for spells...once inside another can simply utter the command word `" . $magic_word . "` to project an illusion of the one trapped...the " . $rock . " can only hold one soul and cannot be replaced by another soul...one can be freed from the " . $rock . " if it is destroyed";}
 			break;
-		case 3:	$curse = "is cursed where the one who carries it will suffer from the magically incredible weight and begin to travel more slowly and avoid dangers less often" . curseDuration(1,possessor,$level);	break;
-		case 4:	$curse = "is cursed and the " . curseType($level,possessor,item,$game);										break;
+		case 3:	$curse = "is cursed where the one who carries it will suffer from the magically incredible weight and begin to travel more slowly and avoid dangers less often" . curseDuration(1,'possessor',$level);	break;
+		case 4:	$curse = "is cursed and the " . curseType($level,'possessor','item',$game);										break;
 	}
 	switch (mt_rand(0,9))
 	{
@@ -1229,15 +1229,15 @@ function helmPower($helm,$curst,$level,$game)
 	switch (mt_rand(0,3))
 	{
 		case 0:	
-				if (($game == "Tunnels & Trolls 5th Edition") || ($game == "Tunnels & Trolls 7th Edition") || ($game == "Tunnels & Trolls Deluxe")){$curse = "is cursed and will cause the wearer to lose " . mt_rand(1,5) . " " . abilityTranslate($game,INT) . " " . curseDuration(1,wearer,mt_rand(1,20));}
-				else {$curse = "is cursed and will cause the wearer to become evil " . curseDuration(1,wearer,mt_rand(1,20));}
+				if (($game == "Tunnels & Trolls 5th Edition") || ($game == "Tunnels & Trolls 7th Edition") || ($game == "Tunnels & Trolls Deluxe")){$curse = "is cursed and will cause the wearer to lose " . mt_rand(1,5) . " " . abilityTranslate($game,'INT') . " " . curseDuration(1,'wearer',mt_rand(1,20));}
+				else {$curse = "is cursed and will cause the wearer to become evil " . curseDuration(1,'wearer',mt_rand(1,20));}
 			break;
 		case 1:
-				if (($game == "Tunnels & Trolls 5th Edition") || ($game == "Tunnels & Trolls 7th Edition") || ($game == "Tunnels & Trolls Deluxe")){$curse = "is cursed and will cause the wearer to lose " . mt_rand(1,5) . " " . abilityTranslate($game,CHR) . " " . curseDuration(1,wearer,mt_rand(1,20));}
-				else {$curse = "is cursed and will cause the wearer to become good " . curseDuration(1,wearer,mt_rand(1,20));}
+				if (($game == "Tunnels & Trolls 5th Edition") || ($game == "Tunnels & Trolls 7th Edition") || ($game == "Tunnels & Trolls Deluxe")){$curse = "is cursed and will cause the wearer to lose " . mt_rand(1,5) . " " . abilityTranslate($game,'CHR') . " " . curseDuration(1,'wearer',mt_rand(1,20));}
+				else {$curse = "is cursed and will cause the wearer to become good " . curseDuration(1,'wearer',mt_rand(1,20));}
 			break;
-		case 2:	$curse = "is cursed and the " . curseType(mt_rand(1,20),wearer,equip,$game);					break;
-		case 3:	$curse = "is cursed and the " . curseType(mt_rand(1,20),wearer,equip,$game);					break;
+		case 2:	$curse = "is cursed and the " . curseType(mt_rand(1,20),'wearer','equip',$game);					break;
+		case 3:	$curse = "is cursed and the " . curseType(mt_rand(1,20),'wearer','equip',$game);					break;
 	}
 
 	if (($game == "Tunnels & Trolls 5th Edition") || ($game == "Tunnels & Trolls 7th Edition") || ($game == "Tunnels & Trolls Deluxe"))
@@ -1288,7 +1288,7 @@ function helmPower($helm,$curst,$level,$game)
 		if (mt_rand(1,100) > 50){$decorate = preciousChooser() . " " . $helm . " has a " . designType(0) . " symbol on the sides and";}
 	}
 	else if ($helm == "circlet"){$decorate = preciousChooser() . " " . $helm . " has a " . gemChooser() . " set in it and";	$written = "etched inside of it";}
-	else if ($helm == "headband"){$decorate = leatherColor() . " " . materialType(leather) . " skin " . $helm;	$written = "stitched inside of it";}
+	else if ($helm == "headband"){$decorate = leatherColor() . " " . materialType('leather') . " skin " . $helm;	$written = "stitched inside of it";}
 	else if ($helm == "jester hat"){$decorate = "multi-colored " . $helm;	$written = "stitched inside of it";}
 	else if (($helm == "feathered hat") || ($helm == "jester hat") || ($helm == "wide-brim hat") || ($helm == "wizard hat") || ($helm == "tricorne hat") || ($helm == "floppy hat") || ($helm == "skullcap") || ($helm == "bonnet"))
 		{$decorate = candleColor(0) . " " . $helm;		$written = "stitched inside of it";}
@@ -1307,7 +1307,7 @@ function helmPower($helm,$curst,$level,$game)
 			case 6:	$power = "this " . $decorate . " grants the wearer the ability to see perfectly underwater up to " . mt_rand(5,12) . "0 feet away and breathe normally...the magic word to activate the power is `" . castingName() . "` which is " . $written;	break;
 			case 7:	$power = "this " . $decorate . " grants the wearer the ability to detect " . searchList() . " within " . mt_rand(1,5) . "0 feet if they concentrate...and only " . mt_rand(2,4) . " times per day";	break;
 			case 8:	$power = "this " . $decorate . " grants the wearer the ability to " . $special;									break;
-			case 9:	$power = "this " . $decorate . " increases the wearer`s " . abilityTranslate($game,CHR) . " by " . mt_rand(2,9) . " points while wearing it";				break;
+			case 9:	$power = "this " . $decorate . " increases the wearer`s " . abilityTranslate($game,'CHR') . " by " . mt_rand(2,9) . " points while wearing it";				break;
 			case 10:$power = "this " . $decorate . " increases the wearer`s " . abilityType($game) . " by " . mt_rand(2,10) . " points while wearing it";						break;
 		}
 	}
@@ -1369,7 +1369,7 @@ function searchList()
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
 function lycanthrope()
 {
-	$value = array('werebear', 'wereboar', 'wererat', 'weretiger', 'werewolf', 'werewolf', 'werewolf', 'werewolf');
+	$value = ['werebear', 'wereboar', 'wererat', 'weretiger', 'werewolf', 'werewolf', 'werewolf', 'werewolf'];
 	return $value[mt_rand(0,7)];
 }
 //////////////////////////////////////////////////////////////////////////////////////////////////////////

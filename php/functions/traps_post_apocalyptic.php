@@ -2,7 +2,7 @@
 
 function PAtrapMaker($level,$type,$game,$mutants,$might1,$might2,$tech,$v_scare)
 {
-	if ($level > 0){$level = mt_rand(1,$level);} else {$level = mt_rand(1,20);}
+	if ($level > 0){$level = mt_rand(1, max((int)(1), (int)($level)));} else {$level = mt_rand(1,20);}
 
 	$rad_level = $level;  if ($rad_level > 18){$rad_level = 18;}
 
@@ -59,7 +59,7 @@ function PAtrapMaker($level,$type,$game,$mutants,$might1,$might2,$tech,$v_scare)
 	}
 	else
 	{
-		$power = array('4', '6', '8', '10', '12'); $death0 = "suffer 1d" . $power[mt_rand(0,4)] . "x" . (ceil($level/2)+1) . " damage";
+		$power = ['4', '6', '8', '10', '12']; $death0 = "suffer 1d" . $power[mt_rand(0,4)] . "x" . (ceil($level/2)+1) . " damage";
 		$death1 = $death0;
 		$death2 = $death0 . " and become stunned for 1d4 rounds";
 		$death3 = $death0;
@@ -120,7 +120,7 @@ function PAtrapMaker($level,$type,$game,$mutants,$might1,$might2,$tech,$v_scare)
 
 	if ($tech == 1){$tp1 = 10; $tp2 = 54;} else {$tp1=0; $tp2 = 44;}
 
-	switch (mt_rand($tp1,$tp2))
+	switch (mt_rand($tp1, max((int)($tp1), (int)($tp2))))
 	{
 		case 0:	$trap = "A spear comes out of the wall toward " . $t_first . ". It attacks with a " . $scorez . " score of " . $hitscore . " and does 1d6+" . $level . " damage.";	break;
 		case 1:	$trap = "The ceiling caves in and causes 1d6x" . (ceil($level/2)+1) . " damage to all inside.";	break;
@@ -135,8 +135,8 @@ function PAtrapMaker($level,$type,$game,$mutants,$might1,$might2,$tech,$v_scare)
 				else {$trap = "A pit opens up " . $t_pit . " that drops " . $pit_depth . " feet before landing in water. Anyone who falls in this large flooded basement will encounter a <u>" . PArandomMonster($level,2,$game,$mutants,$might1,$might2) . "</u>" . $mfp . "";}
 			break;
 		case 9: $trap = "A " . mt_rand(1,6) . " foot tall " . candleColor(0) . " flower emerges " . $t_pit . " that sprays a " . candleColor(0) . " pollen that " . PAflowerPower($game) . ".";	break;
-		case 10:$trap = ucfirst(fogColor()) . " acidic gases " . $t_where . " causing 1d8+" . $level . " damage to " . $t_who . ".";	break;
-		case 11:$trap = ucfirst(fogColor()) . " poisonous gases " . $t_where . " where " . $t_who . " must " . $save1 . " or " . $death0 . ".";	break;
+		case 10:$trap = ucfirst((string) fogColor()) . " acidic gases " . $t_where . " causing 1d8+" . $level . " damage to " . $t_who . ".";	break;
+		case 11:$trap = ucfirst((string) fogColor()) . " poisonous gases " . $t_where . " where " . $t_who . " must " . $save1 . " or " . $death0 . ".";	break;
 		case 12:$trap = "A pit opens up " . $t_pit . " that is " . $pit_depth . " feet deep. Anyone who falls in will take " . $pit_damage . " damage.";	break;
 		case 13:$trap = "A pit opens up " . $t_pit . " that is " . $pit_depth . " feet deep and layered in spikes. Anyone who falls in will take " . $pit_damage . "x" . mt_rand(2,4) . " damage.";	break;
 		case 14:$trap = "Poison needles shoot from a nearby wall, attacking with a " . $scorez . " score of " . $hitscore . ". Anyone " . $t_pit . " must " . $save1 . " or " . $death0 . ".";	break;
@@ -173,10 +173,10 @@ function PAtrapMaker($level,$type,$game,$mutants,$might1,$might2,$tech,$v_scare)
 		break;
 		case 37:$trap = "The ceiling becomes highly magnetized, causing all metal objects to fly up to the ceiling...carrying metal armor wearing explorers up as well.";	break;
 		case 38:$trap = "A solid door closes the exits to the area. The room then begins to " . $death5 . " in temperature for about " . mt_rand(2,6) . "0 minutes...where no one can survive the extreme " . $death6 . ".";	break;
-		case 39:$trap = ucfirst(fogColor()) . " neural gases " . $t_where . " causing memory loss to " . $t_who . " for about " . mt_rand(2,4) . " hours.";	break;
+		case 39:$trap = ucfirst((string) fogColor()) . " neural gases " . $t_where . " causing memory loss to " . $t_who . " for about " . mt_rand(2,4) . " hours.";	break;
 		case 40:$trap = "Microwaves shoot up through the floor at all " . $t_pit . " where they must " . $save2 . " or " . $death4 . "."; break;
-		case 41:$trap = ucfirst(fogColor()) . " gases " . $t_where . " that cause instant unconsciousness to " . $t_who . " for about " . mt_rand(4,10) . " turns...unless they can " . $save4 . ".";	break;
-		case 42:$trap = ucfirst(fogColor()) . " flammable gases fill the area. Any flame will ignite it causing all " . $t_pit . " to " . $save3 . " from the explosion or " . $death4 . "."; break;
+		case 41:$trap = ucfirst((string) fogColor()) . " gases " . $t_where . " that cause instant unconsciousness to " . $t_who . " for about " . mt_rand(4,10) . " turns...unless they can " . $save4 . ".";	break;
+		case 42:$trap = ucfirst((string) fogColor()) . " flammable gases fill the area. Any flame will ignite it causing all " . $t_pit . " to " . $save3 . " from the explosion or " . $death4 . "."; break;
 		case 43:$trap = "A very bright light flashes in the area...where everyone must " . $save4 . " or be blind for " . ($level+2) . " turns.";		break;
 		case 44:$trap = "A " . candleColor(0) . " sticky substance is " . $t_pit . " and causes " . $t_who . " to be stuck and must succeed at a strength test to free themselves.";	break;
 		case 45:$trap = "A razor pole comes out of the wall toward " . $t_first . ". It attacks with a " . $scorez . " score of " . $hitscore . " and does 1d6+" . $level . " damage.";	break;
@@ -194,15 +194,15 @@ function PAtrapMaker($level,$type,$game,$mutants,$might1,$might2,$tech,$v_scare)
 		case 54:$trap = "A wall exhaust fan sprays a " . candleColor(0) . " dust that " . PAflowerPower($game) . ".";	break;
 	}
 	if ($type == "list"){$trap = $trap;} // FOR DATA FILE LISTS
-	else if ($type != "box"){$trap = strtoupper($v_scare) . "&nbsp;TRAP:&nbsp;" . $trap;}
+	else if ($type != "box"){$trap = strtoupper((string) $v_scare) . "&nbsp;TRAP:&nbsp;" . $trap;}
 
-	return array($trap, $level);
+	return [$trap, $level];
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
 function PAflowerPower($game)
 {
-	$power = array('4', '6', '8', '10', '12');
+	$power = ['4', '6', '8', '10', '12'];
 	$hurt = "suffer 1d" . $power[mt_rand(0,4)] . " damage";
 
 

@@ -19,7 +19,7 @@ $x_data = explode("--END--", $x_dataz[1]);
 
 if ($process_0 > 0)
 {
-	$my_enemy_array = array();
+	$my_enemy_array = [];
 
 	$x_data_creatures = $x_data[0];
 	$x_creatures = explode("\n", $x_data_creatures);
@@ -30,7 +30,7 @@ if ($process_0 > 0)
 
 		$x_creature = explode("\t", $x_creatures[$u_creatures]);
 
-		$x_rarity = $x_creature[3] + 0;
+		$x_rarity = num($x_creature[3]);
 
 		if ( $countapp == "Wandering Enemies" ){ $x_rarity = 1; }
 
@@ -40,7 +40,7 @@ if ($process_0 > 0)
 
 			if (trim($x_creature[0]) != "")
 			{
-				if ( ($x_code == "") && ($x_level+0 < 1) ){}
+				if ( ($x_code == "") && (num($x_level) < 1) ){}
 				else
 				{
 					$matcher = "/" . $x_code . "/i";
@@ -71,7 +71,7 @@ if ($process_0 > 0)
 
 if ($process_1 > 0)
 {
-	$my_traps_array = array();
+	$my_traps_array = [];
 
 	$x_data_traps = $x_data[1];
 	$x_traps = explode("\n", $x_data_traps);
@@ -99,7 +99,7 @@ if ($process_1 > 0)
 
 if ($process_2 > 0)
 {
-	$my_decos_array = array();
+	$my_decos_array = [];
 
 	$x_data_decorations = $x_data[2];
 	$x_decorations = explode("\n", $x_data_decorations);
@@ -127,7 +127,7 @@ if ($process_2 > 0)
 
 if ($process_3 > 0)
 {
-	$my_boxes_array = array();
+	$my_boxes_array = [];
 
 	$x_data_containers = $x_data[3];
 	$x_containers = explode("\n", $x_data_containers);
@@ -173,7 +173,7 @@ if ($process_4 > 0)
 
 		if (trim($x_treasure[0]) != "")
 		{
-			$cycle = $x_treasure[1] + 0;
+			$cycle = num($x_treasure[1]);
 
 			while ($cycle > 0) :
 
@@ -213,11 +213,17 @@ if ($process_4 > 0)
 
 			if (trim($x_treasure[0]) != "")
 			{
-				$sub_loot_lists = 1;
-				$x_val_treasure = str_replace("'", " feet", $x_treasure[0]);
-				$x_val_treasure = str_replace('"', ' inches', $x_val_treasure);
-				$qry_treasure = "INSERT INTO $gable_treasure VALUES ('$x_val_treasure', '$x_treasure[1]', '$loot_listing', '$x_treasure[2]')";
-				mysqli_query( $connection, $qry_treasure ); /* qry_treasure. */
+                $sub_loot_lists = 1;
+                $x_val_treasure = str_replace("'", " feet", $x_treasure[0]);
+                $x_val_treasure = str_replace('"', ' inches', $x_val_treasure);
+                
+                // PHP 8 / Strict Mode Safety: Force empty index strings to a numeric 0
+                $val_1 = trim($x_treasure[1]) === '' ? 0 : $x_treasure[1];
+                $val_2 = trim($x_treasure[2]) === '' ? 0 : $x_treasure[2];
+
+                $qry_treasure = "INSERT INTO $gable_treasure VALUES ('$x_val_treasure', '$val_1', '$loot_listing', '$val_2')";
+                mysqli_query( $connection, $qry_treasure ); /* qry_treasure. */
+
 			}
 
 			$c_treasures = $c_treasures - 1;

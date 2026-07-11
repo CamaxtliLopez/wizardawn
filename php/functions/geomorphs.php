@@ -2,14 +2,14 @@
 
 function explodeGeomorph($tile)
 {
-	$geo_tile_1 = explode('AAA', $tile);
+	$geo_tile_1 = explode('AAA', (string) $tile);
 	$geo_tile_2 = explode('BBB', $geo_tile_1[1]);
 	$geo_tile_3 = explode('CCC', $geo_tile_2[1]);
 	$geo_tile_4 = explode('DDD', $geo_tile_3[1]);
 	$geo_tile_5 = explode('EEE', $geo_tile_4[1]);
 	$geo_tile_6 = explode('FFF', $geo_tile_5[1]);
 
-	return array($geo_tile_1[0], $geo_tile_2[0], $geo_tile_3[0], $geo_tile_4[0], $geo_tile_5[0], $geo_tile_6[0], $geo_tile_6[1]);
+	return [$geo_tile_1[0], $geo_tile_2[0], $geo_tile_3[0], $geo_tile_4[0], $geo_tile_5[0], $geo_tile_6[0], $geo_tile_6[1]];
 }
 
 function storeMap($map,$type)
@@ -20,12 +20,12 @@ function storeMap($map,$type)
 	while ( $true < 1 ) :
 
 		$qty = 10;
-		$let = array('0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z');
+		$let = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
 		$chars = count($let)-1;
 		$code = "";
 
 		while ($qty > 0) :
-			$code = $code . $let[mt_rand(0,$chars)];
+			$code = $code . $let[mt_rand(0, max((int)(0), (int)($chars)))];
 			$qty = $qty - 1;
 		endwhile;
 
@@ -50,15 +50,15 @@ function roomGeomorph($room,$high,$wide)
 		else if ($room < 21){$y = 35;}
 		else {$y = 45;}
 
-		if (substr($room, -1) == 1){$x = 5;}
-		else if (substr($room, -1) == 2){$x = 15;}
-		else if (substr($room, -1) == 3){$x = 25;}
-		else if (substr($room, -1) == 4){$x = 35;}
-		else if (substr($room, -1) == 5){$x = 45;}
-		else if (substr($room, -1) == 6){$x = 5;}
-		else if (substr($room, -1) == 7){$x = 15;}
-		else if (substr($room, -1) == 8){$x = 25;}
-		else if (substr($room, -1) == 9){$x = 35;}
+		if (substr((string) $room, -1) == 1){$x = 5;}
+		else if (substr((string) $room, -1) == 2){$x = 15;}
+		else if (substr((string) $room, -1) == 3){$x = 25;}
+		else if (substr((string) $room, -1) == 4){$x = 35;}
+		else if (substr((string) $room, -1) == 5){$x = 45;}
+		else if (substr((string) $room, -1) == 6){$x = 5;}
+		else if (substr((string) $room, -1) == 7){$x = 15;}
+		else if (substr((string) $room, -1) == 8){$x = 25;}
+		else if (substr((string) $room, -1) == 9){$x = 35;}
 		else {$x = 45;}
 	}
 	else if ($wide == 150)
@@ -74,15 +74,15 @@ function roomGeomorph($room,$high,$wide)
 		else if ($room < 46){$y = 85;}
 		else {$y = 95;}
 
-		if (substr($room, -1) == 1){$x = 5;}
-		else if (substr($room, -1) == 2){$x = 15;}
-		else if (substr($room, -1) == 3){$x = 25;}
-		else if (substr($room, -1) == 4){$x = 35;}
-		else if (substr($room, -1) == 5){$x = 45;}
-		else if (substr($room, -1) == 6){$x = 5;}
-		else if (substr($room, -1) == 7){$x = 15;}
-		else if (substr($room, -1) == 8){$x = 25;}
-		else if (substr($room, -1) == 9){$x = 35;}
+		if (substr((string) $room, -1) == 1){$x = 5;}
+		else if (substr((string) $room, -1) == 2){$x = 15;}
+		else if (substr((string) $room, -1) == 3){$x = 25;}
+		else if (substr((string) $room, -1) == 4){$x = 35;}
+		else if (substr((string) $room, -1) == 5){$x = 45;}
+		else if (substr((string) $room, -1) == 6){$x = 5;}
+		else if (substr((string) $room, -1) == 7){$x = 15;}
+		else if (substr((string) $room, -1) == 8){$x = 25;}
+		else if (substr((string) $room, -1) == 9){$x = 35;}
 		else {$x = 45;}
 	}
 	else if ($high == 150)
@@ -93,15 +93,15 @@ function roomGeomorph($room,$high,$wide)
 		else if ($room < 41){$y = 35;}
 		else {$y = 45;}
 
-		if (substr($room, -1) == 1){$x = 5;}
-		else if (substr($room, -1) == 2){$x = 15;}
-		else if (substr($room, -1) == 3){$x = 25;}
-		else if (substr($room, -1) == 4){$x = 35;}
-		else if (substr($room, -1) == 5){$x = 45;}
-		else if (substr($room, -1) == 6){$x = 55;}
-		else if (substr($room, -1) == 7){$x = 65;}
-		else if (substr($room, -1) == 8){$x = 75;}
-		else if (substr($room, -1) == 9){$x = 85;}
+		if (substr((string) $room, -1) == 1){$x = 5;}
+		else if (substr((string) $room, -1) == 2){$x = 15;}
+		else if (substr((string) $room, -1) == 3){$x = 25;}
+		else if (substr((string) $room, -1) == 4){$x = 35;}
+		else if (substr((string) $room, -1) == 5){$x = 45;}
+		else if (substr((string) $room, -1) == 6){$x = 55;}
+		else if (substr((string) $room, -1) == 7){$x = 65;}
+		else if (substr((string) $room, -1) == 8){$x = 75;}
+		else if (substr((string) $room, -1) == 9){$x = 85;}
 		else {$x = 95;}
 	}
 	else
@@ -117,24 +117,24 @@ function roomGeomorph($room,$high,$wide)
 		else if ($room < 91){$y = 85;}
 		else {$y = 95;}
 
-		if (substr($room, -1) == 1){$x = 5;}
-		else if (substr($room, -1) == 2){$x = 15;}
-		else if (substr($room, -1) == 3){$x = 25;}
-		else if (substr($room, -1) == 4){$x = 35;}
-		else if (substr($room, -1) == 5){$x = 45;}
-		else if (substr($room, -1) == 6){$x = 55;}
-		else if (substr($room, -1) == 7){$x = 65;}
-		else if (substr($room, -1) == 8){$x = 75;}
-		else if (substr($room, -1) == 9){$x = 85;}
+		if (substr((string) $room, -1) == 1){$x = 5;}
+		else if (substr((string) $room, -1) == 2){$x = 15;}
+		else if (substr((string) $room, -1) == 3){$x = 25;}
+		else if (substr((string) $room, -1) == 4){$x = 35;}
+		else if (substr((string) $room, -1) == 5){$x = 45;}
+		else if (substr((string) $room, -1) == 6){$x = 55;}
+		else if (substr((string) $room, -1) == 7){$x = 65;}
+		else if (substr((string) $room, -1) == 8){$x = 75;}
+		else if (substr((string) $room, -1) == 9){$x = 85;}
 		else {$x = 95;}
 	}
 
-	return array((($x*3)-2), (($y*3)-3));
+	return [(($x*3)-2), (($y*3)-3)];
 }
 
 //PIC AAA ROOMS BBB SPOT CCC MORE DDD DELVE EEE TERRAIN FFF WAYOUT
 
-$geomorphs = array(
+$geomorphs = [
 'bottomleft0dyson0cave0altered001.jpgAAA17BBBblCCCDDDEEEcaveFFF1', 
 'bottomleft0dyson0cave0altered002.jpgAAA9BBBblCCCDDDEEEcaveFFF0', 
 'bottomleft0dyson0cave0altered003.jpgAAA4_13_16BBBblCCCDDDEEEcaveFFF0', 
@@ -5570,6 +5570,6 @@ $geomorphs = array(
 'sci_nm_tright_012.jpgAAA1_3_5_13_15_21_25BBBtrCCCDDDEEEscifi-ma-desertFFF0', 
 'sci_nm_tright_022.jpgAAA13BBBtrCCCDDDEEEscifi-ma-desertFFF0', 
 'sci_nm_bright_012.jpgAAA1_5_13_15_21_23_25BBBbrCCCDDDEEEscifi-ma-desertFFF0', 
-'sci_nm_bright_022.jpgAAA13BBBbrCCCDDDEEEscifi-ma-desertFFF0');
+'sci_nm_bright_022.jpgAAA13BBBbrCCCDDDEEEscifi-ma-desertFFF0'];
 
 ?>

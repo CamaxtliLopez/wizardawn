@@ -2,21 +2,21 @@
 
 function sizeMake()
 {
-	$make = array('large', 'long', 'short', 'round', 'low', 'square', 'small');
+	$make = ['large', 'long', 'short', 'round', 'low', 'square', 'small'];
 	return $make[mt_rand(0,6)];
 }
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
 function sizeMakeWall()
 {
-	$make = array('large', 'tall', 'short', 'round', 'wide', 'square', 'small');
+	$make = ['large', 'tall', 'short', 'round', 'wide', 'square', 'small'];
 	return $make[mt_rand(0,6)];
 }
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
 function timeSpan($type)
 {
-	if ($type == "per"){ $time = array('hour', 'day', 'week', 'month', 'season', 'year'); $pick = $time[mt_rand(0,5)]; }
-	else if ($type == "often"){ $time = array('once', 'twice', 'three times', 'four times', 'five times', 'six times', 'seven times', 'eight times', 'nine times', 'ten times'); $pick = $time[mt_rand(0,9)]; }
-	else if ($type == "round"){ $time = array('rounds', 'turns', 'minutes', 'hours'); $pick = $time[mt_rand(0,3)]; }
+	if ($type == "per"){ $time = ['hour', 'day', 'week', 'month', 'season', 'year']; $pick = $time[mt_rand(0,5)]; }
+	else if ($type == "often"){ $time = ['once', 'twice', 'three times', 'four times', 'five times', 'six times', 'seven times', 'eight times', 'nine times', 'ten times']; $pick = $time[mt_rand(0,9)]; }
+	else if ($type == "round"){ $time = ['rounds', 'turns', 'minutes', 'hours']; $pick = $time[mt_rand(0,3)]; }
 	return $pick;
 }
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -53,7 +53,7 @@ function woodenType()
 function itemValues($game,$chance)
 {
 	if ($chance > 0){$x=1; $y=3;} else {$x=0; $y=0;}
-	switch (mt_rand($x,$y))
+	switch (mt_rand($x, max((int)($x), (int)($y))))
 	{
 		case 0:	$worth = "";	break;
 		case 1:	$worth = " worth " . mt_rand(2,10) . " " . coinMaker($game);	break;
@@ -141,7 +141,7 @@ function conditionType($category)
 function designType($painting)
 {
 	if ($painting == 1){$rn = 27;} else {$rn = 33;}
-	switch (mt_rand(0,$rn))
+	switch (mt_rand(0, max((int)(0), (int)($rn))))
 	{
 		case 0:	$value = "tower";	break;
 		case 1: $value = "griffin";	break;
@@ -722,19 +722,19 @@ function polymorphType()
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
 function caveDescription()
 {
-	$qty = array('many', 'a few', 'some', 'a couple of');
-	$hig = array('looming', 'sharp', 'crumbling', 'loose', 'thick', 'thin', 'dripping', 'short', 'long');
-	$low = array('sharp', 'low', 'loose', 'thick', 'thin', 'short', 'long');
-	$prt = array('part', 'section', 'area');
-	$cav = array('cave', 'cavern', 'tunnel');
-	$mad = array('stone', 'rock', 'limestone', 'limestone', 'dolomite', 'gypsum');
-	$wal = array('walls', 'ceiling', 'walls and ceiling', 'floor', 'walls and floor', 'ceiling and floor');
-	$min = array('gold', 'silver', 'copper', 'platinum', 'iron', 'iron', 'lead');
-	$gem = array('garnets', 'opals', 'quartz', 'sapphires', 'rubies', 'topaz', 'tourmalines', 'turquoise', 'amethysts', 'aquamarines', 'diamonds', 'emeralds', 'peridots', 'spinels');
-	$hol = array('small holes', 'holes of varying sizes', 'large holes');
-	$slm = array('moisture', 'cobwebs', 'slime', 'moss', 'mold', 'grime', 'scrapes', 'scratches', 'blood');
-	$pud = array('puddles of water', 'pools of water', 'blood stains', 'patches of moss', 'scrapes', 'scratches', 'bits of fur');
-	$stk = array('protruding from', 'sticking out of', 'extending from', 'poking out from');
+	$qty = ['many', 'a few', 'some', 'a couple of'];
+	$hig = ['looming', 'sharp', 'crumbling', 'loose', 'thick', 'thin', 'dripping', 'short', 'long'];
+	$low = ['sharp', 'low', 'loose', 'thick', 'thin', 'short', 'long'];
+	$prt = ['part', 'section', 'area'];
+	$cav = ['cave', 'cavern', 'tunnel'];
+	$mad = ['stone', 'rock', 'limestone', 'limestone', 'dolomite', 'gypsum'];
+	$wal = ['walls', 'ceiling', 'walls and ceiling', 'floor', 'walls and floor', 'ceiling and floor'];
+	$min = ['gold', 'silver', 'copper', 'platinum', 'iron', 'iron', 'lead'];
+	$gem = ['garnets', 'opals', 'quartz', 'sapphires', 'rubies', 'topaz', 'tourmalines', 'turquoise', 'amethysts', 'aquamarines', 'diamonds', 'emeralds', 'peridots', 'spinels'];
+	$hol = ['small holes', 'holes of varying sizes', 'large holes'];
+	$slm = ['moisture', 'cobwebs', 'slime', 'moss', 'mold', 'grime', 'scrapes', 'scratches', 'blood'];
+	$pud = ['puddles of water', 'pools of water', 'blood stains', 'patches of moss', 'scrapes', 'scratches', 'bits of fur'];
+	$stk = ['protruding from', 'sticking out of', 'extending from', 'poking out from'];
 
 	switch (mt_rand(1,5))
 	{
@@ -865,18 +865,18 @@ function bardType()
 function niceClothType($size)
 {
 	if ($size == 1){$x=3;} else {$x=9;}
-	switch (mt_rand(0,$x))
+	switch (mt_rand(0, max((int)(0), (int)($x))))
 	{
-		case 0:	$cloth = candleColor(0) . ", " . materialType(cloth) . " cloak";	break;
-		case 1:	$cloth = candleColor(0) . ", " . materialType(cloth) . " shirt";	break;
-		case 2:	$cloth = leatherColor() . " belt made of " . materialType(leather) . " skin and with a " . materialType(iron) . "  buckle";	break;
-		case 3:	$cloth = candleColor(0) . ", " . materialType(cloth) . " cape";		break;
-		case 4:	$cloth = candleColor(0) . ", " . materialType(cloth) . " dress";	break;
-		case 5:	$cloth = candleColor(0) . ", " . materialType(cloth) . " robe";		break;
-		case 6:	$cloth = candleColor(0) . ", " . materialType(cloth) . " coat";		break;
-		case 7:	$cloth = "pair of " . leatherColor() . " boots made of " . materialType(leather) . " skin";		if (mt_rand(1,2) == 1){$cloth = "pair of boots made of " . materialType(fur) . " fur";} break;
-		case 8:	$cloth = "pair of " . leatherColor() . " shoes made of " . materialType(leather) . " skin";		break;
-		case 9:	$cloth = "pair of " . leatherColor() . " sandals made of " . materialType(leather) . " skin";	break;
+		case 0:	$cloth = candleColor(0) . ", " . materialType('cloth') . " cloak";	break;
+		case 1:	$cloth = candleColor(0) . ", " . materialType('cloth') . " shirt";	break;
+		case 2:	$cloth = leatherColor() . " belt made of " . materialType('leather') . " skin and with a " . materialType('iron') . "  buckle";	break;
+		case 3:	$cloth = candleColor(0) . ", " . materialType('cloth') . " cape";		break;
+		case 4:	$cloth = candleColor(0) . ", " . materialType('cloth') . " dress";	break;
+		case 5:	$cloth = candleColor(0) . ", " . materialType('cloth') . " robe";		break;
+		case 6:	$cloth = candleColor(0) . ", " . materialType('cloth') . " coat";		break;
+		case 7:	$cloth = "pair of " . leatherColor() . " boots made of " . materialType('leather') . " skin";		if (mt_rand(1,2) == 1){$cloth = "pair of boots made of " . materialType('fur') . " fur";} break;
+		case 8:	$cloth = "pair of " . leatherColor() . " shoes made of " . materialType('leather') . " skin";		break;
+		case 9:	$cloth = "pair of " . leatherColor() . " sandals made of " . materialType('leather') . " skin";	break;
 	}
 	return $cloth;
 }
@@ -922,7 +922,7 @@ function rareCoins($amount,$needed)
 function furMaker($value)
 {
 	if ($value > 2000){$y = 0; $z = 8;} else if ($value > 1000){$y = 3; $z = 6;} else {$y = 0; $z = 3;} 
-	switch (mt_rand($y,$z))
+	switch (mt_rand($y, max((int)($y), (int)($z))))
 	{
 		case 0:	$material = "muskrat";		break;
 		case 1:	$material = "beaver";		break;
@@ -977,7 +977,7 @@ function potteryRare()
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
 function displayWeapon($size)
 {
-	$gems_used = explode(" (", gemChooser()); $gems_used = $gems_used[0];
+	$gems_used = explode(" (", (string) gemChooser()); $gems_used = $gems_used[0];
 	$owner = manyName();
 
 	switch (mt_rand(0,1))
@@ -987,17 +987,17 @@ function displayWeapon($size)
 	}
 
 	if ($size == 1){$z = 1;} else if ($size == 2){$z = 7;} else {$z = 8;}
-	switch (mt_rand(0,$z))
+	switch (mt_rand(0, max((int)(0), (int)($z))))
 	{
-		case 0:	$decoi = "dagger made of " . materialType(iron);		$gemit = " where the handle is decorated with " . mt_rand(2,6) . " " . $gems_used . "s";		$engrave = " and the name of `" . $owner . "` is engraved on the blade";		break;
-		case 1:	$decoi = "knife made of " . materialType(iron);			$gemit = " where the handle is decorated with " . mt_rand(2,6) . " " . $gems_used . "s";		$engrave = " and the name of `" . $owner . "` is engraved on the blade";		break;
-		case 2:	$decoi = "crown made of " . materialType(iron);			$gemit = " and is decorated with " . mt_rand(2,6) . " " . $gems_used . "s";					$engrave = " and the name of `" . $owner . "` is engraved on the inside";		break;
-		case 3:	$decoi = "helm made of " . materialType(iron);			$gemit = " and is decorated with " . mt_rand(2,6) . " " . $gems_used . "s";					$engrave = " and the name of `" . $owner . "` is engraved on the inside";		break;
-		case 4:	$decoi = $hamm . " hammer made of " . materialType(iron);	$gemit = " where the handle is decorated with " . mt_rand(2,6) . " " . $gems_used . "s";		$engrave = " and the name of `" . $owner . "` is engraved on the head";			break;
-		case 5:	$decoi = "sword made of " . materialType(iron);			$gemit = " where the hilt is decorated with " . mt_rand(2,6) . " " . $gems_used . "s";		$engrave = " and the name of `" . $owner . "` is engraved on the blade";		break;
-		case 6:	$decoi = "axe made of " . materialType(iron);			$gemit = " where the handle is decorated with " . mt_rand(2,6) . " " . $gems_used . "s";		$engrave = " and the name of `" . $owner . "` is engraved on the head";		break;
-		case 7:	$decoi = "shield made of " . materialType(iron);		$gemit = " with a " . designType(0) . " symbol on it that is " . designColor() . " in color";		$engrave = " and the edge is decorated with " . mt_rand(4,12) . " " . $gems_used . "s";	break;
-		case 8:	$decoi = "suit of armor made of " . materialType(iron);	$gemit = " with a " . designType(0) . " symbol on the chest piece that is " . designColor() . " in color";		$engrave = "";															break;
+		case 0:	$decoi = "dagger made of " . materialType('iron');		$gemit = " where the handle is decorated with " . mt_rand(2,6) . " " . $gems_used . "s";		$engrave = " and the name of `" . $owner . "` is engraved on the blade";		break;
+		case 1:	$decoi = "knife made of " . materialType('iron');			$gemit = " where the handle is decorated with " . mt_rand(2,6) . " " . $gems_used . "s";		$engrave = " and the name of `" . $owner . "` is engraved on the blade";		break;
+		case 2:	$decoi = "crown made of " . materialType('iron');			$gemit = " and is decorated with " . mt_rand(2,6) . " " . $gems_used . "s";					$engrave = " and the name of `" . $owner . "` is engraved on the inside";		break;
+		case 3:	$decoi = "helm made of " . materialType('iron');			$gemit = " and is decorated with " . mt_rand(2,6) . " " . $gems_used . "s";					$engrave = " and the name of `" . $owner . "` is engraved on the inside";		break;
+		case 4:	$decoi = $hamm . " hammer made of " . materialType('iron');	$gemit = " where the handle is decorated with " . mt_rand(2,6) . " " . $gems_used . "s";		$engrave = " and the name of `" . $owner . "` is engraved on the head";			break;
+		case 5:	$decoi = "sword made of " . materialType('iron');			$gemit = " where the hilt is decorated with " . mt_rand(2,6) . " " . $gems_used . "s";		$engrave = " and the name of `" . $owner . "` is engraved on the blade";		break;
+		case 6:	$decoi = "axe made of " . materialType('iron');			$gemit = " where the handle is decorated with " . mt_rand(2,6) . " " . $gems_used . "s";		$engrave = " and the name of `" . $owner . "` is engraved on the head";		break;
+		case 7:	$decoi = "shield made of " . materialType('iron');		$gemit = " with a " . designType(0) . " symbol on it that is " . designColor() . " in color";		$engrave = " and the edge is decorated with " . mt_rand(4,12) . " " . $gems_used . "s";	break;
+		case 8:	$decoi = "suit of armor made of " . materialType('iron');	$gemit = " with a " . designType(0) . " symbol on the chest piece that is " . designColor() . " in color";		$engrave = "";															break;
 	}
 
 	switch (mt_rand(0,2))
@@ -1021,7 +1021,7 @@ function displayWeapon($size)
 function carvingMaterial($type)
 {
 	if ($type == 1){$z = 8;} else {$z = 20;}
-	switch (mt_rand(0,$z))
+	switch (mt_rand(0, max((int)(0), (int)($z))))
 	{
 		case 0:	$material = "ivory";		break;
 		case 1:	$material = "wooden";		break;
@@ -1050,7 +1050,7 @@ function carvingMaterial($type)
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
 function scrollCase()
 {
-	$gem = explode(" (", gemCreator(0));
+	$gem = explode(" (", (string) gemCreator(0));
 
 	switch (mt_rand(0,7))
 	{
@@ -1079,7 +1079,7 @@ function scrollCase()
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
 function relicAdjective()
 {
-	$adjective = array('Exotic', 'Mysterious', 'Enchanted', 'Marvelous', 'Amazing', 'Astonishing', 'Mystical', 'Astounding', 'Magical', 'Divine', 'Excellent', 'Magnificent', 'Phenomenal', 'Fantastic', 'Incredible', 'Extraordinary', 'Fabulous', 'Wondrous', 'Glorious', 'Lost', 'Fabled', 'Legendary', 'Mythical', 'Missing', 'Ancestral', 'Ornate', 'Ultimate', 'Rare', 'Wonderful', 'Sacred', 'Almighty', 'Supreme', 'Mighty', 'Unspeakable', 'Unknown', 'Forgotten');
+	$adjective = ['Exotic', 'Mysterious', 'Enchanted', 'Marvelous', 'Amazing', 'Astonishing', 'Mystical', 'Astounding', 'Magical', 'Divine', 'Excellent', 'Magnificent', 'Phenomenal', 'Fantastic', 'Incredible', 'Extraordinary', 'Fabulous', 'Wondrous', 'Glorious', 'Lost', 'Fabled', 'Legendary', 'Mythical', 'Missing', 'Ancestral', 'Ornate', 'Ultimate', 'Rare', 'Wonderful', 'Sacred', 'Almighty', 'Supreme', 'Mighty', 'Unspeakable', 'Unknown', 'Forgotten'];
 	return $adjective[mt_rand(0,35)];
 }
 ?>

@@ -151,7 +151,7 @@ $x_game = $_POST['x_package'];
 		$take = "creator='BU'";
 	}
 
-$x_level = $_POST['x_level']+0;
+$x_level = num($_POST['x_level']);
 $x_money = $_POST['x_money'];
 	if (str_replace(" ", "", $x_money) == "")
 	{
@@ -207,7 +207,7 @@ $barw = 4;
 		<td style="border-top: 1px solid #000000"><b><font size="2">Room Trap</font></b></td>
 	</tr>
 	<?php $dice = 0; $traps = 20; while ($traps > 0) : if ($x_level > 0){} else {$x_level = mt_rand(1,20);} $dice = $dice + 1; 
-		$trap = PAtrapMaker($x_level,room,$x_game,$x_mutants,$x_might1,$x_might2,$x_tech,0); $trap = substr($trap[0], 18); ?>
+		$trap = PAtrapMaker($x_level,'room',$x_game,$x_mutants,$x_might1,$x_might2,$x_tech,0); $trap = substr((string) $trap[0], 18); ?>
 	<tr>
 		<td width="40" align="center" style="border-top: 1px solid #000000"><font size="2"><?php echo $dice; ?></font></td>
 		<td style="border-top: 1px solid #000000"><font size="2"><?php echo lcfirst($trap); ?></font></td>
@@ -242,10 +242,10 @@ $barw = 4;
 		<td style="border-top: 1px solid #000000"><b><font size="2">Container Trap</font></b></td>
 	</tr>
 	<?php $dice = 0; $traps = 20; while ($traps > 0) : if ($x_level > 0){} else {$x_level = mt_rand(1,20);} $dice = $dice + 1; 
-		$trap = PAtrapMaker($x_level,box,$x_game,$x_mutants,$x_might1,$x_might2,$x_tech,0); $trap = $trap[0]; ?>
+		$trap = PAtrapMaker($x_level,'box',$x_game,$x_mutants,$x_might1,$x_might2,$x_tech,0); $trap = $trap[0]; ?>
 	<tr>
 		<td width="40" align="center" style="border-top: 1px solid #000000"><font size="2"><?php echo $dice; ?></font></td>
-		<td style="border-top: 1px solid #000000"><font size="2"><?php echo lcfirst($trap); ?></font></td>
+		<td style="border-top: 1px solid #000000"><font size="2"><?php echo lcfirst((string) $trap); ?></font></td>
 	</tr>	
 	<?php $traps = $traps - 1; endwhile; ?>
 	</table>
@@ -324,7 +324,7 @@ $barw = 4;
 			$x_cut = mt_rand(30,100);
 			$loot_size = mt_rand(1,3);
 			if ($x_level > 0){} else {$x_level = mt_rand(1,20);}
-			$my_reward = mt_rand($noco,100);
+			$my_reward = mt_rand($noco, max((int)($noco), (int)(100)));
 				if ($my_reward < 91){$my_prize = PAcurrencyBuilder($x_level,$loot_size,0,$x_cut,1,$x_money,0);	$bags_of_coins = 1;}
 				else if ($my_reward < 93){$my_prize = PAGemMaker($x_cut,$x_money);}
 				else
@@ -358,7 +358,7 @@ $barw = 4;
 
 	while ($ary=mysqli_fetch_array($res)) :
 
-		$frequency = $ary[freq_code] - 1;
+		$frequency = $ary['freq_code'] - 1;
 
 		while ($frequency > 0) :
 

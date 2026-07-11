@@ -57,7 +57,7 @@ while ($runme != 1) :
 		else if ($category > 17)
 		{
 			if ($xcursed > 0){$item = $item . " +1"; }
-			else if (mt_rand(1,3) > 1){$item = $item . " (cursed: " . curseType($xlevel,$xcurse,equip,OSRIC) . ")";}
+			else if (mt_rand(1,3) > 1){$item = $item . " (cursed: " . curseType($xlevel,$xcurse,'equip','OSRIC') . ")";}
 			else if ($item == "shield"){$item = "shield of missile attraction -1"; $allowed = "A_C_F_P_R"; if (($xclass == "Druid") || (mt_rand(1,3) == 1)){$item = "wooden shield of missile attraction -1"; $allowed = "A_C_D_F_P_R";}}
 			else
 			{
@@ -184,7 +184,7 @@ while ($runme != 1) :
 		else if ($category > 17)
 		{
 			if ($xcursed > 0){$item = $item . " +1";}
-			else if (mt_rand(1,3) > 1){$item = $item . " (cursed: " . curseType($xlevel,$xcurse,equip,OSRIC) . ")";}
+			else if (mt_rand(1,3) > 1){$item = $item . " (cursed: " . curseType($xlevel,$xcurse,'equip','OSRIC') . ")";}
 			else
 			{
 				switch (mt_rand(0,1))
@@ -249,7 +249,7 @@ while ($runme != 1) :
 		else if ($category > 17)
 		{
 			if ($xcursed > 0){$item = $item . " +1";}
-			else if (mt_rand(1,3) > 1){$item = $item . " (cursed: " . curseType($xlevel,$xcurse,equip,OSRIC) . ")";}
+			else if (mt_rand(1,3) > 1){$item = $item . " (cursed: " . curseType($xlevel,$xcurse,'equip','OSRIC') . ")";}
 			else
 			{
 				switch (mt_rand(0,2))
@@ -330,7 +330,7 @@ while ($runme != 1) :
 		if (($xcursed > 0) && ($category == 18)){$item = "potion of healing";}
 		else if ($category > 19){$item = "potion of animal control (" . $animal . ")"; if (mt_rand(1,2) > 1){$item = "potion of clairaudience";}}
 		else if ($category > 18){$item = "potion of clairvoyance"; if (mt_rand(1,2) > 1){$item = "potion of climbing";}}
-		else if ($category > 17){$item = "potion (cursed: " . curseType($xlevel,$xcurse,drink,OSRIC) . ")"; if (mt_rand(1,2) > 1){$item = "potion of delusion";}}
+		else if ($category > 17){$item = "potion (cursed: " . curseType($xlevel,$xcurse,'drink','OSRIC') . ")"; if (mt_rand(1,2) > 1){$item = "potion of delusion";}}
 		else if ($category > 16){$item = "potion of diminution"; if (mt_rand(1,3) > 2){$item = "potion of dragon control (" . $dragon . ")";}}
 		else if ($category > 15){$item = "potion of ESP";}
 		else if ($category > 14){$item = "potion of extra-healing"; if (mt_rand(1,3) > 2){$item = "potion of fire resistance";}}
@@ -457,7 +457,7 @@ while ($runme != 1) :
 			else {$lycn = "werebears";}
 
 		if (($xcursed > 0) && ($category == 20)){$item = "scroll (" . gameSpellChooser('OSRIC',$xlevel,'') . ")";}
-		else if ($category > 19){$item = "scroll, cursed (" . curseType($xlevel,reader,item,OSRIC) . ")";}
+		else if ($category > 19){$item = "scroll, cursed (" . curseType($xlevel,'reader','item','OSRIC') . ")";}
 		else if ($category > 12)
 		{
 			switch (mt_rand(0,8))
@@ -872,7 +872,7 @@ while ($runme != 1) :
 
 endwhile;
 
-	return array($item,$armor_class);
+	return [$item,$armor_class];
 }
 
 ?>

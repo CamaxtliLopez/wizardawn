@@ -33,7 +33,7 @@ if ($bottom_notices > 0)
 	<?php } else if ($bottom_notices == 10){ ?>
 	<p align="center"><font size="2">&quot;Necropalyx&quot; is a trademark of Wizardawn Entertainment.</font>
 	<?php } else if ($bottom_notices == 11){ ?>
-	<p align="center"><font size="2">Basic Fantasy Role-Playing Game is copyright 2006-<?php echo date(Y); ?> Chris Gonnerman, and the name and logo thereof are Product Identity under the <a target="_blank" href="lic\lic_ogl.html">Open Game License Version 1.0a</a></font>
+	<p align="center"><font size="2">Basic Fantasy Role-Playing Game is copyright 2006-<?php echo date('Y'); ?> Chris Gonnerman, and the name and logo thereof are Product Identity under the <a target="_blank" href="lic\lic_ogl.html">Open Game License Version 1.0a</a></font>
 	<?php } else if ($bottom_notices == 12){ ?>
 	<p align="center"><font size="2">&quot;Millenniums &amp; Mutations&quot; and &quot;Zendynn&quot; are a trademarks of Wizardawn Entertainment.</font>
 	<p align="center"><font size="2">&quot;Tunnels &amp; Trolls&quot; and &quot;T&amp;T&quot; are trademarks of Flying Buffalo Inc.<br>Wizardawn&trade; are not affiliated with Rick Loomis, Kent St. Andre, or Flying Buffalo Inc.</font>
@@ -70,7 +70,7 @@ else
 
 		if ($_SESSION['SESSION_CREDITS']=="all" || $_SESSION['SESSION_CREDITS']=="tandt" || $_SESSION['SESSION_CREDIT2']=="tandt"){ echo "<br><br>&quot;Tunnels &amp; Trolls&quot; and &quot;T&amp;T&quot; are trademarks of Flying Buffalo Inc.<br>Wizardawn&trade; are not affiliated with Rick Loomis, Kent St. Andre, or Flying Buffalo Inc."; }
 
-		if ($_SESSION['SESSION_CREDITS']=="all" || $_SESSION['SESSION_CREDITS']=="bfrpg" || $_SESSION['SESSION_CREDIT2']=="bfrpg"){ echo "<br><br>Basic Fantasy Role-Playing Game is copyright 2006-" . date(Y) . " Chris Gonnerman,<br>and the name and logo thereof are Product Identity under the Open Game License Version 1.0a."; }
+		if ($_SESSION['SESSION_CREDITS']=="all" || $_SESSION['SESSION_CREDITS']=="bfrpg" || $_SESSION['SESSION_CREDIT2']=="bfrpg"){ echo "<br><br>Basic Fantasy Role-Playing Game is copyright 2006-" . date('Y') . " Chris Gonnerman,<br>and the name and logo thereof are Product Identity under the Open Game License Version 1.0a."; }
 
 		if ($_SESSION['SESSION_CREDITS']=="all" || $_SESSION['SESSION_CREDITS']=="ll" || $_SESSION['SESSION_CREDIT2']=="ll"){ echo "<br><br>&quot;Labyrinth Lord&quot; is a trademark of Daniel Proctor."; if ($extra_disclaimer == "mf"){echo "<br>&quot;Mutant Future&quot; is a trademark of Daniel Proctor.";} }
 

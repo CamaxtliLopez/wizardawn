@@ -62,18 +62,18 @@ if ($game == "Labyrinth Lord")
 		else if ($swkills == 12){$sword_motivation = "Motivated to Destroy Humanoid Monsters";}
 		else {$sword_motivation = "Motivated to Destroy Spiders";}
 	}
-	if (mt_rand(1,100) > 5){$sword_motivation = "";} else {$sword_motivation = " It is " . strtolower($sword_motivation) . "."; }
+	if (mt_rand(1,100) > 5){$sword_motivation = "";} else {$sword_motivation = " It is " . strtolower((string) $sword_motivation) . "."; }
 
 	/////////////////////////////////////////////////////
 
 	if ($aec == 1){$max = 46;} else {$max = 32;}
-	$talk_array = array();
+	$talk_array = [];
 	array_push($talk_array, "Common");
 	$amount = $sword_languages - 1;
 
 	while ($amount > 0) :
 
-		switch (mt_rand(1,$max))
+		switch (mt_rand(1, max((int)(1), (int)($max))))
 		{
 			case 1: $talk = "Bugbear"; break;
 			case 2: $talk = "Centaur"; break;
@@ -142,7 +142,7 @@ if ($game == "Labyrinth Lord")
 
 	/////////////////////////////////////////////////////
 
-	$detect_array = array();
+	$detect_array = [];
 	$amount = $sword_detect_powers;
 	$max = 100; 
 
@@ -150,7 +150,7 @@ if ($game == "Labyrinth Lord")
 
 		$catchd = $catchd + 1;
 
-		$dtc_dice = mt_rand(1,$max);
+		$dtc_dice = mt_rand(1, max((int)(1), (int)($max)));
 
 		switch ($dtc_dice)
 		{
@@ -187,7 +187,7 @@ if ($game == "Labyrinth Lord")
 
 	/////////////////////////////////////////////////////
 
-	$magic_array = array();
+	$magic_array = [];
 	$amount = $sword_spells;
 	$max = 100;
 
@@ -197,7 +197,7 @@ if ($game == "Labyrinth Lord")
 
 			$catchs = $catchs + 1;
 
-			$mag_dice = mt_rand(1,$max);
+			$mag_dice = mt_rand(1, max((int)(1), (int)($max)));
 
 			switch ($mag_dice)
 			{
@@ -302,7 +302,7 @@ else if ($game == "AD&D") //////////////////////////////////////////////////////
 
 	/////////////////////////////////////////////////////
 
-	$talk_array = array();
+	$talk_array = [];
 	array_push($talk_array, "Common");
 	$amount = $sword_languages - 1;
 
@@ -379,7 +379,7 @@ else if ($game == "AD&D") //////////////////////////////////////////////////////
 
 	/////////////////////////////////////////////////////
 
-	$detect_array = array();
+	$detect_array = [];
 	$amount = $sword_detect_powers;
 	$max = 100; 
 
@@ -387,7 +387,7 @@ else if ($game == "AD&D") //////////////////////////////////////////////////////
 
 		$catchd = $catchd + 1;
 
-		$dtc_dice = mt_rand(1,$max);
+		$dtc_dice = mt_rand(1, max((int)(1), (int)($max)));
 
 		switch ($dtc_dice)
 		{
@@ -426,7 +426,7 @@ else if ($game == "AD&D") //////////////////////////////////////////////////////
 
 	/////////////////////////////////////////////////////
 
-	$magic_array = array();
+	$magic_array = [];
 	$amount = $sword_spells;
 	$swmotv = 0;
 
@@ -454,7 +454,7 @@ else if ($game == "AD&D") //////////////////////////////////////////////////////
 				case $mag_dice >= 76 and $mag_dice <= 81: $magicion = "telepathy 60` range for twice per day"; break;
 				case $mag_dice >= 82 and $mag_dice <= 88: $magicion = "teleport as the spell for 600 lbs max and once per day"; break;
 				case $mag_dice >= 89 and $mag_dice <= 94: $magicion = "x-ray vision 40` range for 1 turn and twice per day"; break;
-				case $mag_dice >= 95: $swmotv = mt_rand($lgn,110); $ego = $ego + 6; break;
+				case $mag_dice >= 95: $swmotv = mt_rand($lgn, max((int)($lgn), (int)(110))); $ego = $ego + 6; break;
 			}
 
 			if ($mag_dice <= 94){if (in_array($magicion, $magic_array)){} else { array_push($magic_array, $magicion); $amount = $amount - 1; }}
@@ -539,7 +539,7 @@ else if ($game == "OSRIC") /////////////////////////////////////////////////////
 	else if ($swlang >= 11){$sword_languages = 2;}
 	else {$sword_languages = 1;}
 	
-	$ego = $ego + $sword_languages;
+	$ego = $ego + num($sword_languages);
 
 	/////////////////////////////////////////////////////
 
@@ -557,7 +557,7 @@ else if ($game == "OSRIC") /////////////////////////////////////////////////////
 
 	/////////////////////////////////////////////////////
 
-	$talk_array = array();
+	$talk_array = [];
 	array_push($talk_array, "Common");
 	$amount = $sword_languages - 1;
 
@@ -637,7 +637,7 @@ else if ($game == "OSRIC") /////////////////////////////////////////////////////
 
 	/////////////////////////////////////////////////////
 
-	$detect_array = array();
+	$detect_array = [];
 	$amount = $sword_detect_powers;
 	$max = 100; 
 
@@ -645,7 +645,7 @@ else if ($game == "OSRIC") /////////////////////////////////////////////////////
 
 		$catchd = $catchd + 1;
 
-		$dtc_dice = mt_rand(1,$max);
+		$dtc_dice = mt_rand(1, max((int)(1), (int)($max)));
 
 		switch ($dtc_dice)
 		{
@@ -684,7 +684,7 @@ else if ($game == "OSRIC") /////////////////////////////////////////////////////
 
 	/////////////////////////////////////////////////////
 
-	$magic_array = array();
+	$magic_array = [];
 	$amount = $sword_spells;
 	$swmotv = 0;
 
@@ -712,7 +712,7 @@ else if ($game == "OSRIC") /////////////////////////////////////////////////////
 				case $mag_dice >= 76 and $mag_dice <= 81: $magicion = "telepathy 60` range for twice per day"; break;
 				case $mag_dice >= 82 and $mag_dice <= 88: $magicion = "teleport as the spell for 600 lbs max and once per day"; break;
 				case $mag_dice >= 89 and $mag_dice <= 94: $magicion = "x-ray vision 40` range for 1 turn and twice per day"; break;
-				case $mag_dice >= 95: $swmotv = mt_rand($lgn,100); $ego = $ego + 6; break;
+				case $mag_dice >= 95: $swmotv = mt_rand($lgn, max((int)($lgn), (int)(100))); $ego = $ego + 6; break;
 			}
 
 			if ($mag_dice <= 94){if (in_array($magicion, $magic_array)){} else { array_push($magic_array, $magicion); $amount = $amount - 1; }}
@@ -845,7 +845,7 @@ else if ($game == "BD&D") //////////////////////////////////////////////////////
 	if (mt_rand(1,100) > 5){$sword_motivation = "";}
 	else
 	{
-		$sword_motivation = " Its " . strtolower($sword_motivation) . " ";
+		$sword_motivation = " Its " . strtolower((string) $sword_motivation) . " ";
 		if ($sword_alignment == "lawful"){$sword_motivation = $sword_motivation . " and it will paralyze these beings if they are chaotic...upon a hit unless the victim saves vs spells.";}
 		else if ($sword_alignment == "chaotic"){$sword_motivation = $sword_motivation . " and it will turn to stone these beings if they are chaotic...unless the victim saves vs spells.";}
 		else {$sword_motivation = $sword_motivation . " and it will give +1 to the wielder`s saving throws, but only when attacking these types of beings.";}
@@ -853,7 +853,7 @@ else if ($game == "BD&D") //////////////////////////////////////////////////////
 
 	/////////////////////////////////////////////////////
 
-	$talk_array = array();
+	$talk_array = [];
 	array_push($talk_array, "Common");
 	$amount = $sword_languages - 1;
 
@@ -912,7 +912,7 @@ else if ($game == "BD&D") //////////////////////////////////////////////////////
 
 	/////////////////////////////////////////////////////
 
-	$detect_array = array();
+	$detect_array = [];
 	$amount = $sword_detect_powers;
 	$max = 100;
 
@@ -920,7 +920,7 @@ else if ($game == "BD&D") //////////////////////////////////////////////////////
 
 		$catchd = $catchd + 1;
 
-		$dtc_dice = mt_rand(1,$max);
+		$dtc_dice = mt_rand(1, max((int)(1), (int)($max)));
 
 		switch ($dtc_dice)
 		{
@@ -958,7 +958,7 @@ else if ($game == "BD&D") //////////////////////////////////////////////////////
 
 	/////////////////////////////////////////////////////
 
-	$magic_array = array();
+	$magic_array = [];
 	$amount = $sword_spells;
 	$max = 100;
 
@@ -968,7 +968,7 @@ else if ($game == "BD&D") //////////////////////////////////////////////////////
 
 			$catchs = $catchs + 1;
 
-			$mag_dice = mt_rand(1,$max);
+			$mag_dice = mt_rand(1, max((int)(1), (int)($max)));
 
 			switch ($mag_dice)
 			{

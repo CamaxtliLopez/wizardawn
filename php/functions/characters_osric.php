@@ -220,18 +220,18 @@ function makeAdventurer($jclass,$jrace,$jmax,$jlvl1,$jlvl2,$jrelics,$jsex)
 		{
 			switch (mt_rand(0,2))
 			{
-				case 0:	$p_name = holmesName(male,1);		break;
+				case 0:	$p_name = holmesName('male',1);		break;
 				case 1:	$p_name = MaleName();				break;
-				case 2:	$p_name = ConanName(none,male);		break;
+				case 2:	$p_name = ConanName('none','male');		break;
 			}
 		}
 		else
 		{
 			switch (mt_rand(0,2))
 			{
-				case 0:	$p_name = holmesName(female,1);		break;
+				case 0:	$p_name = holmesName('female',1);		break;
 				case 1:	$p_name = FemaleName();				break;
-				case 2:	$p_name = ConanName(none,female);	break;
+				case 2:	$p_name = ConanName('none','female');	break;
 			}
 		}
 	}
@@ -349,8 +349,8 @@ function makeAdventurer($jclass,$jrace,$jmax,$jlvl1,$jlvl2,$jrelics,$jsex)
 	///// WHAT LEVEL ARE THEY ////////////////////////////////////////////////////////////////////////////////////////
 	if ($jlvl2 > $p_lvl_limit){$jlvl2 = $p_lvl_limit;}
 	if ($jlvl1 > $jlvl2){$jlvl1 = $jlvl2;}
-	$p_level = mt_rand($jlvl1,$jlvl2);
-		$p_age = $p_age + $p_level; // ASSUME A YEAR PER ADVENTURE LEVEL
+	$p_level = mt_rand($jlvl1, max((int)($jlvl1), (int)($jlvl2)));
+		$p_age = $p_age + num($p_level); // ASSUME A YEAR PER ADVENTURE LEVEL
 	$p_hp = 0;
 	$cyc_level = $p_level;
 	$w_level = 0;
@@ -389,12 +389,12 @@ function makeAdventurer($jclass,$jrace,$jmax,$jlvl1,$jlvl2,$jrelics,$jsex)
 				else if ($p_ab_wis == 17){$sp_c_1 = 2; $sp_c_2 = 2; $sp_c_3 = 1;}
 				else if ($p_ab_wis == 18){$sp_c_1 = 2; $sp_c_2 = 2; $sp_c_3 = 1; $sp_c_4 = 1;}
 				else if ($p_ab_wis == 19){$sp_c_1 = 3; $sp_c_2 = 2; $sp_c_3 = 1; $sp_c_4 = 1;}
-					if ($p_level == 1){$p_skills = $p_skills . "Cleric&nbsp;spells&nbsp;(" . ($sp_c_1+1) . "&nbsp;" . ($sp_c_2+0) . "&nbsp;" . ($sp_c_3+0) . "&nbsp;" . ($sp_c_4+0) . "&nbsp;0&nbsp;0&nbsp;0) / ";}
-					else if ($p_level == 2){$p_skills = $p_skills . "Cleric&nbsp;spells&nbsp;(" . ($sp_c_1+2) . "&nbsp;" . ($sp_c_2+0) . "&nbsp;" . ($sp_c_3+0) . "&nbsp;" . ($sp_c_4+0) . "&nbsp;0&nbsp;0&nbsp;0) / ";}
-					else if ($p_level == 3){$p_skills = $p_skills . "Cleric&nbsp;spells&nbsp;(" . ($sp_c_1+2) . "&nbsp;" . ($sp_c_2+1) . "&nbsp;" . ($sp_c_3+0) . "&nbsp;" . ($sp_c_4+0) . "&nbsp;0&nbsp;0&nbsp;0) / ";}
-					else if ($p_level == 4){$p_skills = $p_skills . "Cleric&nbsp;spells&nbsp;(" . ($sp_c_1+3) . "&nbsp;" . ($sp_c_2+2) . "&nbsp;" . ($sp_c_3+0) . "&nbsp;" . ($sp_c_4+0) . "&nbsp;0&nbsp;0&nbsp;0) / ";}
-					else if ($p_level == 5){$p_skills = $p_skills . "Cleric&nbsp;spells&nbsp;(" . ($sp_c_1+3) . "&nbsp;" . ($sp_c_2+3) . "&nbsp;" . ($sp_c_3+1) . "&nbsp;" . ($sp_c_4+0) . "&nbsp;0&nbsp;0&nbsp;0) / ";}
-					else if ($p_level == 6){$p_skills = $p_skills . "Cleric&nbsp;spells&nbsp;(" . ($sp_c_1+3) . "&nbsp;" . ($sp_c_2+3) . "&nbsp;" . ($sp_c_3+2) . "&nbsp;" . ($sp_c_4+0) . "&nbsp;0&nbsp;0&nbsp;0) / ";}
+					if ($p_level == 1){$p_skills = $p_skills . "Cleric&nbsp;spells&nbsp;(" . ($sp_c_1+1) . "&nbsp;" . (num($sp_c_2)) . "&nbsp;" . (num($sp_c_3)) . "&nbsp;" . (num($sp_c_4)) . "&nbsp;0&nbsp;0&nbsp;0) / ";}
+					else if ($p_level == 2){$p_skills = $p_skills . "Cleric&nbsp;spells&nbsp;(" . ($sp_c_1+2) . "&nbsp;" . (num($sp_c_2)) . "&nbsp;" . (num($sp_c_3)) . "&nbsp;" . (num($sp_c_4)) . "&nbsp;0&nbsp;0&nbsp;0) / ";}
+					else if ($p_level == 3){$p_skills = $p_skills . "Cleric&nbsp;spells&nbsp;(" . ($sp_c_1+2) . "&nbsp;" . ($sp_c_2+1) . "&nbsp;" . (num($sp_c_3)) . "&nbsp;" . (num($sp_c_4)) . "&nbsp;0&nbsp;0&nbsp;0) / ";}
+					else if ($p_level == 4){$p_skills = $p_skills . "Cleric&nbsp;spells&nbsp;(" . ($sp_c_1+3) . "&nbsp;" . ($sp_c_2+2) . "&nbsp;" . (num($sp_c_3)) . "&nbsp;" . (num($sp_c_4)) . "&nbsp;0&nbsp;0&nbsp;0) / ";}
+					else if ($p_level == 5){$p_skills = $p_skills . "Cleric&nbsp;spells&nbsp;(" . ($sp_c_1+3) . "&nbsp;" . ($sp_c_2+3) . "&nbsp;" . ($sp_c_3+1) . "&nbsp;" . (num($sp_c_4)) . "&nbsp;0&nbsp;0&nbsp;0) / ";}
+					else if ($p_level == 6){$p_skills = $p_skills . "Cleric&nbsp;spells&nbsp;(" . ($sp_c_1+3) . "&nbsp;" . ($sp_c_2+3) . "&nbsp;" . ($sp_c_3+2) . "&nbsp;" . (num($sp_c_4)) . "&nbsp;0&nbsp;0&nbsp;0) / ";}
 					else if ($p_level == 7){$p_skills = $p_skills . "Cleric&nbsp;spells&nbsp;(" . ($sp_c_1+3) . "&nbsp;" . ($sp_c_2+3) . "&nbsp;" . ($sp_c_3+2) . "&nbsp;" . ($sp_c_4+1) . "&nbsp;0&nbsp;0&nbsp;0) / ";}
 					else if ($p_level == 8){$p_skills = $p_skills . "Cleric&nbsp;spells&nbsp;(" . ($sp_c_1+3) . "&nbsp;" . ($sp_c_2+3) . "&nbsp;" . ($sp_c_3+3) . "&nbsp;" . ($sp_c_4+2) . "&nbsp;0&nbsp;0&nbsp;0) / ";}
 					else if ($p_level == 9){$p_skills = $p_skills . "Cleric&nbsp;spells&nbsp;(" . ($sp_c_1+4) . "&nbsp;" . ($sp_c_2+4) . "&nbsp;" . ($sp_c_3+3) . "&nbsp;" . ($sp_c_4+2) . "&nbsp;1&nbsp;0&nbsp;0) / ";}
@@ -434,11 +434,11 @@ function makeAdventurer($jclass,$jrace,$jmax,$jlvl1,$jlvl2,$jrelics,$jsex)
 				else if ($p_ab_wis == 17){$sp_c_1 = 2; $sp_c_2 = 2; $sp_c_3 = 1;}
 				else if ($p_ab_wis == 18){$sp_c_1 = 2; $sp_c_2 = 2; $sp_c_3 = 1; $sp_c_4 = 1;}
 				else if ($p_ab_wis == 19){$sp_c_1 = 3; $sp_c_2 = 2; $sp_c_3 = 1; $sp_c_4 = 1;}
-					if ($p_level == 1){$p_skills = $p_skills . "Druid&nbsp;spells&nbsp;(" . ($sp_c_1+2) . "&nbsp;" . ($sp_c_2+0) . "&nbsp;" . ($sp_c_3+0) . "&nbsp;" . ($sp_c_4+0) . "&nbsp;0&nbsp;0&nbsp;0) / ";}
-					else if ($p_level == 2){$p_skills = $p_skills . "Druid&nbsp;spells&nbsp;(" . ($sp_c_1+2) . "&nbsp;" . ($sp_c_2+1) . "&nbsp;" . ($sp_c_3+0) . "&nbsp;" . ($sp_c_4+0) . "&nbsp;0&nbsp;0&nbsp;0) / ";}
-					else if ($p_level == 3){$p_skills = $p_skills . "Druid&nbsp;spells&nbsp;(" . ($sp_c_1+3) . "&nbsp;" . ($sp_c_2+2) . "&nbsp;" . ($sp_c_3+1) . "&nbsp;" . ($sp_c_4+0) . "&nbsp;0&nbsp;0&nbsp;0) / ";}
-					else if ($p_level == 4){$p_skills = $p_skills . "Druid&nbsp;spells&nbsp;(" . ($sp_c_1+4) . "&nbsp;" . ($sp_c_2+2) . "&nbsp;" . ($sp_c_3+2) . "&nbsp;" . ($sp_c_4+0) . "&nbsp;0&nbsp;0&nbsp;0) / ";}
-					else if ($p_level == 5){$p_skills = $p_skills . "Druid&nbsp;spells&nbsp;(" . ($sp_c_1+4) . "&nbsp;" . ($sp_c_2+3) . "&nbsp;" . ($sp_c_3+2) . "&nbsp;" . ($sp_c_4+0) . "&nbsp;0&nbsp;0&nbsp;0) / ";}
+					if ($p_level == 1){$p_skills = $p_skills . "Druid&nbsp;spells&nbsp;(" . ($sp_c_1+2) . "&nbsp;" . (num($sp_c_2)) . "&nbsp;" . (num($sp_c_3)) . "&nbsp;" . (num($sp_c_4)) . "&nbsp;0&nbsp;0&nbsp;0) / ";}
+					else if ($p_level == 2){$p_skills = $p_skills . "Druid&nbsp;spells&nbsp;(" . ($sp_c_1+2) . "&nbsp;" . ($sp_c_2+1) . "&nbsp;" . (num($sp_c_3)) . "&nbsp;" . (num($sp_c_4)) . "&nbsp;0&nbsp;0&nbsp;0) / ";}
+					else if ($p_level == 3){$p_skills = $p_skills . "Druid&nbsp;spells&nbsp;(" . ($sp_c_1+3) . "&nbsp;" . ($sp_c_2+2) . "&nbsp;" . ($sp_c_3+1) . "&nbsp;" . (num($sp_c_4)) . "&nbsp;0&nbsp;0&nbsp;0) / ";}
+					else if ($p_level == 4){$p_skills = $p_skills . "Druid&nbsp;spells&nbsp;(" . ($sp_c_1+4) . "&nbsp;" . ($sp_c_2+2) . "&nbsp;" . ($sp_c_3+2) . "&nbsp;" . (num($sp_c_4)) . "&nbsp;0&nbsp;0&nbsp;0) / ";}
+					else if ($p_level == 5){$p_skills = $p_skills . "Druid&nbsp;spells&nbsp;(" . ($sp_c_1+4) . "&nbsp;" . ($sp_c_2+3) . "&nbsp;" . ($sp_c_3+2) . "&nbsp;" . (num($sp_c_4)) . "&nbsp;0&nbsp;0&nbsp;0) / ";}
 					else if ($p_level == 6){$p_skills = $p_skills . "Druid&nbsp;spells&nbsp;(" . ($sp_c_1+4) . "&nbsp;" . ($sp_c_2+3) . "&nbsp;" . ($sp_c_3+2) . "&nbsp;" . ($sp_c_4+1) . "&nbsp;0&nbsp;0&nbsp;0) / ";}
 					else if ($p_level == 7){$p_skills = $p_skills . "Druid&nbsp;spells&nbsp;(" . ($sp_c_1+4) . "&nbsp;" . ($sp_c_2+4) . "&nbsp;" . ($sp_c_3+3) . "&nbsp;" . ($sp_c_4+1) . "&nbsp;0&nbsp;0&nbsp;0) / ";}
 					else if ($p_level == 8){$p_skills = $p_skills . "Druid&nbsp;spells&nbsp;(" . ($sp_c_1+4) . "&nbsp;" . ($sp_c_2+4) . "&nbsp;" . ($sp_c_3+3) . "&nbsp;" . ($sp_c_4+2) . "&nbsp;0&nbsp;0&nbsp;0) / ";}
@@ -659,7 +659,7 @@ function makeAdventurer($jclass,$jrace,$jmax,$jlvl1,$jlvl2,$jrelics,$jsex)
 		else if (($p_class == "Ranger") && ($w_level > 11)){$p_hp = $p_hp + 2;}
 		else if (($p_class == "Thief") && ($w_level > 10)){$p_hp = $p_hp + 2;}
 		else if ($jmax > 0){$p_hp = $p_hp + $hit_dice + $x_bhps;}
-		else {$p_hp = $p_hp + mt_rand(1,$hit_dice) + $x_bhps;}
+		else {$p_hp = $p_hp + mt_rand(1, max((int)(1), (int)($hit_dice))) + $x_bhps;}
 		$cyc_level = $cyc_level-1;
 	endwhile;
 
@@ -671,10 +671,10 @@ function makeAdventurer($jclass,$jrace,$jmax,$jlvl1,$jlvl2,$jrelics,$jsex)
 		/// DEX BONUS ///
 		if ($p_ab_dex == 9){		$th_sk2 = $th_sk2-15;	$th_sk4 = $th_sk4-10;	$th_sk5 = $th_sk5-20;	$th_sk6 = $th_sk6-10;	$th_sk7 = $th_sk7-15;}
 		else if ($p_ab_dex == 10){	$th_sk2 = $th_sk2-10;	$th_sk4 = $th_sk4-5;	$th_sk5 = $th_sk5-15;	$th_sk6 = $th_sk6-5;	$th_sk7 = $th_sk7-10;}
-		else if ($p_ab_dex == 11){	$th_sk2 = $th_sk2-5;	$th_sk4 = $th_sk4+0;	$th_sk5 = $th_sk5-10;	$th_sk6 = $th_sk6+0;	$th_sk7 = $th_sk7-5;}
-		else if ($p_ab_dex == 12){	$th_sk2 = $th_sk2+0;	$th_sk4 = $th_sk4+0;	$th_sk5 = $th_sk5-5;	$th_sk6 = $th_sk6+0;	$th_sk7 = $th_sk7+0;}
-		else if ($p_ab_dex == 16){	$th_sk2 = $th_sk2+0;	$th_sk4 = $th_sk4+0;	$th_sk5 = $th_sk5+0;	$th_sk6 = $th_sk6+5;	$th_sk7 = $th_sk7+0;}
-		else if ($p_ab_dex == 17){	$th_sk2 = $th_sk2+5;	$th_sk4 = $th_sk4+5;	$th_sk5 = $th_sk5+5;	$th_sk6 = $th_sk6+10;	$th_sk7 = $th_sk7+0;}
+		else if ($p_ab_dex == 11){	$th_sk2 = $th_sk2-5;	$th_sk4 = num($th_sk4);	$th_sk5 = $th_sk5-10;	$th_sk6 = num($th_sk6);	$th_sk7 = $th_sk7-5;}
+		else if ($p_ab_dex == 12){	$th_sk2 = num($th_sk2);	$th_sk4 = num($th_sk4);	$th_sk5 = $th_sk5-5;	$th_sk6 = num($th_sk6);	$th_sk7 = num($th_sk7);}
+		else if ($p_ab_dex == 16){	$th_sk2 = num($th_sk2);	$th_sk4 = num($th_sk4);	$th_sk5 = num($th_sk5);	$th_sk6 = $th_sk6+5;	$th_sk7 = num($th_sk7);}
+		else if ($p_ab_dex == 17){	$th_sk2 = $th_sk2+5;	$th_sk4 = $th_sk4+5;	$th_sk5 = $th_sk5+5;	$th_sk6 = $th_sk6+10;	$th_sk7 = num($th_sk7);}
 		else if ($p_ab_dex == 18){	$th_sk2 = $th_sk2+10;	$th_sk4 = $th_sk4+10;	$th_sk5 = $th_sk5+10;	$th_sk6 = $th_sk6+15;	$th_sk7 = $th_sk7+5;}
 		else if ($p_ab_dex == 19){	$th_sk2 = $th_sk2+15;	$th_sk4 = $th_sk4+15;	$th_sk5 = $th_sk5+15;	$th_sk6 = $th_sk6+20;	$th_sk7 = $th_sk7+15;}
 
@@ -710,14 +710,14 @@ function makeAdventurer($jclass,$jrace,$jmax,$jlvl1,$jlvl2,$jrelics,$jsex)
 	}
 
 	///// ADD SOME GEAR ////////////////////////////////////////////////////////////////////////////////////////////
-	$hcolor = array('blue-green', 'black', 'blue', 'gray', 'dark-gray', 'light-gray', 'green', 'light-gray', 'red', 'brown', 'orange', 'yellowish-green', 'tan', 'light-blue', 'yellow', 'purple', 'light-purple', 'dark-purple', 'light-green', 'forest-green', 'white', 'dark-green', 'dark-red', 'light-red', 'light-brown', 'dark-brown');
-	$bcolor = array('black', 'dark-brown', 'gray', 'dark-green', 'dark-red', 'brown', 'tan');
-	$scolor = array('gold', 'silver', 'bronze', 'copper', 'platinum', 'metal', 'iron');
-		$feet = array('fur boots', 'boots', 'thigh boots', 'shoes', 'sandals');
-		$head = array('skullcap', 'tricorne hat', 'wide-brim hat', 'cap', 'bandana', 'feathered hat', 'floppy hat', 'wizard hat');
-		$robe = array('robe', 'cloak');
-		$shirt = array('doublet', 'tunic', 'shirt');
-		$pants = array('pants', 'short pants', 'pants');
+	$hcolor = ['blue-green', 'black', 'blue', 'gray', 'dark-gray', 'light-gray', 'green', 'light-gray', 'red', 'brown', 'orange', 'yellowish-green', 'tan', 'light-blue', 'yellow', 'purple', 'light-purple', 'dark-purple', 'light-green', 'forest-green', 'white', 'dark-green', 'dark-red', 'light-red', 'light-brown', 'dark-brown'];
+	$bcolor = ['black', 'dark-brown', 'gray', 'dark-green', 'dark-red', 'brown', 'tan'];
+	$scolor = ['gold', 'silver', 'bronze', 'copper', 'platinum', 'metal', 'iron'];
+		$feet = ['fur boots', 'boots', 'thigh boots', 'shoes', 'sandals'];
+		$head = ['skullcap', 'tricorne hat', 'wide-brim hat', 'cap', 'bandana', 'feathered hat', 'floppy hat', 'wizard hat'];
+		$robe = ['robe', 'cloak'];
+		$shirt = ['doublet', 'tunic', 'shirt'];
+		$pants = ['pants', 'short pants', 'pants'];
 
 	$w_shoe = "";	$w_legs = "";	$w_vest = "";	$w_belt="";		$w_head = "";	$w_robe = "";
 
@@ -788,15 +788,15 @@ function makeAdventurer($jclass,$jrace,$jmax,$jlvl1,$jlvl2,$jrelics,$jsex)
 
 	$p_armor = 10-($w_gear[1] + $x_my_acb); if ($p_armor > 10){$p_armor = 10;} if ($p_armor < -10){$p_armor = -10;}
 
-	return array($p_name, $p_race, $p_age, $p_sex, $p_class, $p_alignment, $p_ab_str, $p_ab_str_xtra, $p_ab_int, $p_ab_wis, $p_ab_dex, $p_ab_con, $p_ab_cha, $p_level, $p_hp, $p_armor, $p_barm, $p_bsrp, $p_bhit, $p_bdmg, $p_brng, $p_thaco, $p_xsv1, $p_xsv2, $p_xsv3, $p_xsv4, $p_xsv5, $p_notes, $p_skills, $w_stuff, $x_my_acb, $p_minor_test, $p_major_test, $p_consv, $p_consh, $p_bhps, $p_lngu, $p_msvt, $p_hench);
+	return [$p_name, $p_race, $p_age, $p_sex, $p_class, $p_alignment, $p_ab_str, $p_ab_str_xtra, $p_ab_int, $p_ab_wis, $p_ab_dex, $p_ab_con, $p_ab_cha, $p_level, $p_hp, $p_armor, $p_barm, $p_bsrp, $p_bhit, $p_bdmg, $p_brng, $p_thaco, $p_xsv1, $p_xsv2, $p_xsv3, $p_xsv4, $p_xsv5, $p_notes, $p_skills, $w_stuff, $x_my_acb, $p_minor_test, $p_major_test, $p_consv, $p_consh, $p_bhps, $p_lngu, $p_msvt, $p_hench];
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 function givemeGear($class,$level,$relics)
 {
 	if (($relics > 0) && (($level*10) >= mt_rand(1,100)))
 	{
-		if (mt_rand(1,3) == 1){$arty = OsricMagicItem(club,$level,$class,1,0); $weapon = $arty[0] . ", "; }
-		else {$arty = OsricMagicItem(sword,$level,$class,1,0); $weapon = $arty[0] . ", "; }
+		if (mt_rand(1,3) == 1){$arty = OsricMagicItem('club',$level,$class,1,0); $weapon = $arty[0] . ", "; }
+		else {$arty = OsricMagicItem('sword',$level,$class,1,0); $weapon = $arty[0] . ", "; }
 	}
 	else
 	{
@@ -830,7 +830,7 @@ function givemeGear($class,$level,$relics)
 	}
 	if ((($class == "Fighter") || ($class == "Paladin") || ($class == "Ranger") || ($class == "Assassin")) && (mt_rand(1,100) > 60))
 	{
-		if (($relics > 0) && (($level*5) >= mt_rand(1,100))){$arty = OsricMagicItem(bow,$level,$class,1,1); $weapon = $weapon . $arty[0] . ", ";}
+		if (($relics > 0) && (($level*5) >= mt_rand(1,100))){$arty = OsricMagicItem('bow',$level,$class,1,1); $weapon = $weapon . $arty[0] . ", ";}
 		else
 		{
 			switch (mt_rand(0,9))
@@ -851,7 +851,7 @@ function givemeGear($class,$level,$relics)
 
 	if (($class == "Assassin") || ($class == "Thief"))
 	{
-		if (($relics > 0) && (($level*10) >= mt_rand(1,100))){$arty = OsricMagicItem(suit,$level,$class,1,0); $armor = $arty[0] . ", "; $ac=$arty[1];}
+		if (($relics > 0) && (($level*10) >= mt_rand(1,100))){$arty = OsricMagicItem('suit',$level,$class,1,0); $armor = $arty[0] . ", "; $ac=$arty[1];}
 		else
 		{
 			switch (mt_rand(0,1))
@@ -864,8 +864,8 @@ function givemeGear($class,$level,$relics)
 		{
 			if (($relics > 0) && (($level*10) >= mt_rand(1,100)))
 			{
-				if (mt_rand(1,3) == 1){$arty = OsricMagicItem(club,$level,$class,1,0); $weapon = $arty[0] . ", "; }
-				else {$arty = OsricMagicItem(sword,$level,$class,1,0); $weapon = $arty[0] . ", "; }
+				if (mt_rand(1,3) == 1){$arty = OsricMagicItem('club',$level,$class,1,0); $weapon = $arty[0] . ", "; }
+				else {$arty = OsricMagicItem('sword',$level,$class,1,0); $weapon = $arty[0] . ", "; }
 			}
 			else
 			{
@@ -880,7 +880,7 @@ function givemeGear($class,$level,$relics)
 			}
 			if (mt_rand(1,100) > 60)
 			{
-				if (($relics > 0) && (($level*5) >= mt_rand(1,100))){$arty = OsricMagicItem(bow,$level,$class,1,1); $weapon = $weapon . $arty[0] . ", ";}
+				if (($relics > 0) && (($level*5) >= mt_rand(1,100))){$arty = OsricMagicItem('bow',$level,$class,1,1); $weapon = $weapon . $arty[0] . ", ";}
 				else
 				{
 					switch (mt_rand(0,2))
@@ -895,13 +895,13 @@ function givemeGear($class,$level,$relics)
 		$pack = "thief tools, ";
 		if ((mt_rand(1,100) > 70) && ($hands != 2) && ($class == "Assassin"))
 		{
-			if (($relics > 0) && (($level*10) >= mt_rand(1,100))){$arty = OsricMagicItem(shield,$level,$class,1,0); $shield = $arty[0] . ", "; $ac=$ac+$arty[1];}
+			if (($relics > 0) && (($level*10) >= mt_rand(1,100))){$arty = OsricMagicItem('shield',$level,$class,1,0); $shield = $arty[0] . ", "; $ac=$ac+$arty[1];}
 			else {$shield = "shield, ";	$ac = $ac + 1;}
 		}
 	}
 	else if (($class == "Magic-User") || ($class == "Illusionist"))
 	{
-		if (($relics > 0) && (($level*10) >= mt_rand(1,100))){$arty = OsricMagicItem(club,$level,$class,1,0); $weapon = $arty[0] . ", "; }
+		if (($relics > 0) && (($level*10) >= mt_rand(1,100))){$arty = OsricMagicItem('club',$level,$class,1,0); $weapon = $arty[0] . ", "; }
 		else
 		{
 			switch (mt_rand(0,1))
@@ -913,13 +913,13 @@ function givemeGear($class,$level,$relics)
 		$pack = "spell book, ";
 		if (mt_rand(1,100) > 60)
 		{
-			if (($relics > 0) && (($level*5) >= mt_rand(1,100))){$arty = OsricMagicItem(bow,$level,$class,1,1); $weapon = $weapon . $arty[0] . ", ";}
+			if (($relics > 0) && (($level*5) >= mt_rand(1,100))){$arty = OsricMagicItem('bow',$level,$class,1,1); $weapon = $weapon . $arty[0] . ", ";}
 			else {$weapon = $weapon . "darts [" . mt_rand(5,20) . " ea], "; $i_have_range = 1;}
 		}
 	}
 	else if (($class == "Fighter") || ($class == "Paladin") || ($class == "Ranger") || ($class == "Cleric"))
 	{
-		if (($relics > 0) && (($level*10) >= mt_rand(1,100))){$arty = OsricMagicItem(suit,$level,$class,1,0); $armor = $arty[0] . ", "; $ac=$arty[1];}
+		if (($relics > 0) && (($level*10) >= mt_rand(1,100))){$arty = OsricMagicItem('suit',$level,$class,1,0); $armor = $arty[0] . ", "; $ac=$arty[1];}
 		else
 		{
 			switch (mt_rand(0,7))
@@ -936,7 +936,7 @@ function givemeGear($class,$level,$relics)
 		}
 		if ($class == "Cleric")
 		{
-			if (($relics > 0) && (($level*10) >= mt_rand(1,100))){$arty = OsricMagicItem(club,$level,$class,1,0); $weapon = $arty[0] . ", "; }
+			if (($relics > 0) && (($level*10) >= mt_rand(1,100))){$arty = OsricMagicItem('club',$level,$class,1,0); $weapon = $arty[0] . ", "; }
 			else
 			{
 			switch (mt_rand(0,7))
@@ -962,13 +962,13 @@ function givemeGear($class,$level,$relics)
 		}
 		if ((mt_rand(1,100) > 30) && ($hands != 2))
 		{
-			if (($relics > 0) && (($level*10) >= mt_rand(1,100))){$arty = OsricMagicItem(shield,$level,$class,1,0); $shield = $arty[0] . ", "; $ac=$ac+$arty[1];}
+			if (($relics > 0) && (($level*10) >= mt_rand(1,100))){$arty = OsricMagicItem('shield',$level,$class,1,0); $shield = $arty[0] . ", "; $ac=$ac+$arty[1];}
 			else {$shield = "shield, ";	$ac = $ac + 1;}
 		}
 	}
 	else if ($class == "Druid")
 	{
-		if (($relics > 0) && (($level*10) >= mt_rand(1,100))){$arty = OsricMagicItem(suit,$level,$class,1,0); $armor = $arty[0] . ", "; $ac=$arty[1];}
+		if (($relics > 0) && (($level*10) >= mt_rand(1,100))){$arty = OsricMagicItem('suit',$level,$class,1,0); $armor = $arty[0] . ", "; $ac=$arty[1];}
 		else
 		{
 			switch (mt_rand(0,1))
@@ -979,8 +979,8 @@ function givemeGear($class,$level,$relics)
 		}
 		if (($relics > 0) && (($level*10) >= mt_rand(1,100)))
 		{
-			if (mt_rand(1,3) == 1){$arty = OsricMagicItem(club,$level,$class,1,0); $weapon = $arty[0] . ", "; }
-			else {$arty = OsricMagicItem(sword,$level,$class,1,0); $weapon = $arty[0] . ", "; }
+			if (mt_rand(1,3) == 1){$arty = OsricMagicItem('club',$level,$class,1,0); $weapon = $arty[0] . ", "; }
+			else {$arty = OsricMagicItem('sword',$level,$class,1,0); $weapon = $arty[0] . ", "; }
 		}
 		else
 		{
@@ -996,7 +996,7 @@ function givemeGear($class,$level,$relics)
 		}
 			if (mt_rand(1,100) > 60)
 			{
-				if (($relics > 0) && (($level*5) >= mt_rand(1,100))){$arty = OsricMagicItem(bow,$level,$class,1,1); $weapon = $weapon . $arty[0] . ", ";}
+				if (($relics > 0) && (($level*5) >= mt_rand(1,100))){$arty = OsricMagicItem('bow',$level,$class,1,1); $weapon = $weapon . $arty[0] . ", ";}
 				else
 				{
 					switch (mt_rand(0,2))
@@ -1015,7 +1015,7 @@ function givemeGear($class,$level,$relics)
 			}
 		if ((mt_rand(1,100) > 60) && ($hands != 2))
 		{
-			if (($relics > 0) && (($level*10) >= mt_rand(1,100))){$arty = OsricMagicItem(shield,$level,$class,1,0); $shield = $arty[0] . ", "; $ac=$ac+$arty[1];}
+			if (($relics > 0) && (($level*10) >= mt_rand(1,100))){$arty = OsricMagicItem('shield',$level,$class,1,0); $shield = $arty[0] . ", "; $ac=$ac+$arty[1];}
 			else {$shield = "wooden shield, ";	$ac = $ac + 1;}
 		}
 	}
@@ -1106,40 +1106,40 @@ function givemeGear($class,$level,$relics)
 		if ((($level*4) >= mt_rand(1,100)) && ($class == "Magic-User")){$pack = $pack . "bracers of armor (+" . mt_rand(1,8) . "), ";}
 		if ((($level*4) >= mt_rand(1,100)) && ($class == "Illusionist")){$pack = $pack . "bracers of armor (+" . mt_rand(1,8) . "), ";}
 
-		if ((($level*6) >= mt_rand(1,100)) && ($class == "Cleric")){$arty = OsricMagicItem(potion,$level,$class,1,0); $pack = $pack . $arty[0] . ", ";}
-		if ((($level*8) >= mt_rand(1,100)) && ($class == "Fighter")){$arty = OsricMagicItem(potion,$level,$class,1,0); $pack = $pack . $arty[0] . ", ";}
-		if ((($level*6) >= mt_rand(1,100)) && ($class == "Paladin")){$arty = OsricMagicItem(potion,$level,$class,1,0); $pack = $pack . $arty[0] . ", ";}
-		if ((($level*7) >= mt_rand(1,100)) && ($class == "Ranger")){$arty = OsricMagicItem(potion,$level,$class,1,0); $pack = $pack . $arty[0] . ", ";}
-		if ((($level*5) >= mt_rand(1,100)) && ($class == "Assassin")){$arty = OsricMagicItem(potion,$level,$class,1,0); $pack = $pack . $arty[0] . ", ";}
+		if ((($level*6) >= mt_rand(1,100)) && ($class == "Cleric")){$arty = OsricMagicItem('potion',$level,$class,1,0); $pack = $pack . $arty[0] . ", ";}
+		if ((($level*8) >= mt_rand(1,100)) && ($class == "Fighter")){$arty = OsricMagicItem('potion',$level,$class,1,0); $pack = $pack . $arty[0] . ", ";}
+		if ((($level*6) >= mt_rand(1,100)) && ($class == "Paladin")){$arty = OsricMagicItem('potion',$level,$class,1,0); $pack = $pack . $arty[0] . ", ";}
+		if ((($level*7) >= mt_rand(1,100)) && ($class == "Ranger")){$arty = OsricMagicItem('potion',$level,$class,1,0); $pack = $pack . $arty[0] . ", ";}
+		if ((($level*5) >= mt_rand(1,100)) && ($class == "Assassin")){$arty = OsricMagicItem('potion',$level,$class,1,0); $pack = $pack . $arty[0] . ", ";}
 		if ((($level*11) >= mt_rand(1,100)) && ($class == "Druid"))
 		{
-			$arty = OsricMagicItem(potion,$level,$class,1,0); $pack = $pack . $arty[0] . ", ";
-			if (mt_rand(1,2) == 1){$arty = OsricMagicItem(potion,$level,$class,1,0); $pack = $pack . $arty[0] . ", ";}
+			$arty = OsricMagicItem('potion',$level,$class,1,0); $pack = $pack . $arty[0] . ", ";
+			if (mt_rand(1,2) == 1){$arty = OsricMagicItem('potion',$level,$class,1,0); $pack = $pack . $arty[0] . ", ";}
 		}
 		if ((($level*10) >= mt_rand(1,100)) && ($class == "Illusionist"))
 		{
-			$arty = OsricMagicItem(potion,$level,$class,1,0); $pack = $pack . $arty[0] . ", ";
-			if (mt_rand(1,2) == 1){$arty = OsricMagicItem(potion,$level,$class,1,0); $pack = $pack . $arty[0] . ", ";}
+			$arty = OsricMagicItem('potion',$level,$class,1,0); $pack = $pack . $arty[0] . ", ";
+			if (mt_rand(1,2) == 1){$arty = OsricMagicItem('potion',$level,$class,1,0); $pack = $pack . $arty[0] . ", ";}
 		}
 		if ((($level*9) >= mt_rand(1,100)) && ($class == "Thief"))
 		{
-			$arty = OsricMagicItem(potion,$level,$class,1,0); $pack = $pack . $arty[0] . ", ";
-			if (mt_rand(1,2) == 1){$arty = OsricMagicItem(potion,$level,$class,1,0); $pack = $pack . $arty[0] . ", ";}
+			$arty = OsricMagicItem('potion',$level,$class,1,0); $pack = $pack . $arty[0] . ", ";
+			if (mt_rand(1,2) == 1){$arty = OsricMagicItem('potion',$level,$class,1,0); $pack = $pack . $arty[0] . ", ";}
 		}
 		if ((($level*10) >= mt_rand(1,100)) && ($class == "Magic-User"))
 		{
-			$arty = OsricMagicItem(potion,$level,$class,1,0); $pack = $pack . $arty[0] . ", ";
-			if (mt_rand(1,2) == 1){$arty = OsricMagicItem(potion,$level,$class,1,0); $pack = $pack . $arty[0] . ", ";}
-			if (mt_rand(1,3) == 1){$arty = OsricMagicItem(potion,$level,$class,1,0); $pack = $pack . $arty[0] . ", ";}
+			$arty = OsricMagicItem('potion',$level,$class,1,0); $pack = $pack . $arty[0] . ", ";
+			if (mt_rand(1,2) == 1){$arty = OsricMagicItem('potion',$level,$class,1,0); $pack = $pack . $arty[0] . ", ";}
+			if (mt_rand(1,3) == 1){$arty = OsricMagicItem('potion',$level,$class,1,0); $pack = $pack . $arty[0] . ", ";}
 		}
-		if (($level > 4) && ($level*5) >= mt_rand(1,100)){$arty = OsricMagicItem(magic,$level,$class,1,0); $pack = $pack . $arty[0] . ", ";}
-		if (($level > 4) && ($level*5) >= mt_rand(1,100)){$arty = OsricMagicItem(magic,$level,$class,1,0); $pack = $pack . $arty[0] . ", ";}
-		if (($level > 4) && ($level*5) >= mt_rand(1,100)){$arty = OsricMagicItem(magic,$level,$class,1,0); $pack = $pack . $arty[0] . ", ";}
-		if (($level > 4) && ($level*5) >= mt_rand(1,100)){$arty = OsricMagicItem(magic,$level,$class,1,0); $pack = $pack . $arty[0] . ", ";}
+		if (($level > 4) && ($level*5) >= mt_rand(1,100)){$arty = OsricMagicItem('magic',$level,$class,1,0); $pack = $pack . $arty[0] . ", ";}
+		if (($level > 4) && ($level*5) >= mt_rand(1,100)){$arty = OsricMagicItem('magic',$level,$class,1,0); $pack = $pack . $arty[0] . ", ";}
+		if (($level > 4) && ($level*5) >= mt_rand(1,100)){$arty = OsricMagicItem('magic',$level,$class,1,0); $pack = $pack . $arty[0] . ", ";}
+		if (($level > 4) && ($level*5) >= mt_rand(1,100)){$arty = OsricMagicItem('magic',$level,$class,1,0); $pack = $pack . $arty[0] . ", ";}
 	}
 
 	$gear = $armor . $shield . $weapon . $pack;
-	return array($gear, $ac);
+	return [$gear, $ac];
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 function givemeXP($class,$level)

@@ -41,12 +41,12 @@ function mapMaker($level,$game)
 		$write = mt_rand(1,15);
 		if ($write < 2){$written = "It is written in the thieves' code, so only a rogue will be able to read the map.";}
 		else if ($write < 3){$written = "It is written with magical symbols, so only a wizard will be able to read the map.";}
-		else if ($write < 4){$written = "The words only appear magically scattered every few seconds, requiring an " . TTSaves($tt_level+4,$game) . " vs. " . abilityTranslate($game,INT) . " to read the map.";}
+		else if ($write < 4){$written = "The words only appear magically scattered every few seconds, requiring an " . TTSaves($tt_level+4,$game) . " vs. " . abilityTranslate($game,'INT') . " to read the map.";}
 		else if ($write < 5){$written = "It is written with religious symbols, so only a priest will be able to read the map.";}
 		else if ($write < 6){$written = "It is written in " . languageType($game) . ", and only those that speak the language will be able to read the map.";}
 		else if ($write < 7){$written = "It is written backwards, requiring a mirror to read the map.";}
-		else if ($write < 8){$written = "It is written in some strange code, requiring an " . TTSaves($tt_level,$game) . " vs. " . abilityTranslate($game,INT) . " to read the map.";}
-		else if ($write < 9){$written = "It is written in the form of a riddle, requiring an " . TTSaves(($tt_level+5),$game) . " vs. " . abilityTranslate($game,INT) . " to read the map.";}
+		else if ($write < 8){$written = "It is written in some strange code, requiring an " . TTSaves($tt_level,$game) . " vs. " . abilityTranslate($game,'INT') . " to read the map.";}
+		else if ($write < 9){$written = "It is written in the form of a riddle, requiring an " . TTSaves(($tt_level+5),$game) . " vs. " . abilityTranslate($game,'INT') . " to read the map.";}
 		else {$written = "";}
 	}
 	else if ($game == "Swords & Six-Siders")
@@ -107,7 +107,7 @@ function mapMaker($level,$game)
 	else {$fates = "vanished";}
 
 
-	$story = "This is a map to the " . strtolower($prefix) . " treasure of " . $owner . " the " . ucfirst($job) . ".  Known to have " . $fates . " about " . mt_rand(5,90) . "0 years ago, their treasure is shown to be in an area just " . (mt_rand(1,100)*5) . " miles from here.&nbsp;";
+	$story = "This is a map to the " . strtolower((string) $prefix) . " treasure of " . $owner . " the " . ucfirst((string) $job) . ".  Known to have " . $fates . " about " . mt_rand(5,90) . "0 years ago, their treasure is shown to be in an area just " . (mt_rand(1,100)*5) . " miles from here.&nbsp;";
 
 
 	if (mt_rand(1,100) > 30)
@@ -149,7 +149,7 @@ function mapMaker($level,$game)
 
 				$class1 = explode("_", $class);
 				$class2 = count($class1);
-				$class3 = $class1[mt_rand(1,$class2)];
+				$class3 = $class1[mt_rand(1, max((int)(1), (int)($class2)))];
 			}
 
 			if ($class3 == ""){$class3 = "Merchant";}

@@ -6,7 +6,7 @@ function makeMagicItem($level,$size,$varb,$game,$extra,$cut)
 
 if (($game != "Tunnels & Trolls 5th Edition") && ($game != "Tunnels & Trolls 7th Edition") && ($game != "Tunnels & Trolls Deluxe"))
 {
-	if ($level > 0){$level = mt_rand(1,$level);} else {$level = mt_rand(1,20);}
+	if ($level > 0){$level = mt_rand(1, max((int)(1), (int)($level)));} else {$level = mt_rand(1,20);}
 
 	$which_item = mt_rand(1,100);
 
@@ -95,9 +95,9 @@ if (($game != "Tunnels & Trolls 5th Edition") && ($game != "Tunnels & Trolls 7th
 			case 48:$item = "of spider " . $lqud . " (can walk on walls and ceilings for " . (($level+1)*10) . " minutes)";	break;
 			case 49:$item = "of lore " . $lqud . " (can identify and appraise any item " . (($level+1)*10) . " minutes)";	break;
 			case 50:$item = "of speech " . $lqud . " (can talk in the same language as the one you are trying to converse with for " . (($level+1)*10) . " minutes)";	break;
-			case 51:$item = "of cursed " . $lqud . " (" . curseType($level,drinker,item,$game) . ")";	break;
-			case 52:$item = "of vile " . $lqud . " (" . curseType($level,drinker,item,$game) . ")";	break;
-			case 53:$item = "of infernal " . $lqud . " (" . curseType($level,drinker,item,$game) . ")";	break;
+			case 51:$item = "of cursed " . $lqud . " (" . curseType($level,'drinker','item',$game) . ")";	break;
+			case 52:$item = "of vile " . $lqud . " (" . curseType($level,'drinker','item',$game) . ")";	break;
+			case 53:$item = "of infernal " . $lqud . " (" . curseType($level,'drinker','item',$game) . ")";	break;
 			case 54:$item = "of lycanthropy (drinker will turn into a " . lycanthrope() . " for " . mt_rand(2,12) . " hours, but is not permanent and it is ineffective toward those suffering from lycanthropy)";	break;
 		}
 
@@ -132,9 +132,9 @@ if (($game != "Tunnels & Trolls 5th Edition") && ($game != "Tunnels & Trolls 7th
 			case 19:$item = "protection from water scroll";	break;
 			case 20:$item = "protection from magical weapons scroll";	break;
 			case 21:$item = "protection from normal weapons scroll";	break;
-			case 22:$item = "cursed scroll (" . curseType($level,reader,item,$game) . ")";	break;
-			case 23:$item = "vile parchment (" . curseType($level,reader,item,$game) . ")";	break;
-			case 24:$item = "infernal scroll (" . curseType($level,reader,item,$game) . ")";	break;
+			case 22:$item = "cursed scroll (" . curseType($level,'reader','item',$game) . ")";	break;
+			case 23:$item = "vile parchment (" . curseType($level,'reader','item',$game) . ")";	break;
+			case 24:$item = "infernal scroll (" . curseType($level,'reader','item',$game) . ")";	break;
 		}
 		if (mt_rand(1,100) > 60){$item = $item . " [written in " . languageType($game) . "]";}
 	} ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -184,12 +184,12 @@ if (($game != "Tunnels & Trolls 5th Edition") && ($game != "Tunnels & Trolls 7th
 			case 31:$item = "ring of agility +1";	if (($game == "Swords & Six-Siders") || ($game == "OSRIC") || ($game == "AD&D") || ($game == "BD&D") || ($game == "BFRGP") || ($game == "Labyrinth Lord") || ($game == "Swords & Wizardry")){$item = "ring of dexterity +1";} $no_words = 1; $use_charges = 1;	break;
 			case 32:$item = "ring of stamina +1";	if (($game == "Swords & Six-Siders") || ($game == "OSRIC") || ($game == "AD&D") || ($game == "BD&D") || ($game == "BFRGP") || ($game == "Labyrinth Lord") || ($game == "Swords & Wizardry")){$item = "ring of constitution +1";} $no_words = 1; $use_charges = 1;	break;
 			case 33:$item = "ring of turning (automatically turn " . undeadType() . ")";	break;
-			case 34:$item = "cursed ring (" . curseType($level,wearer,equip,$game) . ")";		$curses = 1; break;
-			case 35:$item = "vile ring (" . curseType($level,wearer,equip,$game) . ")";		$curses = 1; break;
+			case 34:$item = "cursed ring (" . curseType($level,'wearer','equip',$game) . ")";		$curses = 1; break;
+			case 35:$item = "vile ring (" . curseType($level,'wearer','equip',$game) . ")";		$curses = 1; break;
 			case 36:	$ring_picks = mt_rand(1,3);
 				if ($ring_picks == 1){$item = "ring of envy (anyone who sees this ring has to have it...most often resorting to violence...unless they can save for spells)"; }
 				else if ($ring_picks == 2){$item = "ring of severing (anyone who puts this ring on will have their finger cut off)"; $curses = 1; }
-				else {$item = "infernal ring (" . curseType($level,wearer,equip,$game) . ")";}
+				else {$item = "infernal ring (" . curseType($level,'wearer','equip',$game) . ")";}
 					$curses = 1;
 						break;
 			case 37:$item = "rings of fellowship (if one wears this ring and begins to get harmed, the other will begin to glow with a " . beamColor() . " light on the other wearer`s hand)";	$no_words = 1; $use_charges = 1;	break;
@@ -201,12 +201,12 @@ if (($game != "Tunnels & Trolls 5th Edition") && ($game != "Tunnels & Trolls 7th
 				if ((mt_rand(1,100) > 90) && ($curses != 1) && ($no_words != 1)){$words = "...the command word to use this is `" . castingName() . "`, which can be learned with identifying magic";}
 			$decorate = $decorate . "" . $words;
 			if ((mt_rand(1,100) > 70) && ($curses != 1) && ($use_charges != 1)){$item = $item . " " . $decorate . " - it has " . $charges . " charges]";} else {$item = $item . " " . $decorate . "]";}
-			if (mt_rand(1,100) > 50){$item = "<u>" . artifactNaming(ring,'',$curses,0) . "</u> - " . $item;}
+			if (mt_rand(1,100) > 50){$item = "<u>" . artifactNaming('ring','',$curses,0) . "</u> - " . $item;}
 	} ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	else if ($the_item == "wand")
 	{
 		if ($size == 1){$r_min=20; $r_max = 47;} else if ($size == 2){$r_min=10; $r_max = 47;} else {$r_min=0; $r_max = 47;}
-		switch (mt_rand($r_min,$r_max))
+		switch (mt_rand($r_min, max((int)($r_min), (int)($r_max))))
 		{
 			case 0:$item = "staff of domination";		break;
 			case 1:$item = "staff of curing";		break;
@@ -258,7 +258,7 @@ if (($game != "Tunnels & Trolls 5th Edition") && ($game != "Tunnels & Trolls 7th
 			case 47:$item = "wand of vaporous steam";	break;
 		}
 		$mystic_item = explode(" ", $item);
-		if (substr($item, 0, 3) == "rod")
+		if (str_starts_with($item, "rod"))
 		{
 			$charges = mt_rand(10,50);
 			switch (mt_rand(0,8))
@@ -275,7 +275,7 @@ if (($game != "Tunnels & Trolls 5th Edition") && ($game != "Tunnels & Trolls 7th
 			}
 			if (mt_rand(1,100) > 50){$extradj = " and has a " . gemChooser() . " at each end";}
 		}
-		else if (substr($item, 0, 3) == "wan")
+		else if (str_starts_with($item, "wan"))
 		{
 			$charges = mt_rand(20,100);
 			switch (mt_rand(0,9))
@@ -353,7 +353,7 @@ if (($game != "Tunnels & Trolls 5th Edition") && ($game != "Tunnels & Trolls 7th
 			}
 		}
 
-		$forge = mt_rand(1,$roller);
+		$forge = mt_rand(1, max((int)(1), (int)($roller)));
 
 		if ( $game == "Swords & Six-Siders" && $forge < 87 && $forge > 74 ){ $forge = 74; }
 		if ($forge < 50){$heatup = "+1";}
@@ -366,9 +366,9 @@ if (($game != "Tunnels & Trolls 5th Edition") && ($game != "Tunnels & Trolls 7th
 		{	$cursing = 1;
 			switch (mt_rand(0,2))
 			{
-				case 0:$heatup = "cursed " . $armor . " (" . curseType($level,$wearer,equip,$game) . ")";	break;
-				case 1:$heatup = "vile " . $armor . " (" . curseType($level,$wearer,equip,$game) . ")";	break;
-				case 2:$heatup = "infernal " . $armor . " (" . curseType($level,$wearer,equip,$game) . ")";	break;
+				case 0:$heatup = "cursed " . $armor . " (" . curseType($level,$wearer,'equip',$game) . ")";	break;
+				case 1:$heatup = "vile " . $armor . " (" . curseType($level,$wearer,'equip',$game) . ")";	break;
+				case 2:$heatup = "infernal " . $armor . " (" . curseType($level,$wearer,'equip',$game) . ")";	break;
 			}
 		}
 		else
@@ -388,8 +388,8 @@ if (($game != "Tunnels & Trolls 5th Edition") && ($game != "Tunnels & Trolls 7th
 		}
 			$logo = "...with a " . designType(0) . " symbol on the " . $sew . " that is " . designColor() . " in color";}
 	
-		if ($leather == 1){$decorate = "[made of " . materialType(leather) . " hide and is " . leatherColor() . " in color" . $logo. "]";}
-		else {$decorate = "[made of " . materialType(iron) . "" . $logo. "]";}
+		if ($leather == 1){$decorate = "[made of " . materialType('leather') . " hide and is " . leatherColor() . " in color" . $logo. "]";}
+		else {$decorate = "[made of " . materialType('iron') . "" . $logo. "]";}
 		$item = $item . " " . $decorate;
 		if (mt_rand(1,100) > 50){$item = "<u>" . artifactNaming($mystic_item,'',$cursing,0) . "</u> - " . $item;}
 	} ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -398,7 +398,7 @@ if (($game != "Tunnels & Trolls 5th Edition") && ($game != "Tunnels & Trolls 7th
 		$wearer = "wielder";
 		$forge = mt_rand(1,100);
 		if ($size == 1){$r_min=0; $r_max = 4;} else if ($size == 2){$r_min=0; $r_max = 21;} else {$r_min=0; $r_max = 36;}
-		switch (mt_rand($r_min,$r_max))
+		switch (mt_rand($r_min, max((int)($r_min), (int)($r_max))))
 		{
 			case 0:	$item = "knife";		$smith1 = "blade";	$smith2 = "handle";	break;
 			case 1:	$item = "arrow";		$quiver = " {" . mt_rand(5,20) . " each}";	$forge = mt_rand(1,94);	break;
@@ -444,8 +444,8 @@ if (($game != "Tunnels & Trolls 5th Edition") && ($game != "Tunnels & Trolls 7th
 		$mystic_item = $mystic_items[0];	if ($mystic_items[1] != ""){$mystic_item = $mystic_items[1];}	if (($mystic_items[1] == "arm") || ($mystic_items[1] == "star")){$mystic_item = ucwords($item);}
 		if ($smith2 == "hilt")
 		{
-			if (mt_rand(1,100) > 80){$smith3 = materialType(leather) . " leather";} else {$smith3 = "leather";}
-				$decorate = "[the " . $smith1 . " is made of " . materialType(iron) . " with a " . $smith3 . " grip";
+			if (mt_rand(1,100) > 80){$smith3 = materialType('leather') . " leather";} else {$smith3 = "leather";}
+				$decorate = "[the " . $smith1 . " is made of " . materialType('iron') . " with a " . $smith3 . " grip";
 			if (mt_rand(1,100) > 50){$etch = $smith1;} else {$etch = $smith2;}
 			if (mt_rand(1,100) > 80){$belongs = "...the name of <i>" . $owner . "</i> is engraved on the " . $etch; $mystic_mine = $owner;}
 			if (mt_rand(1,100) > 80){$decorate = $decorate . "...the " . $etch . " is decorated with " . mt_rand(3,12) . " gems {" . gemChooser() . "}]";}
@@ -453,19 +453,19 @@ if (($game != "Tunnels & Trolls 5th Edition") && ($game != "Tunnels & Trolls 7th
 		}
 		else if ($smith1 != "")
 		{
-			if (mt_rand(1,100) > 80){$smith3 = materialType(leather) . " leather";} else {$smith3 = "leather";}
-				$decorate = "[the " . $smith1 . " is made of " . materialType(iron) . " and has a " . materialType(handle) . " " . $smith2 . " with a " . $smith3 . " grip";
-				if ($pole == 1){$decorate = "[the " . $smith1 . " is made of " . materialType(iron) . " and has a " . materialType(handle) . " " . $smith2;}
+			if (mt_rand(1,100) > 80){$smith3 = materialType('leather') . " leather";} else {$smith3 = "leather";}
+				$decorate = "[the " . $smith1 . " is made of " . materialType('iron') . " and has a " . materialType('handle') . " " . $smith2 . " with a " . $smith3 . " grip";
+				if ($pole == 1){$decorate = "[the " . $smith1 . " is made of " . materialType('iron') . " and has a " . materialType('handle') . " " . $smith2;}
 			if (mt_rand(1,100) > 50){$etch = $smith1;} else {$etch = $smith2;}
 			if (mt_rand(1,100) > 80){$belongs = "...the name of <i>" . $owner . "</i> is engraved on the " . $etch; $mystic_mine = $owner;}
 			if (mt_rand(1,100) > 80){$decorate = $decorate . "...the " . $etch . " is decorated with " . mt_rand(3,12) . " gems {" . gemChooser() . "}]";}
 			else {$decorate = $decorate . "" . $belongs . "]";}
 		}
-		else if ($bow == 1){ $decorate = "[" . materialType(bow);
+		else if ($bow == 1){ $decorate = "[" . materialType('bow');
 			if (mt_rand(1,100) > 80){$belongs = "...the name of <i>" . $owner . "</i> is carved on it"; $mystic_mine = $owner;}
 			$decorate = $decorate . "" . $belongs . "]";
 		}
-		else if ($bow == 2){ $decorate = "[made of " . materialType(leather) . " hide";
+		else if ($bow == 2){ $decorate = "[made of " . materialType('leather') . " hide";
 			if (mt_rand(1,100) > 50){$etch = "burned";} else {$etch = "stitched";}
 			if (mt_rand(1,100) > 80){$belongs = "...the name of <i>" . $owner . "</i> is " . $etch . " on it"; $mystic_mine = $owner;}
 			if (mt_rand(1,100) > 80){$belongs = $belongs . "...the cradle is decorated with a " . gemChooser();}
@@ -483,9 +483,9 @@ if (($game != "Tunnels & Trolls 5th Edition") && ($game != "Tunnels & Trolls 7th
 		{	$cursing = 1;
 			switch (mt_rand(0,2))
 			{
-				case 0:$heatup = "cursed " . $item . " (" . curseType($level,$wearer,equip,$game) . ")";	break;
-				case 1:$heatup = "vile " . $item . " (" . curseType($level,$wearer,equip,$game) . ")";	break;
-				case 2:$heatup = "infernal " . $item . " (" . curseType($level,$wearer,equip,$game) . ")";	break;
+				case 0:$heatup = "cursed " . $item . " (" . curseType($level,$wearer,'equip',$game) . ")";	break;
+				case 1:$heatup = "vile " . $item . " (" . curseType($level,$wearer,'equip',$game) . ")";	break;
+				case 2:$heatup = "infernal " . $item . " (" . curseType($level,$wearer,'equip',$game) . ")";	break;
 			}
 		}
 		else if ($forge < 98)
@@ -519,7 +519,7 @@ if (($game != "Tunnels & Trolls 5th Edition") && ($game != "Tunnels & Trolls 7th
 		$written = "shown somewhere on it";	if (mt_rand(1,100) > 50){$written = "learned from identifying magic";}
 
 		////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-		switch (mt_rand($sz1,$sz2))
+		switch (mt_rand($sz1, max((int)($sz1), (int)($sz2))))
 		{
 			case 0: $use_other = 2; break;
 			case 1: $use_other = 2; break;
@@ -532,14 +532,14 @@ if (($game != "Tunnels & Trolls 5th Edition") && ($game != "Tunnels & Trolls 7th
 			case 8: $rock = rockType();		$m_misc = $rock . "___{" . rockPower($rock,$curse_me,$level,$game) . "}";	break;
 			case 9: $m_misc = tomeType() . "___{" . tomePower(100,$curse_me,$level,$cut,$game) . "}";	$use_other = 100;	break;
 			case 10:$m_misc = tomeType() . "___{" . tomePower(100,$curse_me,$level,$cut,$game) . "}";	$use_other = 100;	break;
-			case 11:$m_misc = "spell book___{this " . $book_spell . " spell book is bound in " . leatherColor() . " " . materialType(leather) . " skin with " . designColor() . " colored symbols of a " . designType(0) . " on the front and a " . designType(0) . " on the back...it contains " . $pages_book . "}";	break;
+			case 11:$m_misc = "spell book___{this " . $book_spell . " spell book is bound in " . leatherColor() . " " . materialType('leather') . " skin with " . designColor() . " colored symbols of a " . designType(0) . " on the front and a " . designType(0) . " on the back...it contains " . $pages_book . "}";	break;
 			case 12:$m_misc = "skeleton keys___{these " . mt_rand(2,6) . " keys will unlock any lock, each one vanishing afterwards}"; break;
-			case 13:$m_misc = materialType(iron) . " goblet___{any liquid put in this cup will turn into pure water}"; break;
-			case 14:$m_misc = materialType(iron) . " hand mirror___{can make the viewer`s face change to another as long as it is the same gender and race}"; break;
+			case 13:$m_misc = materialType('iron') . " goblet___{any liquid put in this cup will turn into pure water}"; break;
+			case 14:$m_misc = materialType('iron') . " hand mirror___{can make the viewer`s face change to another as long as it is the same gender and race}"; break;
 			case 15:$m_misc = "tobacco pipe of haze___{requires tobacco...when smoked, it will create a dense " . fogColor() . " fog in front of the one smoking the pipe}"; break;
-			case 16:$m_misc = materialType(iron) . " bell of alarming___{this small bell will ring whenever a hostile creature comes within 50 feet of the owner}"; break;
-			case 17:$m_misc = materialType(iron) . " fork___{this dinner fork will turn into a trident +" . mt_rand(1,5) . " when the word `" . castingName() . "` is spoken (which is " . $written . ")...and back to a fork when spoken again}";
-				if ($game == "Swords & Six-Siders"){ $m_misc = materialType(iron) . " fork___{this dinner fork will turn into a trident +" . mt_rand(1,3) . " when the word `" . castingName() . "` is spoken (which is " . $written . ")...and back to a fork when spoken again}"; }
+			case 16:$m_misc = materialType('iron') . " bell of alarming___{this small bell will ring whenever a hostile creature comes within 50 feet of the owner}"; break;
+			case 17:$m_misc = materialType('iron') . " fork___{this dinner fork will turn into a trident +" . mt_rand(1,5) . " when the word `" . castingName() . "` is spoken (which is " . $written . ")...and back to a fork when spoken again}";
+				if ($game == "Swords & Six-Siders"){ $m_misc = materialType('iron') . " fork___{this dinner fork will turn into a trident +" . mt_rand(1,3) . " when the word `" . castingName() . "` is spoken (which is " . $written . ")...and back to a fork when spoken again}"; }
 				break;
 			case 18:$m_misc = "ointment___{this small jar has " . mt_rand(2,7) . " uses and will cure poison and disease...along with healing " . mt_rand(6,13) . " damage}"; break;
 			case 19:$m_misc = "paint brush___{once a day this brush can paint a doorway on a wall that is no more than 10 feet thick...but it does require a pint of paint}"; break;
@@ -560,35 +560,35 @@ if (($game != "Tunnels & Trolls 5th Edition") && ($game != "Tunnels & Trolls 7th
 			case 32:$m_misc = "chess piece___{this looks like a rook piece but when the word `" . castingName() . "` is spoken (which is " . $written . ") a stone tower appears that is 30 feet high and 20 feet wide...if it is empty, the command word will turn it back into a rook piece}"; break;
 			case 33:$m_misc = "stones___{these " . mt_rand(2,10) . " sling stones will always hit their target}"; break;
 			case 34:$m_misc = "glue___{this " . bottlePicker() . " of glue has " . mt_rand(2,8) . " uses and cause anything to stick to anything else...permanently}"; break;
-			case 35:$m_misc = materialType(iron) . " holy symbol___{while held, priest spells can double their effects...but does not affect save rolls}";
-				if ($game == "Swords & Six-Siders"){ $m_misc = materialType(iron) . " holy symbol___{while held, one can turn back any undead as the wizard spells}"; }
+			case 35:$m_misc = materialType('iron') . " holy symbol___{while held, priest spells can double their effects...but does not affect save rolls}";
+				if ($game == "Swords & Six-Siders"){ $m_misc = materialType('iron') . " holy symbol___{while held, one can turn back any undead as the wizard spells}"; }
 				break;
-			case 36:$m_misc = "rings___{these 8 inch " . materialType(iron) . " rings are found in pairs that are magically linked together...anyone putting their arm throw one ring will have it come through the other ring instead}"; break;
-			case 37:$m_misc = "key___{this " . materialType(iron) . " key can be used once per day where it is pushed into a solid wall and turned...revealing a door that leads to where the key was tuned...tuning the key requires one to hold the key in a particular spot and saying the word `" . castingName() . "` which is engraved on the key}"; break;
+			case 36:$m_misc = "rings___{these 8 inch " . materialType('iron') . " rings are found in pairs that are magically linked together...anyone putting their arm throw one ring will have it come through the other ring instead}"; break;
+			case 37:$m_misc = "key___{this " . materialType('iron') . " key can be used once per day where it is pushed into a solid wall and turned...revealing a door that leads to where the key was tuned...tuning the key requires one to hold the key in a particular spot and saying the word `" . castingName() . "` which is engraved on the key}"; break;
 			case 38:$m_misc = "scrolls___{there are " . mt_rand(2,6) . " scrolls bunched together...when a scroll is written on, it will appear on the other scrolls for almost a minute before vanishing}"; break;
 			case 39:$m_misc = "coin___{" . rareCoins(1,1) . "...where it can be flipped in a heads or tails fashion to help answer " . mt_rand(2,6) . " questions a day}"; break;
-			case 40:$m_misc = "apple___{this silver apple can be bitten into a total of 12 times before it is useless...where each bite restores " . mt_rand(2,12) . " " . abilityTranslate($game,CON) . "}";
+			case 40:$m_misc = "apple___{this silver apple can be bitten into a total of 12 times before it is useless...where each bite restores " . mt_rand(2,12) . " " . abilityTranslate($game,'CON') . "}";
 				if ($game == "Swords & Six-Siders"){ $m_misc = "apple___{this silver apple can be bitten into a total of 12 times before it is useless...where each bite restores " . mt_rand(2,12) . " hit points}"; }
 				break;
 			case 41:$m_misc = "stone___{this small stone will begin to scream whenever one approaches that will do the owner harm...but it has to be activated and deactivated by speaking the word `" . castingName() . "`, which can be learned by identifying the item}"; break;
-			case 42:$m_misc = "throwing knife___{this " . materialType(iron) . " knife gives +" . mt_rand(1,3) . " to damage, and when it is thrown, it will always hit the intended target}"; break;
+			case 42:$m_misc = "throwing knife___{this " . materialType('iron') . " knife gives +" . mt_rand(1,3) . " to damage, and when it is thrown, it will always hit the intended target}"; break;
 			case 43:$m_misc = "biting skull___{this skull will bite down with unbreakable magical force when the word `" . castingName() . "` is spoken, which can be learned by identifying the item...speaking the same word will cause the skull to open the mouth}"; break;
 			case 44:$m_misc = "stick___{this " . woodenType() . " stick is about " . mt_rand(2,4) . " feet long and will safely set off a nearby trap when tapped on the floor or ground, but only " . mt_rand(2,6) . " times a day}"; break;
 			case 45:$m_misc = "stick___{this " . woodenType() . " stick is about " . mt_rand(2,4) . " feet long and will detect any fresh water source that is within " . (mt_rand(1,9)*100) . " feet";	break;
 			case 46:$m_misc = "veil___{when this " . candleColor(0) . " veil is worn, anyone looking through it is immune to gaze attacks";	break;
 			case 47:$m_misc = "candle___{when this " . candleColor(0) . " candle is lit, " . candleMagic($game,$level) . "}"; break;
-			case 48:$m_misc = "tankard___{this " . materialType(iron) . " tankard allows one to drink any amount of alcohol from it without any of the effects}"; break;
+			case 48:$m_misc = "tankard___{this " . materialType('iron') . " tankard allows one to drink any amount of alcohol from it without any of the effects}"; break;
 			case 49:$m_misc = "quill___{this " . birdType() . " feathered quill will magically write the spoken words of the owner, as long as it has paper and ink, for " . mt_rand(2,6) . " hours per day}"; break;
 			///////////////////////////////////////////
 			case 50:$m_misc = "arrow___{when this arrow is fired straight into the sky, it will travel up to " . mt_rand(2,20) . "0 miles to reach the recipient of whoever an attached message is for}"; break;
-			case 51:$m_misc = "torch___{when this " . materialType(iron) . " torch is lit, it will illuminate an area of " . mt_rand(1,3) . "0 feet with a " . beamColor(0) . " light...but for only " . mt_rand(2,4) . " hours per day, where no undead or shadowy creatures may enter}"; break;
+			case 51:$m_misc = "torch___{when this " . materialType('iron') . " torch is lit, it will illuminate an area of " . mt_rand(1,3) . "0 feet with a " . beamColor(0) . " light...but for only " . mt_rand(2,4) . " hours per day, where no undead or shadowy creatures may enter}"; break;
 			case 52:$m_misc = "lantern___{anyone holding the lantern can see the illumination...but others cannot}"; break;
 			case 53:$m_misc = "nourishing iron pot___{will magically fill itself with warm stew when the word `" . castingName() . "` is spoken, which is " . $written . "}"; break;
 			case 54:$m_misc = "torch___{if the word `" . castingName() . "` is spoken (which is " . $written . "), this torch will light and follow the owner by floating nearby...but only for about " . mt_rand(3,12) . " hours a day}"; break;
 			case 55:$m_misc = "lamp oil___{this lantern oil will cause the lamp`s light to hurt undead within it`s glow for " . mt_rand(1,3) . "d" . (mt_rand(2,6)*2) . " damage per round}";
 				if ($game == "Swords & Six-Siders"){ $m_misc = "lamp oil___{this lantern oil will cause the lamp`s light to hurt undead within it`s glow for " . mt_rand(1,2) . "d6 damage per round}"; }
 				break;
-			case 56:$m_misc = materialType(iron) . " hand mirror___{when one sees their reflection, and the word spoken by the wielder, any creature looking at their reflection at will get sucked into the mirror (where only one at a time may exist in the mirror) and imprisoned until the owner breaks it}"; break;
+			case 56:$m_misc = materialType('iron') . " hand mirror___{when one sees their reflection, and the word spoken by the wielder, any creature looking at their reflection at will get sucked into the mirror (where only one at a time may exist in the mirror) and imprisoned until the owner breaks it}"; break;
 			case 57:$m_misc = "crystal ball___{allows a wizard or illusionist to see what is happening " . (mt_rand(1,20)*5) . " miles away and only if they are somewhat familiar with the area they are looking}"; break;
 			case 58:$m_misc = "evil skull___{only the vile may hold this skull where anyone else touching it will suffer " . mt_rand(1,3) . "d" . (mt_rand(2,6)*2) . " damage...it will cause any undead to ignore the wielder}";
 				if ($game == "Swords & Six-Siders"){ $m_misc = "evil skull___{only evil ones may hold this skull where anyone else touching it will suffer " . mt_rand(1,2) . "d6 damage...it will cause any undead to ignore the wielder}"; }
@@ -601,7 +601,7 @@ if (($game != "Tunnels & Trolls 5th Edition") && ($game != "Tunnels & Trolls 7th
 			case 64:$m_misc = "driftwood___{when the word `" . castingName() . "` is spoken (which is " . $written . ") this turns into a raft that can hold about 4 humanoids...the command word will turn it back into driftwood}"; break;
 			case 65:$m_misc = "net___{when thrown at an enemy, they will be captured unless they can make a major strength test...if the word `" . castingName() . "` is spoken (which is " . $written . "), then the net release the prisoner}"; break;
 			case 66:$m_misc = "paint___{this pint of " . candleColor(0) . " paint can be used to paint and object that comes to be real and useable...such as swords, boxes, armor, food...but nothing of high value}"; break;
-			case 67:$m_misc = materialType(iron) . " hand mirror___{when the mirror is spoken into, it will answer one question per day}"; break;
+			case 67:$m_misc = materialType('iron') . " hand mirror___{when the mirror is spoken into, it will answer one question per day}"; break;
 			case 68:$m_misc = "vortex___{this is a round black cloth that is 6 feet wide when laid out...it creates a hole that is 10 feet deep in which anyone that falls in must get out before the cloth is picked back up or vanish forever}"; break;
 			case 69:if (mt_rand(1,100) > 50){$toy = "teddy bear";} else {$toy = "doll";} $m_misc = $toy . "___{this " . $toy . " (able to sustain " . mt_rand(6,24) . " damage) can come to life and serve the owner for " . mt_rand(2,12) . " hours per week if the word `" . castingName() . "` is spoken (which is " . $written . ")...it will not fight but do other various chores"; break;
 			case 70:$m_misc = "tablecloth___{once a day, when this " . candleColor(0) . " tablecloth is put on a table, it will unfold with a feast for up to " . mt_rand(4,8) . " people}"; break;
@@ -740,7 +740,7 @@ if (($game != "Tunnels & Trolls 5th Edition") && ($game != "Tunnels & Trolls 7th
 		////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		if (mt_rand(1,4) > 1)
 		{
-			switch (mt_rand(0,$sz3))
+			switch (mt_rand(0, max((int)(0), (int)($sz3))))
 			{
 				case 0: $glove = gloveType();		$m_misc = $glove . "___{" . glovePower($glove,$curse_me,$level,$game) . "}";	break;
 				case 1: $amulet = amuletType();	$m_misc = $amulet . "___{" . amuletPower($amulet,$curse_me,$level,$game) . "}";	break;
@@ -765,7 +765,7 @@ if (($game != "Tunnels & Trolls 5th Edition") && ($game != "Tunnels & Trolls 7th
 		if ($safety > 0){$item = makeMagicItem($level,$size,$varb,$game,$extra,$cut);} // TRY AGAIN IF IT COMES UP WITH NOTHING //
 	}
 
-	$item = ucfirst($item);
+	$item = ucfirst((string) $item);
 	return $item;
 }
 else /// THIS STUFF BELOW IS SPECIFICALLY FOR THE TUNNELS & TROLLS GAME ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -782,7 +782,7 @@ else /// THIS STUFF BELOW IS SPECIFICALLY FOR THE TUNNELS & TROLLS GAME ////////
 		case 21: $plus = "9"; break; case 22: $plus = "10"; break;
 	}
 
-	if ($level > 0){$level = mt_rand(1,$level);} else {$level = mt_rand(1,20);}
+	if ($level > 0){$level = mt_rand(1, max((int)(1), (int)($level)));} else {$level = mt_rand(1,20);}
 
 	switch (mt_rand(0,6))
 	{
@@ -807,21 +807,21 @@ else /// THIS STUFF BELOW IS SPECIFICALLY FOR THE TUNNELS & TROLLS GAME ////////
 		$effective = "but is only effective for " . mt_rand(2,17) . " hits with the weapon before it loses effectiveness";
 
 		$p = 12; if ($game == "Tunnels & Trolls Deluxe"){ $p = 16; }
-		switch (mt_rand(0,$p))
+		switch (mt_rand(0, max((int)(0), (int)($p))))
 		{
 			case 0:$poison = "of curare poison (" . $poisonuse . "...which the opponent loses combat adds for every hit by the poisoned weapon..." . $effective . ")";	break;
 			case 1:$poison = "of dragon venom (" . $poisonuse . "...which the opponent suffers an additional 4 hits of damage from the weapon..." . $effective . ")";	break;
 			case 2:$poison = "of hellfire juice (" . $poisonuse . "...which the opponent takes additional damage [1st time is 1d6 - 2nd time is 2d6 - 3rd time is 3d6 - ect] from hits by the weapon..." . $effective . ")";	break;
 			case 3:$poison = "of manbane paste (" . $poisonuse . "...causes 2d6 damage and a 1d6 reduction from a character`s two highest attributes..." . $effective . ")";	break;
-			case 4:$poison = "of mandrake powder (" . $poisonuse . "...where the victim loses 1/10th of their " . abilityTranslate($game,CON) . " permanently..." . $effective . ")";	break;
+			case 4:$poison = "of mandrake powder (" . $poisonuse . "...where the victim loses 1/10th of their " . abilityTranslate($game,'CON') . " permanently..." . $effective . ")";	break;
 			case 5:
-					if ($game == "Tunnels & Trolls 5th Edition"){$poison = "of naga spittle (" . $poisonuse . "...where it reduces " . abilityTranslate($game,INT) . " by half...down to 1 where the victim would fall unconscious..." . $effective . ")";}
-					else {$poison = "of naga spittle (" . $poisonuse . "...where it reduces " . abilityTranslate($game,INT) . " and " . abilityTranslate($game,WIZ) . " by half their maximum...down to 1 where the victim would fall unconscious..." . $effective . ")";}
+					if ($game == "Tunnels & Trolls 5th Edition"){$poison = "of naga spittle (" . $poisonuse . "...where it reduces " . abilityTranslate($game,'INT') . " by half...down to 1 where the victim would fall unconscious..." . $effective . ")";}
+					else {$poison = "of naga spittle (" . $poisonuse . "...where it reduces " . abilityTranslate($game,'INT') . " and " . abilityTranslate($game,'WIZ') . " by half their maximum...down to 1 where the victim would fall unconscious..." . $effective . ")";}
 				break;
 			case 6:$poison = "of scorpion venom (" . $poisonuse . "...and it will reduce a victim`s combat adds to 75%..." . $effective . ")";	break;
 			case 7:$poison = "of spider venom (" . $poisonuse . "...and can only affect human sized creatures or smaller...where they will suffer paralysis...which wears off after 5 combat rounds..." . $effective . ")";	break;
-			case 8:$poison = "of stone-fish toxin (" . $poisonuse . "...where the opponent hit would suffer 3d6 damage and make an L1SR vs. " . abilityTranslate($game,CON) . " or drop dead..." . $effective . ")";	break;
-			case 9:$poison = "of werebane syrup (" . $poisonuse . "...does 2 extra damage to non-weres, but weres suffer 4x damage from the weapon and must make an L2SR vs. " . abilityTranslate($game,CON) . " or take 8d6 damage [if the SR fails, they are cured of lycanthropy]..." . $effective . ")";	break;
+			case 8:$poison = "of stone-fish toxin (" . $poisonuse . "...where the opponent hit would suffer 3d6 damage and make an L1SR vs. " . abilityTranslate($game,'CON') . " or drop dead..." . $effective . ")";	break;
+			case 9:$poison = "of werebane syrup (" . $poisonuse . "...does 2 extra damage to non-weres, but weres suffer 4x damage from the weapon and must make an L2SR vs. " . abilityTranslate($game,'CON') . " or take 8d6 damage [if the SR fails, they are cured of lycanthropy]..." . $effective . ")";	break;
 			case 10:$poison = "of wolfbane powder (" . $poisonuse . "...where the opponent suffers a loss of 3 points where going to 0 kills the victim..." . $effective . ")";	break;
 			case 11:$poison = "of poison antidote (can cure any poison if consumed quick enough)";	break;
 			case 12:$poison = "of poison immunity (can provide poison immunity for " . mt_rand(2,24) . " hours)";	break;
@@ -843,7 +843,7 @@ else /// THIS STUFF BELOW IS SPECIFICALLY FOR THE TUNNELS & TROLLS GAME ////////
 
 		switch (mt_rand(0,59))
 		{
-			case 0:	$item = "of healing " . $lqud . " (restores " . mt_rand(1,2) . "d6+" . $level . " " . abilityTranslate($game,CON) . ")";	break;
+			case 0:	$item = "of healing " . $lqud . " (restores " . mt_rand(1,2) . "d6+" . $level . " " . abilityTranslate($game,'CON') . ")";	break;
 			case 1:	$item = "of curing " . $lqud . " (cures disease and illness)";	break;
 			case 2:	$item = "of poison antidote (allows +" . $level . " for any SR against poison)";	break;
 			case 3:	$item = "of invisibility " . $lqud . " (lasts for " . ($level+1) . " minutes)";	break;
@@ -858,7 +858,7 @@ else /// THIS STUFF BELOW IS SPECIFICALLY FOR THE TUNNELS & TROLLS GAME ////////
 			case 12:$item = "of flying " . $lqud . " (lasts for " . ($level+10) . " minutes)";	break;
 			case 13:$item = "of mist " . $lqud . " (drinker and items turn to mist for " . ($level *2) . " minutes)";	break;
 			case 14:$item = "of giant domination " . $lqud . " [" . giantType() . "] (lasts for " . ($level+1) . " hours)";	break;
-			case 15:$item = "of giant strength " . $lqud . " (increases the drinker's " . abilityTranslate($game,STR) . " by 10 for " . ($level+1) . " hours)";	break;
+			case 15:$item = "of giant strength " . $lqud . " (increases the drinker's " . abilityTranslate($game,'STR') . " by 10 for " . ($level+1) . " hours)";	break;
 			case 16:$item = "of growing " . $lqud . " (drinker and items grow to 4x normal size for " . ($level+1) . " minutes)";	break;
 			case 17:$item = "of heroic " . $lqud . " (drinker gets to add an extra dice to everything they do for " . ($level *2) . " minutes)";	break;
 			case 18:$item = "of humanoid domination " . $lqud . " [" . humanType() . "] (lasts for " . ($level+1) . " hours)";	break;
@@ -871,7 +871,7 @@ else /// THIS STUFF BELOW IS SPECIFICALLY FOR THE TUNNELS & TROLLS GAME ////////
 			case 25:$item = "of persuasive " . $lqud . " (can convince others to so something non-life threatening for " . ($level *2) . " minutes)";	break;
 			case 26:$item = "of plant control " . $lqud . " (lasts for " . ($level+1) . " hours)";	break;
 			case 27:$item = "of polymorph " . $lqud . " (can turn into another creature the same size for " . ($level+1) . " hours)";	break;
-			case 28:$item = "of speed " . $lqud . " (increases the drinker's " . abilityTranslate($game,SPD) . " by 5 for " . ($level+1) . " hours)";	break;
+			case 28:$item = "of speed " . $lqud . " (increases the drinker's " . abilityTranslate($game,'SPD') . " by 5 for " . ($level+1) . " hours)";	break;
 			case 29:$item = "of super heroic " . $lqud . " (drinker gets to add two extra dice to everything they do for " . ($level *2) . " minutes)";	break;
 			case 30:$item = "of purity " . $lqud . " (turns impure liquids to pure)";	break;
 			case 31:$item = "of treasure seeking " . $lqud . " (can find nearby treasure for " . ($level*2) . " minutes)";	break;
@@ -887,16 +887,16 @@ else /// THIS STUFF BELOW IS SPECIFICALLY FOR THE TUNNELS & TROLLS GAME ////////
 			case 41:$item = "of sharpening oil (any sharp weapon it is rubbed on has an extra " . mt_rand(2,4) . " dice for  " . ($level+1) . " hours)";	break;
 			case 42:$item = "of lying " . $lqud . " (drinker can convincely tell lies for " . mt_rand(10,20) . " minutes)";	break;
 			case 43:$item = "of ventriloquism " . $lqud . " (drinker can throw their voice " . mt_rand(10,20) . " minutes)";	break;
-			case 44:$item = "of intellect " . $lqud . " (increases the drinker's " . abilityTranslate($game,INT) . " by 5 for " . ($level+1) . " hours)";	break;
-			case 45:$item = "of dexterity " . $lqud . " (increases the drinker's " . abilityTranslate($game,DEX) . " by 5 for " . ($level+1) . " hours)";	break;
-			case 46:$item = "of luck " . $lqud . " (increases the drinker's " . abilityTranslate($game,LCK) . " by 5 for " . ($level+1) . " hours)";	break;
+			case 44:$item = "of intellect " . $lqud . " (increases the drinker's " . abilityTranslate($game,'INT') . " by 5 for " . ($level+1) . " hours)";	break;
+			case 45:$item = "of dexterity " . $lqud . " (increases the drinker's " . abilityTranslate($game,'DEX') . " by 5 for " . ($level+1) . " hours)";	break;
+			case 46:$item = "of luck " . $lqud . " (increases the drinker's " . abilityTranslate($game,'LCK') . " by 5 for " . ($level+1) . " hours)";	break;
 			case 47:$item = "of spider " . $lqud . " (can walk on walls and ceilings for " . (($level+1)*10) . " minutes)";	break;
 			case 48:$item = "of lore " . $lqud . " (can identify and appraise any item " . (($level+1)*10) . " minutes)";	break;
-			case 49:$item = "of truthfulness " . $lqud . " (drinker tells nothing but the truth for " . mt_rand(10,20) . " minutes unless they may an " . TTSaves($level,$game) . " vs. " . abilityTranslate($game,INT) . ")";	break;
+			case 49:$item = "of truthfulness " . $lqud . " (drinker tells nothing but the truth for " . mt_rand(10,20) . " minutes unless they may an " . TTSaves($level,$game) . " vs. " . abilityTranslate($game,'INT') . ")";	break;
 			case 50:$item = "of speech " . $lqud . " (can talk in the same language as the one you are trying to converse with for " . (($level+1)*10) . " minutes)";	break;
-			case 51:$item = "of cursed " . $lqud . " (" . curseType($level,drinker,item,$game) . ")";	break;
-			case 52:$item = "of vile " . $lqud . " (" . curseType($level,drinker,item,$game) . ")";	break;
-			case 53:$item = "of infernal " . $lqud . " (" . curseType($level,drinker,item,$game) . ")";	break;
+			case 51:$item = "of cursed " . $lqud . " (" . curseType($level,'drinker','item',$game) . ")";	break;
+			case 52:$item = "of vile " . $lqud . " (" . curseType($level,'drinker','item',$game) . ")";	break;
+			case 53:$item = "of infernal " . $lqud . " (" . curseType($level,'drinker','item',$game) . ")";	break;
 			case 54:$item = "of blessing " . $lqud . " (drinker will have a curse lifted, or it can be poured on an item to remove a curse from it)";	break;
 			case 55:$item = "of cleansing " . $lqud . " (drinker will have a curse lifted, or it can be poured on an item to remove a curse from it)";	break;
 			case 56:$item = "of purity " . $lqud . " (drinker will have a curse lifted, or it can be poured on an item to remove a curse from it)";	break;
@@ -990,14 +990,14 @@ else /// THIS STUFF BELOW IS SPECIFICALLY FOR THE TUNNELS & TROLLS GAME ////////
 			case 19:$item = $paper . " that protects one from water (" . $effec . " and water/ice/snow/vapor-based attacks cannot harm them for " . mt_rand(2,18) . " hours)";	break;
 			case 20:$item = $paper . " that protects one from magical weapons (" . $effec . " and magic weapons cannot harm them for " . mt_rand(2,4) . " hours)";	break;
 			case 21:$item = $paper . " that protects one from normal weapons (" . $effec . " and weapons cannot harm them for " . mt_rand(2,4) . " hours)";	break;
-			case 22:$item = $paper . " with an evil curse to " . $effeh . " (" . curseType($level,person,item,$game) . ")";	break;
-			case 23:$item = $paper . " with a vile hex to " . $effeh . " (" . curseType($level,person,item,$game) . ")";	break;
-			case 24:$item = $paper . " with horrible magic to " . $effeh . " (" . curseType($level,person,item,$game) . ")";	break;
+			case 22:$item = $paper . " with an evil curse to " . $effeh . " (" . curseType($level,'person','item',$game) . ")";	break;
+			case 23:$item = $paper . " with a vile hex to " . $effeh . " (" . curseType($level,'person','item',$game) . ")";	break;
+			case 24:$item = $paper . " with horrible magic to " . $effeh . " (" . curseType($level,'person','item',$game) . ")";	break;
 			case 25:$item = $paper . " of blessing (" . $effec . " where they will have a curse lifted)";	break;
 			case 26:$item = $paper . " of curse removal (" . $effec . " where they will have a curse lifted)";	break;
 			case 27:
-				if ($game == "Tunnels & Trolls 5th Edition"){$item = $paper . " of weakness (" . $effec . " where they will be totally drained of all their " . abilityTranslate($game,STR) . " points)";}
-				else {$item = $paper . " of nullification (" . $effec . " where they will be totally drained of all their " . abilityTranslate($game,WIZ) . " points)";}
+				if ($game == "Tunnels & Trolls 5th Edition"){$item = $paper . " of weakness (" . $effec . " where they will be totally drained of all their " . abilityTranslate($game,'STR') . " points)";}
+				else {$item = $paper . " of nullification (" . $effec . " where they will be totally drained of all their " . abilityTranslate($game,'WIZ') . " points)";}
 				break;
 		}
 	} ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1006,7 +1006,7 @@ else /// THIS STUFF BELOW IS SPECIFICALLY FOR THE TUNNELS & TROLLS GAME ////////
 		if ($game == "Tunnels & Trolls 5th Edition"){$rmax = 41;} else {$rmax = 43;}
 
 		$charges = mt_rand(10,50);
-		switch (mt_rand(0,$rmax))
+		switch (mt_rand(0, max((int)(0), (int)($rmax))))
 		{
 			case 0:	$item = "ring of efreet summoning (will summon a efreet to fight with the group for a single combat)";	break;
 			case 1:	$item = "ring of elemental domination [" . elementalType($game) . "] (will control a single elemental for " . mt_rand(1,9) . "0 minutes)";	break;
@@ -1014,11 +1014,11 @@ else /// THIS STUFF BELOW IS SPECIFICALLY FOR THE TUNNELS & TROLLS GAME ////////
 			case 3:	$item = "ring of fire resistance (allows the wearer to roll an extra die for any SR's involving fire)";		$use_charges = 1;	$no_words = 1; break;
 			case 4:	$item = "ring of cold resistance (allows the wearer to roll an extra die for any SR's involving cold)";		$use_charges = 1;	$no_words = 1; break;
 			case 5:	$item = "ring of freedom (allows the wearer to break free from any form of imprisonment)";	break;
-			case 6:	$item = "ring of influence (allows the wearer to roll an extra die for any SR's involving " . abilityTranslate($game,CHR) . ")";	break;
+			case 6:	$item = "ring of influence (allows the wearer to roll an extra die for any SR's involving " . abilityTranslate($game,'CHR') . ")";	break;
 			case 7:	$item = "ring of invisibility (the wearer can turn invisible for " . mt_rand(1,9) . "0 minutes)";	break;
 			case 8:	$item = "ring of animal domination [" . animalType() . "] (will control a single animal for " . mt_rand(1,9) . "0 minutes)";	break;
 			case 9:	$item = "ring of protection +" . $plus . " (gives additional points to armor hits)";	break;
-			case 10:$item = "ring of regenerating (restores " . $plus . " " . abilityTranslate($game,CON) . " every hour)";	$use_charges = 1;	break;
+			case 10:$item = "ring of regenerating (restores " . $plus . " " . abilityTranslate($game,'CON') . " every hour)";	$use_charges = 1;	break;
 			case 11:$item = "ring of magic (allows the wearer reduce a spell casting cost by " . $plus . " point)";	break;
 			case 12:$item = "ring of turning spells (allows the wearer to reflect a spell back at the caster)";	break;
 			case 13:$item = "ring of telekinesis (allows the wearer to move an object they can see, and that they can lift themselves, with their mind up to " . mt_rand(1,10) . "0 feet)";	break;
@@ -1041,17 +1041,17 @@ else /// THIS STUFF BELOW IS SPECIFICALLY FOR THE TUNNELS & TROLLS GAME ////////
 			case 30:$item = "ring of charisma +" . $plus;		$use_charges = 1;	$no_words = 1; break;
 			case 31:$item = "ring of dexterity +" . $plus;		$use_charges = 1;	$no_words = 1; break;
 			case 32:$item = "ring of the dead [" . undeadType() . "] (will control a single undead for " . mt_rand(1,9) . "0 minutes)";	break;
-			case 33:$item = "cursed ring (" . curseType($level,wearer,equip,$game) . ")";	$curses = 1; break;
-			case 34:$item = "vile ring (" . curseType($level,wearer,equip,$game) . ")";		$curses = 1; break;
-			case 35:$item = "infernal ring (" . curseType($level,wearer,equip,$game) . ")";	$curses = 1; break;
-			case 36:$item = "ring of the warlock (can reduce the " . abilityTranslate($game,POW) . " cost to cast a spell by " . mt_rand(2,10) . ")";	$no_words = 1; break;
-			case 37:$item = "ring of the witch (can reduce the " . abilityTranslate($game,POW) . " cost to cast a spell by " . mt_rand(2,10) . ")";		$no_words = 1; break;
-			case 38:$item = "ring of the mystic (can cast a spell at 1 level higher efficacy without spending extra " . abilityTranslate($game,POW) . " points)";	$no_words = 1; break;
+			case 33:$item = "cursed ring (" . curseType($level,'wearer','equip',$game) . ")";	$curses = 1; break;
+			case 34:$item = "vile ring (" . curseType($level,'wearer','equip',$game) . ")";		$curses = 1; break;
+			case 35:$item = "infernal ring (" . curseType($level,'wearer','equip',$game) . ")";	$curses = 1; break;
+			case 36:$item = "ring of the warlock (can reduce the " . abilityTranslate($game,'POW') . " cost to cast a spell by " . mt_rand(2,10) . ")";	$no_words = 1; break;
+			case 37:$item = "ring of the witch (can reduce the " . abilityTranslate($game,'POW') . " cost to cast a spell by " . mt_rand(2,10) . ")";		$no_words = 1; break;
+			case 38:$item = "ring of the mystic (can cast a spell at 1 level higher efficacy without spending extra " . abilityTranslate($game,'POW') . " points)";	$no_words = 1; break;
 			case 39:	$ring_picks = mt_rand(1,3);
-				if ($ring_picks == 1){$item = "ring of envy (anyone who sees this ring has to have it...most often resorting to violence...unless they can make an L" . mt_rand(1,3) . "SR vs. " . abilityTranslate($game,INT) . ")"; $curses = 1; }
+				if ($ring_picks == 1){$item = "ring of envy (anyone who sees this ring has to have it...most often resorting to violence...unless they can make an L" . mt_rand(1,3) . "SR vs. " . abilityTranslate($game,'INT') . ")"; $curses = 1; }
 				else if ($ring_picks == 2){$item = "ring of severing (anyone who puts this ring on will have their finger cut off)"; $curses = 1; }
-				else if ($game == "Tunnels & Trolls 5th Edition"){$item = "ring of weakness (if the wearer of this ring touches someone, and wills it, they can drain the victim of all their " . abilityTranslate($game,STR) . " points once per day)";}
-				else {$item = "ring of nullification (if the wearer of this ring touches someone, and wills it, they can drain the victim of all their " . abilityTranslate($game,WIZ) . " points once per day)";}
+				else if ($game == "Tunnels & Trolls 5th Edition"){$item = "ring of weakness (if the wearer of this ring touches someone, and wills it, they can drain the victim of all their " . abilityTranslate($game,'STR') . " points once per day)";}
+				else {$item = "ring of nullification (if the wearer of this ring touches someone, and wills it, they can drain the victim of all their " . abilityTranslate($game,'WIZ') . " points once per day)";}
 				break;
 			case 40:$item = "rings of fellowship (if one wears this ring and begins to get harmed, the other will begin to glow with a " . beamColor() . " light on the other wearer`s hand)";	$no_words = 1; $use_charges = 1;	break;
 			case 41:$item = "rings of the birds (this will cause the wearer, and all of their possessions, to turn into a " . birdType() . " for " . mt_rand(2,6) . " hours per day)";	break;
@@ -1064,7 +1064,7 @@ else /// THIS STUFF BELOW IS SPECIFICALLY FOR THE TUNNELS & TROLLS GAME ////////
 				if ((mt_rand(1,100) > 90) && ($curses != 1) && ($no_words != 1)){$words = "...the command word to use this is `" . castingName() . "`, which can be learned by identifying the item";}
 			$decorate = $decorate . "" . $words;
 			if ((mt_rand(1,100) > 70) && ($curses != 1) && ($use_charges != 1)){$item = $item . " " . $decorate . " - it has " . $charges . " charges]";} else {$item = $item . " " . $decorate . "]";}
-			if (mt_rand(1,100) > 50){$item = "<u>" . artifactNaming(ring,'',$curses,0) . "</u> - " . $item;}
+			if (mt_rand(1,100) > 50){$item = "<u>" . artifactNaming('ring','',$curses,0) . "</u> - " . $item;}
 	} ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	else if ($the_item == "wand")
 	{
@@ -1076,18 +1076,18 @@ else /// THIS STUFF BELOW IS SPECIFICALLY FOR THE TUNNELS & TROLLS GAME ////////
 		$smy_mr_is = ($level * 10) + 30;
 		$smy_dc_is = (FLOOR($smy_mr_is/10)+1) . "&nbsp;+&nbsp;" . (CEIL($smy_mr_is/2));
 
-		switch (mt_rand($r_min,$r_max))
+		switch (mt_rand($r_min, max((int)($r_min), (int)($r_max))))
 		{
 			case 0:$item = "staff of domination " . $staff_hurt . " (will control a single creature for " . mt_rand(1,9) . "0 minutes)";		break;
 			case 1:$item = "staff of curing " . $staff_hurt . " (can cure anyone of poison or disease)";		break;
-			case 2:$item = "staff of the wizard " . $staff_hurt . " (grants a +" . mt_rand(3,10) . " to " . abilityTranslate($game,INT) . "...without using charges...and can reduce the " . abilityTranslate($game,POW) . " cost to cast a spell by " . mt_rand(5,15) . " per charge)";		break;
+			case 2:$item = "staff of the wizard " . $staff_hurt . " (grants a +" . mt_rand(3,10) . " to " . abilityTranslate($game,'INT') . "...without using charges...and can reduce the " . abilityTranslate($game,'POW') . " cost to cast a spell by " . mt_rand(5,15) . " per charge)";		break;
 			case 3:$item = "staff of power " . $staff_hurt . " (can allow the wielder, and nearby comrades, an extra dice to anything they attempt for " . mt_rand(2,6) . " hours per charge)";		break;
 			case 4:$item = "staff of the snake " . $staff_hurt . " (if thrown on the ground, this will turn into a giant serpent {MR " . $smy_mr_is . " creature with " . $smy_dc_is . " DICE} for the duration of a single combat)";		break;
-			case 5:$item = "staff of the sorcerer " . $staff_hurt . " (grants a +" . mt_rand(3,10) . " to " . abilityTranslate($game,LCK) . "...without using charges...and can reduce the " . abilityTranslate($game,POW) . " cost to cast a spell by " . mt_rand(5,15) . " per charge)";		break;
-			case 6:$item = "staff of withering " . $staff_hurt . " (every charge used will cause a target to lose 10 points of MR and 5 points of " . abilityTranslate($game,WIZ) . ")";		break;
+			case 5:$item = "staff of the sorcerer " . $staff_hurt . " (grants a +" . mt_rand(3,10) . " to " . abilityTranslate($game,'LCK') . "...without using charges...and can reduce the " . abilityTranslate($game,'POW') . " cost to cast a spell by " . mt_rand(5,15) . " per charge)";		break;
+			case 6:$item = "staff of withering " . $staff_hurt . " (every charge used will cause a target to lose 10 points of MR and 5 points of " . abilityTranslate($game,'WIZ') . ")";		break;
 			case 7:$item = "staff of insect swarm " . $staff_hurt . " (can produce a magical swarm of insects for a single combat...that will either allow a group to escape or cause an opponent to reduce their combat dice in half...rounded up)";		break;
-			case 8:$item = "staff of the mage " . $staff_hurt . " (can cast a spell at 1 level higher efficacy without spending extra " . abilityTranslate($game,POW) . " points)";		break;
-			case 9:$item = "staff of the conjurer " . $staff_hurt . " (grants a +" . mt_rand(3,10) . " to " . abilityTranslate($game,DEX) . "...without using charges...and can reduce the " . abilityTranslate($game,POW) . " cost to cast a spell by " . mt_rand(5,15) . " per charge)";		break;
+			case 8:$item = "staff of the mage " . $staff_hurt . " (can cast a spell at 1 level higher efficacy without spending extra " . abilityTranslate($game,'POW') . " points)";		break;
+			case 9:$item = "staff of the conjurer " . $staff_hurt . " (grants a +" . mt_rand(3,10) . " to " . abilityTranslate($game,'DEX') . "...without using charges...and can reduce the " . abilityTranslate($game,'POW') . " cost to cast a spell by " . mt_rand(5,15) . " per charge)";		break;
 			case 10:$item = "staff of magical vortex " . $staff_hurt . " (can absorb magic unleashed on the wielder and cast out at a later time...but only able to hold one magic effect at a time)";	break;
 			case 11:$item = "staff of friendship " . $staff_hurt . " (can make up to " . mt_rand(2,10) . " enemies be friendly to the wielder for " . mt_rand(5,20) . " minutes)";		break;
 			case 12:$item = "staff of nullifying " . $staff_hurt . " (using this rod on a magic item will remove all magical effects...even curses)";		break;
@@ -1098,41 +1098,41 @@ else /// THIS STUFF BELOW IS SPECIFICALLY FOR THE TUNNELS & TROLLS GAME ////////
 			case 17:$item = "staff of awareness " . $staff_hurt . " (every charge of this staff will keep the wielder from getting surprised by others)";		break;
 			case 18:$item = "staff of travel " . $staff_hurt . " (if tapped on the ground 3 times, this staff can later open a dimensional door that will allow others to travel back to that spot)";		break;
 			case 19:$item = "staff of safe haven " . $staff_hurt . " (can create an area of safety where dangers cannot penetrate and a group can rest without concern)";		break;
-			case 20:$item = "wand of conjuring (can summon any creature for the duration of a single combat...but no matter the creature...it will only have an MR of the wielder`s " . abilityTranslate($game,INT) . "x10)";		break;
-			case 21:$item = "wand of finding foes (will find enemies nearby and an " . TTSaves($level,$game) . " vs. " . abilityTranslate($game,INT) . " will even show what type they are)";		break;
+			case 20:$item = "wand of conjuring (can summon any creature for the duration of a single combat...but no matter the creature...it will only have an MR of the wielder`s " . abilityTranslate($game,'INT') . "x10)";		break;
+			case 21:$item = "wand of finding foes (will find enemies nearby and an " . TTSaves($level,$game) . " vs. " . abilityTranslate($game,'INT') . " will even show what type they are)";		break;
 			case 22:$item = "wand of fright (will cause an opponent to collapse in fear and do nothing for " . mt_rand(2,5) . " combat rounds)";		break;
-			case 23:$item = "wand of the illusionist (can reduce the " . abilityTranslate($game,POW) . " cost to cast a spell by " . mt_rand(2,10) . " per charge)";	break;
+			case 23:$item = "wand of the illusionist (can reduce the " . abilityTranslate($game,'POW') . " cost to cast a spell by " . mt_rand(2,10) . " per charge)";	break;
 			case 24:$item = "wand of freezing (will cause an opponent to be frozen for " . mt_rand(2,5) . " combat rounds, after which they fully thaw)";		break;
 			case 25:$item = "wand of light (will radiate light like a torch or lantern for about " . mt_rand(2,12) . " hours per charge";		break;
-			case 26:$item = "wand of illusion (can create an illusion of any medium-sized creature that will cause an opponent to attack that for " . mt_rand(2,5) . " combat rounds...and only if they fail an L" . mt_rand(1,4) . "SR vs. " . abilityTranslate($game,INT);		break;
-			case 27:$item = "wand of the magician (can cast a spell at 1 level higher efficacy without spending extra " . abilityTranslate($game,POW) . " points)";	break;
-			case 28:$item = "wand of finding magic (will point in the direction of any magic item or creature that is nearby and an " . TTSaves($level,$game) . " vs. " . abilityTranslate($game,INT) . " will even show what it is)";		break;
-			case 29:$item = "wand of finding coins (will point in the direction of any coins that is nearby and an " . TTSaves($level,$game) . " vs. " . abilityTranslate($game,INT) . " will even show what they are and how much)";		break;
-			case 30:$item = "wand of the magi (can cast a spell at 1 level higher efficacy without spending extra " . abilityTranslate($game,POW) . " points)";	break;
-			case 31:$item = "wand of magic arrow (will create an arrow that attacks on its own for one combat round and then vanishes...based on the wielder, it has DICE:[" . abilityTranslate($game,INT) . "+2]d6+[" . abilityTranslate($game,POW) . "])";		break;
+			case 26:$item = "wand of illusion (can create an illusion of any medium-sized creature that will cause an opponent to attack that for " . mt_rand(2,5) . " combat rounds...and only if they fail an L" . mt_rand(1,4) . "SR vs. " . abilityTranslate($game,'INT');		break;
+			case 27:$item = "wand of the magician (can cast a spell at 1 level higher efficacy without spending extra " . abilityTranslate($game,'POW') . " points)";	break;
+			case 28:$item = "wand of finding magic (will point in the direction of any magic item or creature that is nearby and an " . TTSaves($level,$game) . " vs. " . abilityTranslate($game,'INT') . " will even show what it is)";		break;
+			case 29:$item = "wand of finding coins (will point in the direction of any coins that is nearby and an " . TTSaves($level,$game) . " vs. " . abilityTranslate($game,'INT') . " will even show what they are and how much)";		break;
+			case 30:$item = "wand of the magi (can cast a spell at 1 level higher efficacy without spending extra " . abilityTranslate($game,'POW') . " points)";	break;
+			case 31:$item = "wand of magic arrow (will create an arrow that attacks on its own for one combat round and then vanishes...based on the wielder, it has DICE:[" . abilityTranslate($game,'INT') . "+2]d6+[" . abilityTranslate($game,'POW') . "])";		break;
 			case 32:$item = "wand of negating (will destroy any magical effect or curse)";		break;
 			case 33:$item = "wand of paralyzing (will paralyze an opponent for " . mt_rand(2,5) . " combat rounds)";		break;
 			case 34:$item = "wand of polymorph (will turn an opponent into a " . polymorphType() . " for " . mt_rand(2,5) . " combat rounds)";		break;
 			case 35:$item = "wand of secrets (will find nearby secret/hidden doors)";	break;
 			case 36:$item = "wand of finding traps (will find nearby traps)";	break;
-			case 37:$item = "wand of wonderous magic (can cast a spell at 1 level higher efficacy without spending extra " . abilityTranslate($game,POW) . " points...or can reduce the " . abilityTranslate($game,POW) . " cost to cast a spell by " . mt_rand(5,15) . "...per charge)";	break;
+			case 37:$item = "wand of wonderous magic (can cast a spell at 1 level higher efficacy without spending extra " . abilityTranslate($game,'POW') . " points...or can reduce the " . abilityTranslate($game,'POW') . " cost to cast a spell by " . mt_rand(5,15) . "...per charge)";	break;
 			case 38:$item = "wand of autumn (clears plants and vegetation in a 100 foot area per charge)";		break;
 			case 39:$item = "wand of the worm (digs, moves earth, changes rock to mud...but only 20 feet per charge)";	break;
-			case 40:$item = "wand of fireball (will create a fireball that attacks on its own for one combat round and then burns away...based on the wielder, it has DICE:[" . abilityTranslate($game,INT) . "+4]d6+[" . abilityTranslate($game,POW) . "])";		break;
+			case 40:$item = "wand of fireball (will create a fireball that attacks on its own for one combat round and then burns away...based on the wielder, it has DICE:[" . abilityTranslate($game,'INT') . "+4]d6+[" . abilityTranslate($game,'POW') . "])";		break;
 			case 41:$item = "wand of extinguishing (puts out fires and can even stop the effects of fire based attacks)";	break;
-			case 42:$item = "wand of sorcery (can reduce the " . abilityTranslate($game,POW) . " cost to cast a spell by " . mt_rand(2,10) . " per charge)";	break;
-			case 43:$item = "wand of icicles (will create icicles that attacks on its own for one combat round and then melts away...based on the wielder, it has DICE:[" . abilityTranslate($game,INT) . "+6]d6+[" . abilityTranslate($game,POW) . "])";		break;
-			case 44:$item = "wand of lightning (will create a lightning bolt that attacks on its own for one combat round and then fizzles away...based on the wielder, it has DICE:[" . abilityTranslate($game,INT) . "+8]d6+[" . abilityTranslate($game,POW) . "])";		break;
+			case 42:$item = "wand of sorcery (can reduce the " . abilityTranslate($game,'POW') . " cost to cast a spell by " . mt_rand(2,10) . " per charge)";	break;
+			case 43:$item = "wand of icicles (will create icicles that attacks on its own for one combat round and then melts away...based on the wielder, it has DICE:[" . abilityTranslate($game,'INT') . "+6]d6+[" . abilityTranslate($game,'POW') . "])";		break;
+			case 44:$item = "wand of lightning (will create a lightning bolt that attacks on its own for one combat round and then fizzles away...based on the wielder, it has DICE:[" . abilityTranslate($game,'INT') . "+8]d6+[" . abilityTranslate($game,'POW') . "])";		break;
 			case 45:$item = "wand of necromancy (can make one dead creature`s corpse rise and fight with the group for a single combat...after which the corpse turns to dust)";	break;
 			case 46:$item = "wand of the puppet master (will cause one opponent to join the wielder and fight alongside for " . mt_rand(2,5) . " combat rounds)";		break;
-			case 47:$item = "wand of animation (will cause a nearby statue or furniture {chair, table, etc} to join the wielder and fight alongside for " . mt_rand(2,5) . " combat rounds...based on the wielder, it will have a CON:[" . abilityTranslate($game,INT) . "+" . abilityTranslate($game,POW) . "] and DICE:[" . abilityTranslate($game,INT) . "+2]d6+[" . abilityTranslate($game,CON) . "])";		break;
+			case 47:$item = "wand of animation (will cause a nearby statue or furniture {chair, table, etc} to join the wielder and fight alongside for " . mt_rand(2,5) . " combat rounds...based on the wielder, it will have a CON:[" . abilityTranslate($game,'INT') . "+" . abilityTranslate($game,'POW') . "] and DICE:[" . abilityTranslate($game,'INT') . "+2]d6+[" . abilityTranslate($game,'CON') . "])";		break;
 			case 48:
-				if ($game == "Tunnels & Trolls 5th Edition"){$item = "wand of weakness (every charge used will drain " . mt_rand(5,25) . " " . abilityTranslate($game,POW) . " from an opponent)";}
-				else {$item = "wand of nullification (every charge used will drain " . mt_rand(5,25) . " " . abilityTranslate($game,POW) . " from an opponent)";}
+				if ($game == "Tunnels & Trolls 5th Edition"){$item = "wand of weakness (every charge used will drain " . mt_rand(5,25) . " " . abilityTranslate($game,'POW') . " from an opponent)";}
+				else {$item = "wand of nullification (every charge used will drain " . mt_rand(5,25) . " " . abilityTranslate($game,'POW') . " from an opponent)";}
 				break;
 		}
 		$mystic_item = explode(" ", $item);
-		if (substr($item, 0, 3) == "wan")
+		if (str_starts_with($item, "wan"))
 		{
 			$charges = mt_rand(20,100);
 			switch (mt_rand(0,9))
@@ -1201,7 +1201,7 @@ else /// THIS STUFF BELOW IS SPECIFICALLY FOR THE TUNNELS & TROLLS GAME ////////
 			{
 				if ($nt_category == "Shield"){$nt_iam = "shield";}
 				else if ($nt_category == "Suit"){$nt_iam = "full suit of armor";}
-				else {$nt_iam = "armor for " . strtolower($nt_category);}
+				else {$nt_iam = "armor for " . strtolower((string) $nt_category);}
 			}
 
 			$ttm_item = $nt_name;
@@ -1242,12 +1242,12 @@ else /// THIS STUFF BELOW IS SPECIFICALLY FOR THE TUNNELS & TROLLS GAME ////////
 		else if ($forge < 99){ $ttm_hits = $ttm_hits * mt_rand(2,4); $ttm_str = CEIL($ttm_str - mt_rand(1,2)); if ($ttm_str < 1){$ttm_str = 1;} $bonus = "BONUS&nbsp;+" . mt_rand(3,6) . " for any SR's made from attacks"; }
 		else
 		{	$cursing = 1;
-			$curs = strtolower($ttm_mystic);
+			$curs = strtolower((string) $ttm_mystic);
 			switch (mt_rand(0,2))
 			{
-				case 0:$bonus = "cursed " . $curs . " (" . curseType($level,$wearer,equip,$game) . ")";	break;
-				case 1:$bonus = "vile " . $curs . " (" . curseType($level,$wearer,equip,$game) . ")";	break;
-				case 2:$bonus = "infernal " . $curs . " (" . curseType($level,$wearer,equip,$game) . ")";	break;
+				case 0:$bonus = "cursed " . $curs . " (" . curseType($level,$wearer,'equip',$game) . ")";	break;
+				case 1:$bonus = "vile " . $curs . " (" . curseType($level,$wearer,'equip',$game) . ")";	break;
+				case 2:$bonus = "infernal " . $curs . " (" . curseType($level,$wearer,'equip',$game) . ")";	break;
 			}
 		}
 		if ( ($cursing != 1) && (mt_rand(1,100) > 95) && ($ttm_style != "Armor/Shield") && ($ttm_style != "Shield") )
@@ -1255,9 +1255,9 @@ else /// THIS STUFF BELOW IS SPECIFICALLY FOR THE TUNNELS & TROLLS GAME ////////
 			switch (mt_rand(0,7))
 			{
 				case 0:$bonus = "shadow armor - wearer can turn invisible for " . mt_rand(2,10) . " minutes but only " . mt_rand(2,6) . " times a day";	break;
-				case 1:$bonus = "troll armor - wearer can regenerate " . mt_rand(2,10) . " " . abilityTranslate($game,CON) . " during 1 combat round but only " . mt_rand(5,15) . " times a day";	break;
-				case 2:$bonus = "wearer can absorb 2x the hits when attacked by " . slayerType(armor);	break;
-				case 3:$bonus = "wearer can absorb 3x the hits when attacked by " . slayerType(armor);	break;
+				case 1:$bonus = "troll armor - wearer can regenerate " . mt_rand(2,10) . " " . abilityTranslate($game,'CON') . " during 1 combat round but only " . mt_rand(5,15) . " times a day";	break;
+				case 2:$bonus = "wearer can absorb 2x the hits when attacked by " . slayerType('armor');	break;
+				case 3:$bonus = "wearer can absorb 3x the hits when attacked by " . slayerType('armor');	break;
 				case 4:$bonus = "bright light armor - can light a " . mt_rand(2,6) . "0 foot area when worn...and the wearer wills it";	break;
 				case 5:$bonus = "warmonger armor - doubles the wearer`s combat adds " . mt_rand(2,10) . " times a day";	break;
 				case 6:$bonus = "ghost armor - wearer can walk through objects no more than " . mt_rand(2,10) . " feet thick but only " . mt_rand(2,6) . " times a day";	break;
@@ -1270,8 +1270,8 @@ else /// THIS STUFF BELOW IS SPECIFICALLY FOR THE TUNNELS & TROLLS GAME ////////
 			{
 				case 0:$bonus = "dragon shield - wielder can block the effect of any dragon breath " . mt_rand(2,10) . " times a day";	break;
 				case 1:$bonus = "mirror shield - wielder can reflect any gaze attacks back at the attacker " . mt_rand(2,10) . " times a day";	break;
-				case 2:$bonus = "wielder cannot be harmed when attacked by " . slayerType(armor);	break;
-				case 3:$bonus = "wielder can absorb 2x the hits when attacked by " . slayerType(armor);	break;
+				case 2:$bonus = "wielder cannot be harmed when attacked by " . slayerType('armor');	break;
+				case 3:$bonus = "wielder can absorb 2x the hits when attacked by " . slayerType('armor');	break;
 				case 4:$bonus = "star shine shield - can light a " . mt_rand(2,6) . "0 foot area when worn...and the wearer wills it";	break;
 				case 5:$bonus = "spell shield - wielder can block the effects of any spells directed at them " . mt_rand(2,10) . " times a day.";	break;
 				case 6:$bonus = "door basher - can bash open any non-magically locked/sealed door " . mt_rand(2,10) . " times a day";	break;
@@ -1283,7 +1283,7 @@ else /// THIS STUFF BELOW IS SPECIFICALLY FOR THE TUNNELS & TROLLS GAME ////////
 
 		$ttm_bonus = "HITS:" . $ttm_hits . "&nbsp;--&nbspSTR:" . $ttm_str . $bonus;
 
-		$item = strtolower($ttm_item);
+		$item = strtolower((string) $ttm_item);
 
 		if ( $tt_easy_items == 1 ) //////////////////////////////// MAGESTYKC SIMPLE ARMOR ////////////////////////////////////////////////////////////////////////////////
 		{
@@ -1294,21 +1294,21 @@ else /// THIS STUFF BELOW IS SPECIFICALLY FOR THE TUNNELS & TROLLS GAME ////////
 			}
 				$logo = "...with a " . designType(0) . " symbol on the " . $sew . " that is " . designColor() . " in color";}
 		
-			if ($nt_material == "L"){$decorate = "[made of " . materialType(leather) . " hide and is " . leatherColor() . " in color" . $logo. "]";}
-			else if ($nt_material == "C"){$decorate = "[made of " . materialType(cloth) . " and is " . leatherColor() . " in color" . $logo. "]";}
-			else if ($nt_material == "W"){$decorate = "[made of " . materialType(wood) . " and is " . leatherColor() . " in color" . $logo. "]";}
-			else {$decorate = "[made of " . materialType(iron) . "" . $logo. "]";}
+			if ($nt_material == "L"){$decorate = "[made of " . materialType('leather') . " hide and is " . leatherColor() . " in color" . $logo. "]";}
+			else if ($nt_material == "C"){$decorate = "[made of " . materialType('cloth') . " and is " . leatherColor() . " in color" . $logo. "]";}
+			else if ($nt_material == "W"){$decorate = "[made of " . materialType('wood') . " and is " . leatherColor() . " in color" . $logo. "]";}
+			else {$decorate = "[made of " . materialType('iron') . "" . $logo. "]";}
 		}
 		else ////////////////////////////////////////////////////// T&T NORMAL ARMOR //////////////////////////////////////////////////////////////////////////////////////
 		{
 			if (mt_rand(1,100) > 60){$logo = "...with a " . designType(0) . " symbol on it that is " . designColor() . " in color";}
 
-			if ($ttm_mat == "L"){$decorate = "[made of " . materialType(leather) . " hide and is " . leatherColor() . " in color" . $logo. "]";}
-			else if ($ttm_mat == "M"){$decorate = "[made of " . materialType(iron) . "" . $logo. "]";}
+			if ($ttm_mat == "L"){$decorate = "[made of " . materialType('leather') . " hide and is " . leatherColor() . " in color" . $logo. "]";}
+			else if ($ttm_mat == "M"){$decorate = "[made of " . materialType('iron') . "" . $logo. "]";}
 			else {$decorate = "[it is " . candleColor(0) . " in color" . $logo. "]";}
 		}
 
-		$item = $item . " [magical " . strtolower($ttm_style) . "] (" . $ttm_bonus . ") " . $decorate;
+		$item = $item . " [magical " . strtolower((string) $ttm_style) . "] (" . $ttm_bonus . ") " . $decorate;
 
 		if (mt_rand(1,100) > 50){$item = "<u>" . artifactNaming($ttm_mystic,'',$cursing,0) . "</u> - " . $item;}
 
@@ -1344,10 +1344,10 @@ else /// THIS STUFF BELOW IS SPECIFICALLY FOR THE TUNNELS & TROLLS GAME ////////
 				$smith2 = $item_from_tt[16];
 				$smith1 = $item_from_tt[17];
 
-			$item = strtolower($nt_name);
-			$ttw_type = strtolower($nt_category);
-			$ttw_name = strtolower($nt_name);
-			$ttw_mystic = strtolower($nt_name);
+			$item = strtolower((string) $nt_name);
+			$ttw_type = strtolower((string) $nt_category);
+			$ttw_name = strtolower((string) $nt_name);
+			$ttw_mystic = strtolower((string) $nt_name);
 			$ttw_dice = $nt_dice;
 			$ttw_adds = $nt_adds;
 			$ttw_str = $nt_str;
@@ -1407,12 +1407,12 @@ else /// THIS STUFF BELOW IS SPECIFICALLY FOR THE TUNNELS & TROLLS GAME ////////
 			else if ($forge < 99){	$ttw_adds = $ttw_adds + mt_rand(12,16); 	$ttw_str = $ttw_str - mt_rand(0,6);		$ttw_dex1 = $ttw_dex1 - mt_rand(0,6);		if ($ttw_dex2 > 0){$ttw_dext = $ttw_dex2 - mt_rand(0,6);}	}
 			else
 			{	$cursing = 1;
-				$curs = strtolower($ttw_mystic);
+				$curs = strtolower((string) $ttw_mystic);
 				switch (mt_rand(0,2))
 				{
-					case 0:$bonus = "cursed " . $curs . " (" . curseType($level,$wearer,equip,$game) . ")";	break;
-					case 1:$bonus = "vile " . $curs . " (" . curseType($level,$wearer,equip,$game) . ")";	break;
-					case 2:$bonus = "infernal " . $curs . " (" . curseType($level,$wearer,equip,$game) . ")";	break;
+					case 0:$bonus = "cursed " . $curs . " (" . curseType($level,$wearer,'equip',$game) . ")";	break;
+					case 1:$bonus = "vile " . $curs . " (" . curseType($level,$wearer,'equip',$game) . ")";	break;
+					case 2:$bonus = "infernal " . $curs . " (" . curseType($level,$wearer,'equip',$game) . ")";	break;
 				}
 			}
 		}
@@ -1426,12 +1426,12 @@ else /// THIS STUFF BELOW IS SPECIFICALLY FOR THE TUNNELS & TROLLS GAME ////////
 			else if ($forge < 99){	$ttw_dice = $ttw_dice + mt_rand(3,5);		$ttw_adds = $ttw_adds + mt_rand(12,14); 	$ttw_str = $ttw_str - mt_rand(0,6);		$ttw_dex1 = $ttw_dex1 - mt_rand(0,6);		if ($ttw_dex2 > 0){$ttw_dext = $ttw_dex2 - mt_rand(0,6);}	}
 			else
 			{	$cursing = 1;
-				$curs = strtolower($ttw_mystic);
+				$curs = strtolower((string) $ttw_mystic);
 				switch (mt_rand(0,2))
 				{
-					case 0:$bonus = "cursed " . $curs . " (" . curseType($level,$wearer,equip,$game) . ")";	break;
-					case 1:$bonus = "vile " . $curs . " (" . curseType($level,$wearer,equip,$game) . ")";	break;
-					case 2:$bonus = "infernal " . $curs . " (" . curseType($level,$wearer,equip,$game) . ")";	break;
+					case 0:$bonus = "cursed " . $curs . " (" . curseType($level,$wearer,'equip',$game) . ")";	break;
+					case 1:$bonus = "vile " . $curs . " (" . curseType($level,$wearer,'equip',$game) . ")";	break;
+					case 2:$bonus = "infernal " . $curs . " (" . curseType($level,$wearer,'equip',$game) . ")";	break;
 				}
 			}
 		}
@@ -1442,16 +1442,16 @@ else /// THIS STUFF BELOW IS SPECIFICALLY FOR THE TUNNELS & TROLLS GAME ////////
 				case 0:$bonus = "add " . mt_rand(1,5) . " extra combat dice against " . slayerType('');	break;
 				case 1:$bonus = "+" . mt_rand(3,12) . " combat adds when used against " . slayerType('');	break;
 				case 2:$bonus = "legendary weapon - doubles the wielder`s combat dice " . mt_rand(2,10) . " times a day";	break;
-				case 3:$bonus = "good fortune weapon - wielder gets a +" . mt_rand(1,5) . " to " . abilityTranslate($game,LCK) . "";	break;
+				case 3:$bonus = "good fortune weapon - wielder gets a +" . mt_rand(1,5) . " to " . abilityTranslate($game,'LCK') . "";	break;
 				case 4:$bonus = "sun light weapon - can light a " . mt_rand(2,6) . "0 foot area when wielded and the wielder wills it";	break;
 				case 5:$bonus = "defender weapon - gives an additional " . mt_rand(5,15) . " to armor hits";	break;
-				case 6:$bonus = "haste weapon - wielder gets a +" . mt_rand(1,5) . " to " . abilityTranslate($game,SPD) . "";	break;
-				case 7:$bonus = "vampiric weapon - wielder can restore " . mt_rand(1,2) . "d6 of their own " . abilityTranslate($game,CON) . " from the damage dealt with this weapon...but only " . mt_rand(5,20) . " times a day";	break;
+				case 6:$bonus = "haste weapon - wielder gets a +" . mt_rand(1,5) . " to " . abilityTranslate($game,'SPD') . "";	break;
+				case 7:$bonus = "vampiric weapon - wielder can restore " . mt_rand(1,2) . "d6 of their own " . abilityTranslate($game,'CON') . " from the damage dealt with this weapon...but only " . mt_rand(5,20) . " times a day";	break;
 				case 8:$bonus = "bloody weapon - any opponent hit with this weapon cannot heal themselves, or regenerate, for " . mt_rand(2,6) . " combat rounds";	break;
 				case 9:$bonus = "weapon of chance - the wielder may roll their combat dice over if they do not like the first results, once per combat round...they must accept the second results";	break;
-				case 10:$bonus = "magic leech weapon - any opponent hit with this weapon will lose " . mt_rand(3,20) . " of their " . abilityTranslate($game,POW) . "";	break;
+				case 10:$bonus = "magic leech weapon - any opponent hit with this weapon will lose " . mt_rand(3,20) . " of their " . abilityTranslate($game,'POW') . "";	break;
 				case 11:$bonus = "warmonger weapon - doubles the wielder`s combat adds " . mt_rand(2,10) . " times a day";	break;
-				case 12:$bonus = "wizard weapon - any wizard can use this weapon without any penalty...and if their " . abilityTranslate($game,STR) . " allows";	break;
+				case 12:$bonus = "wizard weapon - any wizard can use this weapon without any penalty...and if their " . abilityTranslate($game,'STR') . " allows";	break;
 				case 13:$bonus = "fire weapon - this weapon will appear to be on fire when wielded in combat, but will not burn the wielder";	break;
 				case 14:$bonus = "singing weapon - has a " . mt_rand(1,5) . " in 6 chance to sing at the start of a battle where it provides an additional " . (mt_rand(1,5)*5) . " ADDS but also causes more wandering monster checks)";	break;
 			}
@@ -1462,8 +1462,8 @@ else /// THIS STUFF BELOW IS SPECIFICALLY FOR THE TUNNELS & TROLLS GAME ////////
 			$owner = manyName();
 			if ($smith2 == "hilt")
 			{
-				if (mt_rand(1,100) > 80){$smith3 = materialType(leather) . " leather";} else {$smith3 = "leather";}
-					$decorate = "[the " . $smith1 . " is made of " . materialType(iron) . " with a " . $smith3 . " grip";
+				if (mt_rand(1,100) > 80){$smith3 = materialType('leather') . " leather";} else {$smith3 = "leather";}
+					$decorate = "[the " . $smith1 . " is made of " . materialType('iron') . " with a " . $smith3 . " grip";
 				if (mt_rand(1,100) > 50){$etch = $smith1;} else {$etch = $smith2;}
 				if (mt_rand(1,100) > 80){$belongs = "...the name of <i>" . $owner . "</i> is engraved on the " . $etch;}
 				if (mt_rand(1,100) > 80){$decorate = $decorate . "...the " . $etch . " is decorated with " . mt_rand(3,12) . " gems {" . gemChooser() . "}]";}
@@ -1471,26 +1471,26 @@ else /// THIS STUFF BELOW IS SPECIFICALLY FOR THE TUNNELS & TROLLS GAME ////////
 			}
 			else if ($smith1 != "")
 			{
-				if (mt_rand(1,100) > 80){$smith3 = materialType(leather) . " leather";} else {$smith3 = "leather";}
-					$decorate = "[the " . $smith1 . " is made of " . materialType(iron) . " and has a " . materialType(handle) . " " . $smith2 . " with a " . $smith3 . " grip";
-					if ($pole == 1){$decorate = "[the " . $smith1 . " is made of " . materialType(iron) . " and has a " . materialType(handle) . " " . $smith2;}
+				if (mt_rand(1,100) > 80){$smith3 = materialType('leather') . " leather";} else {$smith3 = "leather";}
+					$decorate = "[the " . $smith1 . " is made of " . materialType('iron') . " and has a " . materialType('handle') . " " . $smith2 . " with a " . $smith3 . " grip";
+					if ($pole == 1){$decorate = "[the " . $smith1 . " is made of " . materialType('iron') . " and has a " . materialType('handle') . " " . $smith2;}
 				if (mt_rand(1,100) > 50){$etch = $smith1;} else {$etch = $smith2;}
 				if (mt_rand(1,100) > 80){$belongs = "...the name of <i>" . $owner . "</i> is engraved on the " . $etch;}
 				if (mt_rand(1,100) > 80){$decorate = $decorate . "...the " . $etch . " is decorated with " . mt_rand(3,12) . " gems {" . gemChooser() . "}]";}
 				else {$decorate = $decorate . "" . $belongs . "]";}
 			}
-			else if ($bow == 1){ $decorate = "[" . materialType(bow);
+			else if ($bow == 1){ $decorate = "[" . materialType('bow');
 				if (mt_rand(1,100) > 80){$belongs = "...the name of <i>" . $owner . "</i> is carved on it";}
 				$decorate = $decorate . "" . $belongs . "]";
 			}
-			else if ($bow == 2){ $decorate = "[made of " . materialType(leather) . " hide";
+			else if ($bow == 2){ $decorate = "[made of " . materialType('leather') . " hide";
 				if (mt_rand(1,100) > 50){$etch = "burned";} else {$etch = "stitched";}
 				if (mt_rand(1,100) > 80){$belongs = "...the name of <i>" . $owner . "</i> is " . $etch . " on it";}
 				if (mt_rand(1,100) > 80){$belongs = $belongs . "...the cradle is decorated with a " . gemChooser();}
 				$decorate = $decorate . "" . $belongs . "]";
 			}
-			else if ($nt_material == "M"){ $decorate = "[made of " . materialType(iron) . "]"; }
-			else if ($nt_material == "W"){ $decorate = "[made of " . materialType(wood) . "]"; }
+			else if ($nt_material == "M"){ $decorate = "[made of " . materialType('iron') . "]"; }
+			else if ($nt_material == "W"){ $decorate = "[made of " . materialType('wood') . "]"; }
 
 			$item = $item . " " . $decorate;
 
@@ -1502,7 +1502,7 @@ else /// THIS STUFF BELOW IS SPECIFICALLY FOR THE TUNNELS & TROLLS GAME ////////
 				if ($nt_range > 0){ $nt_haul = "&nbsp;/&nbsp;RNG:" . $nt_range; } else { $nt_haul = ""; }
 				if ($nt_adds > 0){ $nt_roll = $nt_dice . $turm . "+" . $nt_adds; } else if ($nt_adds < 0){ $nt_roll = $nt_dice . $turm . $nt_adds; } else { $nt_roll = $nt_dice . $turm; }
 
-				$item = $item . " (cursed " . strtolower($ttw_type) . "&nbsp;/&nbsp;" . $term . ":" . $nt_roll . "&nbsp;/&nbsp;STR:" . $nt_str . "&nbsp;/&nbsp;DEX:" . $nt_dex . "&nbsp;/&nbsp;HND:" . $nt_hands . $nt_haul . ")" . $bonus;
+				$item = $item . " (cursed " . strtolower((string) $ttw_type) . "&nbsp;/&nbsp;" . $term . ":" . $nt_roll . "&nbsp;/&nbsp;STR:" . $nt_str . "&nbsp;/&nbsp;DEX:" . $nt_dex . "&nbsp;/&nbsp;HND:" . $nt_hands . $nt_haul . ")" . $bonus;
 			}
 			else
 			{
@@ -1512,7 +1512,7 @@ else /// THIS STUFF BELOW IS SPECIFICALLY FOR THE TUNNELS & TROLLS GAME ////////
 				if ($ttw_range > 0){ $ttw_haul = "&nbsp;/&nbsp;RNG:" . $ttw_range; } else { $ttw_haul = ""; }
 				if ($ttw_adds > 0){ $ttw_roll = $ttw_dice . $turm . "+" . $ttw_adds; } else if ($ttw_adds < 0){ $ttw_roll = $ttw_dice . $turm . $ttw_adds; } else { $ttw_roll = $ttw_dice . $turm; }
 
-				$item = $item . " (magical " . strtolower($ttw_type) . "&nbsp;/&nbsp;" . $term . ":" . $ttw_roll . "&nbsp;/&nbsp;STR:" . $ttw_str . "&nbsp;/&nbsp;DEX:" . $ttw_dex . "&nbsp;/&nbsp;HND:" . $nt_hands . $ttw_haul . ")" . $bonus;
+				$item = $item . " (magical " . strtolower((string) $ttw_type) . "&nbsp;/&nbsp;" . $term . ":" . $ttw_roll . "&nbsp;/&nbsp;STR:" . $ttw_str . "&nbsp;/&nbsp;DEX:" . $ttw_dex . "&nbsp;/&nbsp;HND:" . $nt_hands . $ttw_haul . ")" . $bonus;
 			}
 
 			if (mt_rand(1,100) > 30){$item = "<u>" . artifactNaming($ttw_mystic,'',$cursing,0) . "</u> - " . $item;}
@@ -1540,7 +1540,7 @@ else /// THIS STUFF BELOW IS SPECIFICALLY FOR THE TUNNELS & TROLLS GAME ////////
 
 			$ttw_bonus = $term . ":" . $ttw_dice . $turm . "+" . $ttw_adds . "&nbsp;--&nbspSTR:" . $ttw_str . "&nbsp;--&nbspDEX:" . $ttw_dex . $bonus;
 
-			$item = $material . strtolower($ttw_name) . " [magical " . strtolower($ttw_type) . "] (" . $ttw_bonus . ")";
+			$item = $material . strtolower((string) $ttw_name) . " [magical " . strtolower((string) $ttw_type) . "] (" . $ttw_bonus . ")";
 
 			if (mt_rand(1,100) > 30){$item = "<u>" . artifactNaming($ttw_mystic,'',$cursing,0) . "</u> - " . $item;}
 		}
@@ -1555,7 +1555,7 @@ else /// THIS STUFF BELOW IS SPECIFICALLY FOR THE TUNNELS & TROLLS GAME ////////
 		$written = "shown somewhere on it";	if (mt_rand(1,100) > 50){$written = "learned by identifying the item";}
 
 		////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-		switch (mt_rand($sz1,$sz2))
+		switch (mt_rand($sz1, max((int)($sz1), (int)($sz2))))
 		{
 			case 0: $use_other = 2; break;
 			case 1: $use_other = 2; break;
@@ -1569,26 +1569,26 @@ else /// THIS STUFF BELOW IS SPECIFICALLY FOR THE TUNNELS & TROLLS GAME ////////
 			case 9: $m_misc = tomeType() . "___{" . tomePower(100,$curse_me,$level,$cut,$game) . "}";	$use_other = 100;	break;
 			case 10:$m_misc = tomeType() . "___{" . tomePower(100,$curse_me,$level,$cut,$game) . "}";	$use_other = 100;	break;
 			case 11:
-					if ($game == "Tunnels & Trolls 5th Edition"){$m_misc = "wizardry book___{this " . $book_spell . " spell book is bound in " . leatherColor() . " " . materialType(leather) . " skin with " . designColor() . " colored symbols of a " . designType(0) . " on the front and a " . designType(0) . " on the back...it gives the owner a +" . mt_rand(2,10) . " to " . abilityTranslate($game,INT) . " for spell casting only}";}
-					else {$m_misc = "wizardry book___{this " . $book_spell . " spell book is bound in " . leatherColor() . " " . materialType(leather) . " skin with " . designColor() . " colored symbols of a " . designType(0) . " on the front and a " . designType(0) . " on the back...it allows the owner to add an extra die for " . abilityTranslate($game,INT) . " SR's when casting spells}";}
+					if ($game == "Tunnels & Trolls 5th Edition"){$m_misc = "wizardry book___{this " . $book_spell . " spell book is bound in " . leatherColor() . " " . materialType('leather') . " skin with " . designColor() . " colored symbols of a " . designType(0) . " on the front and a " . designType(0) . " on the back...it gives the owner a +" . mt_rand(2,10) . " to " . abilityTranslate($game,'INT') . " for spell casting only}";}
+					else {$m_misc = "wizardry book___{this " . $book_spell . " spell book is bound in " . leatherColor() . " " . materialType('leather') . " skin with " . designColor() . " colored symbols of a " . designType(0) . " on the front and a " . designType(0) . " on the back...it allows the owner to add an extra die for " . abilityTranslate($game,'INT') . " SR's when casting spells}";}
 				break;
 			case 12:$m_misc = "skeleton keys___{these " . mt_rand(2,6) . " keys will unlock any lock, each one vanishing afterwards}"; break;
-			case 13:$m_misc = materialType(iron) . " goblet___{any liquid put in this cup will turn into pure water}"; break;
-			case 14:$m_misc = materialType(iron) . " hand mirror___{can make the viewer`s face change to another as long as it is the same gender and race}"; break;
+			case 13:$m_misc = materialType('iron') . " goblet___{any liquid put in this cup will turn into pure water}"; break;
+			case 14:$m_misc = materialType('iron') . " hand mirror___{can make the viewer`s face change to another as long as it is the same gender and race}"; break;
 			case 15:$m_misc = "tobacco pipe of haze___{requires tobacco...when smoked, it will create a dense " . fogColor() . " fog in front of the one smoking the pipe}"; break;
-			case 16:$m_misc = materialType(iron) . " bell of alarming___{this small bell will ring whenever a hostile creature comes within 50 feet of the owner}"; break;
-			case 17:$m_misc = materialType(iron) . " fork___{this dinner fork will turn into a trident {" . $term . ":6" . $turm . "+6} when the word `" . castingName() . "` is spoken (which is " . $written . ")...and back to a fork when spoken again}"; break;
-			case 18:$m_misc = "ointment___{this small jar has " . mt_rand(2,7) . " uses and will cure poison and disease...along with healing " . mt_rand(6,13) . " " . abilityTranslate($game,CON) . "}"; break;
+			case 16:$m_misc = materialType('iron') . " bell of alarming___{this small bell will ring whenever a hostile creature comes within 50 feet of the owner}"; break;
+			case 17:$m_misc = materialType('iron') . " fork___{this dinner fork will turn into a trident {" . $term . ":6" . $turm . "+6} when the word `" . castingName() . "` is spoken (which is " . $written . ")...and back to a fork when spoken again}"; break;
+			case 18:$m_misc = "ointment___{this small jar has " . mt_rand(2,7) . " uses and will cure poison and disease...along with healing " . mt_rand(6,13) . " " . abilityTranslate($game,'CON') . "}"; break;
 			case 19:$m_misc = "paint brush___{once a day this brush can paint a doorway on a wall that is no more than 10 feet thick...but it does require a pint of paint}"; break;
 			case 20:$m_misc = "candle___{when this " . candleColor(0) . " candle is burning, " . candleMagic($game,$level) . "}"; break;
 			case 21:$m_misc = bottlePicker() . "___{will refill itself with clean water when the sun rises}"; break;
 			case 22:$m_misc = bottlePicker() . "___{contains an endless supply of air that one may breathe from}"; break;
 			case 23:$m_misc = bottlePicker() . "___{contains an endless supply of air that one may breathe from}"; break;
-			case 24:$m_misc = "monocle___{allows the wearer to charm someone by looking at them unless they make an " . TTSaves($level,$game) . " vs. " . abilityTranslate($game,INT) . "...it can be used " . mt_rand(2,6) . " times per day}"; break;
+			case 24:$m_misc = "monocle___{allows the wearer to charm someone by looking at them unless they make an " . TTSaves($level,$game) . " vs. " . abilityTranslate($game,'INT') . "...it can be used " . mt_rand(2,6) . " times per day}"; break;
 			case 25:$m_misc = "monocle___{allows the wearer the ability to see how hurt others are around them...it can be used " . mt_rand(2,6) . " times per day}"; break;
-			case 26:$m_misc = "monocle___{allows the wearer to turn someone to stone by looking at them unless they make an " . TTSaves($level,$game) . " vs. " . abilityTranslate($game,SPD) . " or " . abilityTranslate($game,LCK) . "...it can be used " . mt_rand(2,6) . " times per day}"; break;
+			case 26:$m_misc = "monocle___{allows the wearer to turn someone to stone by looking at them unless they make an " . TTSaves($level,$game) . " vs. " . abilityTranslate($game,'SPD') . " or " . abilityTranslate($game,'LCK') . "...it can be used " . mt_rand(2,6) . " times per day}"; break;
 			case 27:$m_misc = "monocle___{allows the wearer to see secret compartments and doors}"; break;
-			case 28:$m_misc = bottlePicker() . "___{there is magical runes on this that show the word `" . castingName() . "` which needs an " . abilityTranslate($game,INT) . " greater than " . ($level + 10) . "...when it is open, and the word spoken, any creature it is pointed at will get sucked into the bottle an imprisoned (where only one at a time may exist in the bottle) until the owner releases them}"; break;
+			case 28:$m_misc = bottlePicker() . "___{there is magical runes on this that show the word `" . castingName() . "` which needs an " . abilityTranslate($game,'INT') . " greater than " . ($level + 10) . "...when it is open, and the word spoken, any creature it is pointed at will get sucked into the bottle an imprisoned (where only one at a time may exist in the bottle) until the owner releases them}"; break;
 			case 29:$m_misc = bottlePicker() . "___{contains a genie that will grant 1 reasonable wish...where the item then vanishes}"; break;
 			case 30:$m_misc = bottlePicker() . "___{when opened, this will create a dense " . fogColor() . " fog in the area...which will last for about " . mt_rand(4,8) . " turns}"; break;
 			case 31:$m_misc = "deck of playing cards___{will surround, whirl, and distract an enemy when thrown at them}"; break;
@@ -1596,45 +1596,45 @@ else /// THIS STUFF BELOW IS SPECIFICALLY FOR THE TUNNELS & TROLLS GAME ////////
 			case 33:$m_misc = "stones___{these " . mt_rand(2,10) . " sling stones that will allow any sling-type weapon to have " . mt_rand(1,4) . " additional dice for combat rolls}"; break;
 			case 34:$m_misc = "glue___{this " . bottlePicker() . " of glue has " . mt_rand(2,8) . " uses and cause anything to stick to anything else...permanently}"; break;
 			case 35:
-					if ($game == "Tunnels & Trolls 5th Edition"){$m_misc = materialType(iron) . " holy symbol___{while held, undead can only use half of their dice and adds in combat}";}
-					else {$m_misc = materialType(iron) . " holy symbol___{while held, undead can only use half of their adds in combat and they cannot do spite damage}";}
+					if ($game == "Tunnels & Trolls 5th Edition"){$m_misc = materialType('iron') . " holy symbol___{while held, undead can only use half of their dice and adds in combat}";}
+					else {$m_misc = materialType('iron') . " holy symbol___{while held, undead can only use half of their adds in combat and they cannot do spite damage}";}
 				break;
-			case 36:$m_misc = "rings___{these 8 inch " . materialType(iron) . " rings are found in pairs that are magically linked together...anyone putting their arm throw one ring will have it come through the other ring instead}"; break;
-			case 37:$m_misc = "key___{this " . materialType(iron) . " key can be used once per day where it is pushed into a solid wall and turned...revealing a door that leads to where the key was tuned...tuning the key requires one to hold the key in a particular spot and saying the word `" . castingName() . "` which is engraved on the key}"; break;
+			case 36:$m_misc = "rings___{these 8 inch " . materialType('iron') . " rings are found in pairs that are magically linked together...anyone putting their arm throw one ring will have it come through the other ring instead}"; break;
+			case 37:$m_misc = "key___{this " . materialType('iron') . " key can be used once per day where it is pushed into a solid wall and turned...revealing a door that leads to where the key was tuned...tuning the key requires one to hold the key in a particular spot and saying the word `" . castingName() . "` which is engraved on the key}"; break;
 			case 38:$m_misc = "scrolls___{there are " . mt_rand(2,6) . " scrolls bunched together...when a scroll is written on, it will appear on the other scrolls for almost a minute before vanishing}"; break;
 			case 39:$m_misc = "lense___{this " . beamColor() . " lense can be used to identify an item if one looks through it at the item}"; break;
-			case 40:$m_misc = "orb___{this " . beamColor() . " glass orb can fit in the hand and will drain the " . abilityTranslate($game,POW) . " from an opponent at the rate of " . mt_rand(5,20) . " " . abilityTranslate($game,POW) . " per combat round...but it only has " . mt_rand(10,50) . " charges and it uses a charge for each combat round used}"; break;
-			case 41:$m_misc = "sage book___{this mystical book is bound in " . leatherColor() . " " . materialType(leather) . " skin with " . designColor() . " colored symbols of a " . designType(0) . " on the front and a " . designType(0) . " on the back...any item placed on a blank page [there are only " . mt_rand(5,25) . " blank pages] will have magical words appear on that page that identifies the item}";	break;
+			case 40:$m_misc = "orb___{this " . beamColor() . " glass orb can fit in the hand and will drain the " . abilityTranslate($game,'POW') . " from an opponent at the rate of " . mt_rand(5,20) . " " . abilityTranslate($game,'POW') . " per combat round...but it only has " . mt_rand(10,50) . " charges and it uses a charge for each combat round used}"; break;
+			case 41:$m_misc = "sage book___{this mystical book is bound in " . leatherColor() . " " . materialType('leather') . " skin with " . designColor() . " colored symbols of a " . designType(0) . " on the front and a " . designType(0) . " on the back...any item placed on a blank page [there are only " . mt_rand(5,25) . " blank pages] will have magical words appear on that page that identifies the item}";	break;
 			case 42:$m_misc = "coin___{" . rareCoins(1,1) . "...where it can be flipped in a heads or tails fashion to help answer " . mt_rand(2,6) . " questions a day}"; break;
-			case 43:$m_misc = "apple___{this silver apple can be bitten into a total of 12 times before it is useless...where each bite restores " . mt_rand(2,12) . " " . abilityTranslate($game,CON) . "}"; break;
+			case 43:$m_misc = "apple___{this silver apple can be bitten into a total of 12 times before it is useless...where each bite restores " . mt_rand(2,12) . " " . abilityTranslate($game,'CON') . "}"; break;
 			case 44:$m_misc = "stone___{this small stone will begin to scream whenever one approaches that will do the owner harm...but it has to be activated and deactivated by speaking the word `" . castingName() . "`, which can be learned by identifying the item}"; break;
-			case 45:$m_misc = "throwing knife___{this " . materialType(iron) . " knife (" . $term . ":" . mt_rand(2,3) . $turm . "+" . mt_rand(3,5) . ") and when it is thrown, it will always hit the intended target}"; break;
+			case 45:$m_misc = "throwing knife___{this " . materialType('iron') . " knife (" . $term . ":" . mt_rand(2,3) . $turm . "+" . mt_rand(3,5) . ") and when it is thrown, it will always hit the intended target}"; break;
 			case 46:$m_misc = "biting skull___{this skull will bite down with unbreakable magical force when the word `" . castingName() . "` is spoken, which can be learned by identifying the item...speaking the same word will cause the skull to open the mouth}"; break;
 			case 47:$m_misc = "stick___{this " . woodenType() . " stick is about " . mt_rand(2,4) . " feet long and will safely set off a nearby trap when tapped on the floor or ground, but only " . mt_rand(2,6) . " times a day}"; break;
 			case 48:$m_misc = "stick___{this " . woodenType() . " stick is about " . mt_rand(2,4) . " feet long and will detect any fresh water source that is within " . (mt_rand(1,9)*100) . " feet";	break;
 			case 49:$m_misc = "veil___{when this " . candleColor(0) . " veil is worn, anyone looking through it is immune to gaze attacks";	break;
 			case 50:$m_misc = "candle___{when this " . candleColor(0) . " candle is lit, " . candleMagic($game,$level) . "}"; break;
-			case 51:$m_misc = "tankard___{this " . materialType(iron) . " tankard allows one to drink any amount of alcohol from it without any of the effects}"; break;
+			case 51:$m_misc = "tankard___{this " . materialType('iron') . " tankard allows one to drink any amount of alcohol from it without any of the effects}"; break;
 			case 52:$m_misc = "quill___{this " . birdType() . " feathered quill will magically write the spoken words of the owner, as long as it has paper and ink, for " . mt_rand(2,6) . " hours per day}"; break;
 			/////////////////////////////////
 			case 53:$m_misc = "arrow___{when this arrow is fired straight into the sky, it will travel up to " . mt_rand(2,20) . "0 miles to reach the recipient of whoever an attached message is for}"; break;
-			case 54:$m_misc = "torch___{when this " . materialType(iron) . " torch is lit, it will illuminate an area of " . mt_rand(1,3) . "0 feet with a " . beamColor(0) . " light...but for only " . mt_rand(2,4) . " hours per day, where no undead or shadowy creatures may enter}"; break;
+			case 54:$m_misc = "torch___{when this " . materialType('iron') . " torch is lit, it will illuminate an area of " . mt_rand(1,3) . "0 feet with a " . beamColor(0) . " light...but for only " . mt_rand(2,4) . " hours per day, where no undead or shadowy creatures may enter}"; break;
 			case 55:$m_misc = "lantern___{anyone holding the lantern can see the illumination...but others cannot}"; break;
 			case 56:$m_misc = "nourishing iron pot___{will magically fill itself with warm stew when the word `" . castingName() . "` is spoken, which is " . $written . "}"; break;
 			case 57:$m_misc = "torch___{if the word `" . castingName() . "` is spoken (which is " . $written . "), this torch will light and follow the owner by floating nearby...but only for about " . mt_rand(3,12) . " hours a day}"; break;
 			case 58:$m_misc = "lamp oil___{this lantern oil will cause the lamp`s light to hurt undead within it`s glow for " . mt_rand(1,3) . "d6 damage per round}"; break;
-			case 59:$m_misc = materialType(iron) . " hand mirror___{when one sees their reflection, and the word spoken by the wielder, any creature looking at their reflection at will get sucked into the mirror (where only one at a time may exist in the mirror) and imprisoned until the owner breaks it}"; break;
+			case 59:$m_misc = materialType('iron') . " hand mirror___{when one sees their reflection, and the word spoken by the wielder, any creature looking at their reflection at will get sucked into the mirror (where only one at a time may exist in the mirror) and imprisoned until the owner breaks it}"; break;
 			case 60:$m_misc = "crystal ball___{allows someone to see what is happening " . (mt_rand(1,20)*5) . " miles away and only if they are somewhat familiar with the area they are looking}"; break;
 			case 61:$m_misc = "evil skull___{holding it will cause any undead to ignore the wielder}"; break;
 			case 62:$m_misc = "shackles___{anyone bound in these cannot escape by even magical means...unless the owner speaks the word `" . castingName() . "`, which is " . $written . "}"; break;
 			case 63:$m_misc = "talking skull___{if the owner asks the skull of nearby " . searchList() . ", it will speak to confirm or deny as such}"; break;
-			case 64:$m_misc = "chains___{when thrown at an enemy, they will chain them up unless they can make an " . TTSaves($level,$game) . " vs. " . abilityTranslate($game,STR) . "...if the word `" . castingName() . "` is spoken (which is " . $written . "), then the chains release the prisoner}"; break;
+			case 64:$m_misc = "chains___{when thrown at an enemy, they will chain them up unless they can make an " . TTSaves($level,$game) . " vs. " . abilityTranslate($game,'STR') . "...if the word `" . castingName() . "` is spoken (which is " . $written . "), then the chains release the prisoner}"; break;
 			case 65:$m_misc = "lantern___{any invisible object or creature is revealed in the light of this}"; break;
 			case 66:$m_misc = "ship in a bottle___{when the word `" . castingName() . "` is spoken (which is " . $written . ") this turns into a ship complete...if it is empty, the command word will turn it back into a ship in the bottle}"; break;
 			case 67:$m_misc = "driftwood___{when the word `" . castingName() . "` is spoken (which is " . $written . ") this turns into a raft that can hold about 4 humanoids...the command word will turn it back into driftwood}"; break;
-			case 68:$m_misc = "net___{when thrown at an enemy, they will be captured unless they can make an " . TTSaves($level,$game) . " vs. " . abilityTranslate($game,STR) . "...if the word `" . castingName() . "` is spoken (which is " . $written . "), then the net release the prisoner}"; break;
+			case 68:$m_misc = "net___{when thrown at an enemy, they will be captured unless they can make an " . TTSaves($level,$game) . " vs. " . abilityTranslate($game,'STR') . "...if the word `" . castingName() . "` is spoken (which is " . $written . "), then the net release the prisoner}"; break;
 			case 69:$m_misc = "paint___{this pint of " . candleColor(0) . " paint can be used to paint an object that comes to be real and useable...such as swords, boxes, armor, food...but nothing of high value}"; break;
-			case 70:$m_misc = materialType(iron) . " hand mirror___{when the mirror is spoken into, it will answer one question per day}"; break;
+			case 70:$m_misc = materialType('iron') . " hand mirror___{when the mirror is spoken into, it will answer one question per day}"; break;
 			case 71:$m_misc = "vortex___{this is a round black cloth that is 6 feet wide when laid out...it creates a hole that is 10 feet deep in which anyone that falls in must get out before the cloth is picked back up or vanish forever}"; break;
 			case 72:if (mt_rand(1,100) > 50){$toy = "teddy bear";} else {$toy = "doll";} $m_misc = $toy . "___{this " . $toy . " can come to life and serve the owner for " . mt_rand(2,12) . " hours per week if the word `" . castingName() . "` is spoken (which is " . $written . ")...it will not fight but do other various chores"; break;
 			case 73:$m_misc = "tablecloth___{once a day, when this " . candleColor(0) . " tablecloth is put on a table, it will unfold with a feast for up to " . mt_rand(4,8) . " people}"; break;
@@ -1653,7 +1653,7 @@ else /// THIS STUFF BELOW IS SPECIFICALLY FOR THE TUNNELS & TROLLS GAME ////////
 			case 85:$m_misc = "saddle___{any steed this is used in can travel twice as fast for twice as long}"; break;
 			case 86:$m_misc = "saddle___{any steed this is used on will run or walk about 6 inches off the ground}"; break;
 			case 87:$m_misc = "rope___{when the word `" . castingName() . "` is spoken (which is " . $written . ") then this " . mt_rand(5,20) . "0 foot rope will ascend so it can be climbed up}"; break;
-			case 88:$m_misc = "rope___{when used as a lasso, this rope will wrap around a target unless they make an " . TTSaves($level,$game) . " vs. " . abilityTranslate($game,STR) . "...if the word `" . castingName() . "` is spoken (which is " . $written . "), then the rope release the target}"; break;
+			case 88:$m_misc = "rope___{when used as a lasso, this rope will wrap around a target unless they make an " . TTSaves($level,$game) . " vs. " . abilityTranslate($game,'STR') . "...if the word `" . castingName() . "` is spoken (which is " . $written . "), then the rope release the target}"; break;
 			case 89:$m_misc = "scabbard___{any edged weapon pulled from this scabbard will give " . mt_rand(1,4) . " additional combat dice but for only " . mt_rand(2,5) . " combats a day}"; break;
 			case 90:$m_misc = "tent___{this " . candleColor(0) . " tent looks like it can only accommodate one person but when you look inside, it really has space for " . mt_rand(4,12) . " people...if the word `" . castingName() . "` (which is " . $written . ") is spoken by someone inside, it will vanish from this plane of existence until the word is spoken again...allowing for safe rest}"; break;
 			case 91:$use_other = 1; break;
@@ -1669,25 +1669,25 @@ else /// THIS STUFF BELOW IS SPECIFICALLY FOR THE TUNNELS & TROLLS GAME ////////
 		    switch (mt_rand(0,16))
 		    {
 			case 1: $m_misc = bardType() . "___{will float, play music, and follow the owner when tossed into the air...giving the group +" . $plus . " for combat}"; break;
-			case 2: $m_misc = bardType() . "___{when played [by making a musical " . TTSaves($level,$game) . " vs. " . abilityTranslate($game,DEX) . "], this will produce a sound where no magic words can be spoken by anyone for " . mt_rand(2,5) . " rounds and only " . mt_rand(2,6) . " times a day}"; break;
-			case 3: $m_misc = bardType() . "___{when played [by making a musical " . TTSaves($level,$game) . " vs. " . abilityTranslate($game,DEX) . "], this will produce a sound that will open anything that does open...even if locked, but only " . mt_rand(2,4) . " times a day}"; break;
-			case 4: $m_misc = bardType() . "___{when played [by making a musical " . TTSaves($level,$game) . " vs. " . abilityTranslate($game,DEX) . "], this will produce a sound that causes fear in those 20 to 120 feet away, but only once a day}"; break;
-			case 5: $m_misc = bardType() . "___{when played [by making a musical " . TTSaves($level,$game) . " vs. " . abilityTranslate($game,DEX) . "], this will produce a sound that scares any enemies within 30 feet and if they have a less total MR than the group, but only twice a day}"; break;
-			case 6: $m_misc = bardType() . "___{when played [by making a musical " . TTSaves($level,$game) . " vs. " . abilityTranslate($game,DEX) . "], this will produce a sound that causes 1d6 damage to all those that can hear it}"; break;
-			case 7: $m_misc = bardType() . "___{when played [by making a musical " . TTSaves($level,$game) . " vs. " . abilityTranslate($game,DEX) . "], this will produce a sound that can be directed as if it was coming from somewhere else up to " . mt_rand(6,18) . "0 feet away}"; break;
-			case 8: $m_misc = bardType() . "___{when played [by making a musical " . TTSaves($level,$game) . " vs. " . abilityTranslate($game,DEX) . "], this will produce a sound that will stop " . mt_rand(2,10) . " enemies from fighting for " . mt_rand(2,5) . " rounds, but only twice a day}"; break;
-			case 9: $m_misc = bardType() . "___{when played [by making a musical " . TTSaves($level,$game) . " vs. " . abilityTranslate($game,DEX) . "], this will produce a sound that will spring traps " . mt_rand(2,10) . "0 feet away from the musician}"; break;
-			case 10:$m_misc = bardType() . "___{when played [by making a musical " . TTSaves($level,$game) . " vs. " . abilityTranslate($game,DEX) . "], this will produce a sound that will cause invisible objects to briefly appear within " . mt_rand(2,10) . "0 feet of the musician}"; break;
-			case 11:$m_misc = bardType() . "___{when played [by making a musical " . TTSaves($level,$game) . " vs. " . abilityTranslate($game,DEX) . "], this will produce a sound that will give the group " . mt_rand(1,2) . " additional dice for any SR's they need to make}"; break;
-			case 12:$m_misc = bardType() . "___{when played [by making a musical " . TTSaves($level,$game) . " vs. " . abilityTranslate($game,DEX) . "], this will produce a sound that will calm waters, scare away sea life, or summon medium sized sea creatures to aid the musician}"; break;
+			case 2: $m_misc = bardType() . "___{when played [by making a musical " . TTSaves($level,$game) . " vs. " . abilityTranslate($game,'DEX') . "], this will produce a sound where no magic words can be spoken by anyone for " . mt_rand(2,5) . " rounds and only " . mt_rand(2,6) . " times a day}"; break;
+			case 3: $m_misc = bardType() . "___{when played [by making a musical " . TTSaves($level,$game) . " vs. " . abilityTranslate($game,'DEX') . "], this will produce a sound that will open anything that does open...even if locked, but only " . mt_rand(2,4) . " times a day}"; break;
+			case 4: $m_misc = bardType() . "___{when played [by making a musical " . TTSaves($level,$game) . " vs. " . abilityTranslate($game,'DEX') . "], this will produce a sound that causes fear in those 20 to 120 feet away, but only once a day}"; break;
+			case 5: $m_misc = bardType() . "___{when played [by making a musical " . TTSaves($level,$game) . " vs. " . abilityTranslate($game,'DEX') . "], this will produce a sound that scares any enemies within 30 feet and if they have a less total MR than the group, but only twice a day}"; break;
+			case 6: $m_misc = bardType() . "___{when played [by making a musical " . TTSaves($level,$game) . " vs. " . abilityTranslate($game,'DEX') . "], this will produce a sound that causes 1d6 damage to all those that can hear it}"; break;
+			case 7: $m_misc = bardType() . "___{when played [by making a musical " . TTSaves($level,$game) . " vs. " . abilityTranslate($game,'DEX') . "], this will produce a sound that can be directed as if it was coming from somewhere else up to " . mt_rand(6,18) . "0 feet away}"; break;
+			case 8: $m_misc = bardType() . "___{when played [by making a musical " . TTSaves($level,$game) . " vs. " . abilityTranslate($game,'DEX') . "], this will produce a sound that will stop " . mt_rand(2,10) . " enemies from fighting for " . mt_rand(2,5) . " rounds, but only twice a day}"; break;
+			case 9: $m_misc = bardType() . "___{when played [by making a musical " . TTSaves($level,$game) . " vs. " . abilityTranslate($game,'DEX') . "], this will produce a sound that will spring traps " . mt_rand(2,10) . "0 feet away from the musician}"; break;
+			case 10:$m_misc = bardType() . "___{when played [by making a musical " . TTSaves($level,$game) . " vs. " . abilityTranslate($game,'DEX') . "], this will produce a sound that will cause invisible objects to briefly appear within " . mt_rand(2,10) . "0 feet of the musician}"; break;
+			case 11:$m_misc = bardType() . "___{when played [by making a musical " . TTSaves($level,$game) . " vs. " . abilityTranslate($game,'DEX') . "], this will produce a sound that will give the group " . mt_rand(1,2) . " additional dice for any SR's they need to make}"; break;
+			case 12:$m_misc = bardType() . "___{when played [by making a musical " . TTSaves($level,$game) . " vs. " . abilityTranslate($game,'DEX') . "], this will produce a sound that will calm waters, scare away sea life, or summon medium sized sea creatures to aid the musician}"; break;
 			case 13:
 						$my_mr_is = $level * 10;
 						$my_dc_is = (FLOOR($my_mr_is/10)+1) . "&nbsp;+&nbsp;" . (CEIL($my_mr_is/2));
-					$m_misc = bardType() . "___{when played [by making a musical " . TTSaves($level,$game) . " vs. " . abilityTranslate($game,DEX) . "], the music will call forth " . mt_rand(2,10) . " mystical warriors [EACH&nbsp;HAVE...MR:" . $my_mr_is . "&nbsp;/&nbsp;DICE:" . $my_dc_is . "] to aid in the current battle...where they then vanish afterwards, and only once per " . timesMaker() . "}";
+					$m_misc = bardType() . "___{when played [by making a musical " . TTSaves($level,$game) . " vs. " . abilityTranslate($game,'DEX') . "], the music will call forth " . mt_rand(2,10) . " mystical warriors [EACH&nbsp;HAVE...MR:" . $my_mr_is . "&nbsp;/&nbsp;DICE:" . $my_dc_is . "] to aid in the current battle...where they then vanish afterwards, and only once per " . timesMaker() . "}";
 				break;
-			case 14:$m_misc = bardType() . "___{when played [by making a musical " . TTSaves($level,$game) . " vs. " . abilityTranslate($game,DEX) . "], this will produce a sound that summons up to " . mt_rand(4,10) . "0 rats if in the area where the musician can then control them as long as they continue playing}"; break;
-			case 15:$m_misc = "horn___{when played [by making a musical " . TTSaves($level,$game) . " vs. " . abilityTranslate($game,DEX) . "], this will create a dense " . fogColor() . " fog in front of the musician...which will last for about " . mt_rand(4,8) . " turns}"; break;
-			case 16:$m_misc = "horn___{when played [by making a musical " . TTSaves($level,$game) . " vs. " . abilityTranslate($game,DEX) . "], this will not produce sound but make a large gusting wind that will extinguish fires and knock smaller creatures off their feet...while holding medium sized creatures at bay momentarily...and only once per day}"; break;
+			case 14:$m_misc = bardType() . "___{when played [by making a musical " . TTSaves($level,$game) . " vs. " . abilityTranslate($game,'DEX') . "], this will produce a sound that summons up to " . mt_rand(4,10) . "0 rats if in the area where the musician can then control them as long as they continue playing}"; break;
+			case 15:$m_misc = "horn___{when played [by making a musical " . TTSaves($level,$game) . " vs. " . abilityTranslate($game,'DEX') . "], this will create a dense " . fogColor() . " fog in front of the musician...which will last for about " . mt_rand(4,8) . " turns}"; break;
+			case 16:$m_misc = "horn___{when played [by making a musical " . TTSaves($level,$game) . " vs. " . abilityTranslate($game,'DEX') . "], this will not produce sound but make a large gusting wind that will extinguish fires and knock smaller creatures off their feet...while holding medium sized creatures at bay momentarily...and only once per day}"; break;
 		    }
 		}
 		////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1715,9 +1715,9 @@ else /// THIS STUFF BELOW IS SPECIFICALLY FOR THE TUNNELS & TROLLS GAME ////////
 				case 4: $curse_me = 0; $m_misc = $m_dustt . "___{this small " . $m_dustc . " of " . candleColor(0) . " " . $m_dustt . " can be thrown into water to absorb about 100 gallons...or it can slay a water elemental}"; break;
 				case 5: $curse_me = 0; $m_misc = $m_dustt . "___{this small " . $m_dustc . " of " . candleColor(0) . " " . $m_dustt . " can be thrown onto anything of medium size or smaller to make them appear as something else the thrower thinks of for " . mt_rand(3,12) . "0 minutes}"; break;
 				case 6: $curse_me = 0; $m_misc = $m_dustt . "___{this small " . $m_dustc . " of " . candleColor(0) . " " . $m_dustt . " can be thrown into an area where it will give the appearance of it being undisturbed for years...but only in 100 square foot area}"; break;
-				case 7: $curse_me = 0; $m_misc = $m_dustt . "___{this small " . $m_dustc . " of " . candleColor(0) . " " . $m_dustt . " can be used to create a summoning circle to call forth an elemental [" . elementalType($game) . "] that will serve the summoner...but must spend " . mt_rand(10,30) . " " . abilityTranslate($game,POW) . " to use this " . $m_dustt . "}"; break;
+				case 7: $curse_me = 0; $m_misc = $m_dustt . "___{this small " . $m_dustc . " of " . candleColor(0) . " " . $m_dustt . " can be used to create a summoning circle to call forth an elemental [" . elementalType($game) . "] that will serve the summoner...but must spend " . mt_rand(10,30) . " " . abilityTranslate($game,'POW') . " to use this " . $m_dustt . "}"; break;
 			}
-		    if ($curse_me > 0){$m_misc = $m_dustt . "___{this small " . $m_dustc . " of " . candleColor(0) . " " . $m_dustt . " can be thrown into the air where everyone within 20 feet will be incapacitated by choking and sneezing for " . mt_rand(5,20) . " rounds...everyone must make an " . TTSaves($level,$game) . " vs. " . abilityTranslate($game,STR) . " or " . abilityTranslate($game,CON) . " or suffer " . mt_rand(1,2) . "d6 damage...this same SR must be made each round they are in the dust}";}
+		    if ($curse_me > 0){$m_misc = $m_dustt . "___{this small " . $m_dustc . " of " . candleColor(0) . " " . $m_dustt . " can be thrown into the air where everyone within 20 feet will be incapacitated by choking and sneezing for " . mt_rand(5,20) . " rounds...everyone must make an " . TTSaves($level,$game) . " vs. " . abilityTranslate($game,'STR') . " or " . abilityTranslate($game,'CON') . " or suffer " . mt_rand(1,2) . "d6 damage...this same SR must be made each round they are in the dust}";}
 		}
 		////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		if ($use_other == 3)
@@ -1755,7 +1755,7 @@ else /// THIS STUFF BELOW IS SPECIFICALLY FOR THE TUNNELS & TROLLS GAME ////////
 		    {
 				switch (mt_rand(0,1))
 				{
-					case 0: $m_misc = bagCreator() . "___{whoever puts their hand in will be swallowed up if they fail an " . TTSaves($level,$game) . " vs. " . abilityTranslate($game,STR) . "...if trapped they can only be freed with curse removing magic}"; break;
+					case 0: $m_misc = bagCreator() . "___{whoever puts their hand in will be swallowed up if they fail an " . TTSaves($level,$game) . " vs. " . abilityTranslate($game,'STR') . "...if trapped they can only be freed with curse removing magic}"; break;
 					case 1: $m_misc = bagCreator() . "___{if coins are put into it, they turn to lead...if gems are put in it, they turn to common stones}"; break;
 				}
 		    }
@@ -1763,7 +1763,7 @@ else /// THIS STUFF BELOW IS SPECIFICALLY FOR THE TUNNELS & TROLLS GAME ////////
 		////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		if (mt_rand(1,2) == 2)
 		{
-			switch (mt_rand(0,$sz3))
+			switch (mt_rand(0, max((int)(0), (int)($sz3))))
 			{
 				case 0: $glove = gloveType();		$m_misc = $glove . "___{" . glovePower($glove,$curse_me,$level,$game) . "}";	break;
 				case 1: $amulet = amuletType();	$m_misc = $amulet . "___{" . amuletPower($amulet,$curse_me,$level,$game) . "}";		break;
@@ -1789,7 +1789,7 @@ else /// THIS STUFF BELOW IS SPECIFICALLY FOR THE TUNNELS & TROLLS GAME ////////
 		if ($safety > 0){$item = makeMagicItem($level,$size,$varb,$game,$extra,$cut);} // TRY AGAIN IF IT COMES UP WITH NOTHING //
 	}
 
-	$item = ucfirst($item);
+	$item = ucfirst((string) $item);
 	return $item;
 }
 

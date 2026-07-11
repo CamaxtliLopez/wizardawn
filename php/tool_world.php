@@ -240,7 +240,7 @@ if ($info > 0)
 
 	if ($legend > 0)
 	{
-		$ticons = explode("^", hexmapIcons($key_array));
+		$ticons = explode("^", (string) hexmapIcons($key_array));
 		sort($ticons);
 		$c_keys = count($ticons);
 		$s = 0;

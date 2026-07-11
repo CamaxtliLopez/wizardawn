@@ -61,7 +61,7 @@ function getADDPower($table)
 		case 48: $arty = "{I}&nbsp;Wizard lock - 7 times/week"; break;
 		case 49: $arty = "{I}&nbsp;Write - 1 time/day"; break;
 		case 50: $arty = "{I}&nbsp;Zombie animation - 1 time/week"; break;
-		case 51: $relic = array('II', 'III'); $arty = "{II}&nbsp;Animal summoning " . $relic[mt_rand(0,1)] . " - 2 times/day"; break;
+		case 51: $relic = ['II', 'III']; $arty = "{II}&nbsp;Animal summoning " . $relic[mt_rand(0,1)] . " - 2 times/day"; break;
 		case 52: $arty = "{II}&nbsp;Animate object upon command - 1 time/day"; break;
 		case 53: $arty = "{II}&nbsp;+2 to armor class of possessor or AC 0, whichever is better"; break;
 		case 54: $arty = "{II}&nbsp;Cause serious wounds by touch"; break;
@@ -81,7 +81,7 @@ function getADDPower($table)
 		case 68: $arty = "{II}&nbsp;Fear by touch or gaze"; break;
 		case 69: $arty = "{II}&nbsp;Fireball (9 - 12 dice) - 2 times/day"; break;
 		case 70: $arty = "{II}&nbsp;Fire shield - 2 times/day"; break;
-		case 71: $relic = array('Storm', 'Cloud', 'Fire', 'Frost', 'Stone', 'Hill'); $arty = "{II}&nbsp;" . $relic[mt_rand(0,5)] . " giant strength for 2 turns"; break; 
+		case 71: $relic = ['Storm', 'Cloud', 'Fire', 'Frost', 'Stone', 'Hill']; $arty = "{II}&nbsp;" . $relic[mt_rand(0,5)] . " giant strength for 2 turns"; break; 
 		case 72: $arty = "{II}&nbsp;Haste - 1 time/day"; break;
 		case 73: $arty = "{II}&nbsp;Heal - 1 time/day"; break;
 		case 74: $arty = "{II}&nbsp;Hold animal - 1 time/day"; break;
@@ -371,7 +371,7 @@ function getADDPickPowers()
 	$cyc = 0;
 	$power_count = count($powers);
 		if ($rod != ""){$power_count = 0; $special = "[Other pieces are needed to draw power from the rod]";}
-	$power_array = array();
+	$power_array = [];
 
 	while ($power_count > 0) :
 
@@ -501,13 +501,13 @@ function makeRPGmagic($game,$varb)
 			case $mi >= 88 and $mi <= 89: $item = $armor . " +5" . $metals; break; // Armor
 			case $mi >= 90 and $mi <= 95:										// Armor
 				$dice = mt_rand(1,20);
-				if ($dice >= 20){ $item = $armor . " +5" . $metals . "(Cursed: " . curseType(mt_rand(1,10),user,equip,$game) . ")"; }
-				else if ($dice >= 18){$item = $armor . " +4" . $metals . "(Cursed: " . curseType(mt_rand(1,10),user,equip,$game) . ")"; }	
-				else if ($dice >= 14){$item = $armor . " +3" . $metals . "(Cursed: " . curseType(mt_rand(1,10),user,equip,$game) . ")"; }			
-				else if ($dice >= 12){$item = $armor . " +2" . $metals . "(Cursed: " . curseType(mt_rand(1,10),user,equip,$game) . ")"; }
-				else if ($dice >= 8){$item = $armor . " +1" . $metals . "(Cursed: " . curseType(mt_rand(1,10),user,equip,$game) . ")"; }
-				else if ($dice >= 5){$item = $armor . " -1" . $metals . "(Cursed: " . curseType(mt_rand(1,10),user,equip,$game) . ")"; }
-				else {$item = $armor . " -2" . $metals . "(Cursed: " . curseType(mt_rand(1,10),user,equip,$game) . ")"; }
+				if ($dice >= 20){ $item = $armor . " +5" . $metals . "(Cursed: " . curseType(mt_rand(1,10),'user','equip',$game) . ")"; }
+				else if ($dice >= 18){$item = $armor . " +4" . $metals . "(Cursed: " . curseType(mt_rand(1,10),'user','equip',$game) . ")"; }	
+				else if ($dice >= 14){$item = $armor . " +3" . $metals . "(Cursed: " . curseType(mt_rand(1,10),'user','equip',$game) . ")"; }			
+				else if ($dice >= 12){$item = $armor . " +2" . $metals . "(Cursed: " . curseType(mt_rand(1,10),'user','equip',$game) . ")"; }
+				else if ($dice >= 8){$item = $armor . " +1" . $metals . "(Cursed: " . curseType(mt_rand(1,10),'user','equip',$game) . ")"; }
+				else if ($dice >= 5){$item = $armor . " -1" . $metals . "(Cursed: " . curseType(mt_rand(1,10),'user','equip',$game) . ")"; }
+				else {$item = $armor . " -2" . $metals . "(Cursed: " . curseType(mt_rand(1,10),'user','equip',$game) . ")"; }
 				break;
 			case $mi >= 96 and $mi <= 106:							// Armor
 				$dice = mt_rand(1,2);
@@ -521,13 +521,13 @@ function makeRPGmagic($game,$varb)
 			case $mi >= 194 and $mi <= 195: $item = $weapon . " +5"; break; // Weapon
 			case $mi >= 196 and $mi <= 201:									// Weapon
 				$dice = mt_rand(1,20);
-				if ($dice >= 20){ $item = $weapon . " +5 (Cursed: " . curseType(mt_rand(1,10),wielder,equip,$game) . ")"; }
-				else if ($dice >= 18){$item = $weapon . " +4 (Cursed: " . curseType(mt_rand(1,10),wielder,equip,$game) . ")"; }	
-				else if ($dice >= 14){$item = $weapon . " +3 (Cursed: " . curseType(mt_rand(1,10),wielder,equip,$game) . ")"; }			
-				else if ($dice >= 12){$item = $weapon . " +2 (Cursed: " . curseType(mt_rand(1,10),wielder,equip,$game) . ")"; }
-				else if ($dice >= 8){$item = $weapon . " +1 (Cursed: " . curseType(mt_rand(1,10),wielder,equip,$game) . ")"; }
-				else if ($dice >= 5){$item = $weapon . " -1 (Cursed: " . curseType(mt_rand(1,10),wielder,equip,$game) . ")"; }
-				else {$item = $weapon . " -2 (Cursed: " . curseType(mt_rand(1,10),wielder,equip,$game) . ")"; }
+				if ($dice >= 20){ $item = $weapon . " +5 (Cursed: " . curseType(mt_rand(1,10),'wielder','equip',$game) . ")"; }
+				else if ($dice >= 18){$item = $weapon . " +4 (Cursed: " . curseType(mt_rand(1,10),'wielder','equip',$game) . ")"; }	
+				else if ($dice >= 14){$item = $weapon . " +3 (Cursed: " . curseType(mt_rand(1,10),'wielder','equip',$game) . ")"; }			
+				else if ($dice >= 12){$item = $weapon . " +2 (Cursed: " . curseType(mt_rand(1,10),'wielder','equip',$game) . ")"; }
+				else if ($dice >= 8){$item = $weapon . " +1 (Cursed: " . curseType(mt_rand(1,10),'wielder','equip',$game) . ")"; }
+				else if ($dice >= 5){$item = $weapon . " -1 (Cursed: " . curseType(mt_rand(1,10),'wielder','equip',$game) . ")"; }
+				else {$item = $weapon . " -2 (Cursed: " . curseType(mt_rand(1,10),'wielder','equip',$game) . ")"; }
 				break;
 			case $mi >= 202 and $mi <= 212:									// Weapon
 				$dice = mt_rand(1,100);
@@ -541,9 +541,9 @@ function makeRPGmagic($game,$varb)
 				else if ($dice >= 16){$item = "Crossbow of Accuracy";}
 				else if ($dice >= 6){$item = "Axe of Hurling";}
 				else {$item = "Arrow of Slaying";
-					$slay = array('Clerics', 'Demi-Humans', 'Demons', 'Devils', 'Dinosaurs', 'Dragons', 'Druids', 'Dwarfs', 'Elementals', 'Elves', 'Ettin', 'Fighters', 'Ghouls', 'Giants', 'Gnolls', 'Gnomes', 'Goblins', 'Golems', 'Humans', 'Hydras', 'Illusionists', 'Kobolds', 'Liches', 'Lizard Men', 'Lycanthropes', 'Magic Users', 'Mammals', 'Medusae', 'Mummies', 'Naga', 'Ogres', 'Orcs', 'Paladins', 'Rangers', 'Reptiles', 'Skeletons', 'Griffons', 'Halflings', 'Harpies', 'Hell Hounds', 'Hippogriffs', 'Hobgoblins', 'Humanoids', 'Spiders', 'Thieves', 'Troglodytes', 'Trolls', 'Undead', 'Vampires', 'Zombies');
+					$slay = ['Clerics', 'Demi-Humans', 'Demons', 'Devils', 'Dinosaurs', 'Dragons', 'Druids', 'Dwarfs', 'Elementals', 'Elves', 'Ettin', 'Fighters', 'Ghouls', 'Giants', 'Gnolls', 'Gnomes', 'Goblins', 'Golems', 'Humans', 'Hydras', 'Illusionists', 'Kobolds', 'Liches', 'Lizard Men', 'Lycanthropes', 'Magic Users', 'Mammals', 'Medusae', 'Mummies', 'Naga', 'Ogres', 'Orcs', 'Paladins', 'Rangers', 'Reptiles', 'Skeletons', 'Griffons', 'Halflings', 'Harpies', 'Hell Hounds', 'Hippogriffs', 'Hobgoblins', 'Humanoids', 'Spiders', 'Thieves', 'Troglodytes', 'Trolls', 'Undead', 'Vampires', 'Zombies'];
 					$part = count($slay)-1;
-					$item = $item . " (Against " . $slay[mt_rand(0,$part)] . ")";
+					$item = $item . " (Against " . $slay[mt_rand(0, max((int)(0), (int)($part)))] . ")";
 				}
 				break;
 			case $mi >= 213 and $mi <= 263: $item = $sword . " +1"; $ego = 1; include("smart_swords.php"); break; // Sword
@@ -553,13 +553,13 @@ function makeRPGmagic($game,$varb)
 			case $mi >= 300 and $mi <= 301: $item = $sword . " +5"; $ego = 5; include("smart_swords.php"); break; // Sword
 			case $mi >= 302 and $mi <= 307:									// Sword
 				$dice = mt_rand(1,20);
-				if ($dice >= 20){ $item = $sword . " +5 (Cursed: " . curseType(mt_rand(1,10),wielder,equip,$game) . ")"; }
-				else if ($dice >= 18){$item = $sword . " +4 (Cursed: " . curseType(mt_rand(1,10),wielder,equip,$game) . ")"; }	
-				else if ($dice >= 14){$item = $sword . " +3 (Cursed: " . curseType(mt_rand(1,10),wielder,equip,$game) . ")"; }			
-				else if ($dice >= 12){$item = $sword . " +2 (Cursed: " . curseType(mt_rand(1,10),wielder,equip,$game) . ")"; }
-				else if ($dice >= 8){$item = $sword . " +1 (Cursed: " . curseType(mt_rand(1,10),wielder,equip,$game) . ")"; }
-				else if ($dice >= 5){$item = $sword . " -1 (Cursed: " . curseType(mt_rand(1,10),wielder,equip,$game) . ")"; }
-				else {$item = $sword . " -2 (Cursed: " . curseType(mt_rand(1,10),wielder,equip,$game) . ")"; }
+				if ($dice >= 20){ $item = $sword . " +5 (Cursed: " . curseType(mt_rand(1,10),'wielder','equip',$game) . ")"; }
+				else if ($dice >= 18){$item = $sword . " +4 (Cursed: " . curseType(mt_rand(1,10),'wielder','equip',$game) . ")"; }	
+				else if ($dice >= 14){$item = $sword . " +3 (Cursed: " . curseType(mt_rand(1,10),'wielder','equip',$game) . ")"; }			
+				else if ($dice >= 12){$item = $sword . " +2 (Cursed: " . curseType(mt_rand(1,10),'wielder','equip',$game) . ")"; }
+				else if ($dice >= 8){$item = $sword . " +1 (Cursed: " . curseType(mt_rand(1,10),'wielder','equip',$game) . ")"; }
+				else if ($dice >= 5){$item = $sword . " -1 (Cursed: " . curseType(mt_rand(1,10),'wielder','equip',$game) . ")"; }
+				else {$item = $sword . " -2 (Cursed: " . curseType(mt_rand(1,10),'wielder','equip',$game) . ")"; }
 				break;
 			case $mi >= 308 and $mi <= 318:									// Sword
 				$dice = mt_rand(1,99);
@@ -608,7 +608,7 @@ function makeRPGmagic($game,$varb)
 			case $mi >= 325 and $mi <= 330: $item = "Potion of Clairaudience"; break; // Potion
 			case $mi >= 331 and $mi <= 336: $item = "Potion of Clairvoyance"; break; // Potion
 			case $mi >= 337 and $mi <= 342: $item = "Potion of Climbing"; break; // Potion
-			case $mi >= 343 and $mi <= 344: $item = "Potion (Cursed: " . curseType(mt_rand(1,10),drinker,item,$game) . ")"; break; // Potion
+			case $mi >= 343 and $mi <= 344: $item = "Potion (Cursed: " . curseType(mt_rand(1,10),'drinker','item',$game) . ")"; break; // Potion
 			case $mi >= 345 and $mi <= 348: $item = "Potion (Poison)"; break; // Potion
 			case $mi >= 349 and $mi <= 354: $item = "Potion of Delusion"; break; // Potion
 			case $mi >= 355 and $mi <= 360: $item = "Potion of Diminution"; break; // Potion
@@ -800,7 +800,7 @@ function makeRPGmagic($game,$varb)
 				else if ($dice >= 10){$item = "Scroll of Demon Warding";}
 				else {$item = "Scroll of Acid Warding";}
 				break;
-			case $mi >= 871 and $mi <= 876: $item = "Cursed Scroll (" . curseType(mt_rand(1,10),reader,item,$game) . ")"; break; // Scrolls
+			case $mi >= 871 and $mi <= 876: $item = "Cursed Scroll (" . curseType(mt_rand(1,10),'reader','item',$game) . ")"; break; // Scrolls
 			case $mi >= 877 and $mi <= 878: $item = "Incense of Meditation (1d4+1 cones)"; break; // Misc I
 			case $mi >= 879 and $mi <= 880: $item = "Javelin of the Raptor"; break; // Misc I
 			case $mi >= 881 and $mi <= 882: $item = "Thunder Spear"; break; // Misc I
@@ -1139,10 +1139,10 @@ function makeRPGmagic($game,$varb)
 						while ($pages > 0):
 							$dice = mt_rand(1,100);
 							$page = $page + 1;
-							if ($dice >= 96){ $item = $item . "pg" . $page . " " . gameSpellChooser($game,0,Illusionist) . ", "; }
-							else if ($dice >= 61){ $item = $item . "pg" . $page . " " . gameSpellChooser($game,0,Magic-User) . ", "; }
-							else if ($dice >= 51){ $item = $item . "pg" . $page . " " . gameSpellChooser($game,0,Cleric) . ", "; }
-							else if ($dice >= 31){ $item = $item . "pg" . $page . " " . gameSpellChooser($game,0,Druid) . ", "; }
+							if ($dice >= 96){ $item = $item . "pg" . $page . " " . gameSpellChooser($game,0,'Illusionist') . ", "; }
+							else if ($dice >= 61){ $item = $item . "pg" . $page . " " . gameSpellChooser($game,0,'Magic'-'User') . ", "; }
+							else if ($dice >= 51){ $item = $item . "pg" . $page . " " . gameSpellChooser($game,0,'Cleric') . ", "; }
+							else if ($dice >= 31){ $item = $item . "pg" . $page . " " . gameSpellChooser($game,0,'Druid') . ", "; }
 							else { $item = $item . "pg" . $page . " is blank, "; }
 							$pages = $pages - 1;
 						endwhile;
@@ -1298,10 +1298,10 @@ function makeRPGmagic($game,$varb)
 						while ($pages > 0):
 							$dice = mt_rand(1,100);
 							$page = $page + 1;
-							if ($dice >= 96){ $item = $item . "pg" . $page . " " . gameSpellChooser($game,0,Illusionist) . ", "; }
-							else if ($dice >= 61){ $item = $item . "pg" . $page . " " . gameSpellChooser($game,0,Magic-User) . ", "; }
-							else if ($dice >= 51){ $item = $item . "pg" . $page . " " . gameSpellChooser($game,0,Cleric) . ", "; }
-							else if ($dice >= 31){ $item = $item . "pg" . $page . " " . gameSpellChooser($game,0,Druid) . ", "; }
+							if ($dice >= 96){ $item = $item . "pg" . $page . " " . gameSpellChooser($game,0,'Illusionist') . ", "; }
+							else if ($dice >= 61){ $item = $item . "pg" . $page . " " . gameSpellChooser($game,0,'Magic'-'User') . ", "; }
+							else if ($dice >= 51){ $item = $item . "pg" . $page . " " . gameSpellChooser($game,0,'Cleric') . ", "; }
+							else if ($dice >= 31){ $item = $item . "pg" . $page . " " . gameSpellChooser($game,0,'Druid') . ", "; }
 							else { $item = $item . "pg" . $page . " is blank, "; }
 							$pages = $pages - 1;
 						endwhile;
@@ -1645,7 +1645,7 @@ function makeRPGmagic($game,$varb)
 				case $mi >= 507 and $mi <= 513: $item = "Boccob`s Blessed Book"; break; //UA - Misc
 				case $mi >= 514 and $mi <= 515: $item = "Boots of the North"; break; //UA - Misc
 				case $mi >= 516 and $mi <= 518: $item = "Boots of Varied Tracks"; //UA - Misc
-					$foot_array = array();
+					$foot_array = [];
 					while ( $foot < 5 ) :
 						switch (mt_rand(1,16))
 						{
@@ -1988,7 +1988,7 @@ function makeRPGmagic($game,$varb)
 				case $mi >= 43 and $mi <= 49: $scroll_picker = 5; $item = "Spell Scrolls 5 ("; break; //DM - Scroll
 				case $mi >= 50 and $mi <= 54: $scroll_picker = 6; $item = "Spell Scrolls 6 ("; break; //DM - Scroll
 				case $mi >= 55 and $mi <= 60: $scroll_picker = 7; $item = "Spell Scrolls 7 ("; break; //DM - Scroll
-				case $mi >= 61 and $mi <= 63: $item = "Cursed Scroll (" . curseType(mt_rand(1,10),reader,item,$game) . ")"; break; //DM - Scroll
+				case $mi >= 61 and $mi <= 63: $item = "Cursed Scroll (" . curseType(mt_rand(1,10),'reader','item',$game) . ")"; break; //DM - Scroll
 				case $mi >= 64 and $mi <= 65: $item = "Scroll of Protection from Demons"; break; //DM - Scroll
 				case $mi >= 66 and $mi <= 67: $item = "Scroll of Protection from Devils"; break; //DM - Scroll
 				case $mi >= 68 and $mi <= 73: $item = "Scroll of Protection from Elementals"; //DM - Scroll
@@ -2487,7 +2487,7 @@ function makeRPGmagic($game,$varb)
 			else if (mt_rand(1,100) == 1){$item = mapMaker(997,$game);}
 			else
 			{
-				$item = "Cursed Scroll (" . curseType(mt_rand(1,20),reader,item,$game) . ")";
+				$item = "Cursed Scroll (" . curseType(mt_rand(1,20),'reader','item',$game) . ")";
 			}
 		}
 		else ///////////////////////////////////////////////////////////////////////////////////
@@ -2682,7 +2682,7 @@ function makeRPGmagic($game,$varb)
 			case $mi >= 456 and $mi <= 457: $item = "XXXSword +2, Holy Avenger"; include("smart_swords.php"); break;  // SWORD AEC
 			case $mi >= 458 and $mi <= 459: $item = "XXXSword +2, Nine Lives Stealer"; include("smart_swords.php"); break;  // SWORD AEC
 			case $mi >= 460 and $mi <= 461: $item = "XXXSword +4, Defending"; include("smart_swords.php"); break;  // SWORD AEC
-			case $mi >= 462 and $mi <= 467: $item = "Cursed Scroll (" . curseType(mt_rand(1,10),reader,item,$game) . ")"; break;  // SCROLL LL
+			case $mi >= 462 and $mi <= 467: $item = "Cursed Scroll (" . curseType(mt_rand(1,10),'reader','item',$game) . ")"; break;  // SCROLL LL
 			case $mi >= 468 and $mi <= 478: $item = "Scroll Warding Against Elementals"; break;  // SCROLL LL
 			case $mi >= 479 and $mi <= 489: $item = "Scroll Warding Against Lycanthropes"; break;  // SCROLL LL
 			case $mi >= 490 and $mi <= 495: $item = "Scroll Warding Against Magic"; break;  // SCROLL LL
@@ -2866,10 +2866,10 @@ function makeRPGmagic($game,$varb)
 					while ($pages > 0):
 						$dice = mt_rand(1,100);
 						$page = $page + 1;
-						if ($dice >= 96){ $item = $item . "pg" . $page . " " . gameSpellChooser($game,0,Illusionist) . ", "; }
-						else if ($dice >= 61){ $item = $item . "pg" . $page . " " . gameSpellChooser($game,0,Magic-User) . ", "; }
-						else if ($dice >= 51){ $item = $item . "pg" . $page . " " . gameSpellChooser($game,0,Cleric) . ", "; }
-						else if ($dice >= 31){ $item = $item . "pg" . $page . " " . gameSpellChooser($game,0,Druid) . ", "; }
+						if ($dice >= 96){ $item = $item . "pg" . $page . " " . gameSpellChooser($game,0,'Illusionist') . ", "; }
+						else if ($dice >= 61){ $item = $item . "pg" . $page . " " . gameSpellChooser($game,0,'Magic'-'User') . ", "; }
+						else if ($dice >= 51){ $item = $item . "pg" . $page . " " . gameSpellChooser($game,0,'Cleric') . ", "; }
+						else if ($dice >= 31){ $item = $item . "pg" . $page . " " . gameSpellChooser($game,0,'Druid') . ", "; }
 						else { $item = $item . "pg" . $page . " is blank, "; }
 						$pages = $pages - 1;
 					endwhile;
@@ -3178,14 +3178,14 @@ function makeRPGmagic($game,$varb)
 			}
 			if ($bonus == "special")
 			{
-				switch (mt_rand(0,$msw))
+				switch (mt_rand(0, max((int)(0), (int)($msw))))
 				{
 					case 0:	$item = $item . " +1 (destroys undead)"; break;
 					case 1:	$item = $item . " +1 (with an extra attack)"; break;
 					case 2:	$item = $item . " +1 (will return to hand if dropped or thrown)"; break;
-					case 3:	$item = $item . " +1 [+2 vs. " . slayerType(weapon) . "]"; break;
-					case 4:	$item = $item . " +1 [+4 vs. " . slayerType(weapon) . "]"; break;
-					case 5:	$item = $item . " +2 [+3 vs. " . slayerType(weapon) . "]"; break;
+					case 3:	$item = $item . " +1 [+2 vs. " . slayerType('weapon') . "]"; break;
+					case 4:	$item = $item . " +1 [+4 vs. " . slayerType('weapon') . "]"; break;
+					case 5:	$item = $item . " +2 [+3 vs. " . slayerType('weapon') . "]"; break;
 					case 6:	$item = $item . " +4"; break;
 					case 7:	$item = $item . " +5"; break;
 					case 8:	$item = $item . " (flaming)"; break;
@@ -3201,7 +3201,7 @@ function makeRPGmagic($game,$varb)
 					case 0:	$item = $item . " +1 to hit, +2 damage"; break;
 					case 1:	$item = $item . " +1 (sheds light in a 15` radius)"; break;
 					case 2:	$item = $item . " +1 (sheds light in a 30` radius)"; break;
-					case 3:	$item = $item . " +1 [+4 damage vs. " . slayerType(weapon) . "]"; break;
+					case 3:	$item = $item . " +1 [+4 damage vs. " . slayerType('weapon') . "]"; break;
 				}
 			}
 			else if ($bonus == "cursed")
@@ -3378,7 +3378,7 @@ function makeRPGmagic($game,$varb)
 					case 18:$curse = "Turned to Stone."; break;
 					case 19:$curse = "Uncontrollable sneezing (3d6 turns). The reader is likely to attract wandering monsters, especially those that prey upon the weak."; break;
 				}
-				if (mt_rand(1,4) == 1){$item = "Cursed Scroll (" . curseType(mt_rand(1,20),reader,item,$game) . ")";}
+				if (mt_rand(1,4) == 1){$item = "Cursed Scroll (" . curseType(mt_rand(1,20),'reader','item',$game) . ")";}
 				else {$item = "Cursed Scroll (" . $curse . ")";}
 			}
 		}
@@ -3581,8 +3581,8 @@ function makeRPGmagic($game,$varb)
 			}
 			else if ( $sx_type="intellect" )
 			{
-				$spell_power = " (casts " . strtolower(gameSpellChooser($game,mt_rand(1,6),wizard)) . " once per day)";
-				if ( mt_rand(1,10) == 1 ){ $spell_power = " (casts " . strtolower(gameSpellChooser($game,mt_rand(1,6),wizard)) . " twice per day)"; }
+				$spell_power = " (casts " . strtolower((string) gameSpellChooser($game,mt_rand(1,6),'wizard')) . " once per day)";
+				if ( mt_rand(1,10) == 1 ){ $spell_power = " (casts " . strtolower((string) gameSpellChooser($game,mt_rand(1,6),'wizard')) . " twice per day)"; }
 				if ( mt_rand(1,40) == 1 ){ $spell_power = " (vorpal)"; }
 				if ( mt_rand(1,40) == 1 ){ $spell_power = " (dancing)"; }
 
@@ -3606,9 +3606,9 @@ function makeRPGmagic($game,$varb)
 					}
 					while ( $powers > 0 ) :
 
-						if ( $no_change_1 != 1 ){ $spell_1 = strtolower(gameSpellChooser($game,mt_rand(1,6),wizard)); }
-						if ( $no_change_2 != 1 ){ $spell_2 = strtolower(gameSpellChooser($game,mt_rand(1,6),wizard)); }
-						if ( $no_change_3 != 1 ){ $spell_3 = strtolower(gameSpellChooser($game,mt_rand(1,6),wizard)); }
+						if ( $no_change_1 != 1 ){ $spell_1 = strtolower((string) gameSpellChooser($game,mt_rand(1,6),'wizard')); }
+						if ( $no_change_2 != 1 ){ $spell_2 = strtolower((string) gameSpellChooser($game,mt_rand(1,6),'wizard')); }
+						if ( $no_change_3 != 1 ){ $spell_3 = strtolower((string) gameSpellChooser($game,mt_rand(1,6),'wizard')); }
 
 						if ( $powers == 1 ){ $magicsx = $spell_1; }
 						if ( $powers == 2 ){ $magicsx = $spell_2; }
@@ -3855,7 +3855,7 @@ function makeRPGmagic($game,$varb)
 
 		if ($magic_item == "sword") ///////////////////////////////////////////////////
 		{
-			$swords = array('Short Sword', 'Sword', 'Two-Handed Sword'); $picked = $swords[array_rand($swords)];
+			$swords = ['Short Sword', 'Sword', 'Two-Handed Sword']; $picked = $swords[array_rand($swords)];
 			switch ($dice)
 			{
 				case ($dice >=1 && $dice <=40): $magic_relic = $picked . " +1"; include("smart_swords.php"); break;
@@ -3879,7 +3879,7 @@ function makeRPGmagic($game,$varb)
 		}
 		else if ($magic_item == "armor") ///////////////////////////////////////////////////
 		{
-			$armors = array('Chain Mail', 'Leather', 'Plate Mail'); $picked = $armors[array_rand($armors)];
+			$armors = ['Chain Mail', 'Leather', 'Plate Mail']; $picked = $armors[array_rand($armors)];
 			switch ($dice)
 			{
 				case ($dice >=1 && $dice <=20): $magic_relic = "Shield +1"; break;
@@ -3986,7 +3986,7 @@ function makeRPGmagic($game,$varb)
 				case ($dice >= 26 && $dice <= 31): $scroll_picker = 3; $magic_relic = "Spell Scrolls 3 ("; break;
 				case ($dice >= 32 && $dice <= 34): $scroll_picker = 5; $magic_relic = "Spell Scrolls 5 ("; break;
 				case ($dice == 35): $scroll_picker = 7; $magic_relic = "Spell Scrolls 7 ("; break;
-				case ($dice >= 36 && $dice <= 50): $magic_relic = "Cursed Scroll (" . curseType(mt_rand(1,10),reader,item,$game) . ")"; break;
+				case ($dice >= 36 && $dice <= 50): $magic_relic = "Cursed Scroll (" . curseType(mt_rand(1,10),'reader','item',$game) . ")"; break;
 				case ($dice >= 51 && $dice <= 60): $magic_relic = "Scroll of Protection from Lycanthropes"; break;
 				case ($dice >= 61 && $dice <= 70): $magic_relic = "Scroll of Protection from Undead"; break;
 				case ($dice >= 71 && $dice <= 80): $magic_relic = "Scroll of Protection from Elementals"; break;
@@ -4097,7 +4097,7 @@ function makeRPGmagic($game,$varb)
 
 /////////////////////////// END OF THE BASIC DUNGEONS & DRAGONS SECTION /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-	return ucfirst($item);
+	return ucfirst((string) $item);
 }
 
 

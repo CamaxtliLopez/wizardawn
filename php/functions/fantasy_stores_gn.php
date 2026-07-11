@@ -58,36 +58,36 @@ $shopres = mysqli_query( $connection, $shopqry ); /* shopqry. */
 
 while ($shopary=mysqli_fetch_assoc($shopres)) :
 
-	if ($shopary[shop] == 1){$owned = "Bartender";}
-	else if ($shopary[shop] == 2){$owned = "Inn Keeper";}
-	else if ($shopary[shop] == 3){$owned = "Merchant";}
-	else if ($shopary[shop] == 4){$owned = "Blacksmith";}
-	else if ($shopary[shop] == 5){$owned = "Fletcher"; if (mt_rand(1,2) == 1){$owned = "Bowyer";} }
-	else if ($shopary[shop] == 6){$owned = "Tanner"; if (mt_rand(1,2) == 1){$owned = "Leatherworker";} }
-	else if ($shopary[shop] == 7){$owned = "Tailor"; if (mt_rand(1,2) == 1){$owned = "Dressmaker";} }
-	else if ($shopary[shop] == 8){$owned = "Animal Trainer"; if (mt_rand(1,2) == 1){$owned = "Stable Master";} }
-	else if ($shopary[shop] == 9){$owned = "Woodworker"; if (mt_rand(1,2) == 1){$owned = "Carpenter";} }
-	else if ($shopary[shop] == 10){$owned = "Alchemist"; if (mt_rand(1,2) == 1){$owned = "Herbalist";} }
-	else if ($shopary[shop] == 11){$owned = "Cook"; if (mt_rand(1,2) == 1){$owned = "Baker";} }
-	else if ($shopary[shop] == 12){$owned = "Librarian";}
-	else if ($shopary[shop] == 13){$owned = "Jeweler";}
-	else if ($shopary[shop] == 14){$owned = "Musician";}
+	if ($shopary['shop'] == 1){$owned = "Bartender";}
+	else if ($shopary['shop'] == 2){$owned = "Inn Keeper";}
+	else if ($shopary['shop'] == 3){$owned = "Merchant";}
+	else if ($shopary['shop'] == 4){$owned = "Blacksmith";}
+	else if ($shopary['shop'] == 5){$owned = "Fletcher"; if (mt_rand(1,2) == 1){$owned = "Bowyer";} }
+	else if ($shopary['shop'] == 6){$owned = "Tanner"; if (mt_rand(1,2) == 1){$owned = "Leatherworker";} }
+	else if ($shopary['shop'] == 7){$owned = "Tailor"; if (mt_rand(1,2) == 1){$owned = "Dressmaker";} }
+	else if ($shopary['shop'] == 8){$owned = "Animal Trainer"; if (mt_rand(1,2) == 1){$owned = "Stable Master";} }
+	else if ($shopary['shop'] == 9){$owned = "Woodworker"; if (mt_rand(1,2) == 1){$owned = "Carpenter";} }
+	else if ($shopary['shop'] == 10){$owned = "Alchemist"; if (mt_rand(1,2) == 1){$owned = "Herbalist";} }
+	else if ($shopary['shop'] == 11){$owned = "Cook"; if (mt_rand(1,2) == 1){$owned = "Baker";} }
+	else if ($shopary['shop'] == 12){$owned = "Librarian";}
+	else if ($shopary['shop'] == 13){$owned = "Jeweler";}
+	else if ($shopary['shop'] == 14){$owned = "Musician";}
 	else {$owned = "Caretaker";}
 
-	$business = GFTBusiness($shopary[shop],$game,$stock,$jack,$oldway,$showcase1,$showcase2,$water,$columns,$shelf);
+	$business = GFTBusiness($shopary['shop'],$game,$stock,$jack,$oldway,$showcase1,$showcase2,$water,$columns,$shelf);
 
 	$shopuqry = "UPDATE shop_track SET shop=99 WHERE building=$shopary[building]";
 	mysqli_query( $connection, $shopuqry ); /* shopuqry. */
 ?>
 
-<hr><b><i><font size="3"><?php echo $shopary[building]; ?></font></i></b><font size="2">&nbsp;-&nbsp;<b><?php echo $business[0]; ?></b>&nbsp;
+<hr><b><i><font size="3"><?php echo $shopary['building']; ?></font></i></b><font size="2">&nbsp;-&nbsp;<b><?php echo $business[0]; ?></b>&nbsp;
 	<?php	if ($owned != "Caretaker"){echo " [" . number_format(mt_rand(50,3000)) . "gp] ";}
-			else {echo " [" . $shopary[type] . "] ";}
+			else {echo " [" . $shopary['type'] . "] ";}
 
-			echo "<b>" . $owned . ":</b> " . $shopary[info];
+			echo "<b>" . $owned . ":</b> " . $shopary['info'];
 
 			echo "<hr color='#C0C0C0' size='1'>";
-			if ($shopary[shop] == 16)
+			if ($shopary['shop'] == 16)
 			{
 				$guards = mt_rand(2,5);
 				$line_up = $guards;
@@ -96,21 +96,21 @@ while ($shopary=mysqli_fetch_assoc($shopres)) :
 						echo "<font size='2'><b>GUARD:</b>  <i>[Level " . GameLvlChar($game,1) . " Warrior]</i> "; 
 							$emp_kindred = GFTRace($x_races);
 							$emp_gender = "Male"; if (mt_rand(1,2) == 1){$emp_gender = "Female";}
-							$emp_citizen = GFTCitizen($emp_kindred,adult,$emp_gender);
-							$equipment = GFTequipCitizen(guard); 
-						echo $emp_citizen[2] . " <b>ARMS&nbsp;&amp;&nbsp;ARMOR:</b> " . strtolower(getWeapon(giant)) . ", " . $equipment[0] . ", " . $equipment[1] . "</font>";
+							$emp_citizen = GFTCitizen($emp_kindred,'adult',$emp_gender);
+							$equipment = GFTequipCitizen('guard'); 
+						echo $emp_citizen[2] . " <b>ARMS&nbsp;&amp;&nbsp;ARMOR:</b> " . strtolower((string) getWeapon('giant')) . ", " . $equipment[0] . ", " . $equipment[1] . "</font>";
 					$guards = $guards - 1;
 				endwhile;
 			}
-			else if ($shopary[shop] > 16)
+			else if ($shopary['shop'] > 16)
 			{
 				$guildy = mt_rand(2,5);
 				$line_up = $guildy;
 				$guild_leader = 0;
 				while ($guildy > 0) :
-					if ($shopary[shop] == 17){$guild_class = "warrior"; $guild_title = "WARRIORS GUILD MEMBER"; $equipment = GFTequipCitizen(warrior); $weaponsize = "giant";}
-					else if ($shopary[shop] == 18){$guild_class = "wizard"; $guild_title = "WIZARDS GUILD MEMBER"; $equipment = GFTequipCitizen(wizard); $weaponsize = "small";}
-					else {$guild_class = "rogue"; $guild_title = "ROGUES GUILD MEMBER"; $equipment = GFTequipCitizen(rogue); $weaponsize = "medium";}
+					if ($shopary['shop'] == 17){$guild_class = "warrior"; $guild_title = "WARRIORS GUILD MEMBER"; $equipment = GFTequipCitizen('warrior'); $weaponsize = "giant";}
+					else if ($shopary['shop'] == 18){$guild_class = "wizard"; $guild_title = "WIZARDS GUILD MEMBER"; $equipment = GFTequipCitizen('wizard'); $weaponsize = "small";}
+					else {$guild_class = "rogue"; $guild_title = "ROGUES GUILD MEMBER"; $equipment = GFTequipCitizen('rogue'); $weaponsize = "medium";}
 					$guild_job = $guild_class;
 					$guild_does = 0;
 					$guild_level = GameLvlChar($game,2);
@@ -126,16 +126,16 @@ while ($shopary=mysqli_fetch_assoc($shopres)) :
 
 					$emp_kindred = GFTRace($x_races);
 					$emp_gender = "Male"; if (mt_rand(1,2) == 1){$emp_gender = "Female";}
-					$emp_citizen = GFTCitizen($emp_kindred,adult,$emp_gender);
+					$emp_citizen = GFTCitizen($emp_kindred,'adult',$emp_gender);
 
 					if ($guildy != $line_up){echo "<hr color='#C0C0C0' size='1'>";}
 						echo "<font size='2'><b>" . $guild_title . ":</b>  <i>[Level " . $guild_level . " " . ucwords($guild_class). "]</i> "; 
-						echo $emp_citizen[2] . " <b>ARMS&nbsp;&amp;&nbsp;ARMOR:</b> " . strtolower(getWeapon($weaponsize)) . ", " . $equipment[0] . ", " . $equipment[1] . "</font>";
+						echo $emp_citizen[2] . " <b>ARMS&nbsp;&amp;&nbsp;ARMOR:</b> " . strtolower((string) getWeapon($weaponsize)) . ", " . $equipment[0] . ", " . $equipment[1] . "</font>";
 					$guildy = $guildy - 1;
 
 				endwhile;
 			}
-			else if ($shopary[shop] == 15)
+			else if ($shopary['shop'] == 15)
 			{
 				$guildy = mt_rand(2,5);
 				$line_up = $guildy;
@@ -156,12 +156,12 @@ while ($shopary=mysqli_fetch_assoc($shopres)) :
 
 					$emp_kindred = GFTRace($x_races);
 					$emp_gender = "Male"; if (mt_rand(1,2) == 1){$emp_gender = "Female";}
-					$emp_citizen = GFTCitizen($emp_kindred,adult,$emp_gender);
-					$equipment = GFTequipCitizen(priest);
+					$emp_citizen = GFTCitizen($emp_kindred,'adult',$emp_gender);
+					$equipment = GFTequipCitizen('priest');
 
 					if ($guildy != $line_up){echo "<hr color='#C0C0C0' size='1'>";}
 						echo "<font size='2'><b>" . $guild_title . ":</b>  <i>[Level " . $guild_level . " Priest]</i> "; 
-						echo $emp_citizen[2] . " <b>ARMS&nbsp;&amp;&nbsp;ARMOR:</b> " . strtolower(getWeapon(small)) . ", " . $equipment[0] . ", " . $equipment[1] . "</font>";
+						echo $emp_citizen[2] . " <b>ARMS&nbsp;&amp;&nbsp;ARMOR:</b> " . strtolower((string) getWeapon('small')) . ", " . $equipment[0] . ", " . $equipment[1] . "</font>";
 
 					$guildy = $guildy - 1;
 

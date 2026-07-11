@@ -34,7 +34,7 @@ $w_stuff = $dude[29];
 
 if ($adv_list_tp == 1)
 {
-	echo $p_name . " the " . strtolower($p_race) . " " . strtolower($p_sex) . " " . strtolower($p_class) . " [<b>AGE</b>:&nbsp;" . $p_age . "; <b>AL</b>:&nbsp;" . $p_alignment . "; <b>ST</b>:&nbsp;" . $p_ab_str . "; <b>IN</b>:&nbsp;" . $p_ab_int . "; <b>WI</b>:&nbsp;" . $p_ab_wis . "; <b>DX</b>:&nbsp;" . $p_ab_dex . "; <b>CN</b>:&nbsp;" . $p_ab_con . "; <b>CH</b>:&nbsp;" . $p_ab_cha . "; <b>LV</b>:&nbsp;" . $p_level . "; <b>HP</b>:&nbsp;" . $p_hp . "; <b>AC</b>:&nbsp;" . $p_armor . "; <b>THAC0</b>:&nbsp;" . $p_thaco . "]";
+	echo $p_name . " the " . strtolower((string) $p_race) . " " . strtolower((string) $p_sex) . " " . strtolower($p_class) . " [<b>AGE</b>:&nbsp;" . $p_age . "; <b>AL</b>:&nbsp;" . $p_alignment . "; <b>ST</b>:&nbsp;" . $p_ab_str . "; <b>IN</b>:&nbsp;" . $p_ab_int . "; <b>WI</b>:&nbsp;" . $p_ab_wis . "; <b>DX</b>:&nbsp;" . $p_ab_dex . "; <b>CN</b>:&nbsp;" . $p_ab_con . "; <b>CH</b>:&nbsp;" . $p_ab_cha . "; <b>LV</b>:&nbsp;" . $p_level . "; <b>HP</b>:&nbsp;" . $p_hp . "; <b>AC</b>:&nbsp;" . $p_armor . "; <b>THAC0</b>:&nbsp;" . $p_thaco . "]";
 	if (($p_barm != "") || ($p_bsrp != "") || ($p_bhit != "") || ($p_bdmg != "") || ($p_brng != ""))
 	{
 		$myxtas =  "&nbsp; [";

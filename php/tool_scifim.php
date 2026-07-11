@@ -116,7 +116,7 @@ if ($game != "Mutant Future")
 			$have_weapons = 0;
 
 			////////// GET THE FUEL //
-				$x_fuel = array('steam', 'clockworks', 'alien technology', 'petroleum', 'electricity', 'radiation', 'plutonium', 'uranium', 'nuclear', 'xormite', 'xormite', 'xormite', 'xormite');
+				$x_fuel = ['steam', 'clockworks', 'alien technology', 'petroleum', 'electricity', 'radiation', 'plutonium', 'uranium', 'nuclear', 'xormite', 'xormite', 'xormite', 'xormite'];
 				$x_fuel = $x_fuel[mt_rand(0,12)];
 					if (($x_fuel == "steam") || ($x_fuel == "clockworks")){ $weapon_tech = 1; $bot_stage = "Industrial";}
 					else if (($x_fuel == "alien technology")){ $weapon_tech = 4; $bot_stage = "Advanced"; }
@@ -125,12 +125,12 @@ if ($game != "Mutant Future")
 					else
 					{	$bot_stage = "Modern";
 						$weapon_tech = 3;
-						$x_battery = array('batteries', 'cells', 'clips', 'liquid', 'generators');
+						$x_battery = ['batteries', 'cells', 'clips', 'liquid', 'generators'];
 						$x_fuel = $x_fuel . " " . $x_battery[mt_rand(0,4)];
 					}
 
 			////////// GET THE METAL & ARMOR //
-				$x_metal = array('iron', 'aluminium', 'steel', 'plastoid', 'durasteel', 'crystal alloy', 'adamant', 'promethium', 'unobtainium', 'unknown metal');
+				$x_metal = ['iron', 'aluminium', 'steel', 'plastoid', 'durasteel', 'crystal alloy', 'adamant', 'promethium', 'unobtainium', 'unknown metal'];
 					if (($x_fuel == "steam") || ($x_fuel == "clockworks")){ $i_metal = mt_rand(0,2); }
 					else if (($x_fuel == "alien technology")){ $i_metal = mt_rand(5,9); }
 					else { $i_metal = mt_rand(0,9); }
@@ -148,17 +148,17 @@ if ($game != "Mutant Future")
 						else {$x_armor = mt_rand(5,15);}
 
 			////////// GET THE LEGS //
-				$x_legs = array('hover', 'legs', 'legs', 'legs', 'legs', 'legs', 'propeller', 'water propulsion', 'rotor', 'stationary', 'tracks', 'treads', 'wheels', 'rockets', 'anti-gravity');
+				$x_legs = ['hover', 'legs', 'legs', 'legs', 'legs', 'legs', 'propeller', 'water propulsion', 'rotor', 'stationary', 'tracks', 'treads', 'wheels', 'rockets', 'anti-gravity'];
 				$x_legs = $x_legs[mt_rand(0,14)];
 
 			////////// GET THE THINKING //
-				$x_iq = array('programmed', 'programmed', 'programmed', 'artificial intelligence');
+				$x_iq = ['programmed', 'programmed', 'programmed', 'artificial intelligence'];
 				$x_iq = $x_iq[mt_rand(0,3)];
 
 			////////// GET THE PROGRAMMING //
 				if ($x_iq == "programmed")
 				{
-					$x_job = array('combat', 'combat', 'combat', 'combat', 'combat', 'retrieval', 'spying', 'guarding', 'escorting', 'exploration');
+					$x_job = ['combat', 'combat', 'combat', 'combat', 'combat', 'retrieval', 'spying', 'guarding', 'escorting', 'exploration'];
 					$x_job = $x_job[mt_rand(0,9)];
 					if ($x_legs == "stationary"){$x_job = "guarding";}
 					$software = 1;
@@ -172,7 +172,7 @@ if ($game != "Mutant Future")
 				$bot_size = mt_rand(3,12);
 				$shape = " It is a standard robot build and is about " . $bot_size . " feet in size. ";
 
-				$x_hands = array('claw', 'jaw', 'pincer', 'fist');
+				$x_hands = ['claw', 'jaw', 'pincer', 'fist'];
 				$x_hands = $x_hands[mt_rand(0,3)];
 
 				$attacks = mt_rand(1,2);
@@ -180,7 +180,7 @@ if ($game != "Mutant Future")
 				if ($attacks > 1){$hitters = $attacks . " " . $x_hands . "s";}
 				else{$hitters = $attacks . " " . $x_hands . "";}
 
-				$x_hurt = array('1d4', '1d4', '1d4', '1d4', '1d4', '1d6', '1d6', '1d6', '1d6', '1d8', '1d8', '1d8', '1d10', '1d10', '1d12');
+				$x_hurt = ['1d4', '1d4', '1d4', '1d4', '1d4', '1d6', '1d6', '1d6', '1d6', '1d8', '1d8', '1d8', '1d10', '1d10', '1d12'];
 				$x_hurto = $x_hurt[mt_rand(0,14)];
 
 				if ($attacks > 1){$hitting = $x_hurto . " " . $x_hands . " / " . $x_hurto . " " . $x_hands;}
@@ -189,7 +189,7 @@ if ($game != "Mutant Future")
 					if (mt_rand(1,100) > 30){$animal = "a humanoid";}
 					else
 					{
-						$animals = array('a bear', 'a beetle', 'a lizard', 'a crab', 'a rat', 'a scorpion', 'a snake', 'a spider', 'a tiger', 'a wolf', 'a worm', 'an ant', 'an ape', 'a dragon', 'a wasp', 'a bird', 'a bat', 'a fly', 'an eel', 'a fish', 'a dolphin', 'a shark', 'a squid', 'a sea serpent', 'a lobster');
+						$animals = ['a bear', 'a beetle', 'a lizard', 'a crab', 'a rat', 'a scorpion', 'a snake', 'a spider', 'a tiger', 'a wolf', 'a worm', 'an ant', 'an ape', 'a dragon', 'a wasp', 'a bird', 'a bat', 'a fly', 'an eel', 'a fish', 'a dolphin', 'a shark', 'a squid', 'a sea serpent', 'a lobster'];
 						$animal = $animals[mt_rand(0,24)];
 					}
 
@@ -506,13 +506,13 @@ if ($game != "Mutant Future")
 				}
 
 				////////// COLOR //
-				$xcolor = array('black', 'blue', 'gray', 'green', 'red', 'rust', 'orange', 'gold', 'bronze', 'silver', 'white');
+				$xcolor = ['black', 'blue', 'gray', 'green', 'red', 'rust', 'orange', 'gold', 'bronze', 'silver', 'white'];
 				$xcolor = $xcolor[mt_rand(0,10)];
 
-				$xdut = array('metallic', 'dull', 'shiny', 'smooth', 'rough', 'light', 'dark', 'metallic');
+				$xdut = ['metallic', 'dull', 'shiny', 'smooth', 'rough', 'light', 'dark', 'metallic'];
 				$xdut = $xdut[mt_rand(0,7)];
 
-				$xhue = array('colored', 'tinted', 'shaded', 'hued', 'painted', 'coated', 'looking');
+				$xhue = ['colored', 'tinted', 'shaded', 'hued', 'painted', 'coated', 'looking'];
 				$xhue = $xhue[mt_rand(0,6)];
 
 			if ($bot_level < 2){$stamina = mt_rand(39,41); $hit = mt_rand(8,12); $energy = mt_rand(3,7); $mind = mt_rand(1,5); $radiation = mt_rand(3,7); $shock = mt_rand(3,7); $toxin = mt_rand(2,6);}
@@ -707,7 +707,7 @@ if ($game != "Mutant Future")
 		if ($swims > 0){$word4 = "slimy substance on themselves";}
 		//////////////////////////////////////////////////////////
 		$word5 = "suffer 1d4 damage";
-		switch (mt_rand(0,round($level/2)))
+		switch (mt_rand(0, max((int)(0), (int)(round($level/2)))))
 		{
 			case 0: $word5 = "die"; break;
 			case 1: $word5 = "suffer 1d4 damage"; break;
@@ -731,7 +731,7 @@ if ($game != "Mutant Future")
 		}
 		//////////////////////////////////////////////////////////
 		$word7 = "1d4";
-		switch (mt_rand(0,round($level/5)))
+		switch (mt_rand(0, max((int)(0), (int)(round($level/5)))))
 		{
 			case 1: $word7 = "1d4"; break;
 			case 2: $word7 = "1d6"; break;
@@ -856,7 +856,7 @@ if ($game != "Mutant Future")
 		//////////////////////////////////////////////////////////
 
 		if ($swims > 0){$xax = 22;} else {$xax = 26;}
-		switch (mt_rand(0,$xax))
+		switch (mt_rand(0, max((int)(0), (int)($xax))))
 		{
 			case 0: $special_ability = "can change their color to match the surrounding area, with a " . mt_rand(1,5) . "0% chance to be noticed by others. They do this " . $word1 . "."; break;
 			case 1: $special_ability = "can grow " . mt_rand(5,10) . "0% larger when " . $word2 . "."; break;
@@ -912,7 +912,7 @@ if ($game != "Mutant Future")
 					else {$special_ability = "can emit a fragrance for " . ceil(($level/2)+1) . " rounds, where anyone nearbry breathing it in must make a defense test for toxin or be lured in by it.";}
 				break;
 			case 24: $special_ability = "can breath a " . fogColor() . " colored gas that " . $word15; break;
-			case 25: $special_ability = word18; break;
+			case 25: $special_ability = 'word18'; break;
 			case 26: $special_ability = "can move around without making a single sound."; break;
 		}
 
@@ -928,25 +928,25 @@ if ($game != "Mutant Future")
 	{
 
 	////////// COLOR //
-	$xcolors = array('blue-green', 'black', 'blue', 'gray', 'green', 'violet', 'red', 'brown', 'orange', 'yellowish-green', 'tan', 'gold', 'yellow', 'purple', 'silver', 'forest-green', 'white');
+	$xcolors = ['blue-green', 'black', 'blue', 'gray', 'green', 'violet', 'red', 'brown', 'orange', 'yellowish-green', 'tan', 'gold', 'yellow', 'purple', 'silver', 'forest-green', 'white'];
 		// ANY COLOR VARIATION //
-		$xcolors2 = array('bright ', '', 'dark ', 'light ', 'dull ', 'vibrant ', 'thick ', 'faded ', 'deep ', 'rich ', 'shiny ');
+		$xcolors2 = ['bright ', '', 'dark ', 'light ', 'dull ', 'vibrant ', 'thick ', 'faded ', 'deep ', 'rich ', 'shiny '];
 
 	$n = 0;
 	$names_to_make = $amount;
-	$name_array = array();
+	$name_array = [];
 
 		while ($names_to_make > 0):
 
 			////////// COME UP WITH NAMES AND SORT ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-			$my_name = strtolower(speciesName());
+			$my_name = strtolower((string) speciesName());
 
 			$myname_top = substr($my_name, 0, 1);
 			$myname_end = substr($my_name, -1);
 
-			$consonants = array('b', 'c', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'm', 'n', 'p', 'r', 's', 't', 'v', 'w', 'x', 'y', 'z');
-			$vowels = array('a', 'e', 'i', 'o', 'u');
+			$consonants = ['b', 'c', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'm', 'n', 'p', 'r', 's', 't', 'v', 'w', 'x', 'y', 'z'];
+			$vowels = ['a', 'e', 'i', 'o', 'u'];
 
 			if ( (($myname_end == "a") || ($myname_end == "e") || ($myname_end == "i") || ($myname_end == "o") || ($myname_end == "u")) && (mt_rand(1,4) != 1) ){$my_name = $my_name . $consonants[mt_rand(0,19)];}
 			else if ( (($myname_end != "a") && ($myname_end != "e") && ($myname_end != "i") && ($myname_end != "o") && ($myname_end != "u")) && (mt_rand(1,4) != 1) ){$my_name = $my_name . $vowels[mt_rand(0,4)];}
@@ -1301,16 +1301,16 @@ if ($game != "Mutant Future")
 	////////// GET THE MOBILITY /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		if ( (($legs == 1) && (mt_rand(1,100) > 75)) || ($species == "bird") )
 		{
-			$walkers = array("2", "2", "2", "2", "2", "4", "4", "6", "8");
+			$walkers = ["2", "2", "2", "2", "2", "4", "4", "6", "8"];
 			$legs = $walkers[mt_rand(0,8)];
 		}
 		else if ($legs == 1)
 		{
-			$walkers = array("2", "4", "4", "4", "4", "4", "6", "6", "8");
+			$walkers = ["2", "4", "4", "4", "4", "4", "6", "6", "8"];
 			$legs = $walkers[mt_rand(0,8)];
 		}
-		$leg_size = array("", "", "", "short ", "long ", "large ", "small ");
-		$leg_wide = array("", "", "", "muscular ", "thin ");
+		$leg_size = ["", "", "", "short ", "long ", "large ", "small "];
+		$leg_wide = ["", "", "", "muscular ", "thin "];
 
 		if ($legs == 2){$movement = mt_rand(4,10);}
 		else if ($legs == 4){$movement = mt_rand(6,12);}
@@ -1362,7 +1362,7 @@ if ($game != "Mutant Future")
 
 	////////// ACTIVE CYCLE //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		if (mt_rand(1,100) > 50){ $sleep = "any"; }
-		else { $sleep = array('any', 'day', 'night'); $sleep = $sleep[mt_rand(0,2)]; }
+		else { $sleep = ['any', 'day', 'night']; $sleep = $sleep[mt_rand(0,2)]; }
 
 		$my_daily = "They inhabit the " . $dwell . " and are active during varying times of day or night.";
 
@@ -1376,16 +1376,16 @@ if ($game != "Mutant Future")
 		if ($dwell == "underground areas"){$my_daily = "They inhabit the " . $dwell . " like caves and tunnels.";}
 
 	////////// DIET /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-		$my_food_plant = array("leafy plants", "plant roots", "fruits", "vegetables", "shrubs and bushes", "tree bark", "succulent plants", "grasses");
-		$my_food_meats = array("meat", "smaller creatures", "live creatures", "creature carcasses", "insects", "reptiles", "birds", "any meat");
+		$my_food_plant = ["leafy plants", "plant roots", "fruits", "vegetables", "shrubs and bushes", "tree bark", "succulent plants", "grasses"];
+		$my_food_meats = ["meat", "smaller creatures", "live creatures", "creature carcasses", "insects", "reptiles", "birds", "any meat"];
 
 			$my_p_food = $my_food_plant[mt_rand(0,7)];
 			$my_m_food = $my_food_meats[mt_rand(0,7)];
 
 		if ( (($swims > 0) && ($legs == 0)) || (($swims > 0) && ($legs > 0) && (mt_rand(1,3) == 1)) )
 		{
-			$my_food_plant = array("seaweed", "algae");
-			$my_food_meats = array("meat", "smaller creatures", "shellfish", "fish", "reptiles", "any meat");
+			$my_food_plant = ["seaweed", "algae"];
+			$my_food_meats = ["meat", "smaller creatures", "shellfish", "fish", "reptiles", "any meat"];
 				$my_p_food = $my_food_plant[mt_rand(0,1)];
 				$my_m_food = $my_food_meats[mt_rand(0,5)];
 		}
@@ -1413,7 +1413,7 @@ if ($game != "Mutant Future")
 		else if (mt_rand(1,100) > 25){ $arms = 2; }
 		else { $arms = 2 * mt_rand(1,3); }
 
-		$arm_size = array("", "short ", "long ", "muscular ", "thin ", "large ", "small ");
+		$arm_size = ["", "short ", "long ", "muscular ", "thin ", "large ", "small "];
 
 		if ($arms == 0){$my_arms = "";}
 		else if ($fingers == 0){ $my_arms = "They have " . $arms . " " . $arm_size[mt_rand(0,6)]. "arms with " . $my_hands . "."; }
@@ -1524,7 +1524,7 @@ if ($game != "Mutant Future")
 		if ($size_wide < 1){$size_wide = mt_rand(4,11) . '"';} else {$size_wide = $size_wide . "'";}
 		if ($size_long < 1){$size_long = mt_rand(4,11) . '"';} else {$size_long = $size_long . "'";}
 
-		$mes_size = array("roughly ", "usually ", "normally ", "", "about ");
+		$mes_size = ["roughly ", "usually ", "normally ", "", "about "];
 
 		if ($humanoid > 0)
 		{
@@ -1548,14 +1548,14 @@ if ($game != "Mutant Future")
 		}
 
 	////////// EYES ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-		$xeyes = array("0", "1", "2", "2", "2", "2", "3", "4", "6", "8");
+		$xeyes = ["0", "1", "2", "2", "2", "2", "3", "4", "6", "8"];
 		$eyes = $xeyes[mt_rand(0,9)];
 
 		$ecolor = $xcolors[mt_rand(0,16)];
 		$ecolor2 = $xcolors2[mt_rand(0,10)];
 		$eye_color = $ecolor2 . $ecolor;
 
-		$eye_size = array("", "small ", "large ", "bulbous ", "small ", "large ", "small ", "large ");
+		$eye_size = ["", "small ", "large ", "bulbous ", "small ", "large ", "small ", "large "];
 
 		if (($flies > 0) || ($swims > 0)){$eyes = $xeyes[mt_rand(1,9)];}
 		if ($eyes == 1){$my_eyes = "and they can see with a single " . $eye_size[mt_rand(0,7)] . $eye_color . " eye.";}
@@ -1601,7 +1601,7 @@ if ($game != "Mutant Future")
 		$hit = $hit - mt_rand(-2,2);
 
 	////////// STAMINA ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-		$stamina = ($level * 8) + mt_rand(0,$level);
+		$stamina = ($level * 8) + mt_rand(0, max((int)(0), (int)($level)));
 
 	////////// DEFENSES ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	if ($level == 2){$save_e=6; $save_m=4; $save_r=5; $save_s=6; $save_t=5; $dmg_d = 1;}
@@ -1648,12 +1648,12 @@ if ($game != "Mutant Future")
 		$my_damage = "";
 		$my_weapon = "";
 
-		$damage_dice = array('1d4', '1d6', '1d8', '2d4', '1d10', '1d12', '2d6', '2d8', '1d20', '2d10', '2d12', '3d6', '3d8', '3d10', '3d12');
-		$damage_mods = array('+1', '+1', '+1', '+1', '+1', '+1', '+1', '+1', '+2', '+2', '+2', '+2', '+2', '+2', '+2', '+2', '+2', '+2', '+3', '+3', '+3', '+3', '+4');
+		$damage_dice = ['1d4', '1d6', '1d8', '2d4', '1d10', '1d12', '2d6', '2d8', '1d20', '2d10', '2d12', '3d6', '3d8', '3d10', '3d12'];
+		$damage_mods = ['+1', '+1', '+1', '+1', '+1', '+1', '+1', '+1', '+2', '+2', '+2', '+2', '+2', '+2', '+2', '+2', '+2', '+2', '+3', '+3', '+3', '+3', '+4'];
 		$dmg_min = $dmg_d - 5;
 			if ($dmg_min < 1){$dmg_min = 0;}
 		$dmg_max = $dmg_d;
-		$damage_done = $damage_dice[mt_rand(0,$dmg_max)];
+		$damage_done = $damage_dice[mt_rand(0, max((int)(0), (int)($dmg_max)))];
 		if (mt_rand(1,10) == 1){$damage_done = $damage_done . $damage_mods[mt_rand(0,22)];}
 
 			if ($stage == "Instinctual")
@@ -1670,7 +1670,7 @@ if ($game != "Mutant Future")
 				}
 				if (((mt_rand(1,4) == 1) || ($my_attack == "")) && ((($legs > 0) && ($legs < 9)) || ($my_arms != "")) && ($swiper != "fist") && ($swiper != "pincer"))
 				{
-					$damage_swipe = $damage_dice[mt_rand(0,$dmg_max)];
+					$damage_swipe = $damage_dice[mt_rand(0, max((int)(0), (int)($dmg_max)))];
 					if (mt_rand(1,10) == 1){$damage_swipe = $damage_swipe . $damage_mods[mt_rand(0,22)];}
 					if ($my_attack != ""){$my_attack = $my_attack . "&nbsp;/&nbsp;1 " . $swiper; $my_damage = $my_damage . "&nbsp;/&nbsp;" . $damage_swipe;}
 					else
@@ -2319,10 +2319,10 @@ else ////////////////////////////////////////// MUTANT FUTURE //////////////////
 
 	////////// ACTIVE CYCLE //
 		if (mt_rand(1,100) > 50){ $sleep = "any"; }
-		else { $sleep = array('any', 'day', 'night'); $sleep = $sleep[mt_rand(0,2)]; }
+		else { $sleep = ['any', 'day', 'night']; $sleep = $sleep[mt_rand(0,2)]; }
 
 	////////// WHERE LIVE //
-		$dwell = array('desert', 'forest', 'swampy', 'jungle', 'ruins', 'underground', 'radioactive', 'cold or snowy', 'grassland', 'mountainous', 'hilly', 'freshwater', 'sea');
+		$dwell = ['desert', 'forest', 'swampy', 'jungle', 'ruins', 'underground', 'radioactive', 'cold or snowy', 'grassland', 'mountainous', 'hilly', 'freshwater', 'sea'];
 		$dwell = $dwell[mt_rand(0,12)];
 
 	////////// GET THE BOTTOM HALF //
@@ -2348,7 +2348,7 @@ else ////////////////////////////////////////// MUTANT FUTURE //////////////////
 		$walks = mt_rand(1,100);
 		if (($walks > 25) && ($ary4[7] == 1)){ $legs = 0; $snake = 1; }
 		else if (($walks > 25) && ($ary4[5] == 1)){ $legs = 0; $fish = 1; }
-		else { $legs = array('2', '4', '6', '8'); $legs = $legs[mt_rand(0,3)]; $snake = 0; $fish = 0; }
+		else { $legs = ['2', '4', '6', '8']; $legs = $legs[mt_rand(0,3)]; $snake = 0; $fish = 0; }
 			if ($legs == 2){$movement = mt_rand(4,10);}
 			else if ($legs == 4){$movement = mt_rand(6,12);}
 			else if ($legs == 6){$movement = mt_rand(8,14);}
@@ -2356,18 +2356,18 @@ else ////////////////////////////////////////// MUTANT FUTURE //////////////////
 			else {$movement = mt_rand(1,10);}
 
 	////////// SKIN //
-		$xskin = array('scales', 'fur', 'feathers', 'skin'); $xskin = $xskin[mt_rand(0,3)];
+		$xskin = ['scales', 'fur', 'feathers', 'skin']; $xskin = $xskin[mt_rand(0,3)];
 
 	////////// COLOR //
-		$xcolors = array('blue-green', 'black', 'blue', 'gray', 'green', 'violet', 'red', 'brown', 'orange', 'yellowish-green', 'tan', 'gold', 'yellow', 'purple', 'silver', 'forest-green', 'white');
+		$xcolors = ['blue-green', 'black', 'blue', 'gray', 'green', 'violet', 'red', 'brown', 'orange', 'yellowish-green', 'tan', 'gold', 'yellow', 'purple', 'silver', 'forest-green', 'white'];
 		$xcolor = $xcolors[mt_rand(0,16)];
 
 	////////// ANY COLOR VARIATION //
-		$xcolors2 = array('bright', '', 'dark', 'light', 'dull', 'vibrant', 'thick', 'dirty', 'deep', 'rich', 'shiny');
+		$xcolors2 = ['bright', '', 'dark', 'light', 'dull', 'vibrant', 'thick', 'dirty', 'deep', 'rich', 'shiny'];
 		$xcolor2 = $xcolors2[mt_rand(0,10)];
 
 	////////// INTELLIGENCE //
-		$xiq = array('animal', 'low', 'average', 'high', 'genius');
+		$xiq = ['animal', 'low', 'average', 'high', 'genius'];
 		$xiq = $xiq[mt_rand(0,4)];
 			if ($xiq == "animal"){$smarty = "exhibit animal behavior"; $willpower = mt_rand(3,8);}
 			else if ($xiq == "low"){$smarty = "are not very intelligent"; $willpower = mt_rand(3,13);}
@@ -2382,11 +2382,11 @@ else ////////////////////////////////////////// MUTANT FUTURE //////////////////
 		if (mt_rand(1,100) > 95){$heads = 2;}
 
 	////////// HEIGHT //
-		$xheight = array('3', '4', '5', '6', '7', '8', '9', '10', '11', '12');
+		$xheight = ['3', '4', '5', '6', '7', '8', '9', '10', '11', '12'];
 		$xheight = $xheight[mt_rand(0,9)];
 
 	////////// ENCOUNTER //
-		$xenc = array('1', '1d2', '1d4', '1d6', '1d8', '1d10', '2d4', '2d6', '2d8', '2d10');
+		$xenc = ['1', '1d2', '1d4', '1d6', '1d8', '1d10', '2d4', '2d6', '2d8', '2d10'];
 		$xenc = $xenc[mt_rand(0,9)];
 
 	////////// LAIR //
@@ -2404,13 +2404,13 @@ else ////////////////////////////////////////// MUTANT FUTURE //////////////////
 			else if ($xenc == "2d8"){$lairv = 8;}
 			else {$lairv = 9;}
 
-			$lair = array('1d2', '1d4', '1d6', '1d8', '1d10', '2d4', '2d6', '2d8', '2d10', '3d6', '3d4');
-			$lair = $lair[mt_rand($lairv,10)];
+			$lair = ['1d2', '1d4', '1d6', '1d8', '1d10', '2d4', '2d6', '2d8', '2d10', '3d6', '3d4'];
+			$lair = $lair[mt_rand($lairv, max((int)($lairv), (int)(10)))];
 		}
 
 	////////// ALIGNMENT //
 		if ($xiq == "animal"){ $alignment = "Neutral"; }
-		else { $alignment = array('Lawful', 'Neutral', 'Chaotic'); $alignment = $alignment[mt_rand(0,2)]; }
+		else { $alignment = ['Lawful', 'Neutral', 'Chaotic']; $alignment = $alignment[mt_rand(0,2)]; }
 
 	////////// ARMOR CLASS //
 		$xarmor = 10 - mt_rand(1,16);
@@ -2423,9 +2423,9 @@ else ////////////////////////////////////////// MUTANT FUTURE //////////////////
 		if ($hmod > 25){ $hd_mod = 0; }
 		else
 		{
-			$xhdmod = array('+1', '+2', '+3', '+4', '+5', '+6', '+7', '+8', '+9', '+10', '-1', '-2', '-3', '-4', '-5', '-6');
+			$xhdmod = ['+1', '+2', '+3', '+4', '+5', '+6', '+7', '+8', '+9', '+10', '-1', '-2', '-3', '-4', '-5', '-6'];
 			$hd_mod = $xhdmod[mt_rand(0,15)];
-			if (($hd_mod + 0) > 0){$hitdice = $hitdice + 1;}
+			if ((num($hd_mod)) > 0){$hitdice = $hitdice + 1;}
 		}
 
 	////////// THACO //
@@ -2439,10 +2439,10 @@ else ////////////////////////////////////////// MUTANT FUTURE //////////////////
 	////////// LOOT //
 		if ($xiq == "animal"){ $loot = "None"; }
 		else if (($xiq == "low") && (mt_rand(1,100) > 50)){ $loot = "None"; }
-		else if ($xiq == "low"){	$cash = array('I', 'II', 'III', 'IV', 'V');	$loot = $cash[mt_rand(0,4)]; }
-		else if ($xiq == "average"){$cash = array('I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII');	$loot = $cash[mt_rand(0,7)]; }
-		else if ($xiq == "high"){	$cash = array('VI', 'VII', 'VIII', 'IX', 'X', 'XI', 'XII', 'XIII', 'XIV', 'XV', 'XVI');	$loot = $cash[mt_rand(0,10)]; }
-		else if ($xiq == "genius"){	$cash = array('VIII', 'IX', 'X', 'XI', 'XII', 'XIII', 'XIV', 'XV', 'XVI', 'XVII', 'XVIII', 'XIX', 'XX', 'XXI', 'XXII');	$loot = $cash[mt_rand(0,14)]; }
+		else if ($xiq == "low"){	$cash = ['I', 'II', 'III', 'IV', 'V'];	$loot = $cash[mt_rand(0,4)]; }
+		else if ($xiq == "average"){$cash = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII'];	$loot = $cash[mt_rand(0,7)]; }
+		else if ($xiq == "high"){	$cash = ['VI', 'VII', 'VIII', 'IX', 'X', 'XI', 'XII', 'XIII', 'XIV', 'XV', 'XVI'];	$loot = $cash[mt_rand(0,10)]; }
+		else if ($xiq == "genius"){	$cash = ['VIII', 'IX', 'X', 'XI', 'XII', 'XIII', 'XIV', 'XV', 'XVI', 'XVII', 'XVIII', 'XIX', 'XX', 'XXI', 'XXII'];	$loot = $cash[mt_rand(0,14)]; }
 
 	////////// MOVEMENT //
 		if ($movement == 1){$moving = 30;}		else if ($movement == 2){$moving = 40;}		else if ($movement == 3){$moving = 50;}
@@ -2464,7 +2464,7 @@ else ////////////////////////////////////////// MUTANT FUTURE //////////////////
 	////////// ATTACKS //
 		$fight=0; $fight1=0; $fight2=0; $fight3=0; $fight4=0; $fight5=0; $fight6=0; $fight7=0; $fight8=0; $fight9=0;
 		$hitters = ""; $hurts = "";
-		$xdamage = array('1d4', '1d4', '1d4', '1d4', '1d4', '1d4', '1d4', '1d6', '1d6', '1d6', '1d6', '1d6', '1d6', '1d8', '1d8', '1d8', '1d8', '2d4', '2d4', '1d10', '1d10', '1d12', '1d12', '2d6', '2d8');
+		$xdamage = ['1d4', '1d4', '1d4', '1d4', '1d4', '1d4', '1d4', '1d6', '1d6', '1d6', '1d6', '1d6', '1d6', '1d8', '1d8', '1d8', '1d8', '2d4', '2d4', '1d10', '1d10', '1d12', '1d12', '2d6', '2d8'];
 
 		/// HAND ATTACKS //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		if (($ary[2] == "talons") || ($ary[2] == "claw") || ($ary[2] == "fist") || ($ary[2] == "pincer") || ($ary[2] == "pincers"))
@@ -2556,13 +2556,13 @@ else ////////////////////////////////////////// MUTANT FUTURE //////////////////
 
 		if (mt_rand(1,100) > 50){$myname = $ary[1];} else {$myname = $ary4[1];}
 
-		$name_long = strlen($myname);
+		$name_long = strlen((string) $myname);
 		$name_short = ceil($name_long / 3);
-		$name_total = mt_rand($name_short,$name_long);
-		$myname = substr($myname, 0, $name_total);
+		$name_total = mt_rand($name_short, max((int)($name_short), (int)($name_long)));
+		$myname = substr((string) $myname, 0, $name_total);
 		$myname_end = substr($myname, -1);
 
-		$suf_use = strtolower(mutantName());
+		$suf_use = strtolower((string) mutantName());
 		$suf_start = substr($suf_use, -1);
 
 		if (($myname_end == "a") || ($myname_end == "e") || ($myname_end == "i") || ($myname_end == "o") || ($myname_end == "u")){$vowel1 = 1;}
@@ -2604,9 +2604,9 @@ else ////////////////////////////////////////// MUTANT FUTURE //////////////////
 
 		if (($fight1 + $fight2) > 0){} else
 		{
-			if ($xiq == "animal"){$arms = 0; if ($legs < 3){$legs = $legs + $arms;}}
-			else if (($xiq == "low") && (mt_rand(1,100) > 25)){$arms = 0; if ($legs < 3){$legs = $legs + $arms;}}
-			else if (($xiq == "average") && (mt_rand(1,100) > 50)){$arms = 0; if ($legs < 3){$legs = $legs + $arms;}}
+			if ($xiq == "animal"){$arms = 0; if ($legs < 3){$legs = $legs + num($arms);}}
+			else if (($xiq == "low") && (mt_rand(1,100) > 25)){$arms = 0; if ($legs < 3){$legs = $legs + num($arms);}}
+			else if (($xiq == "average") && (mt_rand(1,100) > 50)){$arms = 0; if ($legs < 3){$legs = $legs + num($arms);}}
 		}
 		if (($arms > 0) && ($xiq == "low") && (mt_rand(1,100) > 70))
 		{
@@ -2789,7 +2789,7 @@ else ////////////////////////////////////////// MUTANT FUTURE //////////////////
 	while ($amount > 0) :
 
 	////////// GET THE FUEL //
-		$x_fuel = array('steam', 'clockworks', 'alien technology', 'petroleum', 'electricity', 'radiation', 'plutonium', 'uranium', 'nuclear');
+		$x_fuel = ['steam', 'clockworks', 'alien technology', 'petroleum', 'electricity', 'radiation', 'plutonium', 'uranium', 'nuclear'];
 		$x_fuel = $x_fuel[mt_rand(0,8)];
 			if (($x_fuel == "steam") || ($x_fuel == "clockworks")){ $weapon_tech = 1; }
 			else if (($x_fuel == "alien technology")){ $weapon_tech = 4; }
@@ -2798,12 +2798,12 @@ else ////////////////////////////////////////// MUTANT FUTURE //////////////////
 			else
 			{
 				$weapon_tech = 3;
-				$x_battery = array('batteries', 'cells', 'clips', 'liquid', 'generators');
+				$x_battery = ['batteries', 'cells', 'clips', 'liquid', 'generators'];
 				$x_fuel = $x_fuel . " " . $x_battery[mt_rand(0,4)];
 			}
 
 	////////// GET THE METAL & ARMOR //
-		$x_metal = array('iron', 'aluminium', 'steel', 'silicon steel', 'durasteel', 'crystal alloy', 'adamant', 'promethium', 'unobtainium', 'an uknown metal');
+		$x_metal = ['iron', 'aluminium', 'steel', 'silicon steel', 'durasteel', 'crystal alloy', 'adamant', 'promethium', 'unobtainium', 'an uknown metal'];
 			if (($x_fuel == "steam") || ($x_fuel == "clockworks")){ $i_metal = mt_rand(0,2); }
 			else if (($x_fuel == "alien technology")){ $i_metal = mt_rand(5,9); }
 			else { $i_metal = mt_rand(0,9); }
@@ -2811,7 +2811,7 @@ else ////////////////////////////////////////// MUTANT FUTURE //////////////////
 				$x_armor = 7 - $i_metal;
 
 	////////// GET THE LEGS //
-		$x_legs = array('hover', 'legs', 'legs', 'legs', 'legs', 'legs', 'propeller', 'water propulsion', 'rotor', 'stationary', 'tracks', 'treads', 'wheels', 'rockets', 'anti-gravity');
+		$x_legs = ['hover', 'legs', 'legs', 'legs', 'legs', 'legs', 'propeller', 'water propulsion', 'rotor', 'stationary', 'tracks', 'treads', 'wheels', 'rockets', 'anti-gravity'];
 		$x_legs = $x_legs[mt_rand(0,14)];
 
 	////////// GET THE EXTRAS ... IF ANY //
@@ -2822,7 +2822,7 @@ else ////////////////////////////////////////// MUTANT FUTURE //////////////////
 		$assec1 = ""; $assec1a = "";
 		$someadd = 0;
 
-		$x_more = array('Recorder', 'Fire Extinguisher', 'Storage Unit', 'Arming Mechanism', 'Mounted Tool', 'Voice', 'Mounted Weapon', 'Magnetic Force Field', 'Self-Destruct System', 'Holographic Screen', 'Gravity Field', 'Self-Repair Tools', 'Camouflage', 'Repair Unit', 'Transmitter', 'Remote Control');
+		$x_more = ['Recorder', 'Fire Extinguisher', 'Storage Unit', 'Arming Mechanism', 'Mounted Tool', 'Voice', 'Mounted Weapon', 'Magnetic Force Field', 'Self-Destruct System', 'Holographic Screen', 'Gravity Field', 'Self-Repair Tools', 'Camouflage', 'Repair Unit', 'Transmitter', 'Remote Control'];
 
 		if (mt_rand(1,100) > 40)
 		{
@@ -2856,17 +2856,17 @@ else ////////////////////////////////////////// MUTANT FUTURE //////////////////
 		if ($someadd > 0){$x_extras = $assec1 . "" . $assec2 . "" . $assec3; $x_extras = substr($x_extras, 0, -2);} else {$x_extras = "None";}
 
 	////////// GET THE SENSORS //
-		$x_eyes = array('an audio receiver and video camera', 'an audio receiver and video camera', 'an audio receiver and video camera', 'an audio receiver and video camera', 'an audio receiver and video camera', 'an audio receiver and video camera', 'an audio receiver and video camera', 'an audio receiver and video camera', 'an audio receiver and video camera', 'an audio receiver and video camera', 'an audio receiver, chemical sensor, and thermal video camera', 'an audio receiver, chemical sensor, and thermal video camera', 'an audio receiver, chemical sensor, and thermal video camera', 'an audio receiver, chemical sensor, and thermal video camera', 'an audio receiver, chemical sensor, and thermal video camera', 'an audio receiver, chemical sensor, and thermal video camera', 'an audio receiver, chemical sensor, and thermal video camera', 'an audio receiver, chemical sensor, and thermal video camera', 'audio sensors, chemical sensor, impact sensor, and an advanced video camera', 'audio sensors, chemical sensor, impact sensor, and an advanced video camera', 'audio sensors, chemical sensor, impact sensor, and an advanced video camera', 'audio sensors, chemical sensor, impact sensor, and an advanced video camera', 'audio sensors, chemical sensor, impact sensor, and an advanced video camera', 'audio sensors, chemical sensor, impact sensor, and an advanced video camera', 'audio sensors, chemical sensor, impact sensor, an advanced video camera with 60 feet night vision, and sonar/radar', 'audio sensors, chemical sensor, impact sensor, an advanced video camera with 60 feet night vision, and sonar/radar', 'audio sensors, chemical sensor, impact sensor, an advanced video camera with 60 feet night vision, and sonar/radar', 'audio sensors, chemical sensor, impact sensor, an advanced video camera with 60 feet night vision, and sonar/radar', 'audio sensors, chemical sensor, impact sensor, an advanced video camera with 60 feet night/thermal vision, and sonar/radar', 'audio sensors, chemical sensor, impact sensor, an advanced video camera with 60 feet night/thermal vision, and sonar/radar', 'audio sensors, chemical sensor, impact sensor, an advanced video camera with 120 feet night vision, and sonar/radar', 'audio sensors, chemical sensor, impact sensor, an advanced video camera with 180 feet night/thermal vision, and sonar/radar');
+		$x_eyes = ['an audio receiver and video camera', 'an audio receiver and video camera', 'an audio receiver and video camera', 'an audio receiver and video camera', 'an audio receiver and video camera', 'an audio receiver and video camera', 'an audio receiver and video camera', 'an audio receiver and video camera', 'an audio receiver and video camera', 'an audio receiver and video camera', 'an audio receiver, chemical sensor, and thermal video camera', 'an audio receiver, chemical sensor, and thermal video camera', 'an audio receiver, chemical sensor, and thermal video camera', 'an audio receiver, chemical sensor, and thermal video camera', 'an audio receiver, chemical sensor, and thermal video camera', 'an audio receiver, chemical sensor, and thermal video camera', 'an audio receiver, chemical sensor, and thermal video camera', 'an audio receiver, chemical sensor, and thermal video camera', 'audio sensors, chemical sensor, impact sensor, and an advanced video camera', 'audio sensors, chemical sensor, impact sensor, and an advanced video camera', 'audio sensors, chemical sensor, impact sensor, and an advanced video camera', 'audio sensors, chemical sensor, impact sensor, and an advanced video camera', 'audio sensors, chemical sensor, impact sensor, and an advanced video camera', 'audio sensors, chemical sensor, impact sensor, and an advanced video camera', 'audio sensors, chemical sensor, impact sensor, an advanced video camera with 60 feet night vision, and sonar/radar', 'audio sensors, chemical sensor, impact sensor, an advanced video camera with 60 feet night vision, and sonar/radar', 'audio sensors, chemical sensor, impact sensor, an advanced video camera with 60 feet night vision, and sonar/radar', 'audio sensors, chemical sensor, impact sensor, an advanced video camera with 60 feet night vision, and sonar/radar', 'audio sensors, chemical sensor, impact sensor, an advanced video camera with 60 feet night/thermal vision, and sonar/radar', 'audio sensors, chemical sensor, impact sensor, an advanced video camera with 60 feet night/thermal vision, and sonar/radar', 'audio sensors, chemical sensor, impact sensor, an advanced video camera with 120 feet night vision, and sonar/radar', 'audio sensors, chemical sensor, impact sensor, an advanced video camera with 180 feet night/thermal vision, and sonar/radar'];
 		$x_eyes = $x_eyes[mt_rand(0,31)];
 
 	////////// GET THE THINKING //
-		$x_iq = array('programmed', 'programmed', 'programmed', 'artificial intelligence');
+		$x_iq = ['programmed', 'programmed', 'programmed', 'artificial intelligence'];
 		$x_iq = $x_iq[mt_rand(0,3)];
 
 	////////// GET THE PROGRAMMING //
 		if ($x_iq == "programmed")
 		{
-			$x_job = array('combat', 'combat', 'combat', 'combat', 'combat', 'retrieval', 'spying', 'guarding', 'escorting', 'exploration');
+			$x_job = ['combat', 'combat', 'combat', 'combat', 'combat', 'retrieval', 'spying', 'guarding', 'escorting', 'exploration'];
 			$x_job = $x_job[mt_rand(0,9)];
 			if ($x_legs == "stationary"){$x_job = "guarding";}
 			$software = 1;
@@ -2885,14 +2885,14 @@ else ////////////////////////////////////////// MUTANT FUTURE //////////////////
 
 		$shape = " It is a standard robot build and is about " . mt_rand(3,12) . " feet in size. ";
 
-		$x_hands = array('claws', 'jaws', 'pincers', 'probes', 'grips', 'hands');
+		$x_hands = ['claws', 'jaws', 'pincers', 'probes', 'grips', 'hands'];
 		$x_hands = $x_hands[mt_rand(0,5)];
 
 		$attacks = mt_rand(1,2);
 
 		$hitters = $attacks . "(" . $x_hands . ")";
 
-		$x_hurt = array('1d4', '1d4', '1d4', '1d4', '1d4', '1d6', '1d6', '1d6', '1d6', '1d8', '1d8', '1d8', '1d10', '1d10', '1d12');
+		$x_hurt = ['1d4', '1d4', '1d4', '1d4', '1d4', '1d6', '1d6', '1d6', '1d6', '1d8', '1d8', '1d8', '1d10', '1d10', '1d12'];
 		$x_hurto = $x_hurt[mt_rand(0,14)];
 
 		if ($attacks > 1){$hitting = $x_hurto . "/" . $x_hurto;}
@@ -2921,7 +2921,7 @@ else ////////////////////////////////////////// MUTANT FUTURE //////////////////
 			if ($attacks2 > 1){$hitting = $hitting . "/" . $x_hurt2 . "/" . $x_hurt2;}
 			else {$hitting = $hitting . "/" . $x_hurt2;}
 
-			$attacks = $attacks + $attacks2;
+			$attacks = $attacks + num($attacks2);
 		}
 
 		if ($framez > 0)
@@ -2929,7 +2929,7 @@ else ////////////////////////////////////////// MUTANT FUTURE //////////////////
 			if (mt_rand(1,100) > 50){$animal = "a humanoid";}
 			else
 			{
-				$animal = array('a bear', 'a beetle', 'a lizard', 'a crab', 'a rat', 'a scorpion', 'a snake', 'a spider', 'a tiger', 'a wolf', 'a worm', 'an ant', 'an ape', 'a dragon', 'a wasp', 'a bird', 'a bat', 'a fly', 'an eel', 'a fish', 'a dolphin', 'a shark', 'a squid', 'a sea serpent', 'a lobster');
+				$animal = ['a bear', 'a beetle', 'a lizard', 'a crab', 'a rat', 'a scorpion', 'a snake', 'a spider', 'a tiger', 'a wolf', 'a worm', 'an ant', 'an ape', 'a dragon', 'a wasp', 'a bird', 'a bat', 'a fly', 'an eel', 'a fish', 'a dolphin', 'a shark', 'a squid', 'a sea serpent', 'a lobster'];
 				$animal = $animal[mt_rand(0,24)];
 			}
 
@@ -3002,7 +3002,7 @@ else ////////////////////////////////////////// MUTANT FUTURE //////////////////
 		}
 		else
 		{
-			$x_encounter = array('1d4', '1d4', '1d4', '1d4', '1d4', '1d6', '1d6', '1d6', '1d6', '1d8', '1d8', '1d8', '1d10', '1d10', '1d12');
+			$x_encounter = ['1d4', '1d4', '1d4', '1d4', '1d4', '1d6', '1d6', '1d6', '1d6', '1d8', '1d8', '1d8', '1d10', '1d10', '1d12'];
 			$x_encounter = $x_encounter[mt_rand(0,14)];
 		}
 
@@ -3167,22 +3167,22 @@ else ////////////////////////////////////////// MUTANT FUTURE //////////////////
 
 			if ($weapon_tech == 1)
 			{
-				$gunz = array('Automatic Pistol', 'Pistol', 'Sub-Machine Gun', 'Carbine Rifle', 'Automatic Rifle', 'Shotgun', 'Automatic Shotgun', 'Cannon', 'Grenade Launcher', 'Machine Gun');
+				$gunz = ['Automatic Pistol', 'Pistol', 'Sub-Machine Gun', 'Carbine Rifle', 'Automatic Rifle', 'Shotgun', 'Automatic Shotgun', 'Cannon', 'Grenade Launcher', 'Machine Gun'];
 				$gunz = $gunz[mt_rand(0,9)];
 			}
 			else if ($weapon_tech == 2)
 			{
-				$gunz = array('Automatic Pistol', 'Pistol', 'Sub-Machine Gun', 'Carbine Rifle', 'Automatic Rifle', 'Shotgun', 'Automatic Shotgun', 'Cannon', 'Grenade Launcher', 'Machine Gun', 'Automatic Pistol', 'Pistol', 'Sub-Machine Gun', 'Carbine Rifle', 'Automatic Rifle', 'Shotgun', 'Automatic Shotgun', 'Cannon', 'Grenade Launcher', 'Machine Gun', 'Chemical Grenade', 'Concussion Grenade', 'Dynamite', 'Energy Grenade', 'Frag Grenade', 'Fire Grenade', 'Gas Grenade', 'MutagenGrenade', 'Nerve Gas Grenade', 'Photon Grenade', 'Photon Grenade', 'Plasma Grenade', 'Shock Grenade', 'Smoke Grenade');
+				$gunz = ['Automatic Pistol', 'Pistol', 'Sub-Machine Gun', 'Carbine Rifle', 'Automatic Rifle', 'Shotgun', 'Automatic Shotgun', 'Cannon', 'Grenade Launcher', 'Machine Gun', 'Automatic Pistol', 'Pistol', 'Sub-Machine Gun', 'Carbine Rifle', 'Automatic Rifle', 'Shotgun', 'Automatic Shotgun', 'Cannon', 'Grenade Launcher', 'Machine Gun', 'Chemical Grenade', 'Concussion Grenade', 'Dynamite', 'Energy Grenade', 'Frag Grenade', 'Fire Grenade', 'Gas Grenade', 'MutagenGrenade', 'Nerve Gas Grenade', 'Photon Grenade', 'Photon Grenade', 'Plasma Grenade', 'Shock Grenade', 'Smoke Grenade'];
 				$gunz = $gunz[mt_rand(0,33)];
 			}
 			else if ($weapon_tech == 3)
 			{
-				$gunz = array('Chemical Grenade', 'Concussion Grenade', 'Energy Grenade', 'Frag Grenade', 'Fire Grenade', 'Gas Grenade', 'MutagenGrenade', 'Nerve Gas Grenade', 'Photon Grenade', 'Photon Grenade', 'Plasma Grenade', 'Shock Grenade', 'Smoke Grenade', 'Sonic Pistol', 'Energy Pistol', 'Laser Pistol', 'Heavy Laser Pistol', 'Photon Pistol', 'Plasma Pistol', 'Stun Pistol', 'Sonic Pistol', 'Energy Pistol', 'Laser Pistol', 'Heavy Laser Pistol', 'Photon Pistol', 'Plasma Pistol', 'Stun Pistol', 'Sonic Pistol', 'Energy Pistol', 'Laser Pistol', 'Heavy Laser Pistol', 'Photon Pistol', 'Plasma Pistol', 'Stun Pistol');
+				$gunz = ['Chemical Grenade', 'Concussion Grenade', 'Energy Grenade', 'Frag Grenade', 'Fire Grenade', 'Gas Grenade', 'MutagenGrenade', 'Nerve Gas Grenade', 'Photon Grenade', 'Photon Grenade', 'Plasma Grenade', 'Shock Grenade', 'Smoke Grenade', 'Sonic Pistol', 'Energy Pistol', 'Laser Pistol', 'Heavy Laser Pistol', 'Photon Pistol', 'Plasma Pistol', 'Stun Pistol', 'Sonic Pistol', 'Energy Pistol', 'Laser Pistol', 'Heavy Laser Pistol', 'Photon Pistol', 'Plasma Pistol', 'Stun Pistol', 'Sonic Pistol', 'Energy Pistol', 'Laser Pistol', 'Heavy Laser Pistol', 'Photon Pistol', 'Plasma Pistol', 'Stun Pistol'];
 				$gunz = $gunz[mt_rand(0,33)];
 			}
 			else if ($weapon_tech == 4)
 			{
-				$gunz = array('Blaster Rifle', 'EMP Rifle', 'Fusion Rifle', 'Plasma Rifle', 'Plutonium Rifle', 'Pulse Rifle', 'Laser Rifle', 'Heavy Laser Rifle', 'Nuclear Rifle', 'Stun Rifle', 'Sonic Rifle', 'Blaster Rifle', 'EMP Rifle', 'Fusion Rifle', 'Plasma Rifle', 'Plutonium Rifle', 'Pulse Rifle', 'Laser Rifle', 'Heavy Laser Rifle', 'Nuclear Rifle', 'Stun Rifle', 'Sonic Rifle', 'Blaster Rifle', 'EMP Rifle', 'Fusion Rifle', 'Plasma Rifle', 'Plutonium Rifle', 'Pulse Rifle', 'Laser Rifle', 'Heavy Laser Rifle', 'Nuclear Rifle', 'Stun Rifle', 'Sonic Rifle', 'Toxic Bomb', 'Concussion Bomb', 'Anti-Tank Weapon', 'Mutagen Bomb', 'Energy Bomb', 'Plasma Bomb', 'Radiation Bomb', 'Grenade Launcher', 'Mini-Missile Launcher', 'Missile Launcher');
+				$gunz = ['Blaster Rifle', 'EMP Rifle', 'Fusion Rifle', 'Plasma Rifle', 'Plutonium Rifle', 'Pulse Rifle', 'Laser Rifle', 'Heavy Laser Rifle', 'Nuclear Rifle', 'Stun Rifle', 'Sonic Rifle', 'Blaster Rifle', 'EMP Rifle', 'Fusion Rifle', 'Plasma Rifle', 'Plutonium Rifle', 'Pulse Rifle', 'Laser Rifle', 'Heavy Laser Rifle', 'Nuclear Rifle', 'Stun Rifle', 'Sonic Rifle', 'Blaster Rifle', 'EMP Rifle', 'Fusion Rifle', 'Plasma Rifle', 'Plutonium Rifle', 'Pulse Rifle', 'Laser Rifle', 'Heavy Laser Rifle', 'Nuclear Rifle', 'Stun Rifle', 'Sonic Rifle', 'Toxic Bomb', 'Concussion Bomb', 'Anti-Tank Weapon', 'Mutagen Bomb', 'Energy Bomb', 'Plasma Bomb', 'Radiation Bomb', 'Grenade Launcher', 'Mini-Missile Launcher', 'Missile Launcher'];
 				$gunz = $gunz[mt_rand(0,42)];
 			}
 
@@ -3289,10 +3289,10 @@ else ////////////////////////////////////////// MUTANT FUTURE //////////////////
 
 	////////// ACTIVE CYCLE //
 		if (mt_rand(1,100) > 50){ $sleep = "any"; }
-		else { $sleep = array('any', 'day', 'night'); $sleep = $sleep[mt_rand(0,2)]; }
+		else { $sleep = ['any', 'day', 'night']; $sleep = $sleep[mt_rand(0,2)]; }
 
 	////////// WHERE LIVE //
-		$dwell = array('desert', 'forest', 'swampy', 'jungle', 'ruins', 'underground', 'radioactive', 'cold or snowy', 'grassland', 'mountainous', 'hilly', 'freshwater', 'sea');
+		$dwell = ['desert', 'forest', 'swampy', 'jungle', 'ruins', 'underground', 'radioactive', 'cold or snowy', 'grassland', 'mountainous', 'hilly', 'freshwater', 'sea'];
 		$dwell = $dwell[mt_rand(0,12)];
 
 	////////// GET THE BOTTOM HALF //
@@ -3318,7 +3318,7 @@ else ////////////////////////////////////////// MUTANT FUTURE //////////////////
 		$walks = mt_rand(1,100);
 		if (($walks > 25) && ($ary4[7] == 1)){ $legs = 0; $snake = 1; }
 		else if (($walks > 25) && ($ary4[5] == 1)){ $legs = 0; $fish = 1; }
-		else { $legs = array('2', '4', '6', '8'); $legs = $legs[mt_rand(0,3)]; $snake = 0; $fish = 0; }
+		else { $legs = ['2', '4', '6', '8']; $legs = $legs[mt_rand(0,3)]; $snake = 0; $fish = 0; }
 			if ($legs == 2){$movement = mt_rand(4,10);}
 			else if ($legs == 4){$movement = mt_rand(6,12);}
 			else if ($legs == 6){$movement = mt_rand(8,14);}
@@ -3326,18 +3326,18 @@ else ////////////////////////////////////////// MUTANT FUTURE //////////////////
 			else {$movement = mt_rand(1,10);}
 
 	////////// SKIN //
-		$xskin = array('scales', 'fur', 'feathers', 'skin'); $xskin = $xskin[mt_rand(0,3)];
+		$xskin = ['scales', 'fur', 'feathers', 'skin']; $xskin = $xskin[mt_rand(0,3)];
 
 	////////// COLOR //
-		$xcolors = array('blue-green', 'black', 'blue', 'gray', 'green', 'violet', 'red', 'brown', 'orange', 'yellowish-green', 'tan', 'gold', 'yellow', 'purple', 'silver', 'forest-green', 'white');
+		$xcolors = ['blue-green', 'black', 'blue', 'gray', 'green', 'violet', 'red', 'brown', 'orange', 'yellowish-green', 'tan', 'gold', 'yellow', 'purple', 'silver', 'forest-green', 'white'];
 		$xcolor = $xcolors[mt_rand(0,16)];
 
 	////////// ANY COLOR VARIATION //
-		$xcolors2 = array('bright', '', 'dark', 'light', 'dull', 'vibrant', 'thick', 'dirty', 'deep', 'rich', 'shiny');
+		$xcolors2 = ['bright', '', 'dark', 'light', 'dull', 'vibrant', 'thick', 'dirty', 'deep', 'rich', 'shiny'];
 		$xcolor2 = $xcolors2[mt_rand(0,10)];
 
 	////////// INTELLIGENCE //
-		$xiq = array('animal', 'low', 'average', 'high', 'genius');
+		$xiq = ['animal', 'low', 'average', 'high', 'genius'];
 		$xiq = $xiq[mt_rand(0,4)];
 			if ($xiq == "animal"){$smarty = "exhibit animal behavior"; $willpower = mt_rand(3,8);}
 			else if ($xiq == "low"){$smarty = "are not very intelligent"; $willpower = mt_rand(3,13);}
@@ -3352,11 +3352,11 @@ else ////////////////////////////////////////// MUTANT FUTURE //////////////////
 		if (mt_rand(1,100) > 95){$heads = 2;}
 
 	////////// HEIGHT //
-		$xheight = array('3', '4', '5', '6', '7', '8', '9', '10', '11', '12');
+		$xheight = ['3', '4', '5', '6', '7', '8', '9', '10', '11', '12'];
 		$xheight = $xheight[mt_rand(0,9)];
 
 	////////// ENCOUNTER //
-		$xenc = array('1', '1d2', '1d4', '1d6', '1d8', '1d10', '2d4', '2d6', '2d8', '2d10');
+		$xenc = ['1', '1d2', '1d4', '1d6', '1d8', '1d10', '2d4', '2d6', '2d8', '2d10'];
 		$xenc = $xenc[mt_rand(0,9)];
 
 	////////// LAIR //
@@ -3374,13 +3374,13 @@ else ////////////////////////////////////////// MUTANT FUTURE //////////////////
 			else if ($xenc == "2d8"){$lairv = 8;}
 			else {$lairv = 9;}
 
-			$lair = array('1d2', '1d4', '1d6', '1d8', '1d10', '2d4', '2d6', '2d8', '2d10', '3d6', '3d4');
-			$lair = $lair[mt_rand($lairv,10)];
+			$lair = ['1d2', '1d4', '1d6', '1d8', '1d10', '2d4', '2d6', '2d8', '2d10', '3d6', '3d4'];
+			$lair = $lair[mt_rand($lairv, max((int)($lairv), (int)(10)))];
 		}
 
 	////////// ALIGNMENT //
 		if ($xiq == "animal"){ $alignment = "Neutral"; }
-		else { $alignment = array('Lawful', 'Neutral', 'Chaotic'); $alignment = $alignment[mt_rand(0,2)]; }
+		else { $alignment = ['Lawful', 'Neutral', 'Chaotic']; $alignment = $alignment[mt_rand(0,2)]; }
 
 	////////// ARMOR CLASS //
 		$xarmor = 10 - mt_rand(1,16);
@@ -3393,9 +3393,9 @@ else ////////////////////////////////////////// MUTANT FUTURE //////////////////
 		if ($hmod > 25){ $hd_mod = 0; }
 		else
 		{
-			$xhdmod = array('+1', '+2', '+3', '+4', '+5', '+6', '+7', '+8', '+9', '+10', '-1', '-2', '-3', '-4', '-5', '-6');
+			$xhdmod = ['+1', '+2', '+3', '+4', '+5', '+6', '+7', '+8', '+9', '+10', '-1', '-2', '-3', '-4', '-5', '-6'];
 			$hd_mod = $xhdmod[mt_rand(0,15)];
-			if (($hd_mod + 0) > 0){$hitdice = $hitdice + 1;}
+			if ((num($hd_mod)) > 0){$hitdice = $hitdice + 1;}
 		}
 
 	////////// THACO //
@@ -3409,10 +3409,10 @@ else ////////////////////////////////////////// MUTANT FUTURE //////////////////
 	////////// LOOT //
 		if ($xiq == "animal"){ $loot = "None"; }
 		else if (($xiq == "low") && (mt_rand(1,100) > 50)){ $loot = "None"; }
-		else if ($xiq == "low"){	$cash = array('I', 'II', 'III', 'IV', 'V');	$loot = $cash[mt_rand(0,4)]; }
-		else if ($xiq == "average"){$cash = array('I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII');	$loot = $cash[mt_rand(0,7)]; }
-		else if ($xiq == "high"){	$cash = array('VI', 'VII', 'VIII', 'IX', 'X', 'XI', 'XII', 'XIII', 'XIV', 'XV', 'XVI');	$loot = $cash[mt_rand(0,10)]; }
-		else if ($xiq == "genius"){	$cash = array('VIII', 'IX', 'X', 'XI', 'XII', 'XIII', 'XIV', 'XV', 'XVI', 'XVII', 'XVIII', 'XIX', 'XX', 'XXI', 'XXII');	$loot = $cash[mt_rand(0,14)]; }
+		else if ($xiq == "low"){	$cash = ['I', 'II', 'III', 'IV', 'V'];	$loot = $cash[mt_rand(0,4)]; }
+		else if ($xiq == "average"){$cash = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII'];	$loot = $cash[mt_rand(0,7)]; }
+		else if ($xiq == "high"){	$cash = ['VI', 'VII', 'VIII', 'IX', 'X', 'XI', 'XII', 'XIII', 'XIV', 'XV', 'XVI'];	$loot = $cash[mt_rand(0,10)]; }
+		else if ($xiq == "genius"){	$cash = ['VIII', 'IX', 'X', 'XI', 'XII', 'XIII', 'XIV', 'XV', 'XVI', 'XVII', 'XVIII', 'XIX', 'XX', 'XXI', 'XXII'];	$loot = $cash[mt_rand(0,14)]; }
 
 	////////// MOVEMENT //
 		if ($movement == 1){$moving = 30;}		else if ($movement == 2){$moving = 40;}		else if ($movement == 3){$moving = 50;}
@@ -3434,7 +3434,7 @@ else ////////////////////////////////////////// MUTANT FUTURE //////////////////
 	////////// ATTACKS //
 		$fight=0; $fight1=0; $fight2=0; $fight3=0; $fight4=0; $fight5=0; $fight6=0; $fight7=0; $fight8=0; $fight9=0;
 		$hitters = ""; $hurts = "";
-		$xdamage = array('1d4', '1d4', '1d4', '1d4', '1d4', '1d4', '1d4', '1d6', '1d6', '1d6', '1d6', '1d6', '1d6', '1d8', '1d8', '1d8', '1d8', '2d4', '2d4', '1d10', '1d10', '1d12', '1d12', '2d6', '2d8');
+		$xdamage = ['1d4', '1d4', '1d4', '1d4', '1d4', '1d4', '1d4', '1d6', '1d6', '1d6', '1d6', '1d6', '1d6', '1d8', '1d8', '1d8', '1d8', '2d4', '2d4', '1d10', '1d10', '1d12', '1d12', '2d6', '2d8'];
 
 		/// HAND ATTACKS //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		if (($ary[2] == "talons") || ($ary[2] == "claw") || ($ary[2] == "fist") || ($ary[2] == "pincer") || ($ary[2] == "pincers"))
@@ -3526,13 +3526,13 @@ else ////////////////////////////////////////// MUTANT FUTURE //////////////////
 
 		if (mt_rand(1,100) > 50){$myname = $ary[1];} else {$myname = $ary4[1];}
 
-		$name_long = strlen($myname);
+		$name_long = strlen((string) $myname);
 		$name_short = ceil($name_long / 3);
-		$name_total = mt_rand($name_short,$name_long);
-		$myname = substr($myname, 0, $name_total);
+		$name_total = mt_rand($name_short, max((int)($name_short), (int)($name_long)));
+		$myname = substr((string) $myname, 0, $name_total);
 		$myname_end = substr($myname, -1);
 
-		$suf_use = strtolower(mutantName());
+		$suf_use = strtolower((string) mutantName());
 		$suf_start = substr($suf_use, -1);
 
 		if (($myname_end == "a") || ($myname_end == "e") || ($myname_end == "i") || ($myname_end == "o") || ($myname_end == "u")){$vowel1 = 1;}
@@ -3574,9 +3574,9 @@ else ////////////////////////////////////////// MUTANT FUTURE //////////////////
 
 		if (($fight1 + $fight2) > 0){} else
 		{
-			if ($xiq == "animal"){$arms = 0; if ($legs < 3){$legs = $legs + $arms;}}
-			else if (($xiq == "low") && (mt_rand(1,100) > 25)){$arms = 0; if ($legs < 3){$legs = $legs + $arms;}}
-			else if (($xiq == "average") && (mt_rand(1,100) > 50)){$arms = 0; if ($legs < 3){$legs = $legs + $arms;}}
+			if ($xiq == "animal"){$arms = 0; if ($legs < 3){$legs = $legs + num($arms);}}
+			else if (($xiq == "low") && (mt_rand(1,100) > 25)){$arms = 0; if ($legs < 3){$legs = $legs + num($arms);}}
+			else if (($xiq == "average") && (mt_rand(1,100) > 50)){$arms = 0; if ($legs < 3){$legs = $legs + num($arms);}}
 		}
 		if (($arms > 0) && ($xiq == "low") && (mt_rand(1,100) > 70))
 		{

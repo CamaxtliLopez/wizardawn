@@ -113,8 +113,8 @@ $x_package = $_POST['x_game'];
 $x_whichmagic = $_POST['x_whichmagic'];
 $x_cut = mt_rand(25,50);
 
-$ua = $_SESSION["SESSION_ADD_UA"] = $_POST['ua']+0;
-$aec = $_SESSION["SESSION_ADD_AEC"] = $_POST['aec']+0;
+$ua = $_SESSION["SESSION_ADD_UA"] = num($_POST['ua']);
+$aec = $_SESSION["SESSION_ADD_AEC"] = num($_POST['aec']);
 
 $mapqty = $_POST['amount'];
 $level = $_POST['level'];
@@ -176,10 +176,10 @@ include("functions/data_process.php");
 		if ($db_lister == 1)
 		{
 			if ($bags_of_coins > 0){$ghrz = 91;} else {$ghrz = 1;}
-			$my_reward = mt_rand($ghrz,100);
+			$my_reward = mt_rand($ghrz, max((int)($ghrz), (int)(100)));
 			if ($my_reward < 91){$dynamic_loot = currencyBuilder(mt_rand(1,20),mt_rand(1,3),0,$x_cut,1,$x_package);	$bags_of_coins = 1;}
-			else if ($my_reward < 96){$dynamic_loot = "GEMS&nbsp;[" . mt_rand(1,3) . " each]:&nbsp;" . ucwords(gemCreator($x_cut));}
-			else if ($my_reward < 98){$dynamic_loot = "JEWELRY:&nbsp;" . ucwords(jewelCreator($x_cut));}
+			else if ($my_reward < 96){$dynamic_loot = "GEMS&nbsp;[" . mt_rand(1,3) . " each]:&nbsp;" . ucwords((string) gemCreator($x_cut));}
+			else if ($my_reward < 98){$dynamic_loot = "JEWELRY:&nbsp;" . ucwords((string) jewelCreator($x_cut));}
 			else
 			{
 				if (($x_package == "Tunnels & Trolls 5th Edition") || ($x_package == "Tunnels & Trolls 7th Edition") || ($x_package == "Tunnels & Trolls Deluxe")){ $dynamic_loot = makeMagicItem(mt_rand(1,20),mt_rand(1,3),0,$x_package,0,$x_cut); }
@@ -195,9 +195,9 @@ include("functions/data_process.php");
 			$ary5 = mysqli_fetch_assoc($res5);
 			$g_loot = mysqli_num_rows($res5);
 
-			if ($ary5[sublist] > 0){$sub_lists = 1;} else {$sub_lists = 0;}
-			$treasure_item = $ary5[treasure];
-			$mylisting = $ary5[sublist];
+			if ($ary5['sublist'] > 0){$sub_lists = 1;} else {$sub_lists = 0;}
+			$treasure_item = $ary5['treasure'];
+			$mylisting = $ary5['sublist'];
 
 			while ($sub_lists > 0) :
 
@@ -205,9 +205,9 @@ include("functions/data_process.php");
 				$res5s = mysqli_query( $connection, $qry5s ); /*qry5s*/
 				$ary5s = mysqli_fetch_assoc($res5s);
 
-				if ($ary5s[sublist] > 0){$mylisting = $ary5s[sublist];} else {$sub_lists = 0;}
+				if ($ary5s['sublist'] > 0){$mylisting = $ary5s['sublist'];} else {$sub_lists = 0;}
 
-				if ($ary5s[treasure] != ""){$treasure_item = $treasure_item . ", " . $ary5s[treasure];}
+				if ($ary5s['treasure'] != ""){$treasure_item = $treasure_item . ", " . $ary5s['treasure'];}
 
 			endwhile;
 		}
@@ -227,12 +227,12 @@ include("functions/data_process.php");
 	{
 		if ($db_lister == 1)
 		{
-			$picked_trap = trapMaker($level,box,$x_package,0,0);
+			$picked_trap = trapMaker($level,'box',$x_package,0,0);
 			$rigged = "&nbsp;-&nbsp;TRAPPED: " . $picked_trap[0] . "]"; $uhoh = 1;
 		}
 		else
 		{
-			$rigged = "&nbsp;-&nbsp;TRAPPED: " . $my_traps_array[mt_rand(0,$my_traps_max)] . "]"; $uhoh = 1;
+			$rigged = "&nbsp;-&nbsp;TRAPPED: " . $my_traps_array[mt_rand(0, max((int)(0), (int)($my_traps_max)))] . "]"; $uhoh = 1;
 		}
 	}
 	else
@@ -248,7 +248,7 @@ include("functions/data_process.php");
 	}
 	else
 	{
-		echo "TREASURE&nbsp;:&nbsp;[" . $my_boxes_array[mt_rand(0,$my_boxes_max)] . "" . $rigged . ":&nbsp;" . stripslashes($filled);
+		echo "TREASURE&nbsp;:&nbsp;[" . $my_boxes_array[mt_rand(0, max((int)(0), (int)($my_boxes_max)))] . "" . $rigged . ":&nbsp;" . stripslashes($filled);
 	}
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

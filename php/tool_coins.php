@@ -59,8 +59,8 @@ echo "</head><body>";
 
 $game = $_POST['x_game'];
 $x_pile = $_POST['x_pile'];
-$value1 = $_POST['x_value1']+0;
-$value2 = $_POST['x_value2']+0;
+$value1 = num($_POST['x_value1']);
+$value2 = num($_POST['x_value2']);
 	if ($value1 < 1){$value1 = 1;}
 	if ($value1 > $value2){$value2 = $value1;}
 
@@ -90,7 +90,7 @@ else if (($game == "Tunnels & Trolls 5th Edition") || ($x_game == "Tunnels & Tro
 
 				$x_pile = $x_pile - 1;
 				$line = $line + 1;
-				$value = mt_rand($value1,$value2);
+				$value = mt_rand($value1, max((int)($value1), (int)($value2)));
 
 				echo "<tr><td width='40' style='border-bottom-style: solid; border-bottom-width: 1px'><font size='2'>" . $line . "</font></td>";
 				echo "<td style='border-bottom-style: solid; border-bottom-width: 1px'><font size='2'>" . coinBuilder($value,$game,0) . "</font></td></tr>";

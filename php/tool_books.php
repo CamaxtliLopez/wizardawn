@@ -76,7 +76,7 @@ $unusual = $_POST['unusual'];
 if ($x_game == "OSRIC"){$bottom_notices = 1;}
 else if ($x_game == "Swords & Wizardry"){$bottom_notices = 5;}
 else if ($x_game == "BD&D" || $x_game == "AD&D"){$bottom_notices = 13;}
-else if ($x_game == "Labyrinth Lord"){$bottom_notices = 2; $aec = $_SESSION["SESSION_ADD_AEC"] = $_POST['aec']+0;}
+else if ($x_game == "Labyrinth Lord"){$bottom_notices = 2; $aec = $_SESSION["SESSION_ADD_AEC"] = num($_POST['aec']);}
 else if (($x_game == "Tunnels & Trolls 5th Edition") || ($x_game == "Tunnels & Trolls 7th Edition") || ($x_game == "Tunnels & Trolls Deluxe")){$bottom_notices = 6;}
 
 ?>

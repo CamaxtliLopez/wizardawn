@@ -4,7 +4,7 @@
 
 function VehicleRobotMaker($game,$type,$level)
 {
-	if ($level > 0){$level = mt_rand(1,$level);} else {$level = mt_rand(1,20);}
+	if ($level > 0){$level = mt_rand(1, max((int)(1), (int)($level)));} else {$level = mt_rand(1,20);}
 
 	$working = mt_rand(2,12);
 
@@ -176,10 +176,10 @@ function VehicleRobotMaker($game,$type,$level)
 		else if ($level < 19){$soft = "IX";}
 		else {$soft = "X";}
 
-		$fuel = array('alien technology', 'petroleum', 'electricity', 'radiation', 'plutonium', 'uranium', 'nuclear', 'xormite', 'xormite', 'xormite', 'xormite');
+		$fuel = ['alien technology', 'petroleum', 'electricity', 'radiation', 'plutonium', 'uranium', 'nuclear', 'xormite', 'xormite', 'xormite', 'xormite'];
 		$fuel = $fuel[mt_rand(0,10)];
 
-		$metal = array('iron', 'aluminium', 'steel', 'plastoid', 'durasteel', 'crystal alloy', 'adamant', 'promethium', 'unobtainium', 'unknown metal');
+		$metal = ['iron', 'aluminium', 'steel', 'plastoid', 'durasteel', 'crystal alloy', 'adamant', 'promethium', 'unobtainium', 'unknown metal'];
 		$metal = $metal[mt_rand(0,9)];
 
 		if ($fuel == "alien technology")

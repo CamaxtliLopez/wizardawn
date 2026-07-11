@@ -213,7 +213,7 @@ $cave_zero = $_POST['cave_zero'];
 
 if ($map_type != "side view")
 {
-	$search_string = "/" . substr($search_string, 0, -1) . "/";
+	$search_string = "/" . substr((string) $search_string, 0, -1) . "/";
 	$geomorphic_tiles = preg_grep($search_string, $geomorphic_tiles);
 }
 

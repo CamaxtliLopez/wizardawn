@@ -2,9 +2,9 @@
 
 function bx_basic_stat($type, $min, $max, $class, $race, $sheet)
 {
-	$min_val = $min+0; if ($min_val < 3){$min_val = 3;}
-	$max_val = $max+0; if ($max_val > 18){$max_val = 18;}
-	$roll = mt_rand($min_val,$max_val);
+	$min_val = num($min); if ($min_val < 3){$min_val = 3;}
+	$max_val = num($max); if ($max_val > 18){$max_val = 18;}
+	$roll = mt_rand($min_val, max((int)($min_val), (int)($max_val)));
 	$what = "";
 	$languages = 0;
 
@@ -47,7 +47,7 @@ function bx_basic_stat($type, $min, $max, $class, $race, $sheet)
 		$what = substr($what, 0, -13);
 	}
 
-	return array($roll, $what, $mod1, $mod2, $mod3, $mod4, $mod5, $mod6, $mod7, $mod8, $mod9, $mod10, $languages);
+	return [$roll, $what, $mod1, $mod2, $mod3, $mod4, $mod5, $mod6, $mod7, $mod8, $mod9, $mod10, $languages];
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -69,7 +69,7 @@ function bx_languages($show,$race,$amount,$aec)
 {
 	if ($show != 1){$amount = 0;}
 
-	$talk_array = array();
+	$talk_array = [];
 
 	// WHAT DO RACES ALREADY SPEAK //
 	if ($race == "Dwarf")
@@ -190,7 +190,7 @@ function bx_basic_saves($class, $level)
 	else if ($class=="Thief" && $level>8 && $level<13){		$sv1=10; $sv2=11; $sv3=9;  $sv4=12; $sv5=10;}
 	else if ($class=="Thief" && $level>12){					$sv1=8;  $sv2=9;  $sv3=7;  $sv4=10; $sv5=8;}
 
-	return array($sv1,$sv2,$sv3,$sv4,$sv5);
+	return [$sv1,$sv2,$sv3,$sv4,$sv5];
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -247,11 +247,11 @@ function bx_basic_hit_points($class, $level, $con, $max)
 
 	$start_level = 1;
 	while ($level > 0) :
-		if ($start_level >= $lvl){$hd = xhp;}
-		else { $hd = mt_rand(1,$dce) + $mod; if ($max > 0){$hd = $mod + $dce;} }
+		if ($start_level >= $lvl){$hd = 'xhp';}
+		else { $hd = mt_rand(1, max((int)(1), (int)($dce))) + $mod; if ($max > 0){$hd = $mod + $dce;} }
 
 		if ($hd < 1){$hd = 1;}
-			$hp = $hp + $hd;
+            $hp = $hp + num($hd);
 
 		$level = $level - 1;
 		$start_level = $start_level + 1;
@@ -283,27 +283,27 @@ function bx_basic_gear($class, $level, $dex, $magic, $vardmg)
 
 		switch (mt_rand(1,21))
 		{
-			case 1: $weapon = "battle axe (1d8 dmg)"; $hands=2; $classes = array('Elf', 'Fighter', 'Thief'); break;
-			case 2: $weapon = "hand axe (1d6 dmg)"; $hands=1; $classes = array('Dwarf', 'Elf', 'Fighter', 'Halfling', 'Thief'); break;
-			case 3: $weapon = "club (1d4 dmg)"; $hands=1; $classes = array('Cleric', 'Dwarf', 'Elf', 'Fighter', 'Halfling', 'Thief'); break;
-			case 4: $weapon = "dagger (1d4 dmg)"; $hands=1; $classes = array('Dwarf', 'Elf', 'Fighter', 'Halfling', 'Magic-User', 'Thief'); break;
-			case 5: $weapon = "trident (1d6 dmg)"; $hands=2; $classes = array('Elf', 'Fighter', 'Thief'); break;
-			case 6: $weapon = "flail (1d6 dmg)"; $hands=1; $classes = array('Cleric', 'Dwarf', 'Elf', 'Fighter', 'Halfling', 'Thief'); break;
-			case 7: $weapon = "heavy flail (1d8 dmg)"; $hands=2; $classes = array('Cleric', 'Elf', 'Fighter', 'Thief'); break;
-			case 8: $weapon = "light hammer (1d4 dmg)"; $hands=1; $classes = array('Cleric', 'Dwarf', 'Elf', 'Fighter', 'Halfling', 'Thief'); break;
-			case 9: $weapon = "war hammer (1d6 dmg)"; $hands=2; $classes = array('Cleric', 'Elf', 'Fighter', 'Thief'); break;
-			case 10: $weapon = "mace (1d6 dmg)"; $hands=1; $classes = array('Cleric', 'Dwarf', 'Elf', 'Fighter', 'Halfling', 'Thief'); break;
-			case 11: $weapon = "morningstar (1d6 dmg)"; $hands=2; $classes = array('Elf', 'Fighter', 'Thief'); break;
-			case 12: $weapon = "heavy pick (1d8 dmg)"; $hands=2; $classes = array('Elf', 'Fighter', 'Thief'); break;
-			case 13: $weapon = "light pick (1d6 dmg)"; $hands=1; $classes = array('Dwarf', 'Elf', 'Fighter', 'Halfling', 'Thief'); break;
-			case 14: $weapon = "pole arm (1d10 dmg)"; $hands=2; $classes = array('Elf', 'Fighter', 'Thief'); break;
-			case 15: $weapon = "quarterstaff (1d6 dmg)"; $hands=2; $classes = array('Cleric', 'Elf', 'Fighter', 'Thief'); break;
-			case 16: $weapon = "scimitar (1d8 dmg)"; $hands=1; $classes = array('Dwarf', 'Elf', 'Fighter', 'Halfling', 'Thief'); break;
-			case 17: $weapon = "spear (1d6 dmg)"; $hands=1; $classes = array('Dwarf', 'Elf', 'Fighter', 'Halfling', 'Thief'); break;
-			case 18: $weapon = "long sword (1d8 dmg)"; $hands=1; $classes = array('Dwarf', 'Elf', 'Fighter', 'Thief'); break;
-			case 19: $weapon = "bastard sword (1d8/2d4 dmg)"; $hands=1; $classes = array('Dwarf', 'Elf', 'Fighter', 'Thief'); break;
-			case 20: $weapon = "short sword (1d8 dmg)"; $hands=1; $classes = array('Dwarf', 'Elf', 'Fighter', 'Halfling', 'Thief'); break;
-			case 21: $weapon = "two-handed sword (1d10 dmg)"; $hands=2; $classes = array('Elf', 'Fighter', 'Thief'); break;
+			case 1: $weapon = "battle axe (1d8 dmg)"; $hands=2; $classes = ['Elf', 'Fighter', 'Thief']; break;
+			case 2: $weapon = "hand axe (1d6 dmg)"; $hands=1; $classes = ['Dwarf', 'Elf', 'Fighter', 'Halfling', 'Thief']; break;
+			case 3: $weapon = "club (1d4 dmg)"; $hands=1; $classes = ['Cleric', 'Dwarf', 'Elf', 'Fighter', 'Halfling', 'Thief']; break;
+			case 4: $weapon = "dagger (1d4 dmg)"; $hands=1; $classes = ['Dwarf', 'Elf', 'Fighter', 'Halfling', 'Magic-User', 'Thief']; break;
+			case 5: $weapon = "trident (1d6 dmg)"; $hands=2; $classes = ['Elf', 'Fighter', 'Thief']; break;
+			case 6: $weapon = "flail (1d6 dmg)"; $hands=1; $classes = ['Cleric', 'Dwarf', 'Elf', 'Fighter', 'Halfling', 'Thief']; break;
+			case 7: $weapon = "heavy flail (1d8 dmg)"; $hands=2; $classes = ['Cleric', 'Elf', 'Fighter', 'Thief']; break;
+			case 8: $weapon = "light hammer (1d4 dmg)"; $hands=1; $classes = ['Cleric', 'Dwarf', 'Elf', 'Fighter', 'Halfling', 'Thief']; break;
+			case 9: $weapon = "war hammer (1d6 dmg)"; $hands=2; $classes = ['Cleric', 'Elf', 'Fighter', 'Thief']; break;
+			case 10: $weapon = "mace (1d6 dmg)"; $hands=1; $classes = ['Cleric', 'Dwarf', 'Elf', 'Fighter', 'Halfling', 'Thief']; break;
+			case 11: $weapon = "morningstar (1d6 dmg)"; $hands=2; $classes = ['Elf', 'Fighter', 'Thief']; break;
+			case 12: $weapon = "heavy pick (1d8 dmg)"; $hands=2; $classes = ['Elf', 'Fighter', 'Thief']; break;
+			case 13: $weapon = "light pick (1d6 dmg)"; $hands=1; $classes = ['Dwarf', 'Elf', 'Fighter', 'Halfling', 'Thief']; break;
+			case 14: $weapon = "pole arm (1d10 dmg)"; $hands=2; $classes = ['Elf', 'Fighter', 'Thief']; break;
+			case 15: $weapon = "quarterstaff (1d6 dmg)"; $hands=2; $classes = ['Cleric', 'Elf', 'Fighter', 'Thief']; break;
+			case 16: $weapon = "scimitar (1d8 dmg)"; $hands=1; $classes = ['Dwarf', 'Elf', 'Fighter', 'Halfling', 'Thief']; break;
+			case 17: $weapon = "spear (1d6 dmg)"; $hands=1; $classes = ['Dwarf', 'Elf', 'Fighter', 'Halfling', 'Thief']; break;
+			case 18: $weapon = "long sword (1d8 dmg)"; $hands=1; $classes = ['Dwarf', 'Elf', 'Fighter', 'Thief']; break;
+			case 19: $weapon = "bastard sword (1d8/2d4 dmg)"; $hands=1; $classes = ['Dwarf', 'Elf', 'Fighter', 'Thief']; break;
+			case 20: $weapon = "short sword (1d8 dmg)"; $hands=1; $classes = ['Dwarf', 'Elf', 'Fighter', 'Halfling', 'Thief']; break;
+			case 21: $weapon = "two-handed sword (1d10 dmg)"; $hands=2; $classes = ['Elf', 'Fighter', 'Thief']; break;
 		}
 
 		if ( $vardmg == 0 ){ $novardmg = explode(" (", $weapon); $weapon = $novardmg[0]; } // NO VARIABLE WEAPON DAMAGE SO DON'T SHOW IT
@@ -317,7 +317,7 @@ function bx_basic_gear($class, $level, $dex, $magic, $vardmg)
 	{
 		$magic_bonus = ceil($level/5);
 			if ($magic_bonus < 1){$magic_bonus = 1;}
-		$magic_props = "+" . mt_rand(1,$magic_bonus);
+		$magic_props = "+" . mt_rand(1, max((int)(1), (int)($magic_bonus)));
 		$weapon = str_replace(" (", " " . $magic_props . " (", $weapon);
 		$weapon = str_replace(" dmg)", "" . $magic_props . " dmg)", $weapon);
 	}
@@ -329,13 +329,13 @@ function bx_basic_gear($class, $level, $dex, $magic, $vardmg)
 
 			switch (mt_rand(1,7))
 			{
-				case 1: $weapon2 = "javelin (1d6 dmg / " . mt_rand(1,4) . " each)"; $hands=1; $classes = array('Dwarf', 'Elf', 'Fighter', 'Halfling', 'Thief'); $magic_thing = ""; break;
-				case 2: $weapon2 = "heavy crossbow (1d8 dmg / " . mt_rand(10,30) . " bolts in case)"; $hands=2; $classes = array('Dwarf', 'Elf', 'Fighter', 'Thief'); $magic_thing = "bolts"; break;
-				case 3: $weapon2 = "light crossbow (1d6 dmg / " . mt_rand(10,30) . " bolts in case)"; $hands=2; $classes = array('Dwarf', 'Elf', 'Fighter', 'Halfling', 'Thief'); $magic_thing = "bolts"; break;
-				case 4: $weapon2 = "darts (1d4 dmg / " . mt_rand(1,4) . " each)"; $hands=1; $classes = array('Dwarf', 'Elf', 'Fighter', 'Halfling', 'Magic-User', 'Thief'); $magic_thing = ""; break;
-				case 5: $weapon2 = "longbow (1d8 dmg / " . mt_rand(10,30) . " arrows in quiver)"; $hands=2; $classes = array('Elf', 'Fighter', 'Thief'); $magic_thing = "arrows"; break;
-				case 6: $weapon2 = "shortbow (1d6 dmg / " . mt_rand(10,30) . " arrows in quiver)"; $hands=2; $classes = array('Dwarf', 'Elf', 'Fighter', 'Halfling', 'Thief'); $magic_thing = "arrows"; break;
-				case 7: $weapon2 = "sling (1d4 dmg / " . mt_rand(10,30) . " stones)"; $hands=1; $classes = array('Cleric', 'Dwarf', 'Elf', 'Fighter', 'Halfling', 'Magic-User', 'Thief'); $magic_thing = "stones"; break;
+				case 1: $weapon2 = "javelin (1d6 dmg / " . mt_rand(1,4) . " each)"; $hands=1; $classes = ['Dwarf', 'Elf', 'Fighter', 'Halfling', 'Thief']; $magic_thing = ""; break;
+				case 2: $weapon2 = "heavy crossbow (1d8 dmg / " . mt_rand(10,30) . " bolts in case)"; $hands=2; $classes = ['Dwarf', 'Elf', 'Fighter', 'Thief']; $magic_thing = "bolts"; break;
+				case 3: $weapon2 = "light crossbow (1d6 dmg / " . mt_rand(10,30) . " bolts in case)"; $hands=2; $classes = ['Dwarf', 'Elf', 'Fighter', 'Halfling', 'Thief']; $magic_thing = "bolts"; break;
+				case 4: $weapon2 = "darts (1d4 dmg / " . mt_rand(1,4) . " each)"; $hands=1; $classes = ['Dwarf', 'Elf', 'Fighter', 'Halfling', 'Magic-User', 'Thief']; $magic_thing = ""; break;
+				case 5: $weapon2 = "longbow (1d8 dmg / " . mt_rand(10,30) . " arrows in quiver)"; $hands=2; $classes = ['Elf', 'Fighter', 'Thief']; $magic_thing = "arrows"; break;
+				case 6: $weapon2 = "shortbow (1d6 dmg / " . mt_rand(10,30) . " arrows in quiver)"; $hands=2; $classes = ['Dwarf', 'Elf', 'Fighter', 'Halfling', 'Thief']; $magic_thing = "arrows"; break;
+				case 7: $weapon2 = "sling (1d4 dmg / " . mt_rand(10,30) . " stones)"; $hands=1; $classes = ['Cleric', 'Dwarf', 'Elf', 'Fighter', 'Halfling', 'Magic-User', 'Thief']; $magic_thing = "stones"; break;
 			}
 
 			if ( $vardmg == 0 ) // NO VARIABLE WEAPON DAMAGE SO DON'T SHOW IT
@@ -354,7 +354,7 @@ function bx_basic_gear($class, $level, $dex, $magic, $vardmg)
 		{
 			$magic_bonus = ceil($level/5);
 				if ($magic_bonus < 1){$magic_bonus = 1;}
-			$magic_props = "+" . mt_rand(1,$magic_bonus);
+			$magic_props = "+" . mt_rand(1, max((int)(1), (int)($magic_bonus)));
 			$weapon2 = str_replace("javelin", "javelin " . $magic_props . "", $weapon2);
 			$weapon2 = str_replace("darts", "darts " . $magic_props . "", $weapon2);
 				if ($magic_thing == ""){$weapon2 = str_replace(" dmg", $magic_props . " dmg", $weapon2);}
@@ -375,7 +375,7 @@ function bx_basic_gear($class, $level, $dex, $magic, $vardmg)
 		{
 			$magic_bonus = ceil($level/5);
 				if ($magic_bonus < 1){$magic_bonus = 1;}
-			$magic_props = "+" . mt_rand(1,$magic_bonus);
+			$magic_props = "+" . mt_rand(1, max((int)(1), (int)($magic_bonus)));
 			$weapon3 = str_replace(" (", " " . $magic_props . " (", $weapon3);
 			$weapon3 = str_replace(" dmg)", "" . $magic_props . " dmg)", $weapon3);
 		}
@@ -400,7 +400,7 @@ function bx_basic_gear($class, $level, $dex, $magic, $vardmg)
 	else if ($class == "Magic-User"){ $min=0; $max=0; }
 	else if ($class == "Thief"){ $min=1; $max=1; }
 
-	switch (mt_rand($min,$max))
+	switch (mt_rand($min, max((int)($min), (int)($max))))
 	{
 		case 1: $armor = "leather armor"; $ac=-2; break;
 		case 2: $armor = "chain mail armor"; $ac=-4; break;
@@ -411,23 +411,23 @@ function bx_basic_gear($class, $level, $dex, $magic, $vardmg)
 	{
 		$magic_bonus = ceil($level/7);
 			if ($magic_bonus < 1){$magic_bonus = 1;}
-			$ac_bonus = mt_rand(1,$magic_bonus);
+			$ac_bonus = mt_rand(1, max((int)(1), (int)($magic_bonus)));
 		$magic_props = "+" . $ac_bonus;
 		$armor = $armor . " " . $magic_props;
 		$ac = $ac - $ac_bonus;
 	}
 
 	if ((mt_rand(1,3) != 1) && ($hands != 2) && ($class == "Cleric" || $class == "Dwarf" || $class == "Elf" || $class == "Fighter" || $class == "Halfling")){$armor = $armor . ",&nbsp;&nbsp;&nbsp;&nbsp; shield"; $ac=-1 + $ac;}
-	if ((mt_rand(1,3) != 1) && ($class == "Cleric" || $class == "Dwarf" || $class == "Elf" || $class == "Fighter" || $class == "Halfling")){$armor = $armor . ",&nbsp;&nbsp;&nbsp;&nbsp; helmet"; $ac=0 + $ac;}
+	if ((mt_rand(1,3) != 1) && ($class == "Cleric" || $class == "Dwarf" || $class == "Elf" || $class == "Fighter" || $class == "Halfling")){$armor = $armor . ",&nbsp;&nbsp;&nbsp;&nbsp; helmet"; $ac=num($ac ?? 0);}
 
 	if ($armor != ""){$armor = $armor . ",&nbsp;&nbsp;&nbsp;&nbsp; ";}
-	$ac = $ac + $mod;
+	$ac = $ac + num($mod);
 
 	//////////////////////////////////
 
 	$gear = $armor . $weapon . $weapon2 . $weapon3;
 
-	return array($gear, $ac);
+	return [$gear, $ac];
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -485,7 +485,7 @@ function bx_basic_xp_bonus($class, $str, $dex, $con, $wis, $cha, $int)
 		else if ($dex > 12){$bonus = "5% Bonus to Experience Points"; $value = "5%";}
 	}
 
-	return array($bonus,$value);
+	return [$bonus,$value];
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -494,87 +494,87 @@ function bx_basic_level($class, $level, $randxp, $max_spells, $dexterity, $use_a
 {
 	$spell = ""; $steal = "";
 
-	if ($class == "Cleric" && $level == 1){$hp=$hp+$hd; $xp1 = "0"; $xp2 = "1,500"; }
-	else if ($class == "Cleric" && $level == 2){$hp=$hp+$hd; $spells = "1|0|0|0|0"; $xp1 = "1,500"; $xp2 = "3,000"; $max_spebx_level = 1; }
-	else if ($class == "Cleric" && $level == 3){$hp=$hp+$hd; $spells = "2|0|0|0|0"; $xp1 = "3,000"; $xp2 = "6,000"; $max_spebx_level = 1; }
-	else if ($class == "Cleric" && $level == 4){$hp=$hp+$hd; $spells = "2|1|0|0|0"; $xp1 = "6,000"; $xp2 = "12,000"; $max_spebx_level = 2; }
-	else if ($class == "Cleric" && $level == 5){$hp=$hp+$hd; $spells = "2|2|0|0|0"; $xp1 = "12,000"; $xp2 = "25,000"; $max_spebx_level = 2; }
-	else if ($class == "Cleric" && $level == 6){$hp=$hp+$hd; $spells = "2|2|1|1|0"; $xp1 = "25,000"; $xp2 = "50,000"; $max_spebx_level = 4; }
-	else if ($class == "Cleric" && $level == 7){$hp=$hp+$hd; $spells = "2|2|2|1|1"; $xp1 = "50,000"; $xp2 = "100,000"; $max_spebx_level = 5; }
-	else if ($class == "Cleric" && $level == 8){$hp=$hp+$hd; $spells = "3|3|2|2|1"; $xp1 = "100,000"; $xp2 = "200,000"; $max_spebx_level = 5; }
-	else if ($class == "Cleric" && $level == 9){$hp=$hp+$hd; $spells = "3|3|3|2|2"; $xp1 = "200,000"; $xp2 = "300,000"; $max_spebx_level = 5; }
+	if ($class == "Cleric" && $level == 1){$hp = $hp + num($hd); $xp1 = "0"; $xp2 = "1,500"; }
+	else if ($class == "Cleric" && $level == 2){$hp = $hp + num($hd); $spells = "1|0|0|0|0"; $xp1 = "1,500"; $xp2 = "3,000"; $max_spebx_level = 1; }
+	else if ($class == "Cleric" && $level == 3){$hp = $hp + num($hd); $spells = "2|0|0|0|0"; $xp1 = "3,000"; $xp2 = "6,000"; $max_spebx_level = 1; }
+	else if ($class == "Cleric" && $level == 4){$hp = $hp + num($hd); $spells = "2|1|0|0|0"; $xp1 = "6,000"; $xp2 = "12,000"; $max_spebx_level = 2; }
+	else if ($class == "Cleric" && $level == 5){$hp = $hp + num($hd); $spells = "2|2|0|0|0"; $xp1 = "12,000"; $xp2 = "25,000"; $max_spebx_level = 2; }
+	else if ($class == "Cleric" && $level == 6){$hp = $hp + num($hd); $spells = "2|2|1|1|0"; $xp1 = "25,000"; $xp2 = "50,000"; $max_spebx_level = 4; }
+	else if ($class == "Cleric" && $level == 7){$hp = $hp + num($hd); $spells = "2|2|2|1|1"; $xp1 = "50,000"; $xp2 = "100,000"; $max_spebx_level = 5; }
+	else if ($class == "Cleric" && $level == 8){$hp = $hp + num($hd); $spells = "3|3|2|2|1"; $xp1 = "100,000"; $xp2 = "200,000"; $max_spebx_level = 5; }
+	else if ($class == "Cleric" && $level == 9){$hp = $hp + num($hd); $spells = "3|3|3|2|2"; $xp1 = "200,000"; $xp2 = "300,000"; $max_spebx_level = 5; }
 	else if ($class == "Cleric" && $level == 10){$hp=$hp+1; $spells = "4|4|3|3|2"; $xp1 = "300,000"; $xp2 = "400,000"; $max_spebx_level = 5; }
 	else if ($class == "Cleric" && $level == 11){$hp=$hp+1; $spells = "4|4|4|3|3"; $xp1 = "400,000"; $xp2 = "500,000"; $max_spebx_level = 5; }
 	else if ($class == "Cleric" && $level == 12){$hp=$hp+1; $spells = "5|5|4|4|3"; $xp1 = "500,000"; $xp2 = "600,000"; $max_spebx_level = 5; }
 	else if ($class == "Cleric" && $level == 13){$hp=$hp+1; $spells = "5|5|5|4|4"; $xp1 = "600,000"; $xp2 = "700,000"; $max_spebx_level = 5; }
 	else if ($class == "Cleric" && $level == 14){$hp=$hp+1; $spells = "6|5|5|5|4"; $xp1 = "700,000"; $xp2 = "800,000"; $max_spebx_level = 5; }
-	else if ($class == "Dwarf" && $level == 1){$hp=$hp+$hd; $xp1 = "0"; $xp2 = "2,200";}
-	else if ($class == "Dwarf" && $level == 2){$hp=$hp+$hd; $xp1 = "2,200"; $xp2 = "4,400";}
-	else if ($class == "Dwarf" && $level == 3){$hp=$hp+$hd; $xp1 = "4,400"; $xp2 = "8,800";}
-	else if ($class == "Dwarf" && $level == 4){$hp=$hp+$hd; $xp1 = "8,800"; $xp2 = "17,500";}
-	else if ($class == "Dwarf" && $level == 5){$hp=$hp+$hd; $xp1 = "17,000"; $xp2 = "35,000";}
-	else if ($class == "Dwarf" && $level == 6){$hp=$hp+$hd; $xp1 = "35,000"; $xp2 = "70,000";}
-	else if ($class == "Dwarf" && $level == 7){$hp=$hp+$hd; $xp1 = "70,000"; $xp2 = "140,000";}
-	else if ($class == "Dwarf" && $level == 8){$hp=$hp+$hd; $xp1 = "140,000"; $xp2 = "270,000";}
-	else if ($class == "Dwarf" && $level == 9){$hp=$hp+$hd; $xp1 = "270,000"; $xp2 = "400,000";}
+	else if ($class == "Dwarf" && $level == 1){$hp = $hp + num($hd); $xp1 = "0"; $xp2 = "2,200";}
+	else if ($class == "Dwarf" && $level == 2){$hp = $hp + num($hd); $xp1 = "2,200"; $xp2 = "4,400";}
+	else if ($class == "Dwarf" && $level == 3){$hp = $hp + num($hd); $xp1 = "4,400"; $xp2 = "8,800";}
+	else if ($class == "Dwarf" && $level == 4){$hp = $hp + num($hd); $xp1 = "8,800"; $xp2 = "17,500";}
+	else if ($class == "Dwarf" && $level == 5){$hp = $hp + num($hd); $xp1 = "17,000"; $xp2 = "35,000";}
+	else if ($class == "Dwarf" && $level == 6){$hp = $hp + num($hd); $xp1 = "35,000"; $xp2 = "70,000";}
+	else if ($class == "Dwarf" && $level == 7){$hp = $hp + num($hd); $xp1 = "70,000"; $xp2 = "140,000";}
+	else if ($class == "Dwarf" && $level == 8){$hp = $hp + num($hd); $xp1 = "140,000"; $xp2 = "270,000";}
+	else if ($class == "Dwarf" && $level == 9){$hp = $hp + num($hd); $xp1 = "270,000"; $xp2 = "400,000";}
 	else if ($class == "Dwarf" && $level == 10){$hp=$hp+3; $xp1 = "400,000"; $xp2 = "530,000";}
 	else if ($class == "Dwarf" && $level == 11){$hp=$hp+3; $xp1 = "530,000"; $xp2 = "660,000";}
 	else if ($class == "Dwarf" && $level == 12){$hp=$hp+3; $xp1 = "660,000"; $xp2 = "0";}
-	else if ($class == "Elf" && $level == 1){$hp=$hp+$hd; $spells = "1|0|0|0|0"; $xp1 = "0"; $xp2 = "4,000"; $max_spebx_level = 1; }
-	else if ($class == "Elf" && $level == 2){$hp=$hp+$hd; $spells = "2|0|0|0|0"; $xp1 = "4,000"; $xp2 = "8,000"; $max_spebx_level = 1; }
-	else if ($class == "Elf" && $level == 3){$hp=$hp+$hd; $spells = "2|1|0|0|0"; $xp1 = "8,000"; $xp2 = "16,000"; $max_spebx_level = 2; }
-	else if ($class == "Elf" && $level == 4){$hp=$hp+$hd; $spells = "2|2|0|0|0"; $xp1 = "16,000"; $xp2 = "32,000"; $max_spebx_level = 2; }
-	else if ($class == "Elf" && $level == 5){$hp=$hp+$hd; $spells = "2|2|1|0|0"; $xp1 = "32,000"; $xp2 = "64,000"; $max_spebx_level = 3; }
-	else if ($class == "Elf" && $level == 6){$hp=$hp+$hd; $spells = "2|2|2|0|0"; $xp1 = "64,000"; $xp2 = "120,000"; $max_spebx_level = 3; }
-	else if ($class == "Elf" && $level == 7){$hp=$hp+$hd; $spells = "3|2|2|1|0"; $xp1 = "120,000"; $xp2 = "250,000"; $max_spebx_level = 4; }
-	else if ($class == "Elf" && $level == 8){$hp=$hp+$hd; $spells = "3|3|2|2|0"; $xp1 = "250,000"; $xp2 = "400,000"; $max_spebx_level = 4; }
-	else if ($class == "Elf" && $level == 9){$hp=$hp+$hd; $spells = "3|3|3|2|1"; $xp1 = "400,000"; $xp2 = "600,000"; $max_spebx_level = 5; }
+	else if ($class == "Elf" && $level == 1){$hp = $hp + num($hd); $spells = "1|0|0|0|0"; $xp1 = "0"; $xp2 = "4,000"; $max_spebx_level = 1; }
+	else if ($class == "Elf" && $level == 2){$hp = $hp + num($hd); $spells = "2|0|0|0|0"; $xp1 = "4,000"; $xp2 = "8,000"; $max_spebx_level = 1; }
+	else if ($class == "Elf" && $level == 3){$hp = $hp + num($hd); $spells = "2|1|0|0|0"; $xp1 = "8,000"; $xp2 = "16,000"; $max_spebx_level = 2; }
+	else if ($class == "Elf" && $level == 4){$hp = $hp + num($hd); $spells = "2|2|0|0|0"; $xp1 = "16,000"; $xp2 = "32,000"; $max_spebx_level = 2; }
+	else if ($class == "Elf" && $level == 5){$hp = $hp + num($hd); $spells = "2|2|1|0|0"; $xp1 = "32,000"; $xp2 = "64,000"; $max_spebx_level = 3; }
+	else if ($class == "Elf" && $level == 6){$hp = $hp + num($hd); $spells = "2|2|2|0|0"; $xp1 = "64,000"; $xp2 = "120,000"; $max_spebx_level = 3; }
+	else if ($class == "Elf" && $level == 7){$hp = $hp + num($hd); $spells = "3|2|2|1|0"; $xp1 = "120,000"; $xp2 = "250,000"; $max_spebx_level = 4; }
+	else if ($class == "Elf" && $level == 8){$hp = $hp + num($hd); $spells = "3|3|2|2|0"; $xp1 = "250,000"; $xp2 = "400,000"; $max_spebx_level = 4; }
+	else if ($class == "Elf" && $level == 9){$hp = $hp + num($hd); $spells = "3|3|3|2|1"; $xp1 = "400,000"; $xp2 = "600,000"; $max_spebx_level = 5; }
 	else if ($class == "Elf" && $level == 10){$hp=$hp+2; $spells = "3|3|3|3|2"; $xp1 = "600,000"; $xp2 = "0"; $max_spebx_level = 5; }
-	else if ($class == "Fighter" && $level == 1){$hp=$hp+$hd; $xp1 = "0"; $xp2 = "2,000";}
-	else if ($class == "Fighter" && $level == 2){$hp=$hp+$hd; $xp1 = "2,000"; $xp2 = "4,000";}
-	else if ($class == "Fighter" && $level == 3){$hp=$hp+$hd; $xp1 = "4,000"; $xp2 = "8,000";}
-	else if ($class == "Fighter" && $level == 4){$hp=$hp+$hd; $xp1 = "8,000"; $xp2 = "16,000";}
-	else if ($class == "Fighter" && $level == 5){$hp=$hp+$hd; $xp1 = "16,000"; $xp2 = "32,000";}
-	else if ($class == "Fighter" && $level == 6){$hp=$hp+$hd; $xp1 = "32,000"; $xp2 = "64,000";}
-	else if ($class == "Fighter" && $level == 7){$hp=$hp+$hd; $xp1 = "64,000"; $xp2 = "120,000";}
-	else if ($class == "Fighter" && $level == 8){$hp=$hp+$hd; $xp1 = "120,000"; $xp2 = "240,000";}
-	else if ($class == "Fighter" && $level == 9){$hp=$hp+$hd; $xp1 = "240,000"; $xp2 = "360,000";}
+	else if ($class == "Fighter" && $level == 1){$hp = $hp + num($hd); $xp1 = "0"; $xp2 = "2,000";}
+	else if ($class == "Fighter" && $level == 2){$hp = $hp + num($hd); $xp1 = "2,000"; $xp2 = "4,000";}
+	else if ($class == "Fighter" && $level == 3){$hp = $hp + num($hd); $xp1 = "4,000"; $xp2 = "8,000";}
+	else if ($class == "Fighter" && $level == 4){$hp = $hp + num($hd); $xp1 = "8,000"; $xp2 = "16,000";}
+	else if ($class == "Fighter" && $level == 5){$hp = $hp + num($hd); $xp1 = "16,000"; $xp2 = "32,000";}
+	else if ($class == "Fighter" && $level == 6){$hp = $hp + num($hd); $xp1 = "32,000"; $xp2 = "64,000";}
+	else if ($class == "Fighter" && $level == 7){$hp = $hp + num($hd); $xp1 = "64,000"; $xp2 = "120,000";}
+	else if ($class == "Fighter" && $level == 8){$hp = $hp + num($hd); $xp1 = "120,000"; $xp2 = "240,000";}
+	else if ($class == "Fighter" && $level == 9){$hp = $hp + num($hd); $xp1 = "240,000"; $xp2 = "360,000";}
 	else if ($class == "Fighter" && $level == 10){$hp=$hp+2; $xp1 = "360,000"; $xp2 = "480,000";}
 	else if ($class == "Fighter" && $level == 11){$hp=$hp+2; $xp1 = "480,000"; $xp2 = "600,000";}
 	else if ($class == "Fighter" && $level == 12){$hp=$hp+2; $xp1 = "600,000"; $xp2 = "720,000";}
 	else if ($class == "Fighter" && $level == 13){$hp=$hp+2; $xp1 = "720,000"; $xp2 = "840,000";}
 	else if ($class == "Fighter" && $level == 14){$hp=$hp+2; $xp1 = "840,000"; $xp2 = "960,000";}
-	else if ($class == "Halfling" && $level == 1){$hp=$hp+$hd; $xp1 = "0"; $xp2 = "2,000";}
-	else if ($class == "Halfling" && $level == 2){$hp=$hp+$hd; $xp1 = "2,000"; $xp2 = "4,000";}
-	else if ($class == "Halfling" && $level == 3){$hp=$hp+$hd; $xp1 = "4,000"; $xp2 = "8,000";}
-	else if ($class == "Halfling" && $level == 4){$hp=$hp+$hd; $xp1 = "8,000"; $xp2 = "16,000";}
-	else if ($class == "Halfling" && $level == 5){$hp=$hp+$hd; $xp1 = "16,000"; $xp2 = "32,000";}
-	else if ($class == "Halfling" && $level == 6){$hp=$hp+$hd; $xp1 = "32,000"; $xp2 = "64,000";}
-	else if ($class == "Halfling" && $level == 7){$hp=$hp+$hd; $xp1 = "64,000"; $xp2 = "120,000";}
-	else if ($class == "Halfling" && $level == 8){$hp=$hp+$hd; $xp1 = "120,000"; $xp2 = "0";}
-	else if ($class == "Magic-User" && $level == 1){$hp=$hp+$hd; $spells = "1|0|0|0|0|0"; $xp1 = "0"; $xp2 = "2,500"; $max_spebx_level = 1; }
-	else if ($class == "Magic-User" && $level == 2){$hp=$hp+$hd; $spells = "2|0|0|0|0|0"; $xp1 = "2,500"; $xp2 = "5,000"; $max_spebx_level = 1; }
-	else if ($class == "Magic-User" && $level == 3){$hp=$hp+$hd; $spells = "2|1|0|0|0|0"; $xp1 = "5,000"; $xp2 = "10,000"; $max_spebx_level = 2; }
-	else if ($class == "Magic-User" && $level == 4){$hp=$hp+$hd; $spells = "2|2|0|0|0|0"; $xp1 = "10,000"; $xp2 = "20,000"; $max_spebx_level = 2; }
-	else if ($class == "Magic-User" && $level == 5){$hp=$hp+$hd; $spells = "2|2|1|0|0|0"; $xp1 = "20,000"; $xp2 = "40,000"; $max_spebx_level = 3; }
-	else if ($class == "Magic-User" && $level == 6){$hp=$hp+$hd; $spells = "2|2|2|0|0|0"; $xp1 = "40,000"; $xp2 = "80,000"; $max_spebx_level = 3; }
-	else if ($class == "Magic-User" && $level == 7){$hp=$hp+$hd; $spells = "3|2|2|1|0|0"; $xp1 = "80,000"; $xp2 = "150,000"; $max_spebx_level = 4; }
-	else if ($class == "Magic-User" && $level == 8){$hp=$hp+$hd; $spells = "3|3|2|2|0|0"; $xp1 = "150,000"; $xp2 = "300,000"; $max_spebx_level = 4; }
-	else if ($class == "Magic-User" && $level == 9){$hp=$hp+$hd; $spells = "3|3|3|2|1|0"; $xp1 = "300,000"; $xp2 = "450,000"; $max_spebx_level = 5; }
+	else if ($class == "Halfling" && $level == 1){$hp = $hp + num($hd); $xp1 = "0"; $xp2 = "2,000";}
+	else if ($class == "Halfling" && $level == 2){$hp = $hp + num($hd); $xp1 = "2,000"; $xp2 = "4,000";}
+	else if ($class == "Halfling" && $level == 3){$hp = $hp + num($hd); $xp1 = "4,000"; $xp2 = "8,000";}
+	else if ($class == "Halfling" && $level == 4){$hp = $hp + num($hd); $xp1 = "8,000"; $xp2 = "16,000";}
+	else if ($class == "Halfling" && $level == 5){$hp = $hp + num($hd); $xp1 = "16,000"; $xp2 = "32,000";}
+	else if ($class == "Halfling" && $level == 6){$hp = $hp + num($hd); $xp1 = "32,000"; $xp2 = "64,000";}
+	else if ($class == "Halfling" && $level == 7){$hp = $hp + num($hd); $xp1 = "64,000"; $xp2 = "120,000";}
+	else if ($class == "Halfling" && $level == 8){$hp = $hp + num($hd); $xp1 = "120,000"; $xp2 = "0";}
+	else if ($class == "Magic-User" && $level == 1){$hp = $hp + num($hd); $spells = "1|0|0|0|0|0"; $xp1 = "0"; $xp2 = "2,500"; $max_spebx_level = 1; }
+	else if ($class == "Magic-User" && $level == 2){$hp = $hp + num($hd); $spells = "2|0|0|0|0|0"; $xp1 = "2,500"; $xp2 = "5,000"; $max_spebx_level = 1; }
+	else if ($class == "Magic-User" && $level == 3){$hp = $hp + num($hd); $spells = "2|1|0|0|0|0"; $xp1 = "5,000"; $xp2 = "10,000"; $max_spebx_level = 2; }
+	else if ($class == "Magic-User" && $level == 4){$hp = $hp + num($hd); $spells = "2|2|0|0|0|0"; $xp1 = "10,000"; $xp2 = "20,000"; $max_spebx_level = 2; }
+	else if ($class == "Magic-User" && $level == 5){$hp = $hp + num($hd); $spells = "2|2|1|0|0|0"; $xp1 = "20,000"; $xp2 = "40,000"; $max_spebx_level = 3; }
+	else if ($class == "Magic-User" && $level == 6){$hp = $hp + num($hd); $spells = "2|2|2|0|0|0"; $xp1 = "40,000"; $xp2 = "80,000"; $max_spebx_level = 3; }
+	else if ($class == "Magic-User" && $level == 7){$hp = $hp + num($hd); $spells = "3|2|2|1|0|0"; $xp1 = "80,000"; $xp2 = "150,000"; $max_spebx_level = 4; }
+	else if ($class == "Magic-User" && $level == 8){$hp = $hp + num($hd); $spells = "3|3|2|2|0|0"; $xp1 = "150,000"; $xp2 = "300,000"; $max_spebx_level = 4; }
+	else if ($class == "Magic-User" && $level == 9){$hp = $hp + num($hd); $spells = "3|3|3|2|1|0"; $xp1 = "300,000"; $xp2 = "450,000"; $max_spebx_level = 5; }
 	else if ($class == "Magic-User" && $level == 10){$hp=$hp+1; $spells = "3|3|3|3|2|0"; $xp1 = "450,000"; $xp2 = "600,000"; $max_spebx_level = 5; }
 	else if ($class == "Magic-User" && $level == 11){$hp=$hp+1; $spells = "4|3|3|3|2|1"; $xp1 = "600,000"; $xp2 = "750,000"; $max_spebx_level = 6; }
 	else if ($class == "Magic-User" && $level == 12){$hp=$hp+1; $spells = "4|4|3|3|3|2"; $xp1 = "750,000"; $xp2 = "900,000"; $max_spebx_level = 6; }
 	else if ($class == "Magic-User" && $level == 13){$hp=$hp+1; $spells = "4|4|4|3|3|3"; $xp1 = "900,000"; $xp2 = "1,050,000"; $max_spebx_level = 6; }
 	else if ($class == "Magic-User" && $level == 14){$hp=$hp+1; $spells = "4|4|4|4|3|3"; $xp1 = "1,050,000"; $xp2 = "1,200,000"; $max_spebx_level = 6; }
-	else if ($class == "Thief" && $level == 1){$hp=$hp+$hd; $steal = "15_10_20_20_87_10_1-2"; $xp1 = "0"; $xp2 = "1,200";}
-	else if ($class == "Thief" && $level == 2){$hp=$hp+$hd; $steal = "20_15_25_25_88_15_1-2"; $xp1 = "1,200"; $xp2 = "2,400";}
-	else if ($class == "Thief" && $level == 3){$hp=$hp+$hd; $steal = "25_20_30_30_89_20_1-3"; $xp1 = "2,400"; $xp2 = "4,800";}
-	else if ($class == "Thief" && $level == 4){$hp=$hp+$hd; $steal = "30_25_35_35_90_25_1-3"; $xp1 = "4,800"; $xp2 = "9,600";}
-	else if ($class == "Thief" && $level == 5){$hp=$hp+$hd; $steal = "35_30_40_40_91_30_1-3"; $xp1 = "9,600"; $xp2 = "20,000";}
-	else if ($class == "Thief" && $level == 6){$hp=$hp+$hd; $steal = "45_40_45_45_92_35_1-3"; $xp1 = "20,000"; $xp2 = "40,000";}
-	else if ($class == "Thief" && $level == 7){$hp=$hp+$hd; $steal = "55_50_55_55_93_45_1-4"; $xp1 = "40,000"; $xp2 = "80,000";}
-	else if ($class == "Thief" && $level == 8){$hp=$hp+$hd; $steal = "65_60_65_65_94_55_1-4"; $xp1 = "80,000"; $xp2 = "160,000";}
-	else if ($class == "Thief" && $level == 9){$hp=$hp+$hd; $steal = "75_70_75_75_95_65_1-4"; $xp1 = "160,000"; $xp2 = "280,000";}
+	else if ($class == "Thief" && $level == 1){$hp = $hp + num($hd); $steal = "15_10_20_20_87_10_1-2"; $xp1 = "0"; $xp2 = "1,200";}
+	else if ($class == "Thief" && $level == 2){$hp = $hp + num($hd); $steal = "20_15_25_25_88_15_1-2"; $xp1 = "1,200"; $xp2 = "2,400";}
+	else if ($class == "Thief" && $level == 3){$hp = $hp + num($hd); $steal = "25_20_30_30_89_20_1-3"; $xp1 = "2,400"; $xp2 = "4,800";}
+	else if ($class == "Thief" && $level == 4){$hp = $hp + num($hd); $steal = "30_25_35_35_90_25_1-3"; $xp1 = "4,800"; $xp2 = "9,600";}
+	else if ($class == "Thief" && $level == 5){$hp = $hp + num($hd); $steal = "35_30_40_40_91_30_1-3"; $xp1 = "9,600"; $xp2 = "20,000";}
+	else if ($class == "Thief" && $level == 6){$hp = $hp + num($hd); $steal = "45_40_45_45_92_35_1-3"; $xp1 = "20,000"; $xp2 = "40,000";}
+	else if ($class == "Thief" && $level == 7){$hp = $hp + num($hd); $steal = "55_50_55_55_93_45_1-4"; $xp1 = "40,000"; $xp2 = "80,000";}
+	else if ($class == "Thief" && $level == 8){$hp = $hp + num($hd); $steal = "65_60_65_65_94_55_1-4"; $xp1 = "80,000"; $xp2 = "160,000";}
+	else if ($class == "Thief" && $level == 9){$hp = $hp + num($hd); $steal = "75_70_75_75_95_65_1-4"; $xp1 = "160,000"; $xp2 = "280,000";}
 	else if ($class == "Thief" && $level == 10){$hp=$hp+2; $steal = "85_80_85_85_96_75_1-4"; $xp1 = "280,000"; $xp2 = "400,000";}
 	else if ($class == "Thief" && $level == 11){$hp=$hp+2; $steal = "95_90_95_95_97_85_1-5"; $xp1 = "400,000"; $xp2 = "520,000";}
 	else if ($class == "Thief" && $level == 12){$hp=$hp+2; $steal = "96_95_105_96_98_90_1-5"; $xp1 = "520,000"; $xp2 = "640,000";}
@@ -586,7 +586,7 @@ function bx_basic_level($class, $level, $randxp, $max_spells, $dexterity, $use_a
 	{
 		$xp3 = str_replace(",", "", $xp1)+0;
 		$xp4 = str_replace(",", "", $xp2)-1;
-		$xp1 = number_format(mt_rand($xp3,$xp4));
+		$xp1 = number_format(mt_rand($xp3, max((int)($xp3), (int)($xp4))));
 	}
 
 	if ($spells != "")
@@ -675,7 +675,7 @@ function bx_basic_level($class, $level, $randxp, $max_spells, $dexterity, $use_a
 		if ($level > 9){$skills = $skills . "&nbsp;&nbsp;&nbsp; Use&nbsp;Scrolls:&nbsp;90%";}
 	}
 
-	return array($spebx_book, $skills, $xp1, $xp2, $max_spebx_level);
+	return [$spebx_book, $skills, $xp1, $xp2, $max_spebx_level];
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -686,22 +686,22 @@ function bx_basic_name($class, $gender)
 	{ 
 		switch (mt_rand(1,5))
 		{
-			case 1: $my_name = holmesName(male,0); break;
-			case 2: $my_name = holmesName(male,0); break;
-			case 3: $my_name = ConanName(Aquilonian,male); if (mt_rand(1,2) == 1){$my_name = $my_name . " " . holmesTitle($gender);} break;
-			case 4: $my_name = ConanName(Cimmerian,male); if (mt_rand(1,2) == 1){$my_name = $my_name . " " . holmesTitle($gender);} break;
-			case 5: $my_name = ConanName(Stygian,male); if (mt_rand(1,2) == 1){$my_name = $my_name . " " . holmesTitle($gender);} break;
+			case 1: $my_name = holmesName('male',0); break;
+			case 2: $my_name = holmesName('male',0); break;
+			case 3: $my_name = ConanName('Aquilonian','male'); if (mt_rand(1,2) == 1){$my_name = $my_name . " " . holmesTitle($gender);} break;
+			case 4: $my_name = ConanName('Cimmerian','male'); if (mt_rand(1,2) == 1){$my_name = $my_name . " " . holmesTitle($gender);} break;
+			case 5: $my_name = ConanName('Stygian','male'); if (mt_rand(1,2) == 1){$my_name = $my_name . " " . holmesTitle($gender);} break;
 		}
 	}
 	else
 	{
 		switch (mt_rand(1,5))
 		{
-			case 1: $my_name = holmesName(female,0); break;
-			case 2: $my_name = holmesName(female,0); break;
-			case 3: $my_name = ConanName(Aquilonian,female); if (mt_rand(1,2) == 1){$my_name = $my_name . " " . holmesTitle($gender);} break;
-			case 4: $my_name = ConanName(Cimmerian,female); if (mt_rand(1,2) == 1){$my_name = $my_name . " " . holmesTitle($gender);} break;
-			case 5: $my_name = ConanName(Stygian,female); if (mt_rand(1,2) == 1){$my_name = $my_name . " " . holmesTitle($gender);} break;
+			case 1: $my_name = holmesName('female',0); break;
+			case 2: $my_name = holmesName('female',0); break;
+			case 3: $my_name = ConanName('Aquilonian','female'); if (mt_rand(1,2) == 1){$my_name = $my_name . " " . holmesTitle($gender);} break;
+			case 4: $my_name = ConanName('Cimmerian','female'); if (mt_rand(1,2) == 1){$my_name = $my_name . " " . holmesTitle($gender);} break;
+			case 5: $my_name = ConanName('Stygian','female'); if (mt_rand(1,2) == 1){$my_name = $my_name . " " . holmesTitle($gender);} break;
 		}
 	}
 	return $my_name;
@@ -734,7 +734,7 @@ function bx_basic_pocket_change($level,$format)
 function bx_basic_magic_items($level, $class)
 {
 	while ( $level > 2 ) :
-		if (mt_rand(1,100) > 90){ $item = $item . "<i>" . str_replace(" ", "&nbsp;", strtolower(makeRPGmagic("BD&D",mt_rand(1,4)))) . "</i>" . ",&nbsp;&nbsp;&nbsp;&nbsp; ";}
+		if (mt_rand(1,100) > 90){ $item = $item . "<i>" . str_replace(" ", "&nbsp;", strtolower((string) makeRPGmagic("BD&D",mt_rand(1,4)))) . "</i>" . ",&nbsp;&nbsp;&nbsp;&nbsp; ";}
 		$level = $level - 1;
 	endwhile;
 
@@ -747,7 +747,7 @@ function bx_basic_magic_items($level, $class)
 
 function bx_basic_magic_spells($level, $splvl, $class, $max_spells)
 {
-	$spebx_array = array();
+	$spebx_array = [];
 	$spells_found = ceil(($level/2) - $splvl) + mt_rand(0,1);
 	if ($spells_found < 2){$spells_found = mt_rand(2,3);}
 	if ($spells_found > $max_spells){$spells_found = $max_spells;}

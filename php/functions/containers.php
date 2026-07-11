@@ -34,7 +34,7 @@ function PAbagCreator($map)
 			case 5:	$make = "garbage bag";	$m1=5; $m2=5;	break;
 			case 6:	$make = "briefcase";	$m1=0; $m2=2;	break;
 		}
-		switch (mt_rand($m1,$m2))
+		switch (mt_rand($m1, max((int)($m1), (int)($m2))))
 		{
 			case 0:	$model = leatherColor() . " leather";	break;
 			case 1:	$model = "leather";			break;

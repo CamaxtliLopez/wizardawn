@@ -187,7 +187,7 @@ $x_oldway = $_POST['x_oldway']; // USED FOR T&T CLASSIC WEAPONS/ARMOR...OR THE S
 	}
 	else if ($x_game == "Labyrinth Lord")
 	{
-		$aec = $_SESSION["SESSION_ADD_AEC"] = $_POST['aec']+0;
+		$aec = $_SESSION["SESSION_ADD_AEC"] = num($_POST['aec']);
 		if ($aec > 0){$take = "(creator LIKE 'AEC%' OR creator LIKE 'LL%')";}
 		else {$take = "(creator LIKE 'LL%')";}
 		$bottom_notices = 2;
@@ -206,7 +206,7 @@ $x_oldway = $_POST['x_oldway']; // USED FOR T&T CLASSIC WEAPONS/ARMOR...OR THE S
 	{
 		$dd_ff = $_SESSION["SESSION_ADD_FF"] = $_POST['dd_ff'];
 		$dd_mm2 = $_SESSION["SESSION_ADD_MM2"] = $_POST['dd_mm2'];
-		$ua = $_SESSION["SESSION_ADD_UA"] = $_POST['ua']+0;
+		$ua = $_SESSION["SESSION_ADD_UA"] = num($_POST['ua']);
 		$take = "(creator LIKE 'SRC: MM %' OR ";
 		if ($dd_ff > 0){$take = $take . "creator LIKE 'SRC: FF %' OR ";}
 		if ($dd_mm2 > 0){$take = $take . "creator LIKE 'SRC: MM2 %' OR ";}
@@ -234,7 +234,7 @@ $x_oldway = $_POST['x_oldway']; // USED FOR T&T CLASSIC WEAPONS/ARMOR...OR THE S
 		$take = "creator='WIZ'";
 	}
 
-$x_level = $_POST['x_level']+0;
+$x_level = num($_POST['x_level']);
 
 $x_show_ru = $_POST['x_show_ru'];
 $x_show_mi = $_POST['x_show_mi'];
@@ -310,7 +310,7 @@ $barw = 4;
 	<?php $unusual = $runit; while ($unusual > 0) : $dice = $dice + 1; ?>
 	<tr>
 		<td width="40" align="center" style="border-top: 1px solid #000000"><font size="2"><?php echo $dice; ?></font></td>
-		<td style="border-top: 1px solid #000000"><font size="2"><?php echo lcfirst(specialMakerRoom(100,1,mt_rand(1,40),$x_game,$x_extra)); ?></font></td>
+		<td style="border-top: 1px solid #000000"><font size="2"><?php echo lcfirst((string) specialMakerRoom(100,1,mt_rand(1,40),$x_game,$x_extra)); ?></font></td>
 	</tr>	
 	<?php $unusual = $unusual - 1; endwhile; ?>
 	</table>
@@ -323,7 +323,7 @@ $barw = 4;
 		<td style="border-top: 1px solid #000000"><b><font size="2">&nbsp;&nbsp;&nbsp;Room Trap</font></b></td>
 	</tr>
 	<?php $traps = $runit; while ($traps > 0) : if ($x_level > 0){} else if ($x_game == "Swords & Six-Siders"){$x_level = mt_rand(1,6);} else {$x_level = mt_rand(1,20);} $dice = $dice + 1; 
-		$trap = trapMaker($x_level,room,$x_game,$x_extra,0); $trap = substr($trap[0], 21); ?>
+		$trap = trapMaker($x_level,'room',$x_game,$x_extra,0); $trap = substr((string) $trap[0], 21); ?>
 	<tr>
 		<td width="40" align="center" style="border-top: 1px solid #000000"><font size="2"><?php echo $dice; ?></font></td>
 		<td style="border-top: 1px solid #000000"><font size="2"><?php echo lcfirst($trap); ?></font></td>
@@ -412,10 +412,10 @@ $barw = 4;
 		<td style="border-top: 1px solid #000000"><b><font size="2">&nbsp;&nbsp;&nbsp;Container Trap</font></b></td>
 	</tr>
 	<?php $traps = $runit; while ($traps > 0) : if ($x_level > 0){} else if ($x_game == "Swords & Six-Siders"){$x_level = mt_rand(1,6);} else {$x_level = mt_rand(1,20);} $dice = $dice + 1; 
-		$trap = trapMaker($x_level,box,$x_game,$x_extra,0); $trap = $trap[0]; ?>
+		$trap = trapMaker($x_level,'box',$x_game,$x_extra,0); $trap = $trap[0]; ?>
 	<tr>
 		<td width="40" align="center" style="border-top: 1px solid #000000"><font size="2"><?php echo $dice; ?></font></td>
-		<td style="border-top: 1px solid #000000"><font size="2"><?php echo lcfirst($trap); ?></font></td>
+		<td style="border-top: 1px solid #000000"><font size="2"><?php echo lcfirst((string) $trap); ?></font></td>
 	</tr>	
 	<?php $traps = $traps - 1; endwhile; ?>
 	</table>
@@ -430,7 +430,7 @@ $barw = 4;
 	<?php $curse = $runit; while ($curse > 0) : if ($x_level > 0){} else if ($x_game == "Swords & Six-Siders"){$x_level = mt_rand(1,6);} else {$x_level = mt_rand(1,20);} $dice = $dice + 1; ?>
 	<tr>
 		<td width="40" align="center" style="border-top: 1px solid #000000"><font size="2"><?php echo $dice; ?></font></td>
-		<td style="border-top: 1px solid #000000"><font size="2"><?php echo curseType($x_level,person,item,$x_game); ?></font></td>
+		<td style="border-top: 1px solid #000000"><font size="2"><?php echo curseType($x_level,'person','item',$x_game); ?></font></td>
 	</tr>	
 	<?php $curse = $curse - 1; endwhile; ?>
 	</table>
@@ -472,8 +472,8 @@ $barw = 4;
 			if ($x_level > 0){} else if ($x_game == "Swords & Six-Siders"){$x_level = mt_rand(1,6);} else {$x_level = mt_rand(1,20);}
 			if ($the_loot < 60){$the_prize = currencyBuilder($x_level,3,0,$x_cut,0,$x_game);}
 			else if ($the_loot < 80){$the_prize = otherThanCoins(3,$x_cut,$x_game,1,$x_level);}
-			else if ($the_loot < 90){$the_prize = "GEMS&nbsp;[" . mt_rand(1,3) . " each]:&nbsp;" . ucwords(gemCreator($x_cut));}
-			else {$the_prize = "JEWELRY:&nbsp;" . ucwords(jewelCreator($x_cut));}
+			else if ($the_loot < 90){$the_prize = "GEMS&nbsp;[" . mt_rand(1,3) . " each]:&nbsp;" . ucwords((string) gemCreator($x_cut));}
+			else {$the_prize = "JEWELRY:&nbsp;" . ucwords((string) jewelCreator($x_cut));}
 	?>
 	<tr>
 		<td width="40" align="center" style="border-top: 1px solid #000000"><font size="2"><?php echo $rollers; $dice = $dice + 1; ?></font></td>
@@ -483,8 +483,8 @@ $barw = 4;
 			if ($x_level > 0){} else if ($x_game == "Swords & Six-Siders"){$x_level = mt_rand(1,6);} else {$x_level = mt_rand(1,20);}
 			if ($the_loot < 60){$the_prize = currencyBuilder($x_level,3,0,$x_cut,0,$x_game);}
 			else if ($the_loot < 80){$the_prize = otherThanCoins(3,$x_cut,$x_game,1,$x_level);}
-			else if ($the_loot < 90){$the_prize = "GEMS&nbsp;[" . mt_rand(1,3) . " each]:&nbsp;" . ucwords(gemCreator($x_cut));}
-			else {$the_prize = "JEWELRY:&nbsp;" . ucwords(jewelCreator($x_cut));}
+			else if ($the_loot < 90){$the_prize = "GEMS&nbsp;[" . mt_rand(1,3) . " each]:&nbsp;" . ucwords((string) gemCreator($x_cut));}
+			else {$the_prize = "JEWELRY:&nbsp;" . ucwords((string) jewelCreator($x_cut));}
 
 			if (($x_game == "Swords & Six-Siders") || ($x_game == "Tunnels & Trolls 5th Edition") || ($x_game == "Tunnels & Trolls 7th Edition") || ($x_game == "Tunnels & Trolls Deluxe"))
 			{
@@ -544,19 +544,19 @@ $barw = 4;
 			$x_cut = mt_rand(5,10); if ($x_game == "Swords & Six-Siders"){$x_cut = mt_rand(1,2);}
 			$loot_size = mt_rand(1,3);
 			if ($x_level > 0){} else if ($x_game == "Swords & Six-Siders"){$x_level = mt_rand(1,6);} else {$x_level = mt_rand(1,20);}
-			$my_reward = mt_rand($noco,100);
+			$my_reward = mt_rand($noco, max((int)($noco), (int)(100)));
 				if ($my_reward < 91)
 				{
 					$my_prize = currencyBuilder($x_level,$loot_size,0,$x_cut,1,$x_game);
 
-					if (mt_rand(1,$rarecash) == 1)
+					if (mt_rand(1, max((int)(1), (int)($rarecash))) == 1)
 					{
 						$my_prize = otherThanCoins($loot_size,$x_cut,$x_game,1,$treasure_level);
 					}
 					$bags_of_coins = 1;
 				}
-				else if ($my_reward < 96){$my_prize = "GEMS&nbsp;[" . mt_rand(1,3) . " each]:&nbsp;" . ucwords(gemCreator($x_cut));}
-				else if ($my_reward < 98){$my_prize = "JEWELRY:&nbsp;" . ucwords(jewelCreator($x_cut));}
+				else if ($my_reward < 96){$my_prize = "GEMS&nbsp;[" . mt_rand(1,3) . " each]:&nbsp;" . ucwords((string) gemCreator($x_cut));}
+				else if ($my_reward < 98){$my_prize = "JEWELRY:&nbsp;" . ucwords((string) jewelCreator($x_cut));}
 				else if (mt_rand(1,100) > 25){$my_prize = makeMagicItem($x_level,3,0,$x_game,0,0); if ($x_whichmagic == 1){ $my_prize = makeRPGmagic($x_game,0); }}
 				else {$my_prize = makeNiceItem(3,$x_cut,$x_game); if ($x_whichmagic == 1){ $my_prize = makeRPGmagic($x_game,0); }}
 					$my_hoard = $my_hoard . " ----- " . $my_prize;
@@ -587,7 +587,7 @@ $barw = 4;
 
 	while ($ary=mysqli_fetch_array($res)) :
 
-		$frequency = $ary[freq_code] - 1;
+		$frequency = $ary['freq_code'] - 1;
 
 		while ($frequency > 0) :
 

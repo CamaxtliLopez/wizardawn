@@ -24,7 +24,7 @@ else if ($game_choice == "Swords & Six-Siders"){ $systemg = "Swords & Six-Siders
 $qry = "SELECT * FROM monsters_rpgs WHERE $cmd ORDER BY name";
 $res = mysqli_query( $connection, $qry ); /* qry. */
 
-$monster_manual = explode("^", $_SESSION[$sesvar]);
+$monster_manual = explode("^", (string) $_SESSION[$sesvar]);
 $m = 0;
 
 ?>
@@ -59,7 +59,7 @@ while '100' is more often. Each monster has <?php echo $level_details; ?> listed
 
 if ($game_choice == "Swords & Wizardry"){$pulnam = explode("^", $ary['name']); $pulnam = explode("(", $pulnam[0]);} else if ($game_choice == "BFRPG"){$pulnam = explode("(", $ary['description']);} else {$pulnam = explode("(", $ary['name']);}
 
-	if (strpos($ary['location'], 'DG') !== false){$iw1 = "<font style='font-size:12px;'>"; $iw2 = "</font>";} else {$iw1 = "<font style='font-size:12px; font-style: italic; font-family: WizardawnItalic;'>"; $iw2 = "</font>";}
+	if (str_contains($ary['location'], 'DG')){$iw1 = "<font style='font-size:12px;'>"; $iw2 = "</font>";} else {$iw1 = "<font style='font-size:12px; font-style: italic; font-family: WizardawnItalic;'>"; $iw2 = "</font>";}
 
 	$check_box = "";
 	$chance_box = "";
@@ -125,7 +125,7 @@ endwhile;
 <p style='font-size:20px; margin-top: 0; margin-bottom: 0'>Custom Encounters For This Dungeon</p>
 <p style='text-align: justify;'>Select a chance for the encounter to appear and then enter the encounter information (name, stat block, etc.). Keep in mind that these encounters will not generate monster quantities or health by the system.<br>
 
-<?php $monster_manual = explode("|$|", $_SESSION[$csesvar]); ?>
+<?php $monster_manual = explode("|$|", (string) $_SESSION[$csesvar]); ?>
 
 <div id="div_table">
 	<div class="row">

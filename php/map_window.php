@@ -124,8 +124,8 @@ $divide_x_and_y_by = 1;
 
 		if ($keyed > 0)
 		{
-			if (($x_delve == "Complex") || ($x_delve == "Progressive")){ $grids = explode("_", $used_tile['3']); }
-			else { $grids = explode("_", $used_tile['1']); }
+			if (($x_delve == "Complex") || ($x_delve == "Progressive")){ $grids = explode("_", (string) $used_tile['3']); }
+			else { $grids = explode("_", (string) $used_tile['1']); }
 
 			$cyc = 0;
 			$room_count = count($grids);
@@ -140,7 +140,7 @@ $divide_x_and_y_by = 1;
 
 				if (($x_delve == "Complex") || ($x_delve == "Progressive"))
 				{
-					$grids = explode("^", $gridz[$cyc]);
+					$grids = explode("^", (string) $gridz[$cyc]);
 					if (($grid == $grids['0']) && (mt_rand(1,100) >= $x_floor))
 					{
 						$key=$key+1;

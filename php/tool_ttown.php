@@ -242,43 +242,43 @@ $church = $_POST['church'];
 $water = $_POST['water'];
 $columns = $_POST['columns'];
 
-$name = stripslashes($_POST['name']);
+$name = stripslashes((string) $_POST['name']);
 
-$x_race_human = $_POST['x_race_human']+0;
-$x_race_brownie = $_POST['x_race_brownie']+0;
-$x_race_centaur = $_POST['x_race_centaur']+0;
-$x_race_cyclops = $_POST['x_race_cyclops']+0;
-$x_race_daklafar = $_POST['x_race_daklafar']+0;
-$x_race_dwarf = $_POST['x_race_dwarf']+0;
-$x_race_dwurman = $_POST['x_race_dwurman']+0;
-$x_race_elf = $_POST['x_race_elf']+0;
-$x_race_fairy = $_POST['x_race_fairy']+0;
-$x_race_falcoran = $_POST['x_race_falcoran']+0;
-$x_race_fruglum = $_POST['x_race_fruglum']+0;
-$x_race_gnome = $_POST['x_race_gnome']+0;
-$x_race_goblin = $_POST['x_race_goblin']+0;
-$x_race_gremlin = $_POST['x_race_gremlin']+0;
-$x_race_greyling = $_POST['x_race_greyling']+0;
-$x_race_hobgoblin = $_POST['x_race_hobgoblin']+0;
-$x_race_hobling = $_POST['x_race_hobling']+0;
-$x_race_imp = $_POST['x_race_imp']+0;
-$x_race_kobold = $_POST['x_race_kobold']+0;
-$x_race_leprechaun = $_POST['x_race_leprechaun']+0;
-$x_race_mantaran = $_POST['x_race_mantaran']+0;
-$x_race_minotaur = $_POST['x_race_minotaur']+0;
-$x_race_neptar = $_POST['x_race_neptar']+0;
-$x_race_ogre = $_POST['x_race_ogre']+0;
-$x_race_orke = $_POST['x_race_orke']+0;
-$x_race_pixie = $_POST['x_race_pixie']+0;
-$x_race_rattanu = $_POST['x_race_rattanu']+0;
-$x_race_satyr = $_POST['x_race_satyr']+0;
-$x_race_sauriman = $_POST['x_race_sauriman']+0;
-$x_race_slitheran = $_POST['x_race_slitheran']+0;
-$x_race_sprite = $_POST['x_race_sprite']+0;
-$x_race_suvart = $_POST['x_race_suvart']+0;
-$x_race_troll = $_POST['x_race_troll']+0;
-$x_race_tigran = $_POST['x_race_tigran']+0;
-$x_race_wulfan = $_POST['x_race_wulfan']+0;
+$x_race_human = num($_POST['x_race_human']);
+$x_race_brownie = num($_POST['x_race_brownie']);
+$x_race_centaur = num($_POST['x_race_centaur']);
+$x_race_cyclops = num($_POST['x_race_cyclops']);
+$x_race_daklafar = num($_POST['x_race_daklafar']);
+$x_race_dwarf = num($_POST['x_race_dwarf']);
+$x_race_dwurman = num($_POST['x_race_dwurman']);
+$x_race_elf = num($_POST['x_race_elf']);
+$x_race_fairy = num($_POST['x_race_fairy']);
+$x_race_falcoran = num($_POST['x_race_falcoran']);
+$x_race_fruglum = num($_POST['x_race_fruglum']);
+$x_race_gnome = num($_POST['x_race_gnome']);
+$x_race_goblin = num($_POST['x_race_goblin']);
+$x_race_gremlin = num($_POST['x_race_gremlin']);
+$x_race_greyling = num($_POST['x_race_greyling']);
+$x_race_hobgoblin = num($_POST['x_race_hobgoblin']);
+$x_race_hobling = num($_POST['x_race_hobling']);
+$x_race_imp = num($_POST['x_race_imp']);
+$x_race_kobold = num($_POST['x_race_kobold']);
+$x_race_leprechaun = num($_POST['x_race_leprechaun']);
+$x_race_mantaran = num($_POST['x_race_mantaran']);
+$x_race_minotaur = num($_POST['x_race_minotaur']);
+$x_race_neptar = num($_POST['x_race_neptar']);
+$x_race_ogre = num($_POST['x_race_ogre']);
+$x_race_orke = num($_POST['x_race_orke']);
+$x_race_pixie = num($_POST['x_race_pixie']);
+$x_race_rattanu = num($_POST['x_race_rattanu']);
+$x_race_satyr = num($_POST['x_race_satyr']);
+$x_race_sauriman = num($_POST['x_race_sauriman']);
+$x_race_slitheran = num($_POST['x_race_slitheran']);
+$x_race_sprite = num($_POST['x_race_sprite']);
+$x_race_suvart = num($_POST['x_race_suvart']);
+$x_race_troll = num($_POST['x_race_troll']);
+$x_race_tigran = num($_POST['x_race_tigran']);
+$x_race_wulfan = num($_POST['x_race_wulfan']);
 
 $x_races = $x_race_human . "_" . $x_race_brownie . "_" . $x_race_centaur . "_" . $x_race_cyclops . "_" . $x_race_daklafar . "_" . $x_race_dwarf . "_" . $x_race_dwurman . "_" . $x_race_elf . "_" . $x_race_fairy . "_" . $x_race_falcoran . "_" . $x_race_fruglum . "_" . $x_race_gnome . "_" . $x_race_goblin . "_" . $x_race_gremlin . "_" . $x_race_greyling . "_" . $x_race_hobgoblin . "_" . $x_race_hobling . "_" . $x_race_imp . "_" . $x_race_kobold . "_" . $x_race_leprechaun . "_" . $x_race_mantaran . "_" . $x_race_minotaur . "_" . $x_race_neptar . "_" . $x_race_ogre . "_" . $x_race_orke . "_" . $x_race_pixie . "_" . $x_race_rattanu . "_" . $x_race_satyr . "_" . $x_race_slitheran . "_" . $x_race_sprite . "_" . $x_race_suvart . "_" . $x_race_troll . "_" . $x_race_sauriman . "_" . $x_race_tigran . "_" . $x_race_wulfan;
 
@@ -304,7 +304,7 @@ if ($rulers > 0)
 	else if ($kingdom >= 20){$castle = "terrain='keep_prince'"; if (mt_rand(1,2) == 1){$castle = "terrain='keep_king'";}}
 	else if ($kingdom >= 5){$castle = "terrain='keep_prince'"; if (mt_rand(1,2) == 1){$castle = "terrain='keep_baron'";}}
 	else {$castle = "terrain='keep_baron'";}
-	$place_castle = mt_rand(1,$kingdom);
+	$place_castle = mt_rand(1, max((int)(1), (int)($kingdom)));
 
 	if ($kingdom >= 60){$r_m_title = "King"; $r_f_title = "Queen"; $royal_guards = mt_rand(4,9);}
 	else if ($kingdom >= 50){$r_m_title = "Grand Duke"; $r_f_title = "Grand Duchess"; $royal_guards = mt_rand(4,8);}
@@ -370,12 +370,12 @@ if ($rulers > 0){ echo "<br><div style='page-break-after: always; height:1px;'>&
 	{
 		$royal_title = $r_m_title;
 		$remp_gender = "Male";
-		echo "<font size='2'><b>" . strtoupper($royal_title) . ":</b> <i>[Warrior]</i> "; 
-		$equipment = TTequipCitizen(warrior);
+		echo "<font size='2'><b>" . strtoupper((string) $royal_title) . ":</b> <i>[Warrior]</i> "; 
+		$equipment = TTequipCitizen('warrior');
 		$weaponsize = "medium";
 		$remp_kindred = TTRace($x_races);
-		$remp_citizen = TTCitizen($remp_kindred,adult,$remp_gender,leader_warrior,$game);
-		echo $remp_citizen[2] . " <b>ARMS&nbsp;&amp;&nbsp;ARMOR:</b> " . strtolower(TTgetWeapon($weaponsize)) . ", " . $equipment[0] . ", " . $equipment[1] . "</font>";
+		$remp_citizen = TTCitizen($remp_kindred,'adult',$remp_gender,'leader_warrior',$game);
+		echo $remp_citizen[2] . " <b>ARMS&nbsp;&amp;&nbsp;ARMOR:</b> " . strtolower((string) TTgetWeapon($weaponsize)) . ", " . $equipment[0] . ", " . $equipment[1] . "</font>";
 			$royal_title = $r_f_title;
 			$remp_gender = "Female";
 			switch (mt_rand(0,2))
@@ -384,31 +384,31 @@ if ($rulers > 0){ echo "<br><div style='page-break-after: always; height:1px;'>&
 				case 1:	$royal_class = "warrior";	break;
 				case 2:	$royal_class = "rogue";		break;
 			}
-			echo "<hr color='#C0C0C0' size='1'><font size='2'><b>" . strtoupper($royal_title) . ":</b> <i>[" . ucfirst($royal_class) . "]</i> "; 
+			echo "<hr color='#C0C0C0' size='1'><font size='2'><b>" . strtoupper((string) $royal_title) . ":</b> <i>[" . ucfirst($royal_class) . "]</i> "; 
 			$equipment = TTequipCitizen($royal_class);
 			$weaponsize = "small";
 			$remp_kindred = TTRace($x_races);
-			$remp_citizen = TTCitizen($remp_citizen[1],adult,$remp_gender,$royal_class,$game);
-			echo $remp_citizen[2] . " <b>ARMS&nbsp;&amp;&nbsp;ARMOR:</b> " . strtolower(TTgetWeapon($weaponsize)) . ", " . $equipment[0] . ", " . $equipment[1] . "</font>";
+			$remp_citizen = TTCitizen($remp_citizen[1],'adult',$remp_gender,$royal_class,$game);
+			echo $remp_citizen[2] . " <b>ARMS&nbsp;&amp;&nbsp;ARMOR:</b> " . strtolower((string) TTgetWeapon($weaponsize)) . ", " . $equipment[0] . ", " . $equipment[1] . "</font>";
 	}
 	else
 	{
 		if (mt_rand(1,3) > 1){$royal_title = $r_m_title; $remp_gender = "Male";}
 		else {$royal_title = $r_f_title; $remp_gender = "Female";}
-		echo "<font size='2'><b>" . strtoupper($royal_title) . ":</b> <i>[Warrior]</i> "; 
-		$equipment = TTequipCitizen(warrior);
+		echo "<font size='2'><b>" . strtoupper((string) $royal_title) . ":</b> <i>[Warrior]</i> "; 
+		$equipment = TTequipCitizen('warrior');
 		$weaponsize = "small";
 		$remp_kindred = TTRace($x_races);
-		$remp_citizen = TTCitizen($remp_kindred,adult,$remp_gender,warrior,$game);
-		echo $remp_citizen[2] . " <b>ARMS&nbsp;&amp;&nbsp;ARMOR:</b> " . strtolower(TTgetWeapon($weaponsize)) . ", " . $equipment[0] . ", " . $equipment[1] . "</font>";
+		$remp_citizen = TTCitizen($remp_kindred,'adult',$remp_gender,'warrior',$game);
+		echo $remp_citizen[2] . " <b>ARMS&nbsp;&amp;&nbsp;ARMOR:</b> " . strtolower((string) TTgetWeapon($weaponsize)) . ", " . $equipment[0] . ", " . $equipment[1] . "</font>";
 	}
 		$riches = "";
 			$rich_limits = mt_rand(($realm+10),($realm+20));
 			$riches = "<hr color='#C0C0C0' size='1'><b>ROYAL VAULT:</b> ";
 			while ($rich_limits > 0) :
 				$my_reward = mt_rand(1,100);
-				if ($my_reward > 60){$my_prize = "GEMS&nbsp;[" . mt_rand(1,3) . " each]:&nbsp;" . ucwords(gemCreator(mt_rand(10,100)));}
-				else if ($my_reward > 20){$my_prize = "JEWELRY:&nbsp;" . ucwords(jewelCreator(mt_rand(10,100)));}
+				if ($my_reward > 60){$my_prize = "GEMS&nbsp;[" . mt_rand(1,3) . " each]:&nbsp;" . ucwords((string) gemCreator(mt_rand(10,100)));}
+				else if ($my_reward > 20){$my_prize = "JEWELRY:&nbsp;" . ucwords((string) jewelCreator(mt_rand(10,100)));}
 				else { $my_prize = makeMagicItem(mt_rand(1,20),3,0,$game,1,100); }
 					$riches = $riches . $my_prize . "&nbsp;---&nbsp;";
 				$rich_limits = $rich_limits - 1;
@@ -419,44 +419,44 @@ if ($rulers > 0){ echo "<br><div style='page-break-after: always; height:1px;'>&
 		if ($realm >= mt_rand(1,20))
 		{
 			echo "<hr color='#C0C0C0' size='1'><font size='2'><b>ROYAL WIZARD:</b>  <i>[Wizard]</i> "; 
-			$equipment = TTequipCitizen(wizard);
+			$equipment = TTequipCitizen('wizard');
 			$weaponsize = "small";
 			$remp_kindred = TTRace($x_races);
 			$remp_gender = "Male"; if (mt_rand(1,2) == 1){$remp_gender = "Female";}
-			$remp_citizen = TTCitizen($remp_kindred,adult,$remp_gender,leader_wizard,$game);
-			echo $remp_citizen[2] . " <b>ARMS&nbsp;&amp;&nbsp;ARMOR:</b> " . strtolower(TTgetWeapon($weaponsize)) . ", " . $equipment[0] . ", " . $equipment[1] . "</font>";
+			$remp_citizen = TTCitizen($remp_kindred,'adult',$remp_gender,'leader_wizard',$game);
+			echo $remp_citizen[2] . " <b>ARMS&nbsp;&amp;&nbsp;ARMOR:</b> " . strtolower((string) TTgetWeapon($weaponsize)) . ", " . $equipment[0] . ", " . $equipment[1] . "</font>";
 		}
 		if ($realm >= mt_rand(1,15))
 		{
 			echo "<hr color='#C0C0C0' size='1'><font size='2'><b>ROYAL SPY:</b>  <i>[Rogue]</i> "; 
-			$equipment = TTequipCitizen(rogue);
+			$equipment = TTequipCitizen('rogue');
 			$weaponsize = "medium";
 			$remp_kindred = TTRace($x_races);
 			$remp_gender = "Male"; if (mt_rand(1,2) == 1){$remp_gender = "Female";}
-			$remp_citizen = TTCitizen($remp_kindred,adult,$remp_gender,leader_rogue,$game);
-			echo $remp_citizen[2] . " <b>ARMS&nbsp;&amp;&nbsp;ARMOR:</b> " . strtolower(TTgetWeapon($weaponsize)) . ", " . $equipment[0] . ", " . $equipment[1] . "</font>";
+			$remp_citizen = TTCitizen($remp_kindred,'adult',$remp_gender,'leader_rogue',$game);
+			echo $remp_citizen[2] . " <b>ARMS&nbsp;&amp;&nbsp;ARMOR:</b> " . strtolower((string) TTgetWeapon($weaponsize)) . ", " . $equipment[0] . ", " . $equipment[1] . "</font>";
 		}
 		if ($realm >= mt_rand(1,5))
 		{
 			if ((mt_rand(1,2) == 1) && ($police > 0)){$royal_title = "CAPTAIN OF THE GUARDS";} else {$royal_title = "SHERIFF";}
 			echo "<hr color='#C0C0C0' size='1'><font size='2'><b>" . $royal_title . ":</b>  <i>[Warrior]</i> "; 
-			$equipment = TTequipCitizen(warrior);
+			$equipment = TTequipCitizen('warrior');
 			$weaponsize = "giant";
 			$remp_kindred = TTRace($x_races);
 			$remp_gender = "Male"; if (mt_rand(1,2) == 1){$remp_gender = "Female";}
-			$remp_citizen = TTCitizen($remp_kindred,adult,$remp_gender,leader_warrior,$game);
-			echo $remp_citizen[2] . " <b>ARMS&nbsp;&amp;&nbsp;ARMOR:</b> " . strtolower(TTgetWeapon($weaponsize)) . ", " . $equipment[0] . ", " . $equipment[1] . "</font>";
+			$remp_citizen = TTCitizen($remp_kindred,'adult',$remp_gender,'leader_warrior',$game);
+			echo $remp_citizen[2] . " <b>ARMS&nbsp;&amp;&nbsp;ARMOR:</b> " . strtolower((string) TTgetWeapon($weaponsize)) . ", " . $equipment[0] . ", " . $equipment[1] . "</font>";
 		}
 		if ($police > 0)
 		{
 			while ($royal_guards > 0) :
 				echo "<hr color='#C0C0C0' size='1'><font size='2'><b>ROYAL GUARD:</b> "; 
-				$equipment = TTequipCitizen(warrior);
+				$equipment = TTequipCitizen('warrior');
 				$weaponsize = "giant";
 				$remp_kindred = TTRace($x_races);
 				$remp_gender = "Male"; if (mt_rand(1,2) == 1){$remp_gender = "Female";}
-				$remp_citizen = TTCitizen($remp_kindred,adult,$remp_gender,warrior,$game);
-				echo $remp_citizen[2] . " <b>ARMS&nbsp;&amp;&nbsp;ARMOR:</b> " . strtolower(TTgetWeapon($weaponsize)) . ", " . $equipment[0] . ", " . $equipment[1] . "</font>";
+				$remp_citizen = TTCitizen($remp_kindred,'adult',$remp_gender,'warrior',$game);
+				echo $remp_citizen[2] . " <b>ARMS&nbsp;&amp;&nbsp;ARMOR:</b> " . strtolower((string) TTgetWeapon($weaponsize)) . ", " . $equipment[0] . ", " . $equipment[1] . "</font>";
 				$royal_guards = $royal_guards - 1;
 			endwhile;
 		}
@@ -467,7 +467,7 @@ if ($empty != 1)
 	while ($key > 0) : $city_size = $city_size + 1;
 		$kindred = TTRace($x_races);
 		$gender = "Male"; if (mt_rand(1,2) == 1){$gender = "Female";}
-		$citizen = TTCitizen($kindred,adult,$gender,citizen,$game);
+		$citizen = TTCitizen($kindred,'adult',$gender,'citizen',$game);
 		$dwell = $dwell + 1;
 		$shopinq = "INSERT INTO shop_track (building, owner, info, stats, gender, race, shop, type, didit) VALUES ('$dwell', '$citizen[3]', '$citizen[2]', '$citizen[4]', '$citizen[0]', '$citizen[1]', '0', '', '0')";
 		mysqli_query( $connection, $shopinq ); /*shopinq*/
@@ -490,20 +490,20 @@ else
 	{
 		$kindred = TTRace($x_races);
 		$gender = "Male"; if (mt_rand(1,2) == 1){$gender = "Female";}
-		$citizen = TTCitizen($kindred,adult,$gender,citizen,$game);
+		$citizen = TTCitizen($kindred,'adult',$gender,'citizen',$game);
 		$dwell = $dwell + 1;
 		echo "<hr><b><i><font size='3'>" . $dwell . "</font></i></b><font size='2'>&nbsp;-&nbsp;" . $citizen[2] . "</font>";
 
 		$shopinq = "INSERT INTO shop_track (building, owner, info, stats, gender, race, shop, type, didit) VALUES ('$dwell', '$citizen[3]', '$citizen[2]', '$citizen[4]', '$citizen[0]', '$citizen[1]', '0', '', '0')";
 		mysqli_query( $connection, $shopinq ); /*shopinq*/
 
-		if (mt_rand(1,100) > 50){ if ($citizen[0] == "Male"){$gend = "Female";} else {$gend = "Male";}     $citizen = TTCitizen($citizen[1],adult,$gend,citizen,$game); ?>
+		if (mt_rand(1,100) > 50){ if ($citizen[0] == "Male"){$gend = "Female";} else {$gend = "Male";}     $citizen = TTCitizen($citizen[1],'adult',$gend,'citizen',$game); ?>
 			<hr color='#C0C0C0' size='1'><font size="2">&nbsp;-&nbsp;-&nbsp;<?php echo $citizen[2]; ?></font><?php } 
 
-		if (mt_rand(1,100) > 70){ $gend = "Male"; if (mt_rand(1,2) == 1){$gend = "Female";} $citizen = TTCitizen($citizen[1],child,$gend,citizen,$game); ?>
+		if (mt_rand(1,100) > 70){ $gend = "Male"; if (mt_rand(1,2) == 1){$gend = "Female";} $citizen = TTCitizen($citizen[1],'child',$gend,'citizen',$game); ?>
 			<hr color='#C0C0C0' size='1'><font size="2">&nbsp;-&nbsp;-&nbsp;-&nbsp;<?php echo $citizen[2]; ?></font><?php } 
 
-		if (mt_rand(1,100) > 90){ $gend = "Male"; if (mt_rand(1,2) == 1){$gend = "Female";} $citizen = TTCitizen($citizen[1],child,$gend,citizen,$game); ?>
+		if (mt_rand(1,100) > 90){ $gend = "Male"; if (mt_rand(1,2) == 1){$gend = "Female";} $citizen = TTCitizen($citizen[1],'child',$gend,'citizen',$game); ?>
 			<hr color='#C0C0C0' size='1'><font size="2">&nbsp;-&nbsp;-&nbsp;-&nbsp;<?php echo $citizen[2]; ?></font><?php } 
 	}
 	$key = $key - 1; endwhile;

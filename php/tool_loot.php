@@ -125,8 +125,8 @@ $picuse = "tools_loot.jpg";
 $x_oldway = $_POST['x_oldway']; // USED FOR T&T CLASSIC WEAPONS/ARMOR...OR THE SIMPLE WEAPONS/ARMOR
 	if ($x_oldway == 1){ $_SESSION['tt_easy_items'] = 1; } else { unset($_SESSION['tt_easy_items']); }
 
-$ua = $_SESSION["SESSION_ADD_UA"] = $_POST['ua']+0;
-$aec = $_SESSION["SESSION_ADD_AEC"] = $_POST['aec']+0;
+$ua = $_SESSION["SESSION_ADD_UA"] = num($_POST['ua']);
+$aec = $_SESSION["SESSION_ADD_AEC"] = num($_POST['aec']);
 
 $x_package = $_POST['x_package'];
 $x_whichmagic = $_POST['x_whichmagic'];
@@ -194,7 +194,7 @@ include("functions/data_process.php");
 		echo $x_line . "&nbsp;&nbsp;";
 		echo "</font></td><td style='border-left-width: 1px; border-right-width: 1px; border-top-width: 1px; border-bottom-style: solid; border-bottom-width: 1px'><font size='2'>";
 
-			$loot_mash = mt_rand($x_min,$x_max);
+			$loot_mash = mt_rand($x_min, max((int)($x_min), (int)($x_max)));
 			$filled = "";
 			$bags_of_coins = 0;
 
@@ -215,12 +215,12 @@ include("functions/data_process.php");
 					else
 					{
 						if ($bags_of_coins > 0){$ghrz = 51;} else {$ghrz = 1;}
-						$my_reward = mt_rand($ghrz,100);
+						$my_reward = mt_rand($ghrz, max((int)($ghrz), (int)(100)));
 					}
 					if ($my_reward < 51){$dynamic_loot = currencyBuilder(mt_rand(1,20),mt_rand(1,3),0,mt_rand(25,75),1,$x_package); $bags_of_coins = 1;}
 					else if ($my_reward < 86){$dynamic_loot = otherThanCoins(mt_rand(1,3),mt_rand(25,75),$x_package,1,mt_rand(1,20));}
-					else if ($my_reward < 90){$dynamic_loot = "GEMS&nbsp;[" . mt_rand(1,3) . " each]:&nbsp;" . ucwords(gemCreator(mt_rand(25,75)));}
-					else if ($my_reward < 92){$dynamic_loot = "JEWELRY:&nbsp;" . ucwords(jewelCreator(mt_rand(25,75)));}
+					else if ($my_reward < 90){$dynamic_loot = "GEMS&nbsp;[" . mt_rand(1,3) . " each]:&nbsp;" . ucwords((string) gemCreator(mt_rand(25,75)));}
+					else if ($my_reward < 92){$dynamic_loot = "JEWELRY:&nbsp;" . ucwords((string) jewelCreator(mt_rand(25,75)));}
 					else {$dynamic_loot = makeMagicItem(mt_rand(1,20),mt_rand(1,3),0,$x_package,0,mt_rand(25,75));}
 						$treasure_item = $dynamic_loot;
 				}
@@ -237,11 +237,11 @@ include("functions/data_process.php");
 					else
 					{
 						if ($bags_of_coins > 0){$ghrz = 50;} else {$ghrz = 1;}
-						$my_reward = mt_rand($ghrz,100);
+						$my_reward = mt_rand($ghrz, max((int)($ghrz), (int)(100)));
 					}
 
 					if ($my_reward < 50){$dynamic_loot = PAcurrencyBuilder(mt_rand(1,20),mt_rand(1,3),0,mt_rand(25,75),1,$x_money,$x_mappack);	$bags_of_coins = 1;}
-					else if ($my_reward < 85){$dynamic_loot  = ucfirst(PAmakeNormalItem(1,1,$x_money,$v_tech,$x_package));}
+					else if ($my_reward < 85){$dynamic_loot  = ucfirst((string) PAmakeNormalItem(1,1,$x_money,$v_tech,$x_package));}
 					else
 					{
 						if ($x_package == "Metamorphosis Alpha"){$dynamic_loot = makeMAItem(mt_rand(1,20),mt_rand(1,3));}
@@ -267,12 +267,12 @@ include("functions/data_process.php");
 					else
 					{
 						if ($bags_of_coins > 0){$ghrz = 51;} else {$ghrz = 1;}
-						$my_reward = mt_rand($ghrz,100);
+						$my_reward = mt_rand($ghrz, max((int)($ghrz), (int)(100)));
 					}
 					if ($my_reward < 51){$dynamic_loot = currencyBuilder(mt_rand(1,20),mt_rand(1,3),0,$cutup,1,$x_package); $bags_of_coins = 1;}
 					else if ($my_reward < 86){$dynamic_loot = otherThanCoins(mt_rand(1,3),$cutup,$x_package,1,mt_rand(1,20));}
-					else if ($my_reward < 90){$dynamic_loot = "GEMS&nbsp;[" . mt_rand(1,3) . " each]:&nbsp;" . ucwords(gemCreator($cutup));}
-					else if ($my_reward < 92){$dynamic_loot = "JEWELRY:&nbsp;" . ucwords(jewelCreator($cutup));}
+					else if ($my_reward < 90){$dynamic_loot = "GEMS&nbsp;[" . mt_rand(1,3) . " each]:&nbsp;" . ucwords((string) gemCreator($cutup));}
+					else if ($my_reward < 92){$dynamic_loot = "JEWELRY:&nbsp;" . ucwords((string) jewelCreator($cutup));}
 					else
 					{
 						if ($x_whichmagic >= mt_rand(1,100)){ $dynamic_loot = makeRPGmagic($x_package,0); }
@@ -286,9 +286,9 @@ include("functions/data_process.php");
 					$res5 = mysqli_query( $connection, $qry5 ); /*qry5*/
 					$ary5 = mysqli_fetch_assoc($res5);
 
-					if ($ary5[sublist] > 0){$sub_lists = 1;} else {$sub_lists = 0;}
-					$treasure_item = $ary5[treasure];
-					$mylisting = $ary5[sublist];
+					if ($ary5['sublist'] > 0){$sub_lists = 1;} else {$sub_lists = 0;}
+					$treasure_item = $ary5['treasure'];
+					$mylisting = $ary5['sublist'];
 
 					while ($sub_lists > 0) :
 
@@ -296,14 +296,14 @@ include("functions/data_process.php");
 						$res5s = mysqli_query( $connection, $qry5s ); /*qry5s*/
 						$ary5s = mysqli_fetch_assoc($res5s);
 
-						if ($ary5s[sublist] > 0){$mylisting = $ary5s[sublist];} else {$sub_lists = 0;}
+						if ($ary5s['sublist'] > 0){$mylisting = $ary5s['sublist'];} else {$sub_lists = 0;}
 
-						if ($ary5s[treasure] != ""){$treasure_item = $treasure_item . ", " . $ary5s[treasure];}
+						if ($ary5s['treasure'] != ""){$treasure_item = $treasure_item . ", " . $ary5s['treasure'];}
 
 					endwhile;
 				}
 
-				if ($x_list > 0){$thisone = "-&nbsp;" . ucfirst($treasure_item);} else {$thisone = ucfirst($treasure_item);}
+				if ($x_list > 0){$thisone = "-&nbsp;" . ucfirst((string) $treasure_item);} else {$thisone = ucfirst((string) $treasure_item);}
 				if ($loot_mash > 1){$filled = $filled . "" . $thisone . "" . $sepr;} else {$filled = $filled . "" . $thisone;}
 				$loot_mash = $loot_mash - 1;
 

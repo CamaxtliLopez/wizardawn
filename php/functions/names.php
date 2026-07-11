@@ -3,21 +3,21 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 function artifactNaming($name,$owner,$cursed,$career)
 {
-	if ($cursed != 1){$adj = adjName();} else {$adj = array('Evil', 'Vile', 'Cursed', 'Wicked', 'Unholy', 'Hated', 'Despised', 'Ruined', 'Unspeakable'); $adj = $adj[mt_rand(0,8)];}
+	if ($cursed != 1){$adj = adjName();} else {$adj = ['Evil', 'Vile', 'Cursed', 'Wicked', 'Unholy', 'Hated', 'Despised', 'Ruined', 'Unspeakable']; $adj = $adj[mt_rand(0,8)];}
 
-	if (mt_rand(1,100) > 60){$job = " the " . ucfirst(jobName());
-		if ($career == 1){$job = array('wizard', 'mage', 'sage', 'magician', 'priest', 'conjurer', 'medium', 'necromancer', 'shaman', 'seer', 'occultist'); $job = " the " . ucfirst($job[mt_rand(0,10)]);}
+	if (mt_rand(1,100) > 60){$job = " the " . ucfirst((string) jobName());
+		if ($career == 1){$job = ['wizard', 'mage', 'sage', 'magician', 'priest', 'conjurer', 'medium', 'necromancer', 'shaman', 'seer', 'occultist']; $job = " the " . ucfirst($job[mt_rand(0,10)]);}
 	}
 
 	if ($owner != ""){} else {$owner = manyName();}
 
 	if ($career == 2)
 	{
-		if (substr($owner, -1) == "s"){$owner = $owner . "`";} else {$owner = $owner . "`s";}
-		if (mt_rand(1,100) > 50){ $relic = $owner . " " . ucfirst($name); }
-		else { $relic = $owner . " " . $adj . " " . ucfirst($name); }
+		if (str_ends_with((string) $owner, "s")){$owner = $owner . "`";} else {$owner = $owner . "`s";}
+		if (mt_rand(1,100) > 50){ $relic = $owner . " " . ucfirst((string) $name); }
+		else { $relic = $owner . " " . $adj . " " . ucfirst((string) $name); }
 	}
-	else {$relic = $adj . " " . ucwords($name) . " of " . $owner . "" . $job;}
+	else {$relic = $adj . " " . ucwords((string) $name) . " of " . $owner . "" . $job;}
 
 	return $relic;
 }
@@ -39,9 +39,9 @@ function castingName()
 		case 8:	$word = authorName();	break;
 		case 9:	$word = authorName();	break;
 		case 10:$word = wolfName(1);	break;
-		case 11:$word = catName(any);	break;
+		case 11:$word = catName('any');	break;
 	}
-	$word = strrev(strtolower($word));
+	$word = strrev(strtolower((string) $word));
 	if (mt_rand(1,100) > 80){$word = strtolower(alienName() . "" . mutantName());}
 
 	return $word;
@@ -53,49 +53,49 @@ function DarkElfParts( $gender, $type )
 {
 	if ($type == "prefix" && $gender == "female")
 	{
-		$name = array('Akor', 'Alaun', 'Aly', 'Ang', 'Ardul', 'Aun', 'Bae', 'Bal', 'Belar', 'Briz', 'Bur', 'Chal', 'Char', 'Chess', 'Dhaun', 'Dil', 'Dirz', 
+		$name = ['Akor', 'Alaun', 'Aly', 'Ang', 'Ardul', 'Aun', 'Bae', 'Bal', 'Belar', 'Briz', 'Bur', 'Chal', 'Char', 'Chess', 'Dhaun', 'Dil', 'Dirz', 
 		'Dris', 'Eclav', 'Elv', 'Elvan', 'Erel', 'Ethe', 'Faer', 'Felyn', 'Filf', 'G`eld', 'Gauss', 'Ghuan', 'Gin', 'Grey', 'Hael', 'Hal', 'Houn', 'Iim', 'Iiv', 'Illiam', 'Ilph', 'In', 'In', 'Irae', 'Iym', 'Jan', 'Jhael', 'Jhul', 
 		'Jys', 'Lael', 'Lar', 'LiNeer', 'Lird', 'Lua', 'Mal', 'May', 'Micar', 'Min', 'Mol', 'Myr', 'Nath', 'Ned', 'Neer', 'Nhil', 'Null', 'Olor', 'Pellan', 'Phaer', 'Phyr', 'Qil', 'Qualn', 'Quar', 'Quav', 'Rauv', 'Ril', 'Sab', 
-		'Sbat', 'Shi`n', 'Shri', 'Shur', 'Shynt', 'Sin', 'Ssap', 'Susp', 'T`riss', 'Tal', 'Talab', 'Triel', 'Ulvir', 'Umrae', 'Vas', 'Vic', 'Vier', 'Vlon', 'Waer', 'Wuyon', 'Xull', 'Xun', 'Yas', 'Zar', 'Zebey', 'Zes', 'Zilv');
+		'Sbat', 'Shi`n', 'Shri', 'Shur', 'Shynt', 'Sin', 'Ssap', 'Susp', 'T`riss', 'Tal', 'Talab', 'Triel', 'Ulvir', 'Umrae', 'Vas', 'Vic', 'Vier', 'Vlon', 'Waer', 'Wuyon', 'Xull', 'Xun', 'Yas', 'Zar', 'Zebey', 'Zes', 'Zilv'];
 	}
 	else if ($type == "suffic" && $gender == "female")
 	{
-		$name = array('a', 'ace', 'ae', 'aer', 'afae', 'afay', 'ala', 'anna', 'arra', 'aste', 'avin', 'ayne', 'baste', 'breena', 'bryn', 'cice', 'cyrl', 'da', 'dia', 
+		$name = ['a', 'ace', 'ae', 'aer', 'afae', 'afay', 'ala', 'anna', 'arra', 'aste', 'avin', 'ayne', 'baste', 'breena', 'bryn', 'cice', 'cyrl', 'da', 'dia', 
 		'diira', 'dra', 'driira', 'dril', 'e', 'eari', 'eyl', 'ffyn', 'fryn', 'iara', 'ice', 'idil', 'iira', 'inidia', 'inil', 'intra', 'isstra', 'ithra', 'jra', 'jss', 'kacha', 'kiira', 'lara', 'lay', 'lin', 'lochar', 'mice', 
 		'mur`ss', 'na', 'nilee', 'niss', 'nitra', 'nolu', 'olin', 'onia', 'oyss', 'qualyn', 'quarra', 'quiri', 'ra', 'rae', 'raema', 'raena', 'riia', 'riina', 'ril', 'ryna', 'ryne', 'shalee', 'ssysn', 'stin', 'stra', 'tana', 
-		'thara', 'thrae', 'tree', 'tyrr', 'ual', 'ue', 'uit', 'une', 'uque', 'urra', 'va', 'vayas', 'vrae', 'vyll', 'vyrae', 'wae', 'wiira', 'wyss', 'xae', 'xena', 'xyra', 'yl', 'ylene', 'ymma', 'ynda', 'ynrae', 'yrr', 'zyne');
+		'thara', 'thrae', 'tree', 'tyrr', 'ual', 'ue', 'uit', 'une', 'uque', 'urra', 'va', 'vayas', 'vrae', 'vyll', 'vyrae', 'wae', 'wiira', 'wyss', 'xae', 'xena', 'xyra', 'yl', 'ylene', 'ymma', 'ynda', 'ynrae', 'yrr', 'zyne'];
 	}
 	else if ($type == "prefix" && $gender == "male")
 	{
-		$name = array('Alak', 'Alton', 'Kel', 'Adin', 'Amal', 'Ant', 'Bar', 'Bel', 'Bruh', 'Berg', 'Bhin', 'Chasz', 'Kron', 
+		$name = ['Alak', 'Alton', 'Kel', 'Adin', 'Amal', 'Ant', 'Bar', 'Bel', 'Bruh', 'Berg', 'Bhin', 'Chasz', 'Kron', 
 		'Cal', 'Dhaun', 'Dur', 'Div', 'Riz', 'Elk', 'Elaug', 'Kalan', 'Rhyl', 'Erth', 'Selds', 'Fil', 'Phar', 'G`eld', 'Orgoll', 'Ghuan', 'Din', 'Gul', 'Hatch', 'Sol', 'Rik', 'Iim', 'Dip', 'Im', 'Ilph', 'Izz', 'Sorn', 'Ilzt', 'Ist', 
 		'Duag', 'Gel', 'Jar', 'Driz', 'Llt', 'Les', 'Mourn', 'Ryld', 'Lyme', 'Malag', 'Mas', 'Micar', 'Ran', 'Go', 'Nym', 'Mer', 'Nad', 'Neer', 'Nal', 'Nil', 'Omar', 'Relon', 'Vorn', 'Phyx', 'Quil', 'Quil', 'Quar', 'Quev', 'Welv', 
-		'Ryl', 'Tsab', 'Szor', 'Kren', 'Ssz', 'Shar', 'Shynt', 'Szin', 'Tath', 'Spir', 'Teb', 'Tar', 'Tluth', 'Taz', 'Uhls', 'Hurz', 'Vesz', 'Vic', 'Val', 'Wod', 'Wehl', 'Wruz', 'Url', 'Xun', 'Yaz', 'Zakn', 'Zek', 'Zsz', 'Vuz');
+		'Ryl', 'Tsab', 'Szor', 'Kren', 'Ssz', 'Shar', 'Shynt', 'Szin', 'Tath', 'Spir', 'Teb', 'Tar', 'Tluth', 'Taz', 'Uhls', 'Hurz', 'Vesz', 'Vic', 'Val', 'Wod', 'Wehl', 'Wruz', 'Url', 'Xun', 'Yaz', 'Zakn', 'Zek', 'Zsz', 'Vuz'];
 	}
 	else 
 	{
-		$name = array('agh', 'as', 'aun', 'd', 'afein', 'aufein', 'launim', 'erin', 'atar', 'aste', 'aonar', 'al', 'gloth', 'antar', 'lyn', 
+		$name = ['agh', 'as', 'aun', 'd', 'afein', 'aufein', 'launim', 'erin', 'atar', 'aste', 'aonar', 'al', 'gloth', 'antar', 'lyn', 
 		'roos', 'axle', 'daer', 'drin', 'diirn', 'zar', 'driirn', 'dorl', 'e', 'erd', 'eyl', 'fein', 'fryn', 'ica', 'eth', 'imar', 'inid', 'inidia', 'in', 'intra', 'atlab', 'irahc', 'gos', 'jss', 'kah', 'raen', 'aghar', 'dyn', 
 		'lin', 'lochar', 'myr', 'mur`ss', 'nar', 'olil', 'nozz', 'net', 'nolu', 'olin', 'onim', 'omph', 'qualyn', 'net', 'oj', 'or', 'rar', 'orvir', 'olvir', 'rak', 'ree', 'ril', 'oyn', 'ryn', 'ral', 'rysn', 'trin', 'tran', 
-		'ton', 'tar', 'olg', 'tel', 'tyrr', 'dan', 'dor', 'dar', 'diin', 'uque', 'dax', 'ven', 'vayas', 'vrae', 'vyll', 'vyr', 'hrae', 'hriir', 'hrys', 'zaer', 'zen', 'zyr', 'yl', 'yln', 'inyon', 'yrd', 'yraen', 'yrr', 'zt');
+		'ton', 'tar', 'olg', 'tel', 'tyrr', 'dan', 'dor', 'dar', 'diin', 'uque', 'dax', 'ven', 'vayas', 'vrae', 'vyll', 'vyr', 'hrae', 'hriir', 'hrys', 'zaer', 'zen', 'zyr', 'yl', 'yln', 'inyon', 'yrd', 'yraen', 'yrr', 'zt'];
 	}
 
 	$part = count($name)-1;
-	return $name[mt_rand(0,$part)];
+	return $name[mt_rand(0, max((int)(0), (int)($part)))];
 }
 
 function DarkElfName( $gender )
 {
 	switch (mt_rand(1,8))
 	{
-		case 1: $name = DarkElfParts( $gender, prefix ) . DarkElfParts( $gender, suffix ); break;
-		case 2: $name = DarkElfParts( $gender, prefix ) . DarkElfParts( $gender, suffix ); break;
-		case 3: $name = DarkElfParts( $gender, prefix ) . DarkElfParts( $gender, suffix ); break;
-		case 4: $name = DarkElfParts( $gender, prefix ) . DarkElfParts( $gender, suffix ) . DarkElfParts( $gender, suffix ); break;
-		case 5: $name = DarkElfParts( $gender, prefix ) . DarkElfParts( $gender, suffix ) . DarkElfParts( $gender, suffix ); break;
-		case 6: $name = DarkElfParts( $gender, prefix ) . DarkElfParts( $gender, suffix ) . "`" . DarkElfParts( $gender, suffix ); break;
-		case 7: $name = DarkElfParts( $gender, prefix ) . DarkElfParts( $gender, suffix ) . "`" . DarkElfParts( $gender, suffix ); break;
-		case 8: $name = ucfirst(DarkElfParts( $gender, prefix )) . "`" . strtolower(DarkElfParts( $gender, suffix )) . DarkElfParts( $gender, suffix ); break;
+		case 1: $name = DarkElfParts( $gender, 'prefix' ) . DarkElfParts( $gender, 'suffix' ); break;
+		case 2: $name = DarkElfParts( $gender, 'prefix' ) . DarkElfParts( $gender, 'suffix' ); break;
+		case 3: $name = DarkElfParts( $gender, 'prefix' ) . DarkElfParts( $gender, 'suffix' ); break;
+		case 4: $name = DarkElfParts( $gender, 'prefix' ) . DarkElfParts( $gender, 'suffix' ) . DarkElfParts( $gender, 'suffix' ); break;
+		case 5: $name = DarkElfParts( $gender, 'prefix' ) . DarkElfParts( $gender, 'suffix' ) . DarkElfParts( $gender, 'suffix' ); break;
+		case 6: $name = DarkElfParts( $gender, 'prefix' ) . DarkElfParts( $gender, 'suffix' ) . "`" . DarkElfParts( $gender, 'suffix' ); break;
+		case 7: $name = DarkElfParts( $gender, 'prefix' ) . DarkElfParts( $gender, 'suffix' ) . "`" . DarkElfParts( $gender, 'suffix' ); break;
+		case 8: $name = ucfirst((string) DarkElfParts( $gender, 'prefix' )) . "`" . strtolower((string) DarkElfParts( $gender, 'suffix' )) . DarkElfParts( $gender, 'suffix' ); break;
 	}
 
 	return $name;
@@ -105,7 +105,7 @@ function DarkElfName( $gender )
 
 function holmesPart()
 {
-	$name = array('A', 'Bee', 'Bru', 'Doh', 'Er', 'Ful', 'Gram', 'Hor', 'Kra', 'Lis', 'Mis', 'Nick', 'Phil', 'Ralt', 'See', 'Tar', 'Tue', 'Y', 
+	$name = ['A', 'Bee', 'Bru', 'Doh', 'Er', 'Ful', 'Gram', 'Hor', 'Kra', 'Lis', 'Mis', 'Nick', 'Phil', 'Ralt', 'See', 'Tar', 'Tue', 'Y', 
 			'Ael', 'Bel', 'Bur', 'Don', 'Es', 'Fum', 'Grink', 'I', 'Krac', 'Lo', 'Mo', 'No', 'Po', 'Ram', 'Ser', 'Tas', 'U', 'Yor', 
 			'Af', 'Ber', 'Car', 'Dor', 'Eth', 'Ga', 'Gulf', 'Ig', 'Ky', 'Lu', 'Moo', 'Nor', 'Pos', 'Ray', 'Shal', 'Tee', 'Va', 'Ys', 
 			'Ak', 'Berd', 'Chor', 'Dre', 'Ev', 'Gahn', 'Ha', 'In', 'La', 'Mal', 'Mul', 'Nos', 'Poy', 'Ree', 'Sho', 'Ten', 'Vak', 'Zef', 
@@ -114,14 +114,14 @@ function holmesPart()
 			'An', 'Bol', 'Da', 'Eg', 'Far', 'Gen', 'Han', 'Jo', 'Lap', 'Mer', 'Mus', 'Omes', 'Quas', 'Ris', 'Spor', 'Ton', 'Wal', 'Zer', 
 			'Ar', 'Bor', 'Dan', 'Ek', 'Feg', 'Ger', 'Harg', 'Jur', 'Le', 'Mez', 'Na', 'Os', 'Que', 'Ro', 'Sun', 'Tra', 'Web', 'Zo', 
 			'Baf', 'Bran', 'Do', 'El', 'Fen', 'Glen', 'Ho', 'Ka', 'Lef', 'Mich', 'Ned', 'Pal', 'Ra', 'Ron', 'Sur', 'Treb', 'Wil', 'Zort', 
-			'Bar', 'Brose', 'Dock', 'End', 'Fi', 'Go', 'Hol', 'Kan', 'Lem', 'Mil', 'Nes', 'Pen', 'Rag', 'Sa', 'Sus', 'Tred', 'Xor');
+			'Bar', 'Brose', 'Dock', 'End', 'Fi', 'Go', 'Hol', 'Kan', 'Lem', 'Mil', 'Nes', 'Pen', 'Rag', 'Sa', 'Sus', 'Tred', 'Xor'];
 		$part = count($name)-1;
 
-	return $name[mt_rand(0,$part)];
+	return $name[mt_rand(0, max((int)(0), (int)($part)))];
 }
 function holmesTitle($gender)
 {
-	$gicolor = array('gold', 'silver', 'arcane', 'iron', 'steel', 'emerald', 'ruby', 'bronze', 'jade', 'sapphire', 'copper', 'royal');
+	$gicolor = ['gold', 'silver', 'arcane', 'iron', 'steel', 'emerald', 'ruby', 'bronze', 'jade', 'sapphire', 'copper', 'royal'];
 	$gcolor = $gicolor[mt_rand(0,11)];
 
 	$otitle = mt_rand(1,33);
@@ -164,9 +164,9 @@ function holmesTitle($gender)
 		case 0: $title = "from Above"; break;
 		case 1: $title = "from Afar"; break;
 		case 2: $title = "from Below"; break;
-		case 3: $title = "of the " . ucfirst(candleColor(0)) . " Cloak"; break;
-		case 4: $title = "of the " . ucfirst(candleColor(0)) . " Robe"; break;
-		case 5: $title = "of the " . ucfirst(candleColor(0)) . " Order"; break;
+		case 3: $title = "of the " . ucfirst((string) candleColor(0)) . " Cloak"; break;
+		case 4: $title = "of the " . ucfirst((string) candleColor(0)) . " Robe"; break;
+		case 5: $title = "of the " . ucfirst((string) candleColor(0)) . " Order"; break;
 		case 6: $title = "of the " . ucfirst($gcolor) . " Shield"; break;
 		case 7: $title = "of the " . ucfirst($gcolor) . " Sword"; break;
 		case 8: $title = "of the " . ucfirst($gcolor) . " Helm"; break;
@@ -183,7 +183,7 @@ function holmesTitle($gender)
 		case 19: $title = $stitle; break;
 		case 20: $title = $stitle; break;
 		case 21: $title = $stitle; break;
-		case 22: $title = "the " . ucfirst(candleColor(0)); break;
+		case 22: $title = "the " . ucfirst((string) candleColor(0)); break;
 		case 23: $title = "the Adept"; break;
 		case 24: $title = "the Albino"; break;
 		case 25: $title = "the Antiquarian"; break;
@@ -337,24 +337,24 @@ function holmesName($gender,$title)
 	}
 
 	$pick = mt_rand(1,100);
-	if ($pick < 11){$fname = holmesPart(); 																					$last = substr($fname, -1); 	if (mt_rand(1,2) == 1){$fname = $fname . $last;} }
+	if ($pick < 11){$fname = holmesPart(); 																					$last = substr((string) $fname, -1); 	if (mt_rand(1,2) == 1){$fname = $fname . $last;} }
 	else if ($pick < 45){$fname = holmesPart() . holmesPart(); }
 	else if ($pick < 60){$fname = holmesPart() . holmesPart() . holmesPart(); }
-	else if ($pick < 65){$fname = holmesPart();									$lname = holmesPart() . holmesPart();		$last = substr($fname, -1); 	if (mt_rand(1,2) == 1){$fname = $fname . $last;} }
-	else if ($pick < 80){$fname = holmesPart() . holmesPart();					$lname = holmesPart();						$last = substr($lname, -1); 	if (mt_rand(1,2) == 1){$lname = $lname . $last;} }
+	else if ($pick < 65){$fname = holmesPart();									$lname = holmesPart() . holmesPart();		$last = substr((string) $fname, -1); 	if (mt_rand(1,2) == 1){$fname = $fname . $last;} }
+	else if ($pick < 80){$fname = holmesPart() . holmesPart();					$lname = holmesPart();						$last = substr((string) $lname, -1); 	if (mt_rand(1,2) == 1){$lname = $lname . $last;} }
 	else if ($pick < 95){$fname = holmesPart() . holmesPart();					$lname = holmesPart() . holmesPart(); }
 	else {$fname = holmesPart() . holmesPart() . holmesPart() . holmesPart(); }
 
-	while (strlen($fname) < 2) : $fname = $fname . holmesPart(); endwhile;
-	if ($lname != ""){while (strlen($lname) < 2) : $lname = $lname . holmesPart(); endwhile;}
+	while (strlen((string) $fname) < 2) : $fname = $fname . holmesPart(); endwhile;
+	if ($lname != ""){while (strlen((string) $lname) < 2) : $lname = $lname . holmesPart(); endwhile;}
 
-	$fname = strtolower($fname);
-	$lname = strtolower($lname);
+	$fname = strtolower((string) $fname);
+	$lname = strtolower((string) $lname);
 	$fname = ucfirst($fname); 
 	$lname = ucfirst($lname);
 	if ($lname != ""){$name = $fname . " " . $lname;} else {$name = $fname;}
 
-	if (($gender == "female") && (substr($name, -1) != "a") && (substr($name, -1) != "i")){$name = $name . $girl;}
+	if (($gender == "female") && (!str_ends_with($name, "a")) && (!str_ends_with($name, "i"))){$name = $name . $girl;}
 
 	if ((mt_rand(1,2) == 1) && ($title != 1)){$name = $name . " " . holmesTitle($gender);}
 
@@ -370,7 +370,7 @@ function ConanFirst($type,$gender,$limit)
 		if ($gender == "female")
 		{
 			if ($limit == 1){$cnt = 47;} else {$cnt = 61;}
-			$name = array('Ak', 'Esh', 'Meht', 'Oluf', 'Shar', 
+			$name = ['Ak', 'Esh', 'Meht', 'Oluf', 'Shar', 
 				'Am', 'Hafsh', 'Meshk', 'Om', 'Sub', 
 				'Ast', 'Hatsheps', 'Mon', 'Omor', 'Tah', 
 				'Az', 'Heq', 'Mum', 'Rab', 'Taur', 
@@ -380,12 +380,12 @@ function ConanFirst($type,$gender,$limit)
 				'Dal', 'Kes', 'Nef', 'Sakhm', 'Zahr', 
 				'Dend', 'Maf', 'Nefert', 'San', 'Zal', 
 				'Ech', 'Mand', 'Nur', 'Sh', 
-				'A', 'B', 'C', 'D', 'E', 'H', 'K', 'M', 'N', 'O', 'R', 'S', 'T', 'Z');
+				'A', 'B', 'C', 'D', 'E', 'H', 'K', 'M', 'N', 'O', 'R', 'S', 'T', 'Z'];
 		}
 		else
 		{
 			if ($limit == 1){$cnt = 48;} else {$cnt = 61;}
-			$name = array('Ab', 'As', 'Ctesph', 'Khald', 'Seb', 
+			$name = ['Ab', 'As', 'Ctesph', 'Khald', 'Seb', 
 				'Abas', 'At', 'Fad', 'Kut', 'Ser', 
 				'Abub', 'Badr', 'Fenuk', 'Men', 'Setankm', 
 				'Agym', 'Bak', 'Han', 'Nad', 'Sipt', 
@@ -395,7 +395,7 @@ function ConanFirst($type,$gender,$limit)
 				'An', 'Chib', 'Iss', 'Osah', 'Thutm', 
 				'Anh', 'Chig', 'Karanth', 'Rakll', 'Tuth', 
 				'Ap', 'Cr', 'Kh', 'Rams', 
-				'A', 'B', 'C', 'F', 'H', 'I', 'K', 'M', 'N', 'O', 'R', 'S', 'T');
+				'A', 'B', 'C', 'F', 'H', 'I', 'K', 'M', 'N', 'O', 'R', 'S', 'T'];
 		}
 	}
 	else if ($type == "Cimmerian")
@@ -403,7 +403,7 @@ function ConanFirst($type,$gender,$limit)
 		if ($gender == "female")
 		{
 			if ($limit == 1){$cnt = 58;} else {$cnt = 72;}
-			$name = array('Aid', 'Cair', 'Earl', 'Kac', 'Murin', 'Shanl', 
+			$name = ['Aid', 'Cair', 'Earl', 'Kac', 'Murin', 'Shanl', 
 				'Ail', 'Cas', 'Eav', 'Keav', 'Nam', 'Shond', 
 				'Al', 'Cion', 'Eil', 'Kev', 'Neal', 'Sil', 
 				'Alm', 'Clion', 'Elv', 'Liad', 'Ness', 'Siobh', 
@@ -413,12 +413,12 @@ function ConanFirst($type,$gender,$limit)
 				'Binn', 'Deall', 'Flid', 'Mon', 'Ry', 'Trev', 
 				'Bon', 'Dev', 'Gorml', 'Moninn', 'Ryl', 'Tuir', 
 				'Br', 'Don', 'Gran', 'Mur', 'Sar', 
-				'A', 'B', 'C', 'D', 'E', 'F', 'G', 'K', 'L', 'M', 'N', 'R', 'S', 'T');
+				'A', 'B', 'C', 'D', 'E', 'F', 'G', 'K', 'L', 'M', 'N', 'R', 'S', 'T'];
 		}
 		else
 		{
 			if ($limit == 1){$cnt = 69;} else {$cnt = 85;}
-			$name = array('Ad', 'Calbh', 'Cur', 'Galv', 'Loch', 'Nemg', 'Scanl', 
+			$name = ['Ad', 'Calbh', 'Cur', 'Galv', 'Loch', 'Nemg', 'Scanl', 
 				'Ah', 'Chull', 'Domn', 'Gill', 'Lorc', 'Patr', 'Sith', 
 				'Amarg', 'Con', 'Don', 'Gilr', 'Mal', 'Ph', 'Sl', 
 				'Aon', 'Conald', 'Dubal', 'Im', 'Man', 'Raf', 'Soal', 
@@ -428,7 +428,7 @@ function ConanFirst($type,$gender,$limit)
 				'Br', 'Corm', 'Er', 'Ken', 'Murch', 'Ridd', 'Torm', 
 				'Brog', 'Cru', 'Erem', 'Kenn', 'Necht', 'Ron', 'Tuath', 
 				'Cah', 'Cul', 'Ferg', 'Lark', 'Negh', 'Ruar', 'Turg', 
-				'A', 'B', 'C', 'D', 'E', 'F', 'G', 'I', 'K', 'L', 'M', 'N', 'P', 'R', 'S', 'T');
+				'A', 'B', 'C', 'D', 'E', 'F', 'G', 'I', 'K', 'L', 'M', 'N', 'P', 'R', 'S', 'T'];
 		}
 	}
 	else // Aquilonian
@@ -436,7 +436,7 @@ function ConanFirst($type,$gender,$limit)
 		if ($gender == "female")
 		{
 			if ($limit == 1){$cnt = 89;} else {$cnt = 108;}
-			$name = array('Adam', 'Cair', 'Elv', 'Heroph', 'Lorell', 'Rh', 
+			$name = ['Adam', 'Cair', 'Elv', 'Heroph', 'Lorell', 'Rh', 
 				'Aeg', 'Cairist', 'Em', 'Hor', 'Malv', 'Ros', 
 				'Al', 'Call', 'Ep', 'Horac', 'Mar', 'Sal', 
 				'Alb', 'Card', 'Epion', 'Il', 'Mat', 'Salv', 
@@ -451,12 +451,12 @@ function ConanFirst($type,$gender,$limit)
 				'Balb', 'Don', 'Halac', 'Lev', 'Pell', 'Vimand', 
 				'Bith', 'Ech', 'Hec', 'Levan', 'Ph', 'Vir', 
 				'Bolb', 'Echidn', 'Hecub', 'Lor', 'Ren', 'Zel', 
-				'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'K', 'L', 'M', 'N', 'P', 'R', 'S', 'T', 'V', 'Z');
+				'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'K', 'L', 'M', 'N', 'P', 'R', 'S', 'T', 'V', 'Z'];
 		}
 		else
 		{
 			if ($limit == 1){$cnt = 144;} else {$cnt = 164;}
-			$name = array('Abant', 'Arct', 'Cadm', 'Er', 'Kest', 'Mod', 'Sept', 
+			$name = ['Abant', 'Arct', 'Cadm', 'Er', 'Kest', 'Mod', 'Sept', 
 				'Abantiad', 'Arp', 'Call', 'Erast', 'Kl', 'Modest', 'Septim', 
 				'Ac', 'Ascl', 'Carn', 'Fabr', 'Klaud', 'Ner', 'Serv', 
 				'Acast', 'Asclep', 'Cenw', 'Favon', 'Kost', 'Nol', 'Sor', 
@@ -477,14 +477,14 @@ function ConanFirst($type,$gender,$limit)
 				'Ang', 'Bel', 'Emil', 'Inach', 'Mez', 'Rin', 'Vil', 
 				'Arar', 'Bor', 'Ep', 'Iph', 'Mezent', 'Ruf', 'Viler', 
 				'Zor', 'Zet', 'Zav', 'Volman', 'Volm', 
-				'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'K', 'L', 'M', 'N', 'O', 'P', 'R', 'S', 'T', 'V', 'Z');
+				'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'K', 'L', 'M', 'N', 'O', 'P', 'R', 'S', 'T', 'V', 'Z'];
 		}
 	}
 
-	$consonant = array('b', 'c', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'm', 'n', 'p', 'r', 's', 't', 'v', 'w', 'x', 'z');
-	$vowel = array('a', 'e', 'i', 'o', 'u', 'y');
+	$consonant = ['b', 'c', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'm', 'n', 'p', 'r', 's', 't', 'v', 'w', 'x', 'z'];
+	$vowel = ['a', 'e', 'i', 'o', 'u', 'y'];
 
-	$names = $name[mt_rand(0,$cnt)];
+	$names = $name[mt_rand(0, max((int)(0), (int)($cnt)))];
 
 	if (($names == "A") || ($names == "E") || ($names == "I") || ($names == "O") || ($names == "U") || ($names == "Y")){ $names = $names . $consonant[mt_rand(0,18)]; }
 
@@ -496,7 +496,7 @@ function ConanLast($type,$gender)
 	{
 		if ($gender == "female")
 		{
-			$name = array('a', 'ema', 'ika', 'orose', 
+			$name = ['a', 'ema', 'ika', 'orose', 
 				'ah', 'emi', 'ila', 'ose', 
 				'ahra', 'enet', 'inah', 'u', 
 				'alika', 'era', 'ione', 'uane', 
@@ -505,11 +505,11 @@ function ConanLast($type,$gender)
 				'arifa', 'i', 'irye', 'ura', 
 				'arte', 'iah', 'isa', 'uret', 
 				'e', 'idna', 'iti', 'urt', 
-				'eemah', 'ifa', 'iza', 'uru', 'ut');
+				'eemah', 'ifa', 'iza', 'uru', 'ut'];
 		}
 		else
 		{
-			$name = array('a', 'amon', 'aruti', 'emu', 'eti', 'ok', 
+			$name = ['a', 'amon', 'aruti', 'emu', 'eti', 'ok', 
 				'adru', 'amsa', 'asi', 'enes', 'i', 'on', 
 				'afra', 'amun', 'aza', 'enoteph', 'ibale', 'ophis', 
 				'ah', 'ankm', 'eb', 'eph', 'if', 'oteph', 
@@ -519,14 +519,14 @@ function ConanLast($type,$gender)
 				'akari', 'ari', 'ek', 'eru', 'iptah', 'ugra', 
 				'aldun', 'armer', 'ekri', 'es', 'is', 'uh', 
 				'ale', 'aru', 'emheb', 'esphon', 'it', 'ukuh', 
-				'ymah', 'uti', 'uris', 'un', 'uma');
+				'ymah', 'uti', 'uris', 'un', 'uma'];
 		}
 	}
 	else if ($type == "Cimmerian")
 	{
 		if ($gender == "female")
 		{
-			$name = array('a', 'an', 'eh', 'iana', 'on', 
+			$name = ['a', 'an', 'eh', 'iana', 'on', 
 				'ab', 'ana', 'ele', 'id', 'orla', 
 				'ach', 'ann', 'ella', 'ideh', 'uma', 
 				'adan', 'e', 'en', 'ilis', 'y', 
@@ -535,11 +535,11 @@ function ConanLast($type,$gender)
 				'aith', 'ee', 'ey', 'inne', 
 				'ala', 'eele', 'ia', 'is', 
 				'alla', 'een', 'iadan', 'ola', 
-				'amh', 'eg', 'ialla', 'omh');
+				'amh', 'eg', 'ialla', 'omh'];
 		}
 		else
 		{
-			$name = array('ac', 'aidh', 'an', 'emon', 'oan', 'ormac', 
+			$name = ['ac', 'aidh', 'an', 'emon', 'oan', 'ormac', 
 				'ach', 'aigh', 'anlon', 'er', 'obar', 'oy', 
 				'acht', 'ain', 'ann', 'ern', 'oc', 'uarc', 
 				'achy', 'ainn', 'ar', 'et', 'odh', 'ull', 
@@ -548,14 +548,14 @@ function ConanLast($type,$gender)
 				'aer', 'aldar', 'ean', 'iall', 'on', 'us', 
 				'afer', 'all', 'earg', 'in', 'onan', 'yon', 
 				'ahn', 'allach', 'el', 'ion', 'onar', 
-				'aic', 'am', 'elan', 'ionn', 'oon');
+				'aic', 'am', 'elan', 'ionn', 'oon'];
 		}
 	}
 	else // Aquilonian
 	{
 		if ($gender == "female")
 		{
-			$name = array('a', 'are', 'ele', 'iana', 'inome', 'ota', 
+			$name = ['a', 'are', 'ele', 'iana', 'inome', 'ota', 
 				'abel', 'ata', 'elia', 'ice', 'iona', 'uba', 
 				'acia', 'atea', 'elle', 'ida', 'ione', 'unda', 
 				'aedra', 'auce', 'ena', 'idna', 'iope', 'uta', 
@@ -564,11 +564,11 @@ function ConanLast($type,$gender)
 				'ana', 'ea', 'era', 'ilia', 'ithea', 'ys', 
 				'andra', 'ede', 'eria', 'ilis', 'ona', 
 				'anne', 'eia', 'eta', 'imede', 'onia', 
-				'antia', 'eis', 'ia', 'ina', 'ope');
+				'antia', 'eis', 'ia', 'ina', 'ope'];
 		}
 		else
 		{
-			$name = array('a', 'alric', 'atius', 'epius', 'ian', 'itheus', 
+			$name = ['a', 'alric', 'atius', 'epius', 'ian', 'itheus', 
 				'abus', 'alus', 'audius', 'er', 'ias', 'ius', 
 				'accus', 'alvi', 'avian', 'ercer', 'ic', 'o', 
 				'achus', 'ana', 'avius', 'eri', 'icus', 'ocer', 
@@ -583,12 +583,12 @@ function ConanLast($type,$gender)
 				'alin', 'assus', 'elus', 'eus', 'io', 'uis', 
 				'alion', 'astus', 'endin', 'i', 'ion', 'ulf', 
 				'alle', 'atian', 'entius', 'iades', 'is', 'ulio', 
-				'ulk', 'ulus', 'ura', 'us', 'yc');
+				'ulk', 'ulus', 'ura', 'us', 'yc'];
 		}
 	}
 
 	$part = count($name)-1;
-	return $name[mt_rand(0,$part)];
+	return $name[mt_rand(0, max((int)(0), (int)($part)))];
 }
 function ConanPlain($type,$gender)
 {
@@ -596,7 +596,7 @@ function ConanPlain($type,$gender)
 	{
 		if ($gender == "female")
 		{
-			$name = array('Akila', 'Eshe', 'Meht-Urt', 'Olufemi', 'Sharifa', 
+			$name = ['Akila', 'Eshe', 'Meht-Urt', 'Olufemi', 'Sharifa', 
 			'Amunet', 'Hafsha', 'Meshkenet', 'Omorose', 'Subira', 
 			'Astarte', 'Hatshepsut', 'Monifa', 'Rabiah', 'Tahirah', 
 			'Aziza', 'Heqet', 'Muminah', 'Rashida', 'Tauret', 
@@ -605,11 +605,11 @@ function ConanPlain($type,$gender)
 			'Chione', 'Kephira', 'Nailah', 'Sagira', 'Zahra', 
 			'Dalila', 'Kesi', 'Nefertari', 'Sakhmet', 'Zalika', 
 			'Dendera', 'Mafuane', 'Nekhbet', 'Sanura', 
-			'Echidna', 'Mandisa', 'Nuru', 'Shani');
+			'Echidna', 'Mandisa', 'Nuru', 'Shani'];
 		}
 		else
 		{
-			$name = array('Abasi', 'Badru', 'Hak', 'Menes', 'Serapis', 
+			$name = ['Abasi', 'Badru', 'Hak', 'Menes', 'Serapis', 
 			'Abubakar', 'Bakari', 'Hanif', 'Mes', 'Setankmek', 
 			'Agymah', 'Baruti', 'Heru', 'Mun', 'Siptah', 
 			'Ak', 'Behdeti', 'Horemheb', 'Naeem', 'Teferi', 
@@ -619,14 +619,14 @@ function ConanPlain($type,$gender)
 			'Anok', 'Cris', 'Khafra', 'Rakllamon', 'Thutothmes', 
 			'Apophis', 'Ctesphon', 'Khaldun', 'Ramsa', 'Tuthamon', 
 			'Asim', 'Fadil', 'Khaza', 'Re', 
-			'Atemu', 'Fenukuh', 'Kutamun', 'Sebak');
+			'Atemu', 'Fenukuh', 'Kutamun', 'Sebak'];
 		}
 	}
 	else if ($type == "Cimmerian")
 	{
 		if ($gender == "female")
 		{
-			$name = array('Aideen', 'Casideh', 'Eilis', 'Keavy', 'Naomh', 'Shanley', 
+			$name = ['Aideen', 'Casideh', 'Eilis', 'Keavy', 'Naomh', 'Shanley', 
 			'Ailis', 'Cliona', 'Elva', 'Kevyn', 'Neala', 'Shonda', 
 			'Alma', 'Comala', 'Ernine', 'Liadan', 'Nessa', 'Sile', 
 			'Artis', 'Creidne', 'Fallon', 'Luiseach', 'Niamh', 'Siobhan', 
@@ -635,11 +635,11 @@ function ConanPlain($type,$gender)
 			'Boann', 'Devin', 'Flidais', 'Margreg', 'Ryann', 'Tarra', 
 			'Briana', 'Doneele', 'Gormlaith', 'Moninne', 'Rylee', 'Trevina', 
 			'Brid', 'Earlene', 'Grania', 'Muireann', 'Saorla', 'Tuiren', 
-			'Caireann', 'Eavan', 'Kacey', 'Murine', 'Saraid');
+			'Caireann', 'Eavan', 'Kacey', 'Murine', 'Saraid'];
 		}
 		else
 		{
-			$name = array('Adair', 'Cael', 'Cruaidh', 'Eachan', 'Giall', 'Larkin', 'Nechtan', 
+			$name = ['Adair', 'Cael', 'Cruaidh', 'Eachan', 'Giall', 'Larkin', 'Nechtan', 
 			'Ahern', 'Cahan', 'Cul', 'Eamha', 'Gillean', 'Lochlainn', 'Nemghan', 
 			'Amargain', 'Calbhach', 'Culann', 'Eion', 'Gilroy', 'Lorcan', 'Patraic', 
 			'Aodh', 'Chullain', 'Curaidh', 'Eithriall', 'Imar', 'Lunn', 'Phelan', 
@@ -650,14 +650,14 @@ function ConanPlain($type,$gender)
 			'Bran', 'Cormac', 'Doon', 'Gaer', 'Kenyon', 'Morann', 'Ronan', 
 			'Brogan', 'Cruacht', 'Dubaltach', 'Galvin', 'Kern', 'Murchad', 'Ruarc', 
 			'Sloan', 'Sualtam', 'Tarlach', 'Tiarnahn', 'Tormey', 'Tuathal', 'Scanlon', 
-			'Sithchean', 'Kull', 'Conan');
+			'Sithchean', 'Kull', 'Conan'];
 		}
 	}
 	else // Aquilonian
 	{
 		if ($gender == "female")
 		{
-			$name = array('Adamina', 'Bolbe', 'Donelle', 'Glauce', 'Lamia', 'Messina', 'Renita', 
+			$name = ['Adamina', 'Bolbe', 'Donelle', 'Glauce', 'Lamia', 'Messina', 'Renita', 
 			'Aegina', 'Cairistiona', 'Echidna', 'Gryne', 'Larunda', 'Nautia', 'Rhea', 
 			'Albiona', 'Calliope', 'Elvera', 'Hecuba', 'Leis', 'Nelia', 'Rosabel', 
 			'Alcimede', 'Cardea', 'Emera', 'Herophile', 'Lelia', 'Noleta', 'Salacia', 
@@ -667,11 +667,11 @@ function ConanPlain($type,$gender)
 			'Arianne', 'Damiana', 'Felice', 'Iphinome', 'Malvina', 'Pasithea', 'Tethys', 
 			'Balbina', 'Deidameia', 'Fluonia', 'Kalare', 'Marina', 'Pellonia', 'Timandra', 
 			'Bithynia', 'Devota', 'Galatea', 'Kornele', 'Matuta', 'Phaedra', 'Tryphene', 
-			'Valeria', 'Verna', 'Vigilia', 'Virilis', 'Zelata');
+			'Valeria', 'Verna', 'Vigilia', 'Virilis', 'Zelata'];
 		}
 		else
 		{
-			$name = array('Abantiades', 'Arctos', 'Calle', 'Epeus', 'Ilus', 'Metabus', 'Rufio', 
+			$name = ['Abantiades', 'Arctos', 'Calle', 'Epeus', 'Ilus', 'Metabus', 'Rufio', 
 			'Acastus', 'Arpell', 'Carneades', 'Erastus', 'Inachus', 'Mezentius', 'Septimus', 
 			'Achaeus', 'Asclepius', 'Cenwulf', 'Fabron', 'Iphis', 'Modestus', 'Servius', 
 			'Acrisioniades', 'Atabulus', 'Cepheus', 'Favonius', 'Kester', 'Nereus', 'Soractus', 
@@ -686,11 +686,11 @@ function ConanPlain($type,$gender)
 			'Andronicus', 'Belus', 'Edric', 'Hilarion', 'Lucian', 'Publius', 'Valerius', 
 			'Anguis', 'Boreas', 'Eligius', 'Horatius', 'Marinos', 'Rigell', 'Victorin', 
 			'Araris', 'Cadmus', 'Emilius', 'Ilius', 'Mercer', 'Rinald', 'Vilerus', 
-			'Zetus', 'Volmana', 'Zorian');
+			'Zetus', 'Volmana', 'Zorian'];
 		}
 	}
 	$part = count($name)-1;
-	return $name[mt_rand(0,$part)];
+	return $name[mt_rand(0, max((int)(0), (int)($part)))];
 }
 
 
@@ -706,7 +706,7 @@ function ConanName($type,$gender)
 		}
 	}
 	$lpart = ConanLast($type,$gender);
-	if (strlen($lpart) < 3){ $limit = 1; } else { $limit = 0; }
+	if (strlen((string) $lpart) < 3){ $limit = 1; } else { $limit = 0; }
 	$fpart = ConanFirst($type,$gender,$limit);
 	$name = $fpart . $lpart;
 	if (mt_rand(1,20) == 1){ $name = ConanPlain($type,$gender); }
@@ -736,7 +736,7 @@ function manyName()
 		case 14:$word = dwarfName();		break;
 		case 15:$word = dragonName();		break;
 		case 16:$word = wolfName(1);		break;
-		case 17:$word = catName(any);		break;
+		case 17:$word = catName('any');		break;
 	}
 	return $word;
 }
@@ -745,108 +745,108 @@ function manyName()
 
 function demonName()
 {
-$name = array('Hrallath', 'Heksen', 'Peinsluth', 'Keelus', 'Kra`an', 'Ankou', 'Turi`el', 'Azazel', 'Armarus', 'Grigorus', 'Ga`ahp', 'Therion', 'Peirazo', 'Ponerus', 'Arhaios', 'Ophis', 'Vairocan', 'Arsat', 'Karnax', 'Taet', 'Nu`uhn', 'Oghmus', 'Arametheus', 'Terxor', 'Erdok', 'Archatrix', 'Jonar', 'Marth`Fador', 'Helzigar', 'Tyrnak', 'Krakus', 'Marcus', 'Kaos', 'Doomor', 'Uhn', 'Malashim', 'Samael', 'Nelokhiel', 'Montobulus', 'Usuhl', 'Zul', 'Sophanon', 'Caryax', 'Daemeox', 'Phlegon', 'Aerophus', 'Euforus', 'Pallax', 'Nikaon', 'Licouax', 'Lindsaon', 'Bastax', 'Magdanon', 'Thayax', 'Aethon', 'Ceridus', 'Galenon', 'Rhysus', 'Auramax', 'Aldrax', 'Anaxus', 'Luceus', 'Quarax', 'Ariax', 'Balarax', 'Vincenus', 'Loxias', 'Birhamus', 'Lekax', 'Nyctinus', 'Myrsinus', 'Aamon', 'Agalierept', 'Agares', 'Aglasis', 'Aiwaz', 'Astaroth', 'Ayperos', 'Azatoth', 'Azmodaeus', 'Azrael', 'Ba`al', 'Baal', 'Barbatos', 'Bathim', 'Bathsin', 'Be`elzebub', 'Be`elzebubba', 'Bechard', 'Beelzebuth', 'Botis', 'Brulefer', 'Bucon', 'Buer', 'Clauneck', 'Clitheret', 'Cthulhu', 'Druzil', 'Eleogap', 'Eliezer', 'Eligor', 'Eracove', 'Faraii', 'Fleurety', 'Frimost', 'Frucissiere', 'Fruitimiere', 'Glassyalabolas', 'Guland', 'Gusoyn', 'Hael', 'Haristum', 'Heramael', 'Hiepacth', 'Huictiigara', 'Humots', 'Khil', 'Maleki', 'Marbas', 'Mephistopheles', 'Mersilde', 'Minoson', 'Moloch', 'Molech', 'Morail', 'Musisin', 'Naberrs', 'Nebiros', 'Nebirots', 'Nyarlathotep', 'Pentagnony', 'Proculo', 'Pruslas', 'Pursan', 'Rofocale', 'Sargatans', 'Satanchia', 'Satanciae', 'Segal', 'Sergulath', 'Sergutthy', 'Sidragrosam', 'Sirchade', 'Surgat', 'Sustugriel', 'Tarchimache', 'Tarihimal', 'Trimasel', 'Vaelfar', 'Wormius', 'Yog-Sothoth', 'Y`reif', 'Eci', 'Zoray', 'Mulpelpe', 'Ermohup', 'Hehsiel', 'Nahehoehsas', 'Oratinael', 'Eriel', 'Pocaspomon', 'Sorubiseriel', 'Aropet', 'Zases', 'Tpahihuz', 'Pael', 'Erorasl', 'Aknrar', 'Ahelas', 'Pontael', 'Asiel', 'Nopoz', 'Rneenuziel', 'Namolon', 'Tuep', 'Henbolaron', 'Zedeson', 'Assoaz', 'Sotas', 'Tadal', 'Huslcir', 'Rutselomiel', 'Solael', 'Saez', 'Bettael', 'Ampahoel', 'Zatar', 'Osaselael', 'Irpsan', 'Alael', 'Pdutozab', 'Luziel', 'Tadon', 'Asramel', 'Aknoan', 'Ahnet', 'Unonom', 'Xuksetpo', 'Pemcapso', 'Osapon', 'Pimunael', 'Esulamon', 'Tuhkaraip', 'Menepruron', 'Ranaron', 'Allaten', 'Asoreb', 'Razeniel', 'Sapanolr', 'Ticos', 'Ussaxot', 'Hahlraz', 'Tedrahamael', 'Apcbun', 'Bahmensu', 'Oron', 'Xatnpih', 'Opael', 'Ipamorz', 'Sanopars', 'Exroh', 'Lurtapios', 'Tocpertaniel', 'Islopaar', 'Nizlpad', 'Umlaboor', 'Dalisatosiel', 'Erammozal', 'Amsaset', 'Anhozal', 'Irlap', 'Nour', 'Etnoxaad', 'Imubenn', 'Ezipexon', 'Sihunosl', 'Ehohit', 'Zatbuhsatiel', 'Sazsutpe', 'Hipdiel', 'Honed', 'Unikesm', 'Udazbanoe', 'Zotipeposael', 'Halmaneop', 'Semnsat', 'Itakup', 'Ehhbes', 'Araraz', 'Halbasoon', 'Nahahetael', 'Ubeezh', 'Ilpbeh', 'Hilopael', 'Esboot', 'Usoparb', 'Hotesiatrem', 'Epnanaet', 'Lehael', 'Lapael', 'Urapes', 'Obalasc', 'Pandael', 'Damaz', 'Ehnnat', 'Pnecamob', 'Ethahoat', 'Kuhretieh', 'Ekanzapis', 'Pundohien', 'Honolens', 'Ahtuxies', 'Asidodiel', 'Laripael', 'Bortarsariel', 'Hirular', 'Dunaneboriel', 'Ensadaap', 'Usraat', 'Hahuhnerael', 'Bolenoz', 'Larhepeis', 'Irasteheh', 'Rarahaimzah', 'Alahotael', 'Litedabh', 'Lasnuhtasael', 'Unamah', 'Topriraiz', 'Rsaset', 'Ansaap', 'Opoasl', 'Hetet', 'Sotsopsehiel', 'Kopozel', 'Xartatesael', 'Amosun', 'Perensahael', 'Chatomep', 'Adiarh', 'Loos', 'Hador', 'Sbeihapiel', 'Odipin', 'Tramater', 'Mephotasael', 'Mozed', 'Depar', 'Taron', 'Anaobm', 'Larpusmason', 'Essaheah', 'Suel', 'Sahaminapiel', 'Dinatoh', 'Anrac', 'Rasuniolpas', 'Isoteciel', 'Atcis', 'Hatazeh', 'Anhoor', 'Samnerra', 'Snilot', 'Esasitm', 'Arhel', 'Rkesitas', 'Hexpemsazon', 'Izatap', 'Ezon', 'Koit', 'Obasahiel', 'Cerneplihael', 'Husmled', 'Hisipon', 'Anolahon', 'Ppaironael', 'Lanetsosiel', 'Olon', 'Arpzih', 'Ekarnahox', 'Ibmnat', 'Ipon', 'Sutlanasael', 'Srosirad', 'Apomael', 'Asemet', 'Uknatias', 'Nohon', 'Maholab', 'Sacuhatakael', 'Orpir', 'Bessipcopiel', 'Isnal', 'Elxar');
+$name = ['Hrallath', 'Heksen', 'Peinsluth', 'Keelus', 'Kra`an', 'Ankou', 'Turi`el', 'Azazel', 'Armarus', 'Grigorus', 'Ga`ahp', 'Therion', 'Peirazo', 'Ponerus', 'Arhaios', 'Ophis', 'Vairocan', 'Arsat', 'Karnax', 'Taet', 'Nu`uhn', 'Oghmus', 'Arametheus', 'Terxor', 'Erdok', 'Archatrix', 'Jonar', 'Marth`Fador', 'Helzigar', 'Tyrnak', 'Krakus', 'Marcus', 'Kaos', 'Doomor', 'Uhn', 'Malashim', 'Samael', 'Nelokhiel', 'Montobulus', 'Usuhl', 'Zul', 'Sophanon', 'Caryax', 'Daemeox', 'Phlegon', 'Aerophus', 'Euforus', 'Pallax', 'Nikaon', 'Licouax', 'Lindsaon', 'Bastax', 'Magdanon', 'Thayax', 'Aethon', 'Ceridus', 'Galenon', 'Rhysus', 'Auramax', 'Aldrax', 'Anaxus', 'Luceus', 'Quarax', 'Ariax', 'Balarax', 'Vincenus', 'Loxias', 'Birhamus', 'Lekax', 'Nyctinus', 'Myrsinus', 'Aamon', 'Agalierept', 'Agares', 'Aglasis', 'Aiwaz', 'Astaroth', 'Ayperos', 'Azatoth', 'Azmodaeus', 'Azrael', 'Ba`al', 'Baal', 'Barbatos', 'Bathim', 'Bathsin', 'Be`elzebub', 'Be`elzebubba', 'Bechard', 'Beelzebuth', 'Botis', 'Brulefer', 'Bucon', 'Buer', 'Clauneck', 'Clitheret', 'Cthulhu', 'Druzil', 'Eleogap', 'Eliezer', 'Eligor', 'Eracove', 'Faraii', 'Fleurety', 'Frimost', 'Frucissiere', 'Fruitimiere', 'Glassyalabolas', 'Guland', 'Gusoyn', 'Hael', 'Haristum', 'Heramael', 'Hiepacth', 'Huictiigara', 'Humots', 'Khil', 'Maleki', 'Marbas', 'Mephistopheles', 'Mersilde', 'Minoson', 'Moloch', 'Molech', 'Morail', 'Musisin', 'Naberrs', 'Nebiros', 'Nebirots', 'Nyarlathotep', 'Pentagnony', 'Proculo', 'Pruslas', 'Pursan', 'Rofocale', 'Sargatans', 'Satanchia', 'Satanciae', 'Segal', 'Sergulath', 'Sergutthy', 'Sidragrosam', 'Sirchade', 'Surgat', 'Sustugriel', 'Tarchimache', 'Tarihimal', 'Trimasel', 'Vaelfar', 'Wormius', 'Yog-Sothoth', 'Y`reif', 'Eci', 'Zoray', 'Mulpelpe', 'Ermohup', 'Hehsiel', 'Nahehoehsas', 'Oratinael', 'Eriel', 'Pocaspomon', 'Sorubiseriel', 'Aropet', 'Zases', 'Tpahihuz', 'Pael', 'Erorasl', 'Aknrar', 'Ahelas', 'Pontael', 'Asiel', 'Nopoz', 'Rneenuziel', 'Namolon', 'Tuep', 'Henbolaron', 'Zedeson', 'Assoaz', 'Sotas', 'Tadal', 'Huslcir', 'Rutselomiel', 'Solael', 'Saez', 'Bettael', 'Ampahoel', 'Zatar', 'Osaselael', 'Irpsan', 'Alael', 'Pdutozab', 'Luziel', 'Tadon', 'Asramel', 'Aknoan', 'Ahnet', 'Unonom', 'Xuksetpo', 'Pemcapso', 'Osapon', 'Pimunael', 'Esulamon', 'Tuhkaraip', 'Menepruron', 'Ranaron', 'Allaten', 'Asoreb', 'Razeniel', 'Sapanolr', 'Ticos', 'Ussaxot', 'Hahlraz', 'Tedrahamael', 'Apcbun', 'Bahmensu', 'Oron', 'Xatnpih', 'Opael', 'Ipamorz', 'Sanopars', 'Exroh', 'Lurtapios', 'Tocpertaniel', 'Islopaar', 'Nizlpad', 'Umlaboor', 'Dalisatosiel', 'Erammozal', 'Amsaset', 'Anhozal', 'Irlap', 'Nour', 'Etnoxaad', 'Imubenn', 'Ezipexon', 'Sihunosl', 'Ehohit', 'Zatbuhsatiel', 'Sazsutpe', 'Hipdiel', 'Honed', 'Unikesm', 'Udazbanoe', 'Zotipeposael', 'Halmaneop', 'Semnsat', 'Itakup', 'Ehhbes', 'Araraz', 'Halbasoon', 'Nahahetael', 'Ubeezh', 'Ilpbeh', 'Hilopael', 'Esboot', 'Usoparb', 'Hotesiatrem', 'Epnanaet', 'Lehael', 'Lapael', 'Urapes', 'Obalasc', 'Pandael', 'Damaz', 'Ehnnat', 'Pnecamob', 'Ethahoat', 'Kuhretieh', 'Ekanzapis', 'Pundohien', 'Honolens', 'Ahtuxies', 'Asidodiel', 'Laripael', 'Bortarsariel', 'Hirular', 'Dunaneboriel', 'Ensadaap', 'Usraat', 'Hahuhnerael', 'Bolenoz', 'Larhepeis', 'Irasteheh', 'Rarahaimzah', 'Alahotael', 'Litedabh', 'Lasnuhtasael', 'Unamah', 'Topriraiz', 'Rsaset', 'Ansaap', 'Opoasl', 'Hetet', 'Sotsopsehiel', 'Kopozel', 'Xartatesael', 'Amosun', 'Perensahael', 'Chatomep', 'Adiarh', 'Loos', 'Hador', 'Sbeihapiel', 'Odipin', 'Tramater', 'Mephotasael', 'Mozed', 'Depar', 'Taron', 'Anaobm', 'Larpusmason', 'Essaheah', 'Suel', 'Sahaminapiel', 'Dinatoh', 'Anrac', 'Rasuniolpas', 'Isoteciel', 'Atcis', 'Hatazeh', 'Anhoor', 'Samnerra', 'Snilot', 'Esasitm', 'Arhel', 'Rkesitas', 'Hexpemsazon', 'Izatap', 'Ezon', 'Koit', 'Obasahiel', 'Cerneplihael', 'Husmled', 'Hisipon', 'Anolahon', 'Ppaironael', 'Lanetsosiel', 'Olon', 'Arpzih', 'Ekarnahox', 'Ibmnat', 'Ipon', 'Sutlanasael', 'Srosirad', 'Apomael', 'Asemet', 'Uknatias', 'Nohon', 'Maholab', 'Sacuhatakael', 'Orpir', 'Bessipcopiel', 'Isnal', 'Elxar'];
 $names = count($name)-1;
-return $name[mt_rand(0,$names)];
+return $name[mt_rand(0, max((int)(0), (int)($names)))];
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 function mageName()
 {
-$name = array('Zelik', 'Kronos', 'Zakron', 'Velis', 'Chujil', 'Hygraph', 'Dyntrall', 'Zarus', 'Phoseph', 'Malkavik', 'Zevras', 'Vakel', 'Daklon', 'Zamog', 'Tavurk', 'Drakov', 'Zazik', 'Yyntrix', 'Zazik', 'Fropoz', 'Noxtrag', 'Makzok', 'Galzan', 'Drakan', 'Drakzik', 'Vazmog', 'Ronlyn', 'Merkul', 'Zasfus', 'Zain', 'Doraghir', 'Danaghir', 'Staylin', 'Kraylin', 'Limnoch', 'Kranor', 'Kraenor', 'Kranostil', 'Kranostir', 'Lilithack', 'Terus', 'Thaelin', 'Thulack', 'Jiltharis', 'Garigor', 'Banothil', 'Bainothil', 'Quain', 'Ilzinias', 'Mardis', 'Phalil', 'Adnoc', 'Leje', 'Akris', 'Sartan', 'Zejron', 'Pitt', 'Puzilan', 'Vantrom', 'Tyrin', 'Kuhl', 'Xarot', 'Viktor', 'Odilion', 'Raith', 'Bazerion', 'Tybevriat', 'Varn', 'Keldor', 'Modoc', 'Mangar', 'Varsan', 'Izlay', 'Slirith', 'Alcor', 'Vitar', 'Feenark', 'Lyticant', 'Aegnor', 'Aelfric', 'Ainvar', 'Arazion', 'Ardarion', 'Arkanis', 'Athrax', 'Barghest', 'Baros', 'Begarin', 'Beynlore', 'Burat', 'Cairne', 'Carthon', 'Chamdar', 'Ciric', 'Cruzado', 'Cyphrak', 'D`Harun', 'Daelon', 'Daktar', 'Darvain', 'Dracus', 'Dradar', 'Draelin', 'Draenor', 'Durodund', 'Eklor', 'Elrak', 'Fangorn', 'Farynthane', 'Galtor', 'Gemma', 'Gragus', 'Irian', 'Israfel', 'Jaden', 'Jefahn', 'K`shar', 'Kalimus', 'Kallomane', 'Kanax', 'Kelnos', 'Kharn', 'Khir', 'Kragon', 'Kylnath', 'Larac', 'Lathis', 'Lenroc', 'Lonthorynthoryl', 'Lorreck', 'Mattrick', 'Mazrim', 'Mazrim', 'Modrei', 'Morturus', 'Muktar', 'Murdon', 'Murron', 'Myndon', 'Mythran', 'Mytor', 'Nabius', 'Nalynkal', 'Nazgul', 'Paorin', 'Quillan', 'Rendar', 'Scythyn', 'Shilor', 'Sobran', 'Soltak', 'Sorz', 'Taban', 'Telzar', 'Teron', 'Trethovian', 'Tyrnar', 'Ulath', 'Vandor', 'Vermithrax', 'Vlade', 'Volan', 'Wydstrin', 'X`calak', 'Xaelin', 'Xandor', 'Xarthos', 'Xaxtox', 'Xenix', 'Xiltanth', 'Xylor', 'Xystil', 'Yazad', 'Yllthane', 'Ylthallynon', 'Ythoryn', 'Zalifar', 'Zathrix', 'Zunrek');
+$name = ['Zelik', 'Kronos', 'Zakron', 'Velis', 'Chujil', 'Hygraph', 'Dyntrall', 'Zarus', 'Phoseph', 'Malkavik', 'Zevras', 'Vakel', 'Daklon', 'Zamog', 'Tavurk', 'Drakov', 'Zazik', 'Yyntrix', 'Zazik', 'Fropoz', 'Noxtrag', 'Makzok', 'Galzan', 'Drakan', 'Drakzik', 'Vazmog', 'Ronlyn', 'Merkul', 'Zasfus', 'Zain', 'Doraghir', 'Danaghir', 'Staylin', 'Kraylin', 'Limnoch', 'Kranor', 'Kraenor', 'Kranostil', 'Kranostir', 'Lilithack', 'Terus', 'Thaelin', 'Thulack', 'Jiltharis', 'Garigor', 'Banothil', 'Bainothil', 'Quain', 'Ilzinias', 'Mardis', 'Phalil', 'Adnoc', 'Leje', 'Akris', 'Sartan', 'Zejron', 'Pitt', 'Puzilan', 'Vantrom', 'Tyrin', 'Kuhl', 'Xarot', 'Viktor', 'Odilion', 'Raith', 'Bazerion', 'Tybevriat', 'Varn', 'Keldor', 'Modoc', 'Mangar', 'Varsan', 'Izlay', 'Slirith', 'Alcor', 'Vitar', 'Feenark', 'Lyticant', 'Aegnor', 'Aelfric', 'Ainvar', 'Arazion', 'Ardarion', 'Arkanis', 'Athrax', 'Barghest', 'Baros', 'Begarin', 'Beynlore', 'Burat', 'Cairne', 'Carthon', 'Chamdar', 'Ciric', 'Cruzado', 'Cyphrak', 'D`Harun', 'Daelon', 'Daktar', 'Darvain', 'Dracus', 'Dradar', 'Draelin', 'Draenor', 'Durodund', 'Eklor', 'Elrak', 'Fangorn', 'Farynthane', 'Galtor', 'Gemma', 'Gragus', 'Irian', 'Israfel', 'Jaden', 'Jefahn', 'K`shar', 'Kalimus', 'Kallomane', 'Kanax', 'Kelnos', 'Kharn', 'Khir', 'Kragon', 'Kylnath', 'Larac', 'Lathis', 'Lenroc', 'Lonthorynthoryl', 'Lorreck', 'Mattrick', 'Mazrim', 'Mazrim', 'Modrei', 'Morturus', 'Muktar', 'Murdon', 'Murron', 'Myndon', 'Mythran', 'Mytor', 'Nabius', 'Nalynkal', 'Nazgul', 'Paorin', 'Quillan', 'Rendar', 'Scythyn', 'Shilor', 'Sobran', 'Soltak', 'Sorz', 'Taban', 'Telzar', 'Teron', 'Trethovian', 'Tyrnar', 'Ulath', 'Vandor', 'Vermithrax', 'Vlade', 'Volan', 'Wydstrin', 'X`calak', 'Xaelin', 'Xandor', 'Xarthos', 'Xaxtox', 'Xenix', 'Xiltanth', 'Xylor', 'Xystil', 'Yazad', 'Yllthane', 'Ylthallynon', 'Ythoryn', 'Zalifar', 'Zathrix', 'Zunrek'];
 $names = count($name)-1;
-return $name[mt_rand(0,$names)];
+return $name[mt_rand(0, max((int)(0), (int)($names)))];
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 function jobName()
 {
-$name = array('warrior', 'fighter', 'barbarian', 'mercenary', 'slayer', 'conquerer', 'enforcer', 'man-at-arms', 'torturer', 'vanquisher', 'soldier', 'wizard', 'mage', 'sage', 'magician', 'priest', 'conjurer', 'medium', 'necromancer', 'shaman', 'seer', 'occultist', 'thief', 'rogue', 'robber', 'criminal', 'swindler', 'pickpocket', 'sneak', 'prowler', 'villain', 'knave', 'bandit');
+$name = ['warrior', 'fighter', 'barbarian', 'mercenary', 'slayer', 'conquerer', 'enforcer', 'man-at-arms', 'torturer', 'vanquisher', 'soldier', 'wizard', 'mage', 'sage', 'magician', 'priest', 'conjurer', 'medium', 'necromancer', 'shaman', 'seer', 'occultist', 'thief', 'rogue', 'robber', 'criminal', 'swindler', 'pickpocket', 'sneak', 'prowler', 'villain', 'knave', 'bandit'];
 $names = count($name)-1;
-return $name[mt_rand(0,$names)];
+return $name[mt_rand(0, max((int)(0), (int)($names)))];
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 function adjName()
 {
-$name = array('Exotic', 'Mysterious', 'Enchanted', 'Marvelous', 'Amazing', 'Astonishing', 'Mystical', 'Astounding', 'Magical', 'Divine', 'Excellent', 'Magnificent', 'Phenomenal', 'Fantastic', 'Incredible', 'Extraordinary', 'Fabulous', 'Wondrous', 'Glorious', 'Lost', 'Fabled', 'Legendary', 'Mythical', 'Missing', 'Ancestral', 'Ornate', 'Ultimate', 'Rare', 'Royal', 'Wonderful', 'Glorified', 'Sacred', 'Almighty', 'Supreme', 'Mighty', 'Powerful', 'Unknown', 'Forgotten');
+$name = ['Exotic', 'Mysterious', 'Enchanted', 'Marvelous', 'Amazing', 'Astonishing', 'Mystical', 'Astounding', 'Magical', 'Divine', 'Excellent', 'Magnificent', 'Phenomenal', 'Fantastic', 'Incredible', 'Extraordinary', 'Fabulous', 'Wondrous', 'Glorious', 'Lost', 'Fabled', 'Legendary', 'Mythical', 'Missing', 'Ancestral', 'Ornate', 'Ultimate', 'Rare', 'Royal', 'Wonderful', 'Glorified', 'Sacred', 'Almighty', 'Supreme', 'Mighty', 'Powerful', 'Unknown', 'Forgotten'];
 $names = count($name)-1;
-return $name[mt_rand(0,$names)];
+return $name[mt_rand(0, max((int)(0), (int)($names)))];
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 function classMaleName()
 {
-$name = array('Templar', 'Thief', 'Illusionist', 'Prince', 'Invoker', 'Priest', 'Conjurer', 'Bandit', 'Baron', 'Wizard', 'Cleric', 'Monk', 'Minstrel', 'Defender', 'Cavalier', 'Magician', 'Warlock', 'Fighter', 'Seeker', 'Slayer', 'Ranger', 'Barbarian', 'Explorer', 'Heretic', 'Gladiator', 'Sage', 'Rogue', 'Paladin', 'Bard', 'Diviner', 'Lord', 'Outlaw', 'Prophet', 'Mercenary', 'Adventurer', 'Enchanter', 'King', 'Scout', 'Mystic', 'Mage', 'Traveler', 'Summoner', 'Warrior', 'Sorcerer', 'Seer', 'Hunter', 'Knight', 'Necromancer', 'Shaman');
+$name = ['Templar', 'Thief', 'Illusionist', 'Prince', 'Invoker', 'Priest', 'Conjurer', 'Bandit', 'Baron', 'Wizard', 'Cleric', 'Monk', 'Minstrel', 'Defender', 'Cavalier', 'Magician', 'Warlock', 'Fighter', 'Seeker', 'Slayer', 'Ranger', 'Barbarian', 'Explorer', 'Heretic', 'Gladiator', 'Sage', 'Rogue', 'Paladin', 'Bard', 'Diviner', 'Lord', 'Outlaw', 'Prophet', 'Mercenary', 'Adventurer', 'Enchanter', 'King', 'Scout', 'Mystic', 'Mage', 'Traveler', 'Summoner', 'Warrior', 'Sorcerer', 'Seer', 'Hunter', 'Knight', 'Necromancer', 'Shaman'];
 $names = count($name)-1;
-return $name[mt_rand(0,$names)];
+return $name[mt_rand(0, max((int)(0), (int)($names)))];
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 function classFemaleName()
 {
-$name = array('Templar', 'Thief', 'Illusionist', 'Princess', 'Invoker', 'Priestess', 'Conjurer', 'Bandit', 'Baroness', 'Wizard', 'Cleric', 'Monk', 'Minstrel', 'Defender', 'Cavalier', 'Magician', 'Witch', 'Fighter', 'Seeker', 'Slayer', 'Ranger', 'Barbarian', 'Explorer', 'Heretic', 'Gladiator', 'Sage', 'Rogue', 'Paladin', 'Bard', 'Diviner', 'Lady', 'Outlaw', 'Prophet', 'Mercenary', 'Adventurer', 'Enchantress', 'Queen', 'Scout', 'Mystic', 'Mage', 'Traveler', 'Summoner', 'Warrior', 'Sorcereress', 'Seer', 'Hunter', 'Knight', 'Necromancer', 'Shaman');
+$name = ['Templar', 'Thief', 'Illusionist', 'Princess', 'Invoker', 'Priestess', 'Conjurer', 'Bandit', 'Baroness', 'Wizard', 'Cleric', 'Monk', 'Minstrel', 'Defender', 'Cavalier', 'Magician', 'Witch', 'Fighter', 'Seeker', 'Slayer', 'Ranger', 'Barbarian', 'Explorer', 'Heretic', 'Gladiator', 'Sage', 'Rogue', 'Paladin', 'Bard', 'Diviner', 'Lady', 'Outlaw', 'Prophet', 'Mercenary', 'Adventurer', 'Enchantress', 'Queen', 'Scout', 'Mystic', 'Mage', 'Traveler', 'Summoner', 'Warrior', 'Sorcereress', 'Seer', 'Hunter', 'Knight', 'Necromancer', 'Shaman'];
 $names = count($name)-1;
-return $name[mt_rand(0,$names)];
+return $name[mt_rand(0, max((int)(0), (int)($names)))];
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 function dragonName()
 {
-$name = array('Ath', 'Balmonth', 'Baranth', 'Bralmuth', 'Briarananth', 'Bucarth', 'Bullinth', 'Camalanth', 'Carmath', 'Caroth', 'Cath', 'Chaneth', 'Charanuth', 'Chatianth', 'Colareth', 'Coliath', 'Craillanth', 'Craimath', 'Crairenarth', 'Duvenath', 'Emaleth', 'Esianth', 'Fith', 'Galzieth', 'Gamiath', 'Gatianth', 'Gebeth', 'Gith', 'Giyeth', 'Glanarth', 'Glath', 'Gorianth', 'Hallath', 'Halzanth', 'Iacanth', 'Iasiluth', 'Jemiath', 'Jenith', 'Jeranth', 'Jeranuth', 'Jeth', 'Laneth', 'Malanenth', 'Mallieth', 'Mareninth', 'Menianth', 'Meranuth', 'Meth', 'Mikenth', 'Mikieth', 'Mileth', 'Mneniath', 'Mneth', 'Mogonth', 'Morenelth', 'Moth', 'Naranoth', 'Nenith', 'Palararth', 'Paloth', 'Perinth', 'Plath', 'Polaneth', 'Polarinth', 'Polzeth', 'Poraneth', 'Porenorth', 'Povarith', 'Quessith', 'Quevenanth', 'Rolieth', 'Rossoth', 'Roth', 'Sagrianth', 'Samaloth', 'Shayenth', 'Sholzianth', 'Shonniath', 'Shoth', 'Sidieth', 'Spamath', 'Spamuth', 'Spath', 'Speth', 'Tagmuth', 'Tarmuth', 'Tiagorth', 'Tiakoth', 'Tiarath', 'Trabieth', 'Trananth', 'Traranath', 'Tueth', 'Weth', 'Wielgianth', 'Wieneth', 'Wienieth', 'Wirmarth', 'Lunamon', 'Ioneron', 'Reanthasala', 'Tiamar', 'Olrion', 'Lunorx', 'Jonin', 'Olthonis', 'Taleron', 'Abraanthasala', 'Lunadine', 'Olthas', 'Tiansa', 'Valorx', 'Talrion', 'Caradine', 'Shinikon', 'Ti', 'Takhansa', 'Ollev', 'Sirorx', 'Abrae', 'Riisis', 'Lauralare', 'Darrion', 'Juderon', 'Tieth', 'Ri', 'Takhorx', 'Raist', 'Riorx', 'Shinadine', 'Rias', 'Nophean', 'Amonter', 'Antarahi', 'Danyan', 'Darangan', 'Erantog', 'Gandong', 'Gioga', 'Iguga', 'Jimondan', 'Jioga', 'Jirondra', 'Loga', 'Ngran', 'Ptangra', 'Ptorag', 'Rahiosar', 'Ranttira', 'Rosegh', 'Sanyarar', 'Sptor', 'Varon', 'Ytaro', 'Ytingahi', 'Zigodare', 'Zilahed', 'Bahiga', 'Cora', 'Egog', 'Eragontt', 'Gospt', 'Hirah', 'Hratapru', 'Hrontr', 'Jiran', 'Jisa', 'Larange', 'Llan', 'Ndrant', 'Ngat', 'Ntar', 'Odzonte', 'Onya', 'Pigaheey', 'Pimahrao', 'Ragugieg', 'Thraheg', 'Uira', 'Ulloda', 'Vanyanga', 'Yttongal', 'Abotoram', 'Bimo', 'Cogo', 'Contod', 'Conya', 'Daralora', 'Dzig', 'Erot', 'Ghilong', 'Guig', 'Imegig', 'Iong', 'Londod', 'Mispra', 'Pisa', 'Pronga', 'Ptorahee', 'Randrag', 'Tahra', 'Tong', 'Ttilo', 'Ugago', 'Ugaraga', 'Zontt', 'Arangama', 'Bigama', 'Dongio', 'Espispto', 'Gimiosp', 'Ilabimo', 'Irall', 'Irgui', 'Jilarara', 'Lant', 'Lararo', 'Largimol', 'Mand', 'Marab', 'Ndron', 'Ntorahra', 'Onthi', 'Ragrara', 'Santega', 'Segiong', 'Ugra', 'Ulor', 'Vama', 'Yarameg', 'Yttigal', 'Rieron', 'Olrion', 'Shinadine', 'Chislev', 'Caras');
+$name = ['Ath', 'Balmonth', 'Baranth', 'Bralmuth', 'Briarananth', 'Bucarth', 'Bullinth', 'Camalanth', 'Carmath', 'Caroth', 'Cath', 'Chaneth', 'Charanuth', 'Chatianth', 'Colareth', 'Coliath', 'Craillanth', 'Craimath', 'Crairenarth', 'Duvenath', 'Emaleth', 'Esianth', 'Fith', 'Galzieth', 'Gamiath', 'Gatianth', 'Gebeth', 'Gith', 'Giyeth', 'Glanarth', 'Glath', 'Gorianth', 'Hallath', 'Halzanth', 'Iacanth', 'Iasiluth', 'Jemiath', 'Jenith', 'Jeranth', 'Jeranuth', 'Jeth', 'Laneth', 'Malanenth', 'Mallieth', 'Mareninth', 'Menianth', 'Meranuth', 'Meth', 'Mikenth', 'Mikieth', 'Mileth', 'Mneniath', 'Mneth', 'Mogonth', 'Morenelth', 'Moth', 'Naranoth', 'Nenith', 'Palararth', 'Paloth', 'Perinth', 'Plath', 'Polaneth', 'Polarinth', 'Polzeth', 'Poraneth', 'Porenorth', 'Povarith', 'Quessith', 'Quevenanth', 'Rolieth', 'Rossoth', 'Roth', 'Sagrianth', 'Samaloth', 'Shayenth', 'Sholzianth', 'Shonniath', 'Shoth', 'Sidieth', 'Spamath', 'Spamuth', 'Spath', 'Speth', 'Tagmuth', 'Tarmuth', 'Tiagorth', 'Tiakoth', 'Tiarath', 'Trabieth', 'Trananth', 'Traranath', 'Tueth', 'Weth', 'Wielgianth', 'Wieneth', 'Wienieth', 'Wirmarth', 'Lunamon', 'Ioneron', 'Reanthasala', 'Tiamar', 'Olrion', 'Lunorx', 'Jonin', 'Olthonis', 'Taleron', 'Abraanthasala', 'Lunadine', 'Olthas', 'Tiansa', 'Valorx', 'Talrion', 'Caradine', 'Shinikon', 'Ti', 'Takhansa', 'Ollev', 'Sirorx', 'Abrae', 'Riisis', 'Lauralare', 'Darrion', 'Juderon', 'Tieth', 'Ri', 'Takhorx', 'Raist', 'Riorx', 'Shinadine', 'Rias', 'Nophean', 'Amonter', 'Antarahi', 'Danyan', 'Darangan', 'Erantog', 'Gandong', 'Gioga', 'Iguga', 'Jimondan', 'Jioga', 'Jirondra', 'Loga', 'Ngran', 'Ptangra', 'Ptorag', 'Rahiosar', 'Ranttira', 'Rosegh', 'Sanyarar', 'Sptor', 'Varon', 'Ytaro', 'Ytingahi', 'Zigodare', 'Zilahed', 'Bahiga', 'Cora', 'Egog', 'Eragontt', 'Gospt', 'Hirah', 'Hratapru', 'Hrontr', 'Jiran', 'Jisa', 'Larange', 'Llan', 'Ndrant', 'Ngat', 'Ntar', 'Odzonte', 'Onya', 'Pigaheey', 'Pimahrao', 'Ragugieg', 'Thraheg', 'Uira', 'Ulloda', 'Vanyanga', 'Yttongal', 'Abotoram', 'Bimo', 'Cogo', 'Contod', 'Conya', 'Daralora', 'Dzig', 'Erot', 'Ghilong', 'Guig', 'Imegig', 'Iong', 'Londod', 'Mispra', 'Pisa', 'Pronga', 'Ptorahee', 'Randrag', 'Tahra', 'Tong', 'Ttilo', 'Ugago', 'Ugaraga', 'Zontt', 'Arangama', 'Bigama', 'Dongio', 'Espispto', 'Gimiosp', 'Ilabimo', 'Irall', 'Irgui', 'Jilarara', 'Lant', 'Lararo', 'Largimol', 'Mand', 'Marab', 'Ndron', 'Ntorahra', 'Onthi', 'Ragrara', 'Santega', 'Segiong', 'Ugra', 'Ulor', 'Vama', 'Yarameg', 'Yttigal', 'Rieron', 'Olrion', 'Shinadine', 'Chislev', 'Caras'];
 $names = count($name)-1;
-return $name[mt_rand(0,$names)];
+return $name[mt_rand(0, max((int)(0), (int)($names)))];
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 function dwarfName()
 {
-$name = array('Aihe', 'Coni', 'Bhadh', 'Brem', 'Aoha', 'Baf', 'Aero', 'Aife', 'Bansil', 'Bagra', 'Aalo', 'Aare', 'Ckar', 'Dobin', 'Didu', 'Brok', 'Cokre', 'Bros', 'Bemedo', 'Aeru', 'Bced', 'Bnof', 'Ddath', 'Besun', 'Aati', 'Glidr', 'Dram', 'Dtahr', 'Fetrik', 'Dkehr', 'Cegono', 'Dabaga', 'Aini', 'Bodesi', 'Bohtak', 'Dtarc', 'Dbarg', 'Aeta', 'Hedra', 'Eika', 'Gbulh', 'Gahkak', 'Eeru', 'Dare', 'Dafar', 'Dotod', 'Dehka', 'Bsikn', 'Durere', 'Deruro', 'Bamro', 'Hirdi', 'Giyi', 'Gobita', 'Gula', 'Faleg', 'Divir', 'Fyuhk', 'Gat', 'Denihe', 'Dakim', 'Eoho', 'Eome', 'Ddoh', 'Iemi', 'Golo', 'Hihor', 'Hare', 'Frit', 'Eiri', 'Grodt', 'Gehahi', 'Dobo', 'Defrut', 'Gersa', 'Fareh', 'Drom', 'Iiko', 'Goluh', 'Himed', 'Hdeyn', 'Furiti', 'Eoha', 'Hitem', 'Gisi', 'Ginrer', 'Fugu', 'Heder', 'Flehr', 'Dugira', 'Ketiro', 'Hber', 'Hmem', 'Iira', 'Gatroc', 'Gandi', 'Homte', 'Herofi', 'Gungar', 'Fgos', 'Hokra', 'Ghimy', 'Eite', 'Kime', 'Hitafi', 'Hotar', 'Kagta', 'Gcetr', 'Htend', 'Ieko', 'Het', 'Henki', 'Fvuh', 'Iiro', 'Herera', 'Euta', 'Kinek', 'Hrir', 'Humge', 'Kinu', 'Gefeg', 'Iife', 'Limkem', 'Hfah', 'Hnoh', 'Gim', 'Lohog', 'Hikenu', 'Getido', 'Let', 'Kafi', 'Kerro', 'Len', 'Hes', 'Klel', 'Macle', 'Hih', 'Hom', 'Hcit', 'Mircid', 'Hir', 'Ghorl', 'Lig', 'Kiyor', 'Lehimo', 'Liyda', 'Hrug', 'Lrent', 'Mod', 'Hireke', 'Huki', 'Hemdar', 'Mirrer', 'Kig', 'Girno', 'Monsab', 'Mruyv', 'Lnus', 'Narbed', 'Ldisn', 'Lrun', 'Negra', 'Hval', 'Kahkir', 'Hoheg', 'Mmacd', 'Lotse', 'Het', 'Mrah', 'Nati', 'Lodde', 'Nifiho', 'Lhab', 'Makod', 'Nida', 'Kekad', 'Karan', 'Hoho', 'Oomi', 'Lrid', 'Lsin', 'Nih', 'Ned', 'Mrigv', 'Radrel', 'Ned', 'Ndes', 'Nigo', 'Knol', 'Kela', 'Iahu', 'Rakdih', 'Miyda', 'Marho', 'Nirib', 'Rbuht', 'Rah', 'Rakre', 'Nire', 'Nure', 'Oike', 'Laf', 'Kika', 'Kere', 'Ridhol', 'Nfidr', 'Reh', 'Nogofi', 'Reror', 'Rame', 'Ratsu', 'Noci', 'Oeli', 'Regar', 'Ldidl', 'Nhol', 'Nerdit', 'Rkut', 'Nohol', 'Rnid', 'Noturi', 'Riton', 'Reriba', 'Rerehi', 'Rali', 'Oero', 'Rerura', 'Luba', 'Raro', 'Nomosu', 'Roddel', 'Revya', 'Roha', 'Ousi', 'Rukine', 'Ruy', 'Roysih', 'Romit', 'Rahevo', 'Rmurv', 'Neba', 'Rifuva', 'Nudgad', 'Rohig', 'Rilo', 'Ror', 'Rama', 'Talta', 'Snoh', 'Rrotr', 'Rret', 'Regrit', 'Rogral', 'Negif', 'Sid', 'Rin', 'Tam', 'Rimo', 'Rotar', 'Rhots', 'Tic', 'Tanok', 'Ruyami', 'Tgadr', 'Rfok', 'Tarri', 'Rgih', 'Tani', 'Ror', 'Tig', 'Rodora', 'Rredm', 'Risihu', 'Tihab', 'Tek', 'Tedafo', 'Tiroh', 'Rhirv', 'Tila', 'Ruk', 'Ueca', 'Rtir', 'Tinok', 'Rrih', 'Rurram', 'Srarc', 'Titgam', 'Uadi', 'Tidake', 'Tnirk', 'Ros', 'Tol', 'Ybehv', 'Uimo', 'Soyemu', 'Tmir', 'Tinar', 'Tatdiv', 'Takido', 'Todran', 'Yonam', 'Tis', 'Vek', 'Rros', 'Treh', 'Yiku', 'Vega', 'Srurs', 'Tonkib', 'Tisded', 'Tdis', 'Tarda', 'Tyofl', 'Yrih', 'Tkall', 'Yekano', 'Tactan', 'Yarabe', 'Yomba', 'Yitlo', 'Ter', 'Vdor', 'Yeho', 'Yitog', 'Yadid');
+$name = ['Aihe', 'Coni', 'Bhadh', 'Brem', 'Aoha', 'Baf', 'Aero', 'Aife', 'Bansil', 'Bagra', 'Aalo', 'Aare', 'Ckar', 'Dobin', 'Didu', 'Brok', 'Cokre', 'Bros', 'Bemedo', 'Aeru', 'Bced', 'Bnof', 'Ddath', 'Besun', 'Aati', 'Glidr', 'Dram', 'Dtahr', 'Fetrik', 'Dkehr', 'Cegono', 'Dabaga', 'Aini', 'Bodesi', 'Bohtak', 'Dtarc', 'Dbarg', 'Aeta', 'Hedra', 'Eika', 'Gbulh', 'Gahkak', 'Eeru', 'Dare', 'Dafar', 'Dotod', 'Dehka', 'Bsikn', 'Durere', 'Deruro', 'Bamro', 'Hirdi', 'Giyi', 'Gobita', 'Gula', 'Faleg', 'Divir', 'Fyuhk', 'Gat', 'Denihe', 'Dakim', 'Eoho', 'Eome', 'Ddoh', 'Iemi', 'Golo', 'Hihor', 'Hare', 'Frit', 'Eiri', 'Grodt', 'Gehahi', 'Dobo', 'Defrut', 'Gersa', 'Fareh', 'Drom', 'Iiko', 'Goluh', 'Himed', 'Hdeyn', 'Furiti', 'Eoha', 'Hitem', 'Gisi', 'Ginrer', 'Fugu', 'Heder', 'Flehr', 'Dugira', 'Ketiro', 'Hber', 'Hmem', 'Iira', 'Gatroc', 'Gandi', 'Homte', 'Herofi', 'Gungar', 'Fgos', 'Hokra', 'Ghimy', 'Eite', 'Kime', 'Hitafi', 'Hotar', 'Kagta', 'Gcetr', 'Htend', 'Ieko', 'Het', 'Henki', 'Fvuh', 'Iiro', 'Herera', 'Euta', 'Kinek', 'Hrir', 'Humge', 'Kinu', 'Gefeg', 'Iife', 'Limkem', 'Hfah', 'Hnoh', 'Gim', 'Lohog', 'Hikenu', 'Getido', 'Let', 'Kafi', 'Kerro', 'Len', 'Hes', 'Klel', 'Macle', 'Hih', 'Hom', 'Hcit', 'Mircid', 'Hir', 'Ghorl', 'Lig', 'Kiyor', 'Lehimo', 'Liyda', 'Hrug', 'Lrent', 'Mod', 'Hireke', 'Huki', 'Hemdar', 'Mirrer', 'Kig', 'Girno', 'Monsab', 'Mruyv', 'Lnus', 'Narbed', 'Ldisn', 'Lrun', 'Negra', 'Hval', 'Kahkir', 'Hoheg', 'Mmacd', 'Lotse', 'Het', 'Mrah', 'Nati', 'Lodde', 'Nifiho', 'Lhab', 'Makod', 'Nida', 'Kekad', 'Karan', 'Hoho', 'Oomi', 'Lrid', 'Lsin', 'Nih', 'Ned', 'Mrigv', 'Radrel', 'Ned', 'Ndes', 'Nigo', 'Knol', 'Kela', 'Iahu', 'Rakdih', 'Miyda', 'Marho', 'Nirib', 'Rbuht', 'Rah', 'Rakre', 'Nire', 'Nure', 'Oike', 'Laf', 'Kika', 'Kere', 'Ridhol', 'Nfidr', 'Reh', 'Nogofi', 'Reror', 'Rame', 'Ratsu', 'Noci', 'Oeli', 'Regar', 'Ldidl', 'Nhol', 'Nerdit', 'Rkut', 'Nohol', 'Rnid', 'Noturi', 'Riton', 'Reriba', 'Rerehi', 'Rali', 'Oero', 'Rerura', 'Luba', 'Raro', 'Nomosu', 'Roddel', 'Revya', 'Roha', 'Ousi', 'Rukine', 'Ruy', 'Roysih', 'Romit', 'Rahevo', 'Rmurv', 'Neba', 'Rifuva', 'Nudgad', 'Rohig', 'Rilo', 'Ror', 'Rama', 'Talta', 'Snoh', 'Rrotr', 'Rret', 'Regrit', 'Rogral', 'Negif', 'Sid', 'Rin', 'Tam', 'Rimo', 'Rotar', 'Rhots', 'Tic', 'Tanok', 'Ruyami', 'Tgadr', 'Rfok', 'Tarri', 'Rgih', 'Tani', 'Ror', 'Tig', 'Rodora', 'Rredm', 'Risihu', 'Tihab', 'Tek', 'Tedafo', 'Tiroh', 'Rhirv', 'Tila', 'Ruk', 'Ueca', 'Rtir', 'Tinok', 'Rrih', 'Rurram', 'Srarc', 'Titgam', 'Uadi', 'Tidake', 'Tnirk', 'Ros', 'Tol', 'Ybehv', 'Uimo', 'Soyemu', 'Tmir', 'Tinar', 'Tatdiv', 'Takido', 'Todran', 'Yonam', 'Tis', 'Vek', 'Rros', 'Treh', 'Yiku', 'Vega', 'Srurs', 'Tonkib', 'Tisded', 'Tdis', 'Tarda', 'Tyofl', 'Yrih', 'Tkall', 'Yekano', 'Tactan', 'Yarabe', 'Yomba', 'Yitlo', 'Ter', 'Vdor', 'Yeho', 'Yitog', 'Yadid'];
 $names = count($name)-1;
-return $name[mt_rand(0,$names)];
+return $name[mt_rand(0, max((int)(0), (int)($names)))];
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 function gnomeName()
 {
-$name = array('Clyz', 'Achug', 'Theram', 'Quale', 'Lutin', 'Gad', 'Croeq', 'Achund', 'Therrisi', 'Qualorm', 'Lyeit', 'Garaso', 'Crul', 'Ackhine', 'Thritai', 'Quaso', 'Lyetonu', 'Garck', 'Cuina', 'Ackult', 'Tig', 'Quealt', 'Moin', 'Garund', 'Daror', 'Aeny', 'Tinalt', 'Rador', 'Moragh', 'Ghagha', 'Deet', 'Aeru', 'Tinkima', 'Rakeld', 'Morir', 'Ghatas', 'Deldrad', 'Ageick', 'Tinut', 'Rancwor', 'Morosy', 'Gosul', 'Deldrae', 'Agemor', 'Tonk', 'Ranildu', 'Mosat', 'Hatalt', 'Delz', 'Aghai', 'Tonolde', 'Ranot', 'Mosd', 'Hatash', 'Denad', 'Ahiny', 'Tonper', 'Ranper', 'Mosrt', 'Hatque', 'Denold', 'Aldkely', 'Torint', 'Ransayi', 'Mosyl', 'Hatskel', 'Denyl', 'Aleler', 'Trooph', 'Ranzmor', 'Moszight', 'Hattia', 'Drahono', 'Anagh', 'Turbelm', 'Raydan', 'Naldely', 'Hiert', 'Draold', 'Anclor', 'Uighta', 'Rayxwor', 'Nalusk', 'Hinalde', 'Dynal', 'Anl', 'Uinga', 'Rhit', 'Nalwar', 'Hinall', 'Dyndray', 'Antack', 'Umnt', 'Risormy', 'Nas', 'Hindend', 'Eacki', 'Ardburo', 'Undaughe', 'Risshy', 'Nat', 'Iade', 'Earda', 'Ardmose', 'Untdran', 'Rodiz', 'Nator', 'Iaper', 'Echal', 'Ardurne', 'Untld', 'Rodkali', 'Nayth', 'Iass', 'Echind', 'Ardyn', 'Uoso', 'Rodrado', 'Neil', 'Iawy', 'Echwaro', 'Ashaugha', 'Urnroth', 'Roort', 'Nenal', 'Iechi', 'Eeni', 'Ashdend', 'Urode', 'Ruina', 'New', 'Ightult', 'Einea', 'Ashye', 'Uskdar', 'Rynm', 'Nia', 'Ildaw', 'Eldsera', 'Asim', 'Uskmdan', 'Rynryna', 'Nikim', 'Ildoq', 'Eldwen', 'Athdra', 'Usksough', 'Ryns', 'Nof', 'Inabel', 'Eldyril', 'Athskel', 'Usktoro', 'Rynut', 'Nook', 'Inaony', 'Elmkach', 'Atkin', 'Ustagee', 'Samgha', 'Nybage', 'Inease', 'Elmll', 'Aughint', 'Ustld', 'Samnche', 'Nyiy', 'Ineegh', 'Emath', 'Aughthere', 'Ustton', 'Samssam', 'Nyseld', 'Ineiti', 'Emengi', 'Avery', 'Verporm', 'Sawor', 'Nysklye', 'Ineun', 'Emild', 'Awch', 'Vesrade', 'Sayimo', 'Nyw', 'Ingr', 'Emmend', 'Banend', 'Voraughe', 'Sayn', 'Oasho', 'Isbaugh', 'Emnden', 'Beac', 'Vorril', 'Sayskelu', 'Oendy', 'Islyei', 'Endvelm', 'Belan', 'Vorunt', 'Scheach', 'Oenthi', 'Issy', 'Endych', 'Beloz', 'Whedan', 'Scheyer', 'Ohato', 'Istin', 'Engeh', 'Beltiai', 'Whisam', 'Serat', 'Oldack', 'Iumo', 'Engen', 'Bliorm', 'Whok', 'Sernd', 'Oldar', 'Jyhin', 'Engh', 'Burold', 'Worath', 'Skell', 'Oldr', 'Jyon', 'Engraki', 'Buror', 'Worav', 'Skelser', 'Oldtar', 'Kalov', 'Engroth', 'Byt', 'Worina', 'Slim', 'Omdser', 'Kelol', 'Engum', 'Cakal', 'Worryno', 'Snaest', 'Ond', 'Kinser', 'Enhech', 'Carr', 'Worunty', 'Sniund', 'Oron', 'Koor', 'Enina', 'Cayld', 'Worwaw', 'Sosam', 'Orrbel', 'Lear', 'Enk', 'Cerar', 'Yary', 'Stayl', 'Osnt', 'Leert', 'Enlald', 'Cerl', 'Yawi', 'Stol', 'Peright', 'Legar', 'Enskele', 'Cerv', 'Yena', 'Strever', 'Perpban', 'Lerev', 'Eoru', 'Chaur', 'Yero', 'Swaih', 'Phiunt', 'Lerzshy', 'Ernysi', 'Chayn', 'Yerrves', 'Tagar', 'Poll', 'Llash', 'Erque', 'Cheimo', 'Yhone', 'Taienn', 'Polrad', 'Llotor', 'Errusk', 'Chekim', 'Yradi', 'Taiyild', 'Polsera', 'Loem', 'Ervory', 'Chreusk', 'Zhugar', 'Tanen', 'Puon', 'Loing', 'Essisi', 'Chrir', 'Zirt', 'Tasaf', 'Quaev', 'Lorelmo', 'Essnd', 'Chroelt', 'Zoine', 'Tasrr', 'Quahang', 'Lorud', 'Estech', 'Cloran', 'Zotin', 'Thaeng', 'Qual', 'Lour', 'Estkut', 'Etoth', 'Esule', 'Estnight');
+$name = ['Clyz', 'Achug', 'Theram', 'Quale', 'Lutin', 'Gad', 'Croeq', 'Achund', 'Therrisi', 'Qualorm', 'Lyeit', 'Garaso', 'Crul', 'Ackhine', 'Thritai', 'Quaso', 'Lyetonu', 'Garck', 'Cuina', 'Ackult', 'Tig', 'Quealt', 'Moin', 'Garund', 'Daror', 'Aeny', 'Tinalt', 'Rador', 'Moragh', 'Ghagha', 'Deet', 'Aeru', 'Tinkima', 'Rakeld', 'Morir', 'Ghatas', 'Deldrad', 'Ageick', 'Tinut', 'Rancwor', 'Morosy', 'Gosul', 'Deldrae', 'Agemor', 'Tonk', 'Ranildu', 'Mosat', 'Hatalt', 'Delz', 'Aghai', 'Tonolde', 'Ranot', 'Mosd', 'Hatash', 'Denad', 'Ahiny', 'Tonper', 'Ranper', 'Mosrt', 'Hatque', 'Denold', 'Aldkely', 'Torint', 'Ransayi', 'Mosyl', 'Hatskel', 'Denyl', 'Aleler', 'Trooph', 'Ranzmor', 'Moszight', 'Hattia', 'Drahono', 'Anagh', 'Turbelm', 'Raydan', 'Naldely', 'Hiert', 'Draold', 'Anclor', 'Uighta', 'Rayxwor', 'Nalusk', 'Hinalde', 'Dynal', 'Anl', 'Uinga', 'Rhit', 'Nalwar', 'Hinall', 'Dyndray', 'Antack', 'Umnt', 'Risormy', 'Nas', 'Hindend', 'Eacki', 'Ardburo', 'Undaughe', 'Risshy', 'Nat', 'Iade', 'Earda', 'Ardmose', 'Untdran', 'Rodiz', 'Nator', 'Iaper', 'Echal', 'Ardurne', 'Untld', 'Rodkali', 'Nayth', 'Iass', 'Echind', 'Ardyn', 'Uoso', 'Rodrado', 'Neil', 'Iawy', 'Echwaro', 'Ashaugha', 'Urnroth', 'Roort', 'Nenal', 'Iechi', 'Eeni', 'Ashdend', 'Urode', 'Ruina', 'New', 'Ightult', 'Einea', 'Ashye', 'Uskdar', 'Rynm', 'Nia', 'Ildaw', 'Eldsera', 'Asim', 'Uskmdan', 'Rynryna', 'Nikim', 'Ildoq', 'Eldwen', 'Athdra', 'Usksough', 'Ryns', 'Nof', 'Inabel', 'Eldyril', 'Athskel', 'Usktoro', 'Rynut', 'Nook', 'Inaony', 'Elmkach', 'Atkin', 'Ustagee', 'Samgha', 'Nybage', 'Inease', 'Elmll', 'Aughint', 'Ustld', 'Samnche', 'Nyiy', 'Ineegh', 'Emath', 'Aughthere', 'Ustton', 'Samssam', 'Nyseld', 'Ineiti', 'Emengi', 'Avery', 'Verporm', 'Sawor', 'Nysklye', 'Ineun', 'Emild', 'Awch', 'Vesrade', 'Sayimo', 'Nyw', 'Ingr', 'Emmend', 'Banend', 'Voraughe', 'Sayn', 'Oasho', 'Isbaugh', 'Emnden', 'Beac', 'Vorril', 'Sayskelu', 'Oendy', 'Islyei', 'Endvelm', 'Belan', 'Vorunt', 'Scheach', 'Oenthi', 'Issy', 'Endych', 'Beloz', 'Whedan', 'Scheyer', 'Ohato', 'Istin', 'Engeh', 'Beltiai', 'Whisam', 'Serat', 'Oldack', 'Iumo', 'Engen', 'Bliorm', 'Whok', 'Sernd', 'Oldar', 'Jyhin', 'Engh', 'Burold', 'Worath', 'Skell', 'Oldr', 'Jyon', 'Engraki', 'Buror', 'Worav', 'Skelser', 'Oldtar', 'Kalov', 'Engroth', 'Byt', 'Worina', 'Slim', 'Omdser', 'Kelol', 'Engum', 'Cakal', 'Worryno', 'Snaest', 'Ond', 'Kinser', 'Enhech', 'Carr', 'Worunty', 'Sniund', 'Oron', 'Koor', 'Enina', 'Cayld', 'Worwaw', 'Sosam', 'Orrbel', 'Lear', 'Enk', 'Cerar', 'Yary', 'Stayl', 'Osnt', 'Leert', 'Enlald', 'Cerl', 'Yawi', 'Stol', 'Peright', 'Legar', 'Enskele', 'Cerv', 'Yena', 'Strever', 'Perpban', 'Lerev', 'Eoru', 'Chaur', 'Yero', 'Swaih', 'Phiunt', 'Lerzshy', 'Ernysi', 'Chayn', 'Yerrves', 'Tagar', 'Poll', 'Llash', 'Erque', 'Cheimo', 'Yhone', 'Taienn', 'Polrad', 'Llotor', 'Errusk', 'Chekim', 'Yradi', 'Taiyild', 'Polsera', 'Loem', 'Ervory', 'Chreusk', 'Zhugar', 'Tanen', 'Puon', 'Loing', 'Essisi', 'Chrir', 'Zirt', 'Tasaf', 'Quaev', 'Lorelmo', 'Essnd', 'Chroelt', 'Zoine', 'Tasrr', 'Quahang', 'Lorud', 'Estech', 'Cloran', 'Zotin', 'Thaeng', 'Qual', 'Lour', 'Estkut', 'Etoth', 'Esule', 'Estnight'];
 $names = count($name)-1;
-return $name[mt_rand(0,$names)];
+return $name[mt_rand(0, max((int)(0), (int)($names)))];
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 function genericName()
 {
-$name = array('Adaradle', 'Cimaclidor', 'Gertur', 'Maldorink', 'Robois', 'Angunal', 'Dade', 'Mabias', 'Adkyna', 'Cinghin', 'Gladh', 'Marmosi', 'Rondona', 'Aurging', 'Ddal', 'Liding', 'Aeferryfela', 'Cinthereban', 'Glasar', 'Marrese', 'Rothiw', 'Cala', 'Dhonl', 'Madon', 'Aehes', 'Cirth', 'Glassa', 'Marri', 'Ruadha', 'Cangla', 'Dorome', 'Maelowr', 'Aemathan', 'Gobar', 'Marus', 'Ruamnan', 'Chan', 'Eesa', 'Maeluinus', 'Aenchoba', 'Cognvareding', 'Gobharlas', 'Marvaldiri', 'Ruditherming', 'Chuthmmi', 'Eiba', 'Lifferg', 'Acwulf', 'Colairion', 'Gimran', 'Marry', 'Selin', 'Dorthu', 'Farine', 'Litiny', 'Adakonico', 'Colan', 'Ginou', 'Marus', 'Selrontus', 'Falla', 'Fkisl', 'Llice', 'Aeter', 'Collsbe', 'Godrica', 'Marzhaeto', 'Ryannen', 'Fauauthencaro', 'Gerrut', 'Lonan', 'Adegen', 'Collullen', 'Glederile', 'Marvegis', 'Senstarlough', 'Gorgortuna', 'Higafi', 'Magda', 'Agraien', 'Colmgristrow', 'Goibhinnach', 'Matha', 'Sabhrewi', 'Hallalur', 'Kalir', 'Loron', 'Agrimona', 'Colphe', 'Gollewyn', 'Mattancheude', 'Sadyn', 'Haulo', 'Kesig', 'Maglor', 'Adulf', 'Comgalant', 'Goibhin', 'Mathere', 'Seporvi', 'Hmoturol', 'Moc', 'Malog', 'Agulac', 'Conandinas', 'Gouthos', 'Maxina', 'Sadyn', 'Kalli', 'Oige', 'Malpaigley', 'Aieth', 'Concouise', 'Grevon', 'Melain', 'Saegalach', 'Lalarornargw', 'Rer', 'Luches', 'Aimboruin', 'Concs', 'Gunory', 'Melan', 'Saemglas', 'Langororobat', 'Ritdar', 'Maagdvar', 'Aesci', 'Concuxoman', 'Goibhir', 'Mefferog', 'Sequa', 'Lkatugin', 'Ru', 'Macka', 'Aesiry', 'Conner', 'Gomeri', 'Meladrywoo', 'Serne', 'Lungoth', 'Rufar', 'Malrickannie', 'Aitharrely', 'Connlugon', 'Gwain', 'Melathe', 'Saiuche', 'Miantu', 'Sbit', 'Malronna', 'Aethennye', 'Conovan', 'Gondorcan', 'Metta', 'Seven', 'Moguglk', 'Sirtuf', 'Maddi', 'Alennifiel', 'Coolis', 'Gwalloy', 'Meldurie', 'Sammarth', 'Sair', 'Suro', 'Maolinn', 'Aethosgorla', 'Corbjalas', 'Gorbis', 'Milimbron', 'Shaug', 'Ugurirt', 'Teddot', 'Maeret', 'Agius', 'Cordberthyn', 'Gorsaihirri', 'Moire', 'Sheelana', 'Vangulurc', 'Tedula', 'Maglach', 'Agnat', 'Corflaneu', 'Grachansien', 'Molum', 'Shenargharth', 'Weglauli', 'Tirik', 'Maiet', 'Aiblaithet', 'Corina', 'Granwy', 'Monesthet', 'Shenn', 'Welrot', 'Vada', 'Malcolum', 'Aille', 'Coryssa', 'Guolde', 'Morga', 'Shermun', 'Alagula', 'Aere', 'Marcanovane', 'Alfil', 'Covedu', 'Gwazeldan', 'Meline', 'Sandoralith', 'Baimmagil', 'Dalbal', 'Salther', 'Alherson', 'Cregodsunnye', 'Gwensin', 'Melinneth', 'Santhinter', 'Caualorirchal', 'Delga', 'Praergae', 'Ailpin', 'Creicath', 'Gwene', 'Morgan', 'Shouenollus', 'Chaldu', 'Dir', 'Samaneelene', 'Alescforther', 'Cucus', 'Gwith', 'Mortiphri', 'Sibyll', 'Gitulinaethegu', 'Dire', 'Samith', 'Alewenna', 'Cuintraya', 'Haaric', 'Moynteinvain', 'Sibyrnach', 'Hengona', 'Fohor', 'Sammen', 'Alingvar', 'Culbury', 'Gwirkitta', 'Meluf', 'Saoignolf', 'Kaert', 'Garit', 'Priel', 'Alien', 'Culleofer', 'Hadrifiel', 'Muirchar', 'Signachne', 'Kamothuro', 'Grocr', 'Priveliann', 'Aliquesnan', 'Cunedo', 'Hariomhnai', 'Mylee', 'Sigurbertur', 'Kauiaz', 'Hidte', 'Prossoke', 'Allan', 'Cunomen', 'Hayla', 'Naiglossi', 'Sipithne', 'Korndur', 'Hokede', 'Pwyllgever', 'Altheire', 'Dunos', 'Heiliach', 'Nathianus', 'Sirardolen', 'Lkortul', 'Kgedn', 'Samporotic', 'Alungoth', 'Cyhilgaleth', 'Helmhearlo', 'Nealemberhae', 'Smiss', 'Lungodu', 'Lgob', 'Quienere', 'Alvarth', 'Cymox', 'Helmott', 'Nelan', 'Solia', 'Mamelaz', 'Meti', 'Sanben', 'Amaerell', 'Cynhel', 'Helwyn', 'Netheilos', 'Soro', 'Nathimingorm', 'Nbadr', 'Sanberin', 'Alpho', 'Cynlo', 'Gwynthian', 'Mengar', 'Saxus', 'Nchammaglkaug', 'Nir', 'Santheiua', 'Amalphyth', 'Cynraenta', 'Halann', 'Merdan', 'Scait', 'Odulurchirordr', 'Nondeb', 'Quier', 'Amervis', 'Cyrus', 'Hazra', 'Mersides', 'Schae', 'Rilalavangon', 'Radavi', 'Ragorten', 'Ancelyndy', 'Daalneylyn', 'Hearbathekin', 'Meryl', 'Schondorn', 'Rothi', 'Rakrit', 'Readwennor', 'Andalf', 'Daghallfreda', 'Heatosus', 'Mewanezel', 'Scipirene', 'Rthaetulauglu', 'Rocnot', 'Saury', 'Anskarim', 'Daille', 'Hedden', 'Millon', 'Serezik', 'Sakaugitur', 'Rohag', 'Seena', 'Aodre', 'Dalbeth', 'Helhervi', 'Mindon', 'Seuma', 'Shmmelarirot', 'Rreht', 'Reosa', 'Ammeidoc', 'Dalie', 'Heralie', 'Nicathrennur', 'Spier', 'Vandrthuindu', 'Ruhdo', 'Segast', 'Amsyndser', 'Dalwing', 'Hervyn', 'Niccus', 'Sripthien', 'Vaturirthm', 'Rumibe', 'Reose', 'Apias', 'Damalongan', 'Here', 'Minmo', 'Shaus', 'Vaugberugia', 'Simuyo', 'Reosef', 'Andabanberth', 'Davetus', 'Hildiwa', 'Nijenn', 'Steal', 'Wergor', 'Tarkor', 'Rhybranen', 'Anfast', 'Deaga', 'Hilgriwa', 'Nimide', 'Steine', 'Baingurchul', 'Agluah', 'Ribus', 'Aracbergtun', 'Decyvedu', 'Heredergana', 'Moglos', 'Sigdis', 'Cathiaullrthmm', 'Alruur', 'Seibhing', 'Anfela', 'Dedegant', 'Hires', 'Norix', 'Steinzena', 'Chimak', 'Arucraen', 'Cathes', 'Anfridge', 'Degil', 'Huntresa', 'Nuarnoth', 'Stwine', 'Drndethmatugl', 'Athot', 'Carnach', 'Angborn', 'Deiristo', 'Hyldristick', 'Ogmael', 'Sual', 'Dronaurndurdug', 'Bariag', 'Catinethiana', 'Araddox', 'Delany', 'Hirmelis', 'Moinsanth', 'Siger', 'Durorin', 'Cahubraig', 'Celotherich', 'Aragorn', 'Dener', 'Hithur', 'Molfrikinoth', 'Sillovigfus', 'Eglrorgundrugo', 'Cihededt', 'Certan', 'Anjarmoth', 'Denkth', 'Iardall', 'Oilbhe', 'Sulish', 'Encatu', 'Dogihsosh', 'Cassavusime', 'Annal', 'Derriht', 'Iatachtach', 'Oilfhil', 'Svafnkell', 'Fando', 'Edatibulh', 'Cassimurcia', 'Arbery', 'Derufineryn', 'Holas', 'Molueli', 'Slefsunsha', 'Gurinca', 'Habsaul', 'Catisoth', 'Ansellryeter', 'Desth', 'Ideardin', 'Oranithos', 'Swal', 'Gwegorodulam', 'Haglitr', 'Cativ', 'Ap-Owerkhes', 'Devan', 'Idwene', 'Orcailifeth', 'Sybet', 'Ilkarirthar', 'Hircalh', 'Changaniam', 'Amlait', 'Evre', 'Heofsa', 'Nevettele', 'Spant', 'Ituth', 'Huhahn', 'Ceighterri', 'Archite', 'Dian', 'Hosbeth', 'Morgar', 'Sodenevrina', 'Korchaug', 'Ibnotn', 'Chani', 'Aptidh', 'Dician', 'Ilfor', 'Ordys', 'Taigardus', 'Korilo', 'Ilheab', 'Chastinia', 'Argon', 'Dilarion', 'Hracye', 'Morgonan', 'Solas', 'Kormiaturgo', 'Inorelinl', 'Chlinethian', 'Ariwen', 'Dimus', 'Hrotheker', 'Morix', 'Sontz', 'Ngogiak', 'Itolraab', 'Celeribe', 'Aradys', 'Dockermas', 'Imcha', 'Orefrfast', 'Talig', 'Ntulrolo', 'Lalihg', 'Celeve', 'Aral', 'Doireth', 'Imla', 'Orody', 'Tegar', 'Ogoturdugldr', 'Loceraoh', 'Celte', 'Arlethawluig', 'Doirss', 'Hroxie', 'Morna', 'Sorry', 'Olar', 'Nennuan', 'Ciach', 'Arhtshallmo', 'Domnallys', 'Ininna', 'Oroke', 'Tegarmail', 'Orgo', 'Olalehaa', 'Cibus', 'Arley', 'Donath', 'Inionna', 'Orrianai', 'Telizez', 'Rururch', 'Sicatatr', 'Celyan', 'Arlygan', 'Donchorundon', 'Huailindrog', 'Morwe', 'Spaisia', 'Sharua', 'Tinariin', 'Cinunnse', 'Arlos', 'Donnie', 'Intha', 'Osbeorsatus', 'Telrichardo', 'Vakazgl', 'Ubidnert', 'Cercnain', 'Arnagh', 'Driathink', 'Hunter', 'Morwenn', 'Stebbi', 'Vamimm', 'Ulerteeh', 'Chrono', 'Arnethire', 'Drovath', 'Hwambrevonn', 'Mothe', 'Strai', 'Akoduti', 'Ablagr', 'Ciacion', 'Asberg', 'Dryrymon', 'Idelos', 'Mouthiana', 'Strogiel', 'Asuda', 'Adattang', 'Ciarion', 'Artuir', 'Dubhe', 'Ioardoc', 'Otbon', 'Tendiegisan', 'Atadedak', 'Adenalinl', 'Clemma', 'Athallyr', 'Dubiggur', 'Iehmassi', 'Muadamulakk', 'Surre', 'Axeer', 'Aralcail', 'Fugeiria', 'Avien', 'Duilen', 'Iseas', 'Ottiriel', 'Terfula', 'Binye', 'Aribih', 'Gablez', 'Aylina', 'Dumnagh', 'Iethilo', 'Muiriehmarus', 'Sveinestel', 'Edeline', 'Atedetiet', 'Gaess', 'Avituc', 'Dumnochobb', 'Isotharic', 'Overninus', 'Terot', 'Etifaca', 'Bogatbius', 'Gaillughaill', 'Aylinsonse', 'Eadan', 'Ilchoar', 'Mulnus', 'Svert', 'Lelhi', 'Casbuit', 'Galadrime', 'Baishian', 'Eafrikinn', 'Imloth', 'Murry', 'Sween', 'Mutydare', 'Dunaet', 'Galak', 'Barladucus', 'Eaneidh', 'Imrilla', 'Myles', 'Swine', 'Niyni', 'Edelocoel', 'Galduit', 'Beardolde', 'Earcorodrich', 'Indingaer', 'Naogurm', 'Tadhagol', 'Odadinir', 'Ehalonoa', 'Garrinaic', 'Ayleribesta', 'Ebemma', 'Issch', 'Palman', 'Teseibhne', 'Ohibarat', 'Erdau', 'Garry', 'Baith', 'Eburn', 'Jartman', 'Paraps', 'Teway', 'Raruce', 'Godreub', 'Gatiarth', 'Becca', 'Edrich', 'Inmouthor', 'Naueritta', 'Tallaith', 'Rexaxrem', 'Hatalitt', 'Gauros', 'Balyesmourn', 'Edynoreth', 'Jarvelae', 'Pawlynn', 'Thats', 'Roletizi', 'Isniah', 'Gavin', 'Barrim', 'Effroy', 'Jazma', 'Peole', 'Therly', 'Royazar', 'Lahhoas', 'Gavinas', 'Bedwick', 'Eitin', 'Intheodar', 'Naugh', 'Tanton', 'Serez', 'Lediag', 'Gaylesh', 'Bauisligal', 'Eksiprepri', 'Jokulan', 'Peron', 'Therto', 'Tarar', 'Naderbaah', 'Geathet', 'Bearus', 'Eksisbury', 'Kabristofa', 'Pesifalas', 'Thian', 'Toxva', 'Ogelath', 'Geirdarnan', 'Beleg', 'Ekwesth', 'Ioete', 'Nealys', 'Tanyalek', 'Utaen', 'Onarareab', 'Gelege', 'Belvana', 'Ekwiremia', 'Ismeneouuin', 'Nechuff', 'Tasses', 'Vosa', 'Ralcaal', 'Gematurg', 'Beley', 'Elagus', 'Kaithe', 'Peutoust', 'Thidric', 'Xetaroka', 'Rehatb', 'Genildis', 'Benciann', 'Elbius', 'Kaluth', 'Phana', 'Thiet', 'Xira', 'Renenirl', 'Geofgivye', 'Benou', 'Elborn', 'Istacheidir', 'Neile', 'Tefalaf', 'Zetomyhe', 'Rughen', 'Geofraelisa', 'Beornorth', 'Elduin', 'Ivalee', 'Neldur', 'Terfindonny', 'Zilohona', 'Teluhoer', 'Georht', 'Benji', 'Elian', 'Keelyne', 'Pothswineron', 'Thikaden', 'Adinikox', 'Batemz', 'Gerechula', 'Bennonne', 'Elich', 'Kenear', 'Prak-Zig', 'Thryth', 'Adivema', 'Be', 'Geristink', 'Bethimen', 'Elimagus', 'Jacloves', 'Nemilinny', 'Teriana', 'Anami', 'Besotg', 'Gerrim', 'Beribenzel', 'Elissire', 'Kenni', 'Presaric', 'Thuiley', 'Arira', 'Bmon', 'Gilos', 'Berthause', 'Elricherick', 'Kennie', 'Priel', 'Tianarus', 'Azekis', 'Bokesm', 'Xabilie', 'Bethe', 'Elrong', 'Kennock', 'Purtlan', 'Tigeri', 'Cihal', 'Bzagn', 'Woodwyn', 'Bjarma', 'Elsecgren', 'Jakebing', 'Netta', 'Thargoll', 'Cizavix', 'Dob', 'Xandur', 'Blathea', 'Elstanly', 'Jayden', 'Nevalinnyn', 'Thella', 'Dasibmir', 'Duterm', 'Xaphorster', 'Bitane', 'Emmena', 'Kevyn', 'Qilla', 'Tillentius', 'Dirob', 'Gabm', 'Xelan', 'Blatell', 'Emyndenelda', 'Kibes', 'Quaethenzio', 'Tilloc', 'Elofivi', 'Gmerx', 'Wrough', 'Blayne', 'Emynyr', 'Jayne', 'Nicolm', 'Theo', 'Ferirde', 'Gobadk', 'Wulla', 'Blina', 'Endrai', 'Jazliko', 'Nides', 'Think', 'Hafde', 'Gox', 'Wynwoioi', 'Bolbjora', 'Eneelesonket', 'Knutiltito', 'Quebran', 'Tirina', 'Ireet', 'Gu', 'Xabus', 'Bowdyn', 'Enoulheirc', 'Kordurh', 'Ragluman', 'Tiriok', 'Mirital', 'Kaz', 'Xiommish', 'Boanna', 'Entink', 'Jenncho', 'Nomon', 'Thoces', 'Nexerek', 'Kusz', 'Xavio', 'Boriya', 'Eochearnir', 'Jesmonan', 'Norody', 'Thoren', 'Nyse', 'Mdos', 'Xippeleg', 'Bozef', 'Eochuter', 'Joakhanezah', 'Norysset', 'Thosgarenn', 'Ratsa', 'Mubazs', 'Yarmotherl', 'Brach', 'Eogentyne', 'Joevicca', 'O`Nei', 'Thowella', 'Renyvar', 'Nazogr', 'Yourn', 'Breas', 'Eosarath', 'Kriseaghy', 'Raskars', 'Toenbert', 'Ridan', 'Nes', 'Xydrie', 'Bradowfax', 'Eosina', 'Jonya', 'Odhre', 'Thrabent', 'Rokan', 'Rabx', 'Xylan', 'Brenzander', 'Epilla', 'Kyantesso', 'Ravaciacus', 'Torchon', 'Sazikak', 'Rgema', 'Yeers', 'Brespal', 'Erachlo', 'Laistjane', 'Refil', 'Trach', 'Suros', 'Temg', 'Zahna', 'Breth', 'Eride', 'Lardullian', 'Reidhg', 'Trecumharust', 'Tehidora', 'Xanozt', 'Zaximo', 'Branabell', 'Ermournen', 'Joscale', 'Olvagosa', 'Tikingal', 'Todxo', 'Zagumx', 'Yenoli', 'Branden', 'Erricia', 'Josse', 'Omnaltgaliam', 'Tipher', 'Uvalalil', 'Zdusb', 'Zepheron', 'Brethur', 'Esairfy', 'Laugurespath', 'Rekwe', 'Tresink', 'Afazer', 'Brog', 'Ysfall', 'Bridra', 'Estendir', 'Josuuarn', 'Orgeralassa', 'Tissia', 'Ahoni', 'Bxorem', 'Zabel', 'Brilionn', 'Esubsiorsa', 'Jowan', 'Orielsecha', 'Todune', 'Ateloba', 'Gebakx', 'Zabeni', 'Bring', 'Etarva', 'Judigbryht', 'Orret', 'Tothryth', 'Avkov', 'Gox', 'Zebin ', 'Brochebig', 'Etgera', 'Kaellecton', 'Osbeothe', 'Traem', 'Dixutir', 'Gxomub', 'Zozzo ', 'Brockmarille', 'Ethelmotor', 'Karkus', 'Osbertur', 'Treen', 'Donorauk', 'Kmot', 'Boh', 'Brythai', 'Etrick', 'Katanyalin', 'Osripi', 'Trilynton', 'Hara', 'Kunedb', 'Dehoro', 'Bretta', 'Eultutney', 'Lawaithburga', 'Relar', 'Treva', 'Ihizan', 'Me', 'Del', 'Burthgham', 'Eurieth', 'Katyrus', 'Ossedelle', 'Tuorne', 'Iroharim', 'Munads', 'Detro', 'Byrtelena', 'Evernen', 'Kavanora', 'Osvinaugh', 'Tutel', 'Isubasak', 'Nmabg', 'Fadher', 'Cadfang', 'Evrenth', 'Keena', 'Othryth', 'Twichos', 'Itoso', 'Ntuser', 'Fircis', 'Briatha', 'Excolma', 'Leach', 'Remay', 'Tronellen', 'Ivirikor', 'Nuxr', 'Fsah', 'Brichadha', 'Exinan', 'Leanna', 'Rendore', 'Truin', 'Kohurbar', 'Nzork', 'Garde', 'Brith', 'Faireth', 'Leide', 'Reote', 'Tuara', 'Lidebam', 'Rmukg', 'Gelnar', 'Brocht', 'Falmtyrnetta', 'Leigh', 'Reprick', 'Tudfran', 'Mitik', 'Rtegob', 'Geri', 'Brook', 'Falyndzai', 'Lenoel', 'Reprost', 'Tyrnaster', 'Ranereku', 'Suk', 'Hva', 'Brossies', 'Fanghus', 'Lerice', 'Rettan', 'Uilief', 'Ronelioc', 'Tax', 'Iama', 'Caela', 'Fanus', 'Kende', 'Ottinus', 'Uaignobe', 'Roxalah', 'Tmazx', 'Ieva', 'Bryales', 'Fareth', 'Lestril', 'Rhyas', 'Uiran', 'Ryxox', 'Toxb', 'Iiro', 'Caili', 'Faria', 'Kennos', 'Owaynegalim', 'Unpith', 'Tayator', 'Tzasb', 'Kehmul', 'Bryanna', 'Farma', 'Leuff', 'Rikur', 'Uriarmosink', 'Teri', 'Tzax', 'Liler', 'Caina', 'Fenectus', 'Kevin', 'Padsto', 'Unter', 'Ulari', 'Xbase', 'Mnavb', 'Cairex', 'Feras', 'Kinburh', 'Palurial', 'Vadrickael', 'Uridol', 'Xdukez', 'Nrir', 'Caith', 'Ferrick', 'Kiorte', 'Pants', 'Valinick', 'Xarirab', 'Xem', 'Resrol', 'Caithren', 'Ferth', 'Knutun', 'Parkathant', 'Varingwayn', 'Ymasul', 'Zrebom', 'Rregr', 'Calde', 'Fevar', 'Kolbye', 'Pearus', 'Vellw', 'Aafi', 'Baz', 'Rudik', 'Bryth', 'Filbh', 'Lilion', 'Rivan', 'Valan', 'Aeyi', 'Bmetog', 'Rvas', 'Budouth', 'Filies', 'Linnda', 'Robert', 'Vauberth', 'Dlarr', 'Bsadon', 'Tat', 'Bygyn', 'Findirianor', 'Lithlea', 'Roche', 'Vaunt', 'Fufiri', 'Bsutax', 'Uavi', 'Byrhthe', 'Finshep', 'Livarzegin', 'Rolyn', 'Veneve', 'Hide', 'Daxonr', 'Vidra', 'Bytzer', 'Firil', 'Lizola', 'Romar', 'Waldor', 'Hihe', 'Der', 'Zxotug', 'Calduil', 'Firth', 'Kongalangwin', 'Pelegoronth', 'Vidan', 'Hmuht', 'Derg', 'Videh', 'Calhoun', 'Fithur', 'Koule', 'Perann', 'Vorwin', 'Horden', 'Dezt', 'Zmedr', 'Calion', 'Flaenguallyn', 'Krise', 'Perman', 'Vuall', 'Iada', 'Dox', 'Zrak', 'Calura', 'Flaine', 'Laimithifiet', 'Persidius', 'Waithe', 'Kcah', 'Gtekus', 'Ttem', 'Camremar', 'Fobble', 'Latiabair', 'Pirogaidach', 'Waken', 'Kfabt', 'Magebs', 'Uote', 'Carapharyn', 'Forop', 'Lebahar', 'Pitinis', 'Weidlyn', 'Ldor', 'Mkanog', 'Wihen', 'Cadha', 'Fough', 'Lliez', 'Ronni', 'Wartmanna', 'Ledsat', 'Mtog', 'Wynfreen', 'Calla', 'Fowelinder', 'Lobrandiern', 'Ronya', 'Wathfais', 'Lodar', 'Mxerb', 'Possimpre', 'Camro', 'Franie', 'Lomerveinse', 'Rorianton', 'Weies', 'Mis', 'Ndet', 'Saebertui', 'Camrotmather', 'Frarellastie', 'Losinedyth', 'Rorystach', 'Wightiua', 'Nnukn', 'Nuz', 'Leoses', 'Caperes', 'Fravela', 'Lothiuture', 'Roscollus', 'Wmffricus', 'Rarif', 'Ran', 'Lynne', 'Caravis', 'Freth', 'Lebee', 'Pleri', 'Werni', 'Reb', 'Sbaxun', 'Froighe', 'Cardon', 'Friennain', 'Lotrissimac', 'Roway', 'Worth', 'Rtak', 'Sgor', 'Froth', 'Carrannin', 'Frienny', 'Lucham', 'Runstina', 'Wrainne', 'Safo', 'Snar', 'Carin', 'Casin', 'Frietga', 'Lugalle', 'Rutha', 'Wulffre', 'Sarda', 'Xgemz', 'Casye', 'Carilann', 'Frith', 'Leffer', 'Ploughne', 'Wichalish', 'Tadri', 'Xzeb');
+$name = ['Adaradle', 'Cimaclidor', 'Gertur', 'Maldorink', 'Robois', 'Angunal', 'Dade', 'Mabias', 'Adkyna', 'Cinghin', 'Gladh', 'Marmosi', 'Rondona', 'Aurging', 'Ddal', 'Liding', 'Aeferryfela', 'Cinthereban', 'Glasar', 'Marrese', 'Rothiw', 'Cala', 'Dhonl', 'Madon', 'Aehes', 'Cirth', 'Glassa', 'Marri', 'Ruadha', 'Cangla', 'Dorome', 'Maelowr', 'Aemathan', 'Gobar', 'Marus', 'Ruamnan', 'Chan', 'Eesa', 'Maeluinus', 'Aenchoba', 'Cognvareding', 'Gobharlas', 'Marvaldiri', 'Ruditherming', 'Chuthmmi', 'Eiba', 'Lifferg', 'Acwulf', 'Colairion', 'Gimran', 'Marry', 'Selin', 'Dorthu', 'Farine', 'Litiny', 'Adakonico', 'Colan', 'Ginou', 'Marus', 'Selrontus', 'Falla', 'Fkisl', 'Llice', 'Aeter', 'Collsbe', 'Godrica', 'Marzhaeto', 'Ryannen', 'Fauauthencaro', 'Gerrut', 'Lonan', 'Adegen', 'Collullen', 'Glederile', 'Marvegis', 'Senstarlough', 'Gorgortuna', 'Higafi', 'Magda', 'Agraien', 'Colmgristrow', 'Goibhinnach', 'Matha', 'Sabhrewi', 'Hallalur', 'Kalir', 'Loron', 'Agrimona', 'Colphe', 'Gollewyn', 'Mattancheude', 'Sadyn', 'Haulo', 'Kesig', 'Maglor', 'Adulf', 'Comgalant', 'Goibhin', 'Mathere', 'Seporvi', 'Hmoturol', 'Moc', 'Malog', 'Agulac', 'Conandinas', 'Gouthos', 'Maxina', 'Sadyn', 'Kalli', 'Oige', 'Malpaigley', 'Aieth', 'Concouise', 'Grevon', 'Melain', 'Saegalach', 'Lalarornargw', 'Rer', 'Luches', 'Aimboruin', 'Concs', 'Gunory', 'Melan', 'Saemglas', 'Langororobat', 'Ritdar', 'Maagdvar', 'Aesci', 'Concuxoman', 'Goibhir', 'Mefferog', 'Sequa', 'Lkatugin', 'Ru', 'Macka', 'Aesiry', 'Conner', 'Gomeri', 'Meladrywoo', 'Serne', 'Lungoth', 'Rufar', 'Malrickannie', 'Aitharrely', 'Connlugon', 'Gwain', 'Melathe', 'Saiuche', 'Miantu', 'Sbit', 'Malronna', 'Aethennye', 'Conovan', 'Gondorcan', 'Metta', 'Seven', 'Moguglk', 'Sirtuf', 'Maddi', 'Alennifiel', 'Coolis', 'Gwalloy', 'Meldurie', 'Sammarth', 'Sair', 'Suro', 'Maolinn', 'Aethosgorla', 'Corbjalas', 'Gorbis', 'Milimbron', 'Shaug', 'Ugurirt', 'Teddot', 'Maeret', 'Agius', 'Cordberthyn', 'Gorsaihirri', 'Moire', 'Sheelana', 'Vangulurc', 'Tedula', 'Maglach', 'Agnat', 'Corflaneu', 'Grachansien', 'Molum', 'Shenargharth', 'Weglauli', 'Tirik', 'Maiet', 'Aiblaithet', 'Corina', 'Granwy', 'Monesthet', 'Shenn', 'Welrot', 'Vada', 'Malcolum', 'Aille', 'Coryssa', 'Guolde', 'Morga', 'Shermun', 'Alagula', 'Aere', 'Marcanovane', 'Alfil', 'Covedu', 'Gwazeldan', 'Meline', 'Sandoralith', 'Baimmagil', 'Dalbal', 'Salther', 'Alherson', 'Cregodsunnye', 'Gwensin', 'Melinneth', 'Santhinter', 'Caualorirchal', 'Delga', 'Praergae', 'Ailpin', 'Creicath', 'Gwene', 'Morgan', 'Shouenollus', 'Chaldu', 'Dir', 'Samaneelene', 'Alescforther', 'Cucus', 'Gwith', 'Mortiphri', 'Sibyll', 'Gitulinaethegu', 'Dire', 'Samith', 'Alewenna', 'Cuintraya', 'Haaric', 'Moynteinvain', 'Sibyrnach', 'Hengona', 'Fohor', 'Sammen', 'Alingvar', 'Culbury', 'Gwirkitta', 'Meluf', 'Saoignolf', 'Kaert', 'Garit', 'Priel', 'Alien', 'Culleofer', 'Hadrifiel', 'Muirchar', 'Signachne', 'Kamothuro', 'Grocr', 'Priveliann', 'Aliquesnan', 'Cunedo', 'Hariomhnai', 'Mylee', 'Sigurbertur', 'Kauiaz', 'Hidte', 'Prossoke', 'Allan', 'Cunomen', 'Hayla', 'Naiglossi', 'Sipithne', 'Korndur', 'Hokede', 'Pwyllgever', 'Altheire', 'Dunos', 'Heiliach', 'Nathianus', 'Sirardolen', 'Lkortul', 'Kgedn', 'Samporotic', 'Alungoth', 'Cyhilgaleth', 'Helmhearlo', 'Nealemberhae', 'Smiss', 'Lungodu', 'Lgob', 'Quienere', 'Alvarth', 'Cymox', 'Helmott', 'Nelan', 'Solia', 'Mamelaz', 'Meti', 'Sanben', 'Amaerell', 'Cynhel', 'Helwyn', 'Netheilos', 'Soro', 'Nathimingorm', 'Nbadr', 'Sanberin', 'Alpho', 'Cynlo', 'Gwynthian', 'Mengar', 'Saxus', 'Nchammaglkaug', 'Nir', 'Santheiua', 'Amalphyth', 'Cynraenta', 'Halann', 'Merdan', 'Scait', 'Odulurchirordr', 'Nondeb', 'Quier', 'Amervis', 'Cyrus', 'Hazra', 'Mersides', 'Schae', 'Rilalavangon', 'Radavi', 'Ragorten', 'Ancelyndy', 'Daalneylyn', 'Hearbathekin', 'Meryl', 'Schondorn', 'Rothi', 'Rakrit', 'Readwennor', 'Andalf', 'Daghallfreda', 'Heatosus', 'Mewanezel', 'Scipirene', 'Rthaetulauglu', 'Rocnot', 'Saury', 'Anskarim', 'Daille', 'Hedden', 'Millon', 'Serezik', 'Sakaugitur', 'Rohag', 'Seena', 'Aodre', 'Dalbeth', 'Helhervi', 'Mindon', 'Seuma', 'Shmmelarirot', 'Rreht', 'Reosa', 'Ammeidoc', 'Dalie', 'Heralie', 'Nicathrennur', 'Spier', 'Vandrthuindu', 'Ruhdo', 'Segast', 'Amsyndser', 'Dalwing', 'Hervyn', 'Niccus', 'Sripthien', 'Vaturirthm', 'Rumibe', 'Reose', 'Apias', 'Damalongan', 'Here', 'Minmo', 'Shaus', 'Vaugberugia', 'Simuyo', 'Reosef', 'Andabanberth', 'Davetus', 'Hildiwa', 'Nijenn', 'Steal', 'Wergor', 'Tarkor', 'Rhybranen', 'Anfast', 'Deaga', 'Hilgriwa', 'Nimide', 'Steine', 'Baingurchul', 'Agluah', 'Ribus', 'Aracbergtun', 'Decyvedu', 'Heredergana', 'Moglos', 'Sigdis', 'Cathiaullrthmm', 'Alruur', 'Seibhing', 'Anfela', 'Dedegant', 'Hires', 'Norix', 'Steinzena', 'Chimak', 'Arucraen', 'Cathes', 'Anfridge', 'Degil', 'Huntresa', 'Nuarnoth', 'Stwine', 'Drndethmatugl', 'Athot', 'Carnach', 'Angborn', 'Deiristo', 'Hyldristick', 'Ogmael', 'Sual', 'Dronaurndurdug', 'Bariag', 'Catinethiana', 'Araddox', 'Delany', 'Hirmelis', 'Moinsanth', 'Siger', 'Durorin', 'Cahubraig', 'Celotherich', 'Aragorn', 'Dener', 'Hithur', 'Molfrikinoth', 'Sillovigfus', 'Eglrorgundrugo', 'Cihededt', 'Certan', 'Anjarmoth', 'Denkth', 'Iardall', 'Oilbhe', 'Sulish', 'Encatu', 'Dogihsosh', 'Cassavusime', 'Annal', 'Derriht', 'Iatachtach', 'Oilfhil', 'Svafnkell', 'Fando', 'Edatibulh', 'Cassimurcia', 'Arbery', 'Derufineryn', 'Holas', 'Molueli', 'Slefsunsha', 'Gurinca', 'Habsaul', 'Catisoth', 'Ansellryeter', 'Desth', 'Ideardin', 'Oranithos', 'Swal', 'Gwegorodulam', 'Haglitr', 'Cativ', 'Ap-Owerkhes', 'Devan', 'Idwene', 'Orcailifeth', 'Sybet', 'Ilkarirthar', 'Hircalh', 'Changaniam', 'Amlait', 'Evre', 'Heofsa', 'Nevettele', 'Spant', 'Ituth', 'Huhahn', 'Ceighterri', 'Archite', 'Dian', 'Hosbeth', 'Morgar', 'Sodenevrina', 'Korchaug', 'Ibnotn', 'Chani', 'Aptidh', 'Dician', 'Ilfor', 'Ordys', 'Taigardus', 'Korilo', 'Ilheab', 'Chastinia', 'Argon', 'Dilarion', 'Hracye', 'Morgonan', 'Solas', 'Kormiaturgo', 'Inorelinl', 'Chlinethian', 'Ariwen', 'Dimus', 'Hrotheker', 'Morix', 'Sontz', 'Ngogiak', 'Itolraab', 'Celeribe', 'Aradys', 'Dockermas', 'Imcha', 'Orefrfast', 'Talig', 'Ntulrolo', 'Lalihg', 'Celeve', 'Aral', 'Doireth', 'Imla', 'Orody', 'Tegar', 'Ogoturdugldr', 'Loceraoh', 'Celte', 'Arlethawluig', 'Doirss', 'Hroxie', 'Morna', 'Sorry', 'Olar', 'Nennuan', 'Ciach', 'Arhtshallmo', 'Domnallys', 'Ininna', 'Oroke', 'Tegarmail', 'Orgo', 'Olalehaa', 'Cibus', 'Arley', 'Donath', 'Inionna', 'Orrianai', 'Telizez', 'Rururch', 'Sicatatr', 'Celyan', 'Arlygan', 'Donchorundon', 'Huailindrog', 'Morwe', 'Spaisia', 'Sharua', 'Tinariin', 'Cinunnse', 'Arlos', 'Donnie', 'Intha', 'Osbeorsatus', 'Telrichardo', 'Vakazgl', 'Ubidnert', 'Cercnain', 'Arnagh', 'Driathink', 'Hunter', 'Morwenn', 'Stebbi', 'Vamimm', 'Ulerteeh', 'Chrono', 'Arnethire', 'Drovath', 'Hwambrevonn', 'Mothe', 'Strai', 'Akoduti', 'Ablagr', 'Ciacion', 'Asberg', 'Dryrymon', 'Idelos', 'Mouthiana', 'Strogiel', 'Asuda', 'Adattang', 'Ciarion', 'Artuir', 'Dubhe', 'Ioardoc', 'Otbon', 'Tendiegisan', 'Atadedak', 'Adenalinl', 'Clemma', 'Athallyr', 'Dubiggur', 'Iehmassi', 'Muadamulakk', 'Surre', 'Axeer', 'Aralcail', 'Fugeiria', 'Avien', 'Duilen', 'Iseas', 'Ottiriel', 'Terfula', 'Binye', 'Aribih', 'Gablez', 'Aylina', 'Dumnagh', 'Iethilo', 'Muiriehmarus', 'Sveinestel', 'Edeline', 'Atedetiet', 'Gaess', 'Avituc', 'Dumnochobb', 'Isotharic', 'Overninus', 'Terot', 'Etifaca', 'Bogatbius', 'Gaillughaill', 'Aylinsonse', 'Eadan', 'Ilchoar', 'Mulnus', 'Svert', 'Lelhi', 'Casbuit', 'Galadrime', 'Baishian', 'Eafrikinn', 'Imloth', 'Murry', 'Sween', 'Mutydare', 'Dunaet', 'Galak', 'Barladucus', 'Eaneidh', 'Imrilla', 'Myles', 'Swine', 'Niyni', 'Edelocoel', 'Galduit', 'Beardolde', 'Earcorodrich', 'Indingaer', 'Naogurm', 'Tadhagol', 'Odadinir', 'Ehalonoa', 'Garrinaic', 'Ayleribesta', 'Ebemma', 'Issch', 'Palman', 'Teseibhne', 'Ohibarat', 'Erdau', 'Garry', 'Baith', 'Eburn', 'Jartman', 'Paraps', 'Teway', 'Raruce', 'Godreub', 'Gatiarth', 'Becca', 'Edrich', 'Inmouthor', 'Naueritta', 'Tallaith', 'Rexaxrem', 'Hatalitt', 'Gauros', 'Balyesmourn', 'Edynoreth', 'Jarvelae', 'Pawlynn', 'Thats', 'Roletizi', 'Isniah', 'Gavin', 'Barrim', 'Effroy', 'Jazma', 'Peole', 'Therly', 'Royazar', 'Lahhoas', 'Gavinas', 'Bedwick', 'Eitin', 'Intheodar', 'Naugh', 'Tanton', 'Serez', 'Lediag', 'Gaylesh', 'Bauisligal', 'Eksiprepri', 'Jokulan', 'Peron', 'Therto', 'Tarar', 'Naderbaah', 'Geathet', 'Bearus', 'Eksisbury', 'Kabristofa', 'Pesifalas', 'Thian', 'Toxva', 'Ogelath', 'Geirdarnan', 'Beleg', 'Ekwesth', 'Ioete', 'Nealys', 'Tanyalek', 'Utaen', 'Onarareab', 'Gelege', 'Belvana', 'Ekwiremia', 'Ismeneouuin', 'Nechuff', 'Tasses', 'Vosa', 'Ralcaal', 'Gematurg', 'Beley', 'Elagus', 'Kaithe', 'Peutoust', 'Thidric', 'Xetaroka', 'Rehatb', 'Genildis', 'Benciann', 'Elbius', 'Kaluth', 'Phana', 'Thiet', 'Xira', 'Renenirl', 'Geofgivye', 'Benou', 'Elborn', 'Istacheidir', 'Neile', 'Tefalaf', 'Zetomyhe', 'Rughen', 'Geofraelisa', 'Beornorth', 'Elduin', 'Ivalee', 'Neldur', 'Terfindonny', 'Zilohona', 'Teluhoer', 'Georht', 'Benji', 'Elian', 'Keelyne', 'Pothswineron', 'Thikaden', 'Adinikox', 'Batemz', 'Gerechula', 'Bennonne', 'Elich', 'Kenear', 'Prak-Zig', 'Thryth', 'Adivema', 'Be', 'Geristink', 'Bethimen', 'Elimagus', 'Jacloves', 'Nemilinny', 'Teriana', 'Anami', 'Besotg', 'Gerrim', 'Beribenzel', 'Elissire', 'Kenni', 'Presaric', 'Thuiley', 'Arira', 'Bmon', 'Gilos', 'Berthause', 'Elricherick', 'Kennie', 'Priel', 'Tianarus', 'Azekis', 'Bokesm', 'Xabilie', 'Bethe', 'Elrong', 'Kennock', 'Purtlan', 'Tigeri', 'Cihal', 'Bzagn', 'Woodwyn', 'Bjarma', 'Elsecgren', 'Jakebing', 'Netta', 'Thargoll', 'Cizavix', 'Dob', 'Xandur', 'Blathea', 'Elstanly', 'Jayden', 'Nevalinnyn', 'Thella', 'Dasibmir', 'Duterm', 'Xaphorster', 'Bitane', 'Emmena', 'Kevyn', 'Qilla', 'Tillentius', 'Dirob', 'Gabm', 'Xelan', 'Blatell', 'Emyndenelda', 'Kibes', 'Quaethenzio', 'Tilloc', 'Elofivi', 'Gmerx', 'Wrough', 'Blayne', 'Emynyr', 'Jayne', 'Nicolm', 'Theo', 'Ferirde', 'Gobadk', 'Wulla', 'Blina', 'Endrai', 'Jazliko', 'Nides', 'Think', 'Hafde', 'Gox', 'Wynwoioi', 'Bolbjora', 'Eneelesonket', 'Knutiltito', 'Quebran', 'Tirina', 'Ireet', 'Gu', 'Xabus', 'Bowdyn', 'Enoulheirc', 'Kordurh', 'Ragluman', 'Tiriok', 'Mirital', 'Kaz', 'Xiommish', 'Boanna', 'Entink', 'Jenncho', 'Nomon', 'Thoces', 'Nexerek', 'Kusz', 'Xavio', 'Boriya', 'Eochearnir', 'Jesmonan', 'Norody', 'Thoren', 'Nyse', 'Mdos', 'Xippeleg', 'Bozef', 'Eochuter', 'Joakhanezah', 'Norysset', 'Thosgarenn', 'Ratsa', 'Mubazs', 'Yarmotherl', 'Brach', 'Eogentyne', 'Joevicca', 'O`Nei', 'Thowella', 'Renyvar', 'Nazogr', 'Yourn', 'Breas', 'Eosarath', 'Kriseaghy', 'Raskars', 'Toenbert', 'Ridan', 'Nes', 'Xydrie', 'Bradowfax', 'Eosina', 'Jonya', 'Odhre', 'Thrabent', 'Rokan', 'Rabx', 'Xylan', 'Brenzander', 'Epilla', 'Kyantesso', 'Ravaciacus', 'Torchon', 'Sazikak', 'Rgema', 'Yeers', 'Brespal', 'Erachlo', 'Laistjane', 'Refil', 'Trach', 'Suros', 'Temg', 'Zahna', 'Breth', 'Eride', 'Lardullian', 'Reidhg', 'Trecumharust', 'Tehidora', 'Xanozt', 'Zaximo', 'Branabell', 'Ermournen', 'Joscale', 'Olvagosa', 'Tikingal', 'Todxo', 'Zagumx', 'Yenoli', 'Branden', 'Erricia', 'Josse', 'Omnaltgaliam', 'Tipher', 'Uvalalil', 'Zdusb', 'Zepheron', 'Brethur', 'Esairfy', 'Laugurespath', 'Rekwe', 'Tresink', 'Afazer', 'Brog', 'Ysfall', 'Bridra', 'Estendir', 'Josuuarn', 'Orgeralassa', 'Tissia', 'Ahoni', 'Bxorem', 'Zabel', 'Brilionn', 'Esubsiorsa', 'Jowan', 'Orielsecha', 'Todune', 'Ateloba', 'Gebakx', 'Zabeni', 'Bring', 'Etarva', 'Judigbryht', 'Orret', 'Tothryth', 'Avkov', 'Gox', 'Zebin ', 'Brochebig', 'Etgera', 'Kaellecton', 'Osbeothe', 'Traem', 'Dixutir', 'Gxomub', 'Zozzo ', 'Brockmarille', 'Ethelmotor', 'Karkus', 'Osbertur', 'Treen', 'Donorauk', 'Kmot', 'Boh', 'Brythai', 'Etrick', 'Katanyalin', 'Osripi', 'Trilynton', 'Hara', 'Kunedb', 'Dehoro', 'Bretta', 'Eultutney', 'Lawaithburga', 'Relar', 'Treva', 'Ihizan', 'Me', 'Del', 'Burthgham', 'Eurieth', 'Katyrus', 'Ossedelle', 'Tuorne', 'Iroharim', 'Munads', 'Detro', 'Byrtelena', 'Evernen', 'Kavanora', 'Osvinaugh', 'Tutel', 'Isubasak', 'Nmabg', 'Fadher', 'Cadfang', 'Evrenth', 'Keena', 'Othryth', 'Twichos', 'Itoso', 'Ntuser', 'Fircis', 'Briatha', 'Excolma', 'Leach', 'Remay', 'Tronellen', 'Ivirikor', 'Nuxr', 'Fsah', 'Brichadha', 'Exinan', 'Leanna', 'Rendore', 'Truin', 'Kohurbar', 'Nzork', 'Garde', 'Brith', 'Faireth', 'Leide', 'Reote', 'Tuara', 'Lidebam', 'Rmukg', 'Gelnar', 'Brocht', 'Falmtyrnetta', 'Leigh', 'Reprick', 'Tudfran', 'Mitik', 'Rtegob', 'Geri', 'Brook', 'Falyndzai', 'Lenoel', 'Reprost', 'Tyrnaster', 'Ranereku', 'Suk', 'Hva', 'Brossies', 'Fanghus', 'Lerice', 'Rettan', 'Uilief', 'Ronelioc', 'Tax', 'Iama', 'Caela', 'Fanus', 'Kende', 'Ottinus', 'Uaignobe', 'Roxalah', 'Tmazx', 'Ieva', 'Bryales', 'Fareth', 'Lestril', 'Rhyas', 'Uiran', 'Ryxox', 'Toxb', 'Iiro', 'Caili', 'Faria', 'Kennos', 'Owaynegalim', 'Unpith', 'Tayator', 'Tzasb', 'Kehmul', 'Bryanna', 'Farma', 'Leuff', 'Rikur', 'Uriarmosink', 'Teri', 'Tzax', 'Liler', 'Caina', 'Fenectus', 'Kevin', 'Padsto', 'Unter', 'Ulari', 'Xbase', 'Mnavb', 'Cairex', 'Feras', 'Kinburh', 'Palurial', 'Vadrickael', 'Uridol', 'Xdukez', 'Nrir', 'Caith', 'Ferrick', 'Kiorte', 'Pants', 'Valinick', 'Xarirab', 'Xem', 'Resrol', 'Caithren', 'Ferth', 'Knutun', 'Parkathant', 'Varingwayn', 'Ymasul', 'Zrebom', 'Rregr', 'Calde', 'Fevar', 'Kolbye', 'Pearus', 'Vellw', 'Aafi', 'Baz', 'Rudik', 'Bryth', 'Filbh', 'Lilion', 'Rivan', 'Valan', 'Aeyi', 'Bmetog', 'Rvas', 'Budouth', 'Filies', 'Linnda', 'Robert', 'Vauberth', 'Dlarr', 'Bsadon', 'Tat', 'Bygyn', 'Findirianor', 'Lithlea', 'Roche', 'Vaunt', 'Fufiri', 'Bsutax', 'Uavi', 'Byrhthe', 'Finshep', 'Livarzegin', 'Rolyn', 'Veneve', 'Hide', 'Daxonr', 'Vidra', 'Bytzer', 'Firil', 'Lizola', 'Romar', 'Waldor', 'Hihe', 'Der', 'Zxotug', 'Calduil', 'Firth', 'Kongalangwin', 'Pelegoronth', 'Vidan', 'Hmuht', 'Derg', 'Videh', 'Calhoun', 'Fithur', 'Koule', 'Perann', 'Vorwin', 'Horden', 'Dezt', 'Zmedr', 'Calion', 'Flaenguallyn', 'Krise', 'Perman', 'Vuall', 'Iada', 'Dox', 'Zrak', 'Calura', 'Flaine', 'Laimithifiet', 'Persidius', 'Waithe', 'Kcah', 'Gtekus', 'Ttem', 'Camremar', 'Fobble', 'Latiabair', 'Pirogaidach', 'Waken', 'Kfabt', 'Magebs', 'Uote', 'Carapharyn', 'Forop', 'Lebahar', 'Pitinis', 'Weidlyn', 'Ldor', 'Mkanog', 'Wihen', 'Cadha', 'Fough', 'Lliez', 'Ronni', 'Wartmanna', 'Ledsat', 'Mtog', 'Wynfreen', 'Calla', 'Fowelinder', 'Lobrandiern', 'Ronya', 'Wathfais', 'Lodar', 'Mxerb', 'Possimpre', 'Camro', 'Franie', 'Lomerveinse', 'Rorianton', 'Weies', 'Mis', 'Ndet', 'Saebertui', 'Camrotmather', 'Frarellastie', 'Losinedyth', 'Rorystach', 'Wightiua', 'Nnukn', 'Nuz', 'Leoses', 'Caperes', 'Fravela', 'Lothiuture', 'Roscollus', 'Wmffricus', 'Rarif', 'Ran', 'Lynne', 'Caravis', 'Freth', 'Lebee', 'Pleri', 'Werni', 'Reb', 'Sbaxun', 'Froighe', 'Cardon', 'Friennain', 'Lotrissimac', 'Roway', 'Worth', 'Rtak', 'Sgor', 'Froth', 'Carrannin', 'Frienny', 'Lucham', 'Runstina', 'Wrainne', 'Safo', 'Snar', 'Carin', 'Casin', 'Frietga', 'Lugalle', 'Rutha', 'Wulffre', 'Sarda', 'Xgemz', 'Casye', 'Carilann', 'Frith', 'Leffer', 'Ploughne', 'Wichalish', 'Tadri', 'Xzeb'];
 $names = count($name)-1;
-return $name[mt_rand(0,$names)];
+return $name[mt_rand(0, max((int)(0), (int)($names)))];
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 function humanMaleName()
 {
-$name = array('Aaron', 'Aasin', 'Abbott', 'Abdel', 'Abdiel', 'Abel', 'Abijah', 'Abner', 'Abraham', 'Abran', 'Ace', 'Achilles', 'Ackerley', 'Adair', 'Adam', 'Addison', 'Adeben', 'Adem', 'Adiran', 'Adlai', 'Adler', 'Adley', 'Admon', 'Adolph', 'Adon', 'Adonis', 'Adrian', 'Adriel', 'Aeneas', 'Agustin', 'Ahearn', 'Ahmik', 'Ahren', 'Aidan', 'Aiken', 'Aimery', 'Aitan', 'Ajayi', 'Akando', 'Akbaar', 'Akello', 'Akil', 'Akshay', 'Alan', 'Aland', 'Alano', 'Alaric', 'Alastair', 'Alben', 'Albert', 'Alcander', 'Alcott', 'Alden', 'Alder', 'Aldrick', 'Alec', 'Alek', 'Aleksy', 'Aleron', 'Aleser', 'Alex', 'Alexander', 'Alfred', 'Alger', 'Alim', 'Alistair', 'Allaard', 'Allan', 'Allard', 'Allen', 'Alonzo', 'Alphonse', 'Alphonso', 'Alston', 'Altair', 'Alton', 'Alvin', 'Amadeo', 'Amadi', 'Amado', 'Ambrose', 'Amiel', 'Ammon', 'Amos', 'Amsden', 'Anders', 'Andre', 'Andreus', 'Andrew', 'Andrey', 'Andries', 'Angelo', 'Angus', 'Anker', 'Anoki', 'Ansel', 'Anselme', 'Ansley', 'Anson', 'Anthony', 'Antonio', 'Anwar', 'Archer', 'Archibald', 'Ardon', 'Aren', 'Ares', 'Argus', 'Ari', 'Aricin', 'Arion', 'Aristo', 'Aristotle', 'Arkin', 'Arlen', 'Arley', 'Arlin', 'Arlo', 'Arman', 'Armen', 'Armon', 'Armstrong', 'Arne', 'Arnold', 'Arnon', 'Aron', 'Arpiar', 'Arsen', 'Arsenio', 'Arthur', 'Ashby', 'Asher', 'Ashford', 'Ashlin', 'Ashon', 'Ashur', 'Athan', 'Atheron', 'Atman', 'Audric', 'Audun', 'Augustin', 'Augustus', 'Aurek', 'Austin', 'Averill', 'Avery', 'Axel', 'Bae', 'Bailey', 'Baingana', 'Bakari', 'Balbo', 'Balder', 'Baldwin', 'Bale', 'Balendin', 'Bali', 'Balin', 'Balint', 'Bancroft', 'Bandele', 'Bane', 'Banning', 'Baran', 'Barclay', 'Barden', 'Bardo', 'Bardon', 'Barnabas', 'Barnaby', 'Barnett', 'Barney', 'Baron', 'Barrett', 'Barry', 'Barse', 'Bart', 'Barth', 'Bartholomew', 'Barton', 'Basil', 'Bastiaan', 'Baul', 'Bavol', 'Baxter', 'Bay', 'Bayani', 'Bayard', 'Baylor', 'Bazyli', 'Beacan', 'Beagan', 'Beaman', 'Beau', 'Beaumont', 'Beauregard', 'Beck', 'Beldon', 'Belen', 'Bem', 'Beman', 'Ben', 'Benedict', 'Benen', 'Benjamin', 'Bennett', 'Benson', 'Bent', 'Bentley', 'Benton', 'Berenger', 'Bergren', 'Berk', 'Berkeley', 'Bernard', 'Bersh', 'Bert', 'Berthold', 'Berton', 'Bertram', 'Beval', 'Bevan', 'Bialy', 'Bilal', 'Bishop', 'Bitalo', 'Bjorn', 'Blade', 'Blaine', 'Blair', 'Blaise', 'Blake', 'Blaz', 'Blorn', 'Bo', 'Boden', 'Bogart', 'Bohdan', 'Bolton', 'Bond', 'Booker', 'Boone', 'Borden', 'Boris', 'Botan', 'Bowie', 'Bowman', 'Boyce', 'Boyd', 'Boyden', 'Brad', 'Braden', 'Bradford', 'Bradney', 'Brady', 'Bram', 'Bran', 'Brand', 'Brandeis', 'Brandon', 'Brant', 'Braxton', 'Bray', 'Braz', 'Brazil', 'Bren', 'Brencis', 'Brendan', 'Brendon', 'Brennan', 'Brent', 'Brentan', 'Bret', 'Brett', 'Brewster', 'Briac', 'Brian', 'Briand', 'Brice', 'Brieg', 'Brinley', 'Brishen', 'Brock', 'Broderick', 'Brodny', 'Brody', 'Bronson', 'Bront', 'Bruce', 'Bruno', 'Brutus', 'Bryan', 'Bryant', 'Bryce', 'Bryson', 'Buck', 'Bud', 'Budo', 'Burgess', 'Burhan', 'Burian', 'Burke', 'Burl', 'Burr', 'Burton', 'Byran', 'Byron', 'Cadeo', 'Cador', 'Caedmon', 'Cailan', 'Cain', 'Caine', 'Calder', 'Caldwell', 'Caleb', 'Calvin', 'Cam', 'Camden', 'Cameron', 'Candan', 'Canton', 'Canute', 'Carden', 'Carey', 'Carl', 'Carlin', 'Carlo', 'Carlos', 'Carlton', 'Carr', 'Carrick', 'Carrocio', 'Carroll', 'Carson', 'Carson', 'Carter', 'Carver', 'Casey', 'Casper', 'Cassidy', 'Cassius', 'Castel', 'Cato', 'Caton', 'Cavan', 'Ceasar', 'Cecil', 'Cedric', 'Cemal', 'Chad', 'Chadwick', 'Chaim', 'Chal', 'Chale', 'Chalmers', 'Chander', 'Chandler', 'Chane', 'Chaney', 'Channing', 'Chapin', 'Chapman', 'Charles', 'Charlton', 'Chase', 'Chatha', 'Chauncy', 'Chayton', 'Chen', 'Cheney', 'Chester', 'Chet', 'Chevalier', 'Chike', 'Chin', 'Christian', 'Christoph', 'Christopher', 'Christos', 'Chuck', 'Ciceron', 'Ciro', 'Clarence', 'Clark', 'Claude', 'Clay', 'Clayton', 'Clement', 'Cleveland', 'Clifford', 'Clifton', 'Clint', 'Clinton', 'Clive', 'Clyde', 'Cody', 'Colby', 'Cole', 'Coleman', 'Colin', 'Collin', 'Colon', 'Colton', 'Coman', 'Condon', 'Connor', 'Conrad', 'Conway', 'Corbett', 'Corbin', 'Corcoran', 'Cordell', 'Corey', 'Cornelius', 'Cort', 'Coty', 'Courtland', 'Craig', 'Crandall', 'Creighton', 'Crispin', 'Crosby', 'Cullen', 'Cullin', 'Culver', 'Curran', 'Curtis', 'Cynric', 'Cyrano', 'Cyril', 'Cyrus', 'Dag', 'Dagan', 'Dakarai', 'Dakota', 'Dale', 'Dallin', 'Dalton', 'Daly', 'Damek', 'Damen', 'Damian', 'Damien', 'Damion', 'Damon', 'Dana', 'Dane', 'Daniel', 'Danior', 'Dannik', 'Dante', 'Daren', 'Darien', 'Dario', 'Darnell', 'Darrel', 'Darrell', 'Darren', 'Daryl', 'David', 'Davin', 'Davis', 'Deacon', 'Dean', 'Decker', 'Delaney', 'Delano', 'Delbert', 'Dellan', 'Delmore', 'Delsin', 'Deman', 'Dempsey', 'Dempster', 'Denby', 'Dennis', 'Dennys', 'Denton', 'Denver', 'Der', 'Derek', 'Derrick', 'Derry', 'Deverell', 'Devin', 'Devlin', 'Dewey', 'Diederik', 'Diego', 'Dieter', 'Dillon', 'Dimitri', 'Dirk', 'Dobry', 'Dominic', 'Dominick', 'Donald', 'Donatien', 'Donato', 'Donnelley', 'Donnelly', 'Donovan', 'Doron', 'Dougie', 'Douglas', 'Douglass', 'Dov', 'Doyle', 'Drake', 'Drew', 'Duane', 'Dugan', 'Duglas', 'Duncan', 'Dunstan', 'Durand', 'Durriken', 'Dusan', 'Dustin', 'Dutch', 'Dwayne', 'Dwight', 'Dyami', 'Dyastro', 'Dylan', 'Dymas', 'Eamon', 'Earl', 'Earle', 'Eaton', 'Edan', 'Edgan', 'Edgar', 'Edison', 'Edmund', 'Edrin', 'Edward', 'Edwin', 'Edwin', 'Egan', 'Einar', 'Elad', 'Elden', 'Eldroth', 'Elek', 'Eli', 'Elias', 'Elijah', 'Elkan', 'Ellery', 'Elliot', 'Elliott', 'Ellis', 'Ellsworth', 'Elmer', 'Elmo', 'Elston', 'Elton', 'Elwood', 'Emanuel', 'Emil', 'Emilio', 'Emmett', 'Emo', 'Enoch', 'Enrico', 'Enrique', 'Ephraim', 'Erek', 'Eric', 'Erik', 'Ernest', 'Erol', 'Errol', 'Erskine', 'Erwin', 'Eryx', 'Essien', 'Esteban', 'Ethan', 'Eugene', 'Evan', 'Evander', 'Everett', 'Evzen', 'Ezekial', 'Ezra', 'Fabio', 'Fairfax', 'Farley', 'Farrell', 'Faxon', 'Felix', 'Felix', 'Fenn', 'Fenton', 'Fergus', 'Ferran', 'Ferris', 'Fielding', 'Filbert', 'Filmore', 'Finlay', 'Finley', 'Finn', 'Finnigan', 'Fisk', 'Fitzgerald', 'Fletcher', 'Flindo', 'Flint', 'Floyd', 'Flynn', 'Forbes', 'Forrest', 'Forsythe', 'Foster', 'Foster', 'Francis', 'Franek', 'Frank', 'Franklin', 'Frasier', 'Frazer', 'Frazier', 'Fred', 'Frederick', 'Fremont', 'Fritz', 'Fuller', 'Fulton', 'Gabe', 'Gabriel', 'Gage', 'Galen', 'Galeno', 'Galvin', 'Gamble', 'Gannon', 'Gareth', 'Garfield', 'Gargan', 'Garner', 'Garrett', 'Garrick', 'Garridan', 'Garrison', 'Garritt', 'Garth', 'Garvin', 'Gary', 'Gaspar', 'Gaston', 'Gavin', 'Gavrie', 'Gaylord', 'Gaynor', 'Geoff', 'Geoffrey', 'Geoffry', 'George', 'Gerard', 'Gerik', 'Germain', 'Gerry', 'Gideon', 'Gilberto', 'Giles', 'Ginton', 'Givon', 'Glen', 'Glenn', 'Glenno', 'Godfrey', 'Gordon', 'Gordy', 'Gorman', 'Grady', 'Graham', 'Gram', 'Granger', 'Grant', 'Granville', 'Grayson', 'Greg', 'Greger', 'Gregor', 'Gregory', 'Gresham', 'Griffen', 'Griffith', 'Guilhem', 'Gunnar', 'Gunther', 'Gus', 'Gustave', 'Guthrie', 'Guy', 'Hackett', 'Hadden', 'Hadi', 'Hadley', 'Hadrian', 'Hagan', 'Hal', 'Halden', 'Hale', 'Halian', 'Halsey', 'Hamilton', 'Hamlin', 'Hank', 'Hans', 'Harden', 'Hardy', 'Harith', 'Harlan', 'Harman', 'Harold', 'Harper', 'Harrison', 'Harry', 'Hart', 'Hartley', 'Harvey', 'Hassan', 'Hastin', 'Hastings', 'Hayden', 'Hayes', 'Haynes', 'Heath', 'Hector', 'Helaku', 'Henning', 'Henry', 'Herbert', 'Herman', 'Herschel', 'Hilliard', 'Hilton', 'Hiroshi', 'Hobart', 'Hogan', 'Holden', 'Holt', 'Homes', 'Horace', 'Horton', 'Houston', 'Howard', 'Howrence', 'Hoyt', 'Hugh', 'Hugo', 'Humphrey', 'Hunter', 'Huntley', 'Hyman', 'Iain', 'Ian', 'Ilias', 'Ingmar', 'Ingram', 'Ira', 'Irvin', 'Irving', 'Irwin', 'Isaac', 'Isaiah', 'Israel', 'Itzak', 'Ivan', 'Ivar', 'Jabari', 'Jabir', 'Jack', 'Jacob', 'Jacobe', 'Jacques', 'Jacson', 'Jacy', 'Jafar', 'Jagger', 'Jake', 'Jal', 'Jaleel', 'Jamal', 'James', 'Jamison', 'Jared', 'Jarek', 'Jarman', 'Jaron', 'Jarrod', 'Jarvis', 'Jason', 'Jasper', 'Javan', 'Javier', 'Jay', 'Jebidiah', 'Jed', 'Jedidiah', 'Jedrek', 'Jeff', 'Jeffrey', 'Jelani', 'Jeremiah', 'Jeremy', 'Jerolin', 'Jerome', 'Jeromy', 'Jerzy', 'Jesse', 'Jessee', 'Jethro', 'Jibril', 'Jin', 'Jiro', 'Jivin', 'Joel', 'Johann', 'John', 'Jolon', 'Jonah', 'Jonathan', 'Jonathon', 'Jordan', 'Jordon', 'Jorgen', 'Jorvin', 'Joseph', 'Joshua', 'Judd', 'Jude', 'Julian', 'Julius', 'Juma', 'Jung', 'Justin', 'Kadin', 'Kai', 'Kaikara', 'Kaladin', 'Kalb', 'Kale', 'Kalil', 'Kalkin', 'Kalman', 'Kamal', 'Kane', 'Kaniel', 'Kardal', 'Karl', 'Karsten', 'Kasch', 'Kasen', 'Kaspar', 'Kateb', 'Kayin', 'Keane', 'Kearney', 'Kedar', 'Keefe', 'Keelan', 'Keenan', 'Kegan', 'Keir', 'Keir', 'Keith', 'Kelby', 'Keleman', 'Kell', 'Kellen', 'Kelvin', 'Ken', 'Kenan', 'Kendall', 'Kendrick', 'Kenelm', 'Kenley', 'Kennard', 'Kennedy', 'Kenneth', 'Kent', 'Kenton', 'Kenyon', 'Keona', 'Ker', 'Kerby', 'Kern', 'Kerry', 'Kers', 'Kersen', 'Kerwin', 'Kester', 'Kevin', 'Khalil', 'Khoury', 'Kiefer', 'Kieran', 'Kiernan', 'Killian', 'Kin', 'Kinnel', 'Kinsey', 'Kintan', 'Kip', 'Kirby', 'Kirk', 'Kiyoshi', 'Kliftin', 'Klog', 'Komor', 'Kontar', 'Krischan', 'Krister', 'Kurt', 'Kyle', 'Kyler', 'Laethan', 'Laird', 'Lamar', 'Lamont', 'Lance', 'Lander', 'Landon', 'Lane', 'Lang', 'Larry', 'Lars', 'Lawler', 'Lawrence', 'Lazarus', 'Lear', 'Lee', 'Leif', 'Leighton', 'Leland', 'Len', 'Lennon', 'Lennor', 'Lennox', 'Lensar', 'Leo', 'Leon', 'Leonard', 'Leron', 'Leroy', 'Lester', 'Lev', 'Levi', 'Lewis', 'Lewis', 'Li', 'Liam', 'Like', 'Lincoln', 'Lindsey', 'Lionel', 'Llewellyn', 'Lloyd', 'Logan', 'Loren', 'Lorenzo', 'Lorne', 'Louis', 'Lowell', 'Lucas', 'Lucian', 'Luis', 'Luke', 'Lukyan', 'Lunt', 'Luther', 'Lyle', 'Lyndon', 'Lysander', 'Mac', 'Macer', 'Mack', 'Mackenzie', 'Magnus', 'Malcolm', 'Malik', 'Manco', 'Mandek', 'Mander', 'Manfred', 'Manning', 'Mansur', 'Manuel', 'Marc', 'Marcos', 'Marcus', 'Marden', 'Marek', 'Mario', 'Mark', 'Markham', 'Markos', 'Marlin', 'Marlon', 'Marlon', 'Marshal', 'Marshall', 'Marsten', 'Martin', 'Martingo', 'Marvin', 'Mason', 'Matai', 'Mateo', 'Mather', 'Matthew', 'Matthias', 'Maurice', 'Max', 'Maxwell', 'Maynard', 'Mayon', 'Mead', 'Meka', 'Mercer', 'Merill', 'Merle', 'Merrick', 'Merrik', 'Meyer', 'Micael', 'Michael', 'Migon', 'Miguel', 'Mike', 'Mikkel', 'Mikos', 'Miles', 'Miles', 'Milo', 'Milton', 'Miner', 'Mitchell', 'Monroe', 'Monte', 'Morgan', 'Morley', 'Morris', 'Mortimer', 'Morton', 'Morven', 'Morz', 'Motega', 'Mukasa', 'Murdoch', 'Murdock', 'Murphy', 'Myles', 'Myron', 'Naeem', 'Nalren', 'Nantan', 'Nathan', 'Nathaniel', 'Neal', 'Neale', 'Neil', 'Nelek', 'Nelson', 'Neron', 'Nestor', 'Nevan', 'Neville', 'Nevin', 'Nevin', 'Nicanor', 'Nicholas', 'Nigel', 'Nikolos', 'Nils', 'Noah', 'Nodin', 'Noe', 'Nolan', 'Norbert', 'Norman', 'Norris', 'Norton', 'Nuri', 'Nyle', 'Oakes', 'Oakley', 'Ochen', 'Octavius', 'Odell', 'Odin', 'Odion', 'Odon', 'Ogden', 'Olaf', 'Olin', 'Oliver', 'Omar', 'Ordano', 'Oren', 'Orion', 'Orman', 'Ormand', 'Orrin', 'Orson', 'Orville', 'Oscar', 'Osgood', 'Osmond', 'Otis', 'Otto', 'Owen', 'Paco', 'Palmer', 'Paolo', 'Paris', 'Parker', 'Parnell', 'Pascal', 'Patamon', 'Patrick', 'Patterson', 'Patton', 'Paul', 'Paulin', 'Pavel', 'Paxton', 'Payton', 'Pearce', 'Peder', 'Pembroke', 'Penn', 'Percival', 'Perry', 'Peter', 'Peyton', 'Phearcy', 'Philip', 'Phillip', 'Phillippe', 'Phoenix', 'Pierce', 'Pierre', 'Pierson', 'Pilan', 'Platon', 'Porter', 'Prentice', 'Prescot', 'Prescott', 'Preston', 'Quentin', 'Quenton', 'Quillan', 'Quincy', 'Quinlan', 'Quinn', 'Rad', 'Radcliffe', 'Radman', 'Rafael', 'Rafferty', 'Ragnar', 'Raidon', 'Raleigh', 'Ralph', 'Ramiro', 'Ramon', 'Ramsay', 'Ramsey', 'Ranard', 'Rance', 'Randall', 'Randolph', 'Ranen', 'Ranger', 'Rankin', 'Raoul', 'Raphael', 'Raul', 'Ravi', 'Ravi', 'Ravid', 'Ray', 'Raymond', 'Raynor', 'Reade', 'Redford', 'Redmond', 'Reed', 'Reese', 'Reeve', 'Regan', 'Reginald', 'Regis', 'Remington', 'Renaldo', 'Rendor', 'Renfry', 'Renny', 'Reuben', 'Rex', 'Reyhan', 'Rhett', 'Rhett', 'Rhys', 'Ricardo', 'Richard', 'Richter', 'Rico', 'Rider', 'Ridgley', 'Rigby', 'Riley', 'Rimon', 'Ringo', 'Ringo', 'Riodan', 'Riordan', 'Roarke', 'Robert', 'Roberto', 'Robi', 'Rockwell', 'Rod', 'Roderick', 'Rodman', 'Rodney', 'Rodrigo', 'Roger', 'Roi', 'Roland', 'Roldan', 'Rolf', 'Ronald', 'Ronan', 'Rooney', 'Rory', 'Roscoe', 'Ross', 'Roth', 'Rowan', 'Rowland', 'Roy', 'Royce', 'Ruben', 'Rudd', 'Rudi', 'Rudyard', 'Rufus', 'Runako', 'Ruskin', 'Russ', 'Russell', 'Rusty', 'Rutherford', 'Rutledge', 'Ryan', 'Ryder', 'Rylan', 'Sahale', 'Sahen', 'Salim', 'Saloman', 'Sam', 'Samien', 'Sammon', 'Samson', 'Samuel', 'Sanders', 'Sandon', 'Sandor', 'Sanford', 'Sargent', 'Sarngin', 'Sarojin', 'Saul', 'Saunders', 'Sawyer', 'Saxon', 'Schuyler', 'Scott', 'Sean', 'Sebastian', 'Sebastien', 'Seif', 'Selby', 'Senon', 'Sergio', 'Seth', 'Seung', 'Severin', 'Sevilin', 'Seward', 'Seymour', 'Shane', 'Shawn', 'Shea', 'Sheffield', 'Sheldon', 'Shen', 'Sheridan', 'Sherman', 'Sherwin', 'Sherwood', 'Shing', 'Shunnar', 'Sidney', 'Siegfried', 'Silas', 'Simon', 'Sivan', 'Skip', 'Skyler', 'Slade', 'Slevin', 'Smith', 'Solomon', 'Sorgan', 'Soterios', 'Spalding', 'Spencer', 'Spenser', 'Standford', 'Stanley', 'Stanton', 'Stasio', 'Stefan', 'Stephan', 'Stephen', 'Sterling', 'Stevan', 'Steve', 'Steven', 'Stewart', 'Stoke', 'Stoyan', 'Strom', 'Stuart', 'Subrey', 'Sulaiman', 'Sullican', 'Sumner', 'Sutherland', 'Sutton', 'Sven', 'Sylvester', 'Tab', 'Tabari', 'Tad', 'Tadi', 'Tai', 'Tajo', 'Talbart', 'Talbot', 'Talman', 'Talos', 'Tanek', 'Tanner', 'Tano', 'Taro', 'Tate', 'Taurin', 'Taylor', 'Tem', 'Terence', 'Terrence', 'Terrill', 'Terry', 'Thaddeus', 'Thai', 'Thaman', 'Thane', 'Thanos', 'Theobald', 'Theodore', 'Theron', 'Thierry', 'Thomas', 'Thorpe', 'Thurston', 'Thurston', 'Tibalt', 'Tiernan', 'Timothy', 'Titus', 'Tobias', 'Toby', 'Tod', 'Todd', 'Tomas', 'Tong', 'Tor', 'Torin', 'Torrance', 'Townsend', 'Travers', 'Travis', 'Tremain', 'Tremaine', 'Trent', 'Trevor', 'Trey', 'Tristan', 'Troy', 'Tryon', 'Tucker', 'Tully', 'Tyee', 'Tyler', 'Tymon', 'Tyrone', 'Upton', 'Uriah', 'Urian', 'Van', 'Vance', 'Vaughn', 'Vern', 'Vernon', 'Victor', 'Vincent', 'Vinson', 'Virgil', 'Vito', 'Vlad', 'Vladimir', 'Vokes', 'Volf', 'Wade', 'Wagner', 'Walden', 'Waldo', 'Walker', 'Wallace', 'Wally', 'Walter', 'Ward', 'Warner', 'Warren', 'Watson', 'Waylan', 'Wayland', 'Waylon', 'Wayne', 'Webb', 'Webster', 'Wendell', 'Wesley', 'Weston', 'Weylin', 'Whitaker', 'Wilfen', 'Will', 'Willard', 'Willem', 'William', 'Wilson', 'Winston', 'Winthrop', 'Wlby', 'Woody', 'Wyatt', 'Xavier', 'Xenos', 'Xerxes', 'Ximen', 'Yakecan', 'Yale', 'Yancey', 'Yardley', 'Yarin', 'Yerik', 'Yero', 'Yervant', 'York', 'Yusuf', 'Yves', 'Zachariah', 'Zachary', 'Zackery', 'Zaid', 'Zaide', 'Zane', 'Zaniel', 'Zann', 'Zared', 'Zarek', 'Zeke', 'Zenon', 'Zion', 'Ziven', 'Zorn');
+$name = ['Aaron', 'Aasin', 'Abbott', 'Abdel', 'Abdiel', 'Abel', 'Abijah', 'Abner', 'Abraham', 'Abran', 'Ace', 'Achilles', 'Ackerley', 'Adair', 'Adam', 'Addison', 'Adeben', 'Adem', 'Adiran', 'Adlai', 'Adler', 'Adley', 'Admon', 'Adolph', 'Adon', 'Adonis', 'Adrian', 'Adriel', 'Aeneas', 'Agustin', 'Ahearn', 'Ahmik', 'Ahren', 'Aidan', 'Aiken', 'Aimery', 'Aitan', 'Ajayi', 'Akando', 'Akbaar', 'Akello', 'Akil', 'Akshay', 'Alan', 'Aland', 'Alano', 'Alaric', 'Alastair', 'Alben', 'Albert', 'Alcander', 'Alcott', 'Alden', 'Alder', 'Aldrick', 'Alec', 'Alek', 'Aleksy', 'Aleron', 'Aleser', 'Alex', 'Alexander', 'Alfred', 'Alger', 'Alim', 'Alistair', 'Allaard', 'Allan', 'Allard', 'Allen', 'Alonzo', 'Alphonse', 'Alphonso', 'Alston', 'Altair', 'Alton', 'Alvin', 'Amadeo', 'Amadi', 'Amado', 'Ambrose', 'Amiel', 'Ammon', 'Amos', 'Amsden', 'Anders', 'Andre', 'Andreus', 'Andrew', 'Andrey', 'Andries', 'Angelo', 'Angus', 'Anker', 'Anoki', 'Ansel', 'Anselme', 'Ansley', 'Anson', 'Anthony', 'Antonio', 'Anwar', 'Archer', 'Archibald', 'Ardon', 'Aren', 'Ares', 'Argus', 'Ari', 'Aricin', 'Arion', 'Aristo', 'Aristotle', 'Arkin', 'Arlen', 'Arley', 'Arlin', 'Arlo', 'Arman', 'Armen', 'Armon', 'Armstrong', 'Arne', 'Arnold', 'Arnon', 'Aron', 'Arpiar', 'Arsen', 'Arsenio', 'Arthur', 'Ashby', 'Asher', 'Ashford', 'Ashlin', 'Ashon', 'Ashur', 'Athan', 'Atheron', 'Atman', 'Audric', 'Audun', 'Augustin', 'Augustus', 'Aurek', 'Austin', 'Averill', 'Avery', 'Axel', 'Bae', 'Bailey', 'Baingana', 'Bakari', 'Balbo', 'Balder', 'Baldwin', 'Bale', 'Balendin', 'Bali', 'Balin', 'Balint', 'Bancroft', 'Bandele', 'Bane', 'Banning', 'Baran', 'Barclay', 'Barden', 'Bardo', 'Bardon', 'Barnabas', 'Barnaby', 'Barnett', 'Barney', 'Baron', 'Barrett', 'Barry', 'Barse', 'Bart', 'Barth', 'Bartholomew', 'Barton', 'Basil', 'Bastiaan', 'Baul', 'Bavol', 'Baxter', 'Bay', 'Bayani', 'Bayard', 'Baylor', 'Bazyli', 'Beacan', 'Beagan', 'Beaman', 'Beau', 'Beaumont', 'Beauregard', 'Beck', 'Beldon', 'Belen', 'Bem', 'Beman', 'Ben', 'Benedict', 'Benen', 'Benjamin', 'Bennett', 'Benson', 'Bent', 'Bentley', 'Benton', 'Berenger', 'Bergren', 'Berk', 'Berkeley', 'Bernard', 'Bersh', 'Bert', 'Berthold', 'Berton', 'Bertram', 'Beval', 'Bevan', 'Bialy', 'Bilal', 'Bishop', 'Bitalo', 'Bjorn', 'Blade', 'Blaine', 'Blair', 'Blaise', 'Blake', 'Blaz', 'Blorn', 'Bo', 'Boden', 'Bogart', 'Bohdan', 'Bolton', 'Bond', 'Booker', 'Boone', 'Borden', 'Boris', 'Botan', 'Bowie', 'Bowman', 'Boyce', 'Boyd', 'Boyden', 'Brad', 'Braden', 'Bradford', 'Bradney', 'Brady', 'Bram', 'Bran', 'Brand', 'Brandeis', 'Brandon', 'Brant', 'Braxton', 'Bray', 'Braz', 'Brazil', 'Bren', 'Brencis', 'Brendan', 'Brendon', 'Brennan', 'Brent', 'Brentan', 'Bret', 'Brett', 'Brewster', 'Briac', 'Brian', 'Briand', 'Brice', 'Brieg', 'Brinley', 'Brishen', 'Brock', 'Broderick', 'Brodny', 'Brody', 'Bronson', 'Bront', 'Bruce', 'Bruno', 'Brutus', 'Bryan', 'Bryant', 'Bryce', 'Bryson', 'Buck', 'Bud', 'Budo', 'Burgess', 'Burhan', 'Burian', 'Burke', 'Burl', 'Burr', 'Burton', 'Byran', 'Byron', 'Cadeo', 'Cador', 'Caedmon', 'Cailan', 'Cain', 'Caine', 'Calder', 'Caldwell', 'Caleb', 'Calvin', 'Cam', 'Camden', 'Cameron', 'Candan', 'Canton', 'Canute', 'Carden', 'Carey', 'Carl', 'Carlin', 'Carlo', 'Carlos', 'Carlton', 'Carr', 'Carrick', 'Carrocio', 'Carroll', 'Carson', 'Carson', 'Carter', 'Carver', 'Casey', 'Casper', 'Cassidy', 'Cassius', 'Castel', 'Cato', 'Caton', 'Cavan', 'Ceasar', 'Cecil', 'Cedric', 'Cemal', 'Chad', 'Chadwick', 'Chaim', 'Chal', 'Chale', 'Chalmers', 'Chander', 'Chandler', 'Chane', 'Chaney', 'Channing', 'Chapin', 'Chapman', 'Charles', 'Charlton', 'Chase', 'Chatha', 'Chauncy', 'Chayton', 'Chen', 'Cheney', 'Chester', 'Chet', 'Chevalier', 'Chike', 'Chin', 'Christian', 'Christoph', 'Christopher', 'Christos', 'Chuck', 'Ciceron', 'Ciro', 'Clarence', 'Clark', 'Claude', 'Clay', 'Clayton', 'Clement', 'Cleveland', 'Clifford', 'Clifton', 'Clint', 'Clinton', 'Clive', 'Clyde', 'Cody', 'Colby', 'Cole', 'Coleman', 'Colin', 'Collin', 'Colon', 'Colton', 'Coman', 'Condon', 'Connor', 'Conrad', 'Conway', 'Corbett', 'Corbin', 'Corcoran', 'Cordell', 'Corey', 'Cornelius', 'Cort', 'Coty', 'Courtland', 'Craig', 'Crandall', 'Creighton', 'Crispin', 'Crosby', 'Cullen', 'Cullin', 'Culver', 'Curran', 'Curtis', 'Cynric', 'Cyrano', 'Cyril', 'Cyrus', 'Dag', 'Dagan', 'Dakarai', 'Dakota', 'Dale', 'Dallin', 'Dalton', 'Daly', 'Damek', 'Damen', 'Damian', 'Damien', 'Damion', 'Damon', 'Dana', 'Dane', 'Daniel', 'Danior', 'Dannik', 'Dante', 'Daren', 'Darien', 'Dario', 'Darnell', 'Darrel', 'Darrell', 'Darren', 'Daryl', 'David', 'Davin', 'Davis', 'Deacon', 'Dean', 'Decker', 'Delaney', 'Delano', 'Delbert', 'Dellan', 'Delmore', 'Delsin', 'Deman', 'Dempsey', 'Dempster', 'Denby', 'Dennis', 'Dennys', 'Denton', 'Denver', 'Der', 'Derek', 'Derrick', 'Derry', 'Deverell', 'Devin', 'Devlin', 'Dewey', 'Diederik', 'Diego', 'Dieter', 'Dillon', 'Dimitri', 'Dirk', 'Dobry', 'Dominic', 'Dominick', 'Donald', 'Donatien', 'Donato', 'Donnelley', 'Donnelly', 'Donovan', 'Doron', 'Dougie', 'Douglas', 'Douglass', 'Dov', 'Doyle', 'Drake', 'Drew', 'Duane', 'Dugan', 'Duglas', 'Duncan', 'Dunstan', 'Durand', 'Durriken', 'Dusan', 'Dustin', 'Dutch', 'Dwayne', 'Dwight', 'Dyami', 'Dyastro', 'Dylan', 'Dymas', 'Eamon', 'Earl', 'Earle', 'Eaton', 'Edan', 'Edgan', 'Edgar', 'Edison', 'Edmund', 'Edrin', 'Edward', 'Edwin', 'Edwin', 'Egan', 'Einar', 'Elad', 'Elden', 'Eldroth', 'Elek', 'Eli', 'Elias', 'Elijah', 'Elkan', 'Ellery', 'Elliot', 'Elliott', 'Ellis', 'Ellsworth', 'Elmer', 'Elmo', 'Elston', 'Elton', 'Elwood', 'Emanuel', 'Emil', 'Emilio', 'Emmett', 'Emo', 'Enoch', 'Enrico', 'Enrique', 'Ephraim', 'Erek', 'Eric', 'Erik', 'Ernest', 'Erol', 'Errol', 'Erskine', 'Erwin', 'Eryx', 'Essien', 'Esteban', 'Ethan', 'Eugene', 'Evan', 'Evander', 'Everett', 'Evzen', 'Ezekial', 'Ezra', 'Fabio', 'Fairfax', 'Farley', 'Farrell', 'Faxon', 'Felix', 'Felix', 'Fenn', 'Fenton', 'Fergus', 'Ferran', 'Ferris', 'Fielding', 'Filbert', 'Filmore', 'Finlay', 'Finley', 'Finn', 'Finnigan', 'Fisk', 'Fitzgerald', 'Fletcher', 'Flindo', 'Flint', 'Floyd', 'Flynn', 'Forbes', 'Forrest', 'Forsythe', 'Foster', 'Foster', 'Francis', 'Franek', 'Frank', 'Franklin', 'Frasier', 'Frazer', 'Frazier', 'Fred', 'Frederick', 'Fremont', 'Fritz', 'Fuller', 'Fulton', 'Gabe', 'Gabriel', 'Gage', 'Galen', 'Galeno', 'Galvin', 'Gamble', 'Gannon', 'Gareth', 'Garfield', 'Gargan', 'Garner', 'Garrett', 'Garrick', 'Garridan', 'Garrison', 'Garritt', 'Garth', 'Garvin', 'Gary', 'Gaspar', 'Gaston', 'Gavin', 'Gavrie', 'Gaylord', 'Gaynor', 'Geoff', 'Geoffrey', 'Geoffry', 'George', 'Gerard', 'Gerik', 'Germain', 'Gerry', 'Gideon', 'Gilberto', 'Giles', 'Ginton', 'Givon', 'Glen', 'Glenn', 'Glenno', 'Godfrey', 'Gordon', 'Gordy', 'Gorman', 'Grady', 'Graham', 'Gram', 'Granger', 'Grant', 'Granville', 'Grayson', 'Greg', 'Greger', 'Gregor', 'Gregory', 'Gresham', 'Griffen', 'Griffith', 'Guilhem', 'Gunnar', 'Gunther', 'Gus', 'Gustave', 'Guthrie', 'Guy', 'Hackett', 'Hadden', 'Hadi', 'Hadley', 'Hadrian', 'Hagan', 'Hal', 'Halden', 'Hale', 'Halian', 'Halsey', 'Hamilton', 'Hamlin', 'Hank', 'Hans', 'Harden', 'Hardy', 'Harith', 'Harlan', 'Harman', 'Harold', 'Harper', 'Harrison', 'Harry', 'Hart', 'Hartley', 'Harvey', 'Hassan', 'Hastin', 'Hastings', 'Hayden', 'Hayes', 'Haynes', 'Heath', 'Hector', 'Helaku', 'Henning', 'Henry', 'Herbert', 'Herman', 'Herschel', 'Hilliard', 'Hilton', 'Hiroshi', 'Hobart', 'Hogan', 'Holden', 'Holt', 'Homes', 'Horace', 'Horton', 'Houston', 'Howard', 'Howrence', 'Hoyt', 'Hugh', 'Hugo', 'Humphrey', 'Hunter', 'Huntley', 'Hyman', 'Iain', 'Ian', 'Ilias', 'Ingmar', 'Ingram', 'Ira', 'Irvin', 'Irving', 'Irwin', 'Isaac', 'Isaiah', 'Israel', 'Itzak', 'Ivan', 'Ivar', 'Jabari', 'Jabir', 'Jack', 'Jacob', 'Jacobe', 'Jacques', 'Jacson', 'Jacy', 'Jafar', 'Jagger', 'Jake', 'Jal', 'Jaleel', 'Jamal', 'James', 'Jamison', 'Jared', 'Jarek', 'Jarman', 'Jaron', 'Jarrod', 'Jarvis', 'Jason', 'Jasper', 'Javan', 'Javier', 'Jay', 'Jebidiah', 'Jed', 'Jedidiah', 'Jedrek', 'Jeff', 'Jeffrey', 'Jelani', 'Jeremiah', 'Jeremy', 'Jerolin', 'Jerome', 'Jeromy', 'Jerzy', 'Jesse', 'Jessee', 'Jethro', 'Jibril', 'Jin', 'Jiro', 'Jivin', 'Joel', 'Johann', 'John', 'Jolon', 'Jonah', 'Jonathan', 'Jonathon', 'Jordan', 'Jordon', 'Jorgen', 'Jorvin', 'Joseph', 'Joshua', 'Judd', 'Jude', 'Julian', 'Julius', 'Juma', 'Jung', 'Justin', 'Kadin', 'Kai', 'Kaikara', 'Kaladin', 'Kalb', 'Kale', 'Kalil', 'Kalkin', 'Kalman', 'Kamal', 'Kane', 'Kaniel', 'Kardal', 'Karl', 'Karsten', 'Kasch', 'Kasen', 'Kaspar', 'Kateb', 'Kayin', 'Keane', 'Kearney', 'Kedar', 'Keefe', 'Keelan', 'Keenan', 'Kegan', 'Keir', 'Keir', 'Keith', 'Kelby', 'Keleman', 'Kell', 'Kellen', 'Kelvin', 'Ken', 'Kenan', 'Kendall', 'Kendrick', 'Kenelm', 'Kenley', 'Kennard', 'Kennedy', 'Kenneth', 'Kent', 'Kenton', 'Kenyon', 'Keona', 'Ker', 'Kerby', 'Kern', 'Kerry', 'Kers', 'Kersen', 'Kerwin', 'Kester', 'Kevin', 'Khalil', 'Khoury', 'Kiefer', 'Kieran', 'Kiernan', 'Killian', 'Kin', 'Kinnel', 'Kinsey', 'Kintan', 'Kip', 'Kirby', 'Kirk', 'Kiyoshi', 'Kliftin', 'Klog', 'Komor', 'Kontar', 'Krischan', 'Krister', 'Kurt', 'Kyle', 'Kyler', 'Laethan', 'Laird', 'Lamar', 'Lamont', 'Lance', 'Lander', 'Landon', 'Lane', 'Lang', 'Larry', 'Lars', 'Lawler', 'Lawrence', 'Lazarus', 'Lear', 'Lee', 'Leif', 'Leighton', 'Leland', 'Len', 'Lennon', 'Lennor', 'Lennox', 'Lensar', 'Leo', 'Leon', 'Leonard', 'Leron', 'Leroy', 'Lester', 'Lev', 'Levi', 'Lewis', 'Lewis', 'Li', 'Liam', 'Like', 'Lincoln', 'Lindsey', 'Lionel', 'Llewellyn', 'Lloyd', 'Logan', 'Loren', 'Lorenzo', 'Lorne', 'Louis', 'Lowell', 'Lucas', 'Lucian', 'Luis', 'Luke', 'Lukyan', 'Lunt', 'Luther', 'Lyle', 'Lyndon', 'Lysander', 'Mac', 'Macer', 'Mack', 'Mackenzie', 'Magnus', 'Malcolm', 'Malik', 'Manco', 'Mandek', 'Mander', 'Manfred', 'Manning', 'Mansur', 'Manuel', 'Marc', 'Marcos', 'Marcus', 'Marden', 'Marek', 'Mario', 'Mark', 'Markham', 'Markos', 'Marlin', 'Marlon', 'Marlon', 'Marshal', 'Marshall', 'Marsten', 'Martin', 'Martingo', 'Marvin', 'Mason', 'Matai', 'Mateo', 'Mather', 'Matthew', 'Matthias', 'Maurice', 'Max', 'Maxwell', 'Maynard', 'Mayon', 'Mead', 'Meka', 'Mercer', 'Merill', 'Merle', 'Merrick', 'Merrik', 'Meyer', 'Micael', 'Michael', 'Migon', 'Miguel', 'Mike', 'Mikkel', 'Mikos', 'Miles', 'Miles', 'Milo', 'Milton', 'Miner', 'Mitchell', 'Monroe', 'Monte', 'Morgan', 'Morley', 'Morris', 'Mortimer', 'Morton', 'Morven', 'Morz', 'Motega', 'Mukasa', 'Murdoch', 'Murdock', 'Murphy', 'Myles', 'Myron', 'Naeem', 'Nalren', 'Nantan', 'Nathan', 'Nathaniel', 'Neal', 'Neale', 'Neil', 'Nelek', 'Nelson', 'Neron', 'Nestor', 'Nevan', 'Neville', 'Nevin', 'Nevin', 'Nicanor', 'Nicholas', 'Nigel', 'Nikolos', 'Nils', 'Noah', 'Nodin', 'Noe', 'Nolan', 'Norbert', 'Norman', 'Norris', 'Norton', 'Nuri', 'Nyle', 'Oakes', 'Oakley', 'Ochen', 'Octavius', 'Odell', 'Odin', 'Odion', 'Odon', 'Ogden', 'Olaf', 'Olin', 'Oliver', 'Omar', 'Ordano', 'Oren', 'Orion', 'Orman', 'Ormand', 'Orrin', 'Orson', 'Orville', 'Oscar', 'Osgood', 'Osmond', 'Otis', 'Otto', 'Owen', 'Paco', 'Palmer', 'Paolo', 'Paris', 'Parker', 'Parnell', 'Pascal', 'Patamon', 'Patrick', 'Patterson', 'Patton', 'Paul', 'Paulin', 'Pavel', 'Paxton', 'Payton', 'Pearce', 'Peder', 'Pembroke', 'Penn', 'Percival', 'Perry', 'Peter', 'Peyton', 'Phearcy', 'Philip', 'Phillip', 'Phillippe', 'Phoenix', 'Pierce', 'Pierre', 'Pierson', 'Pilan', 'Platon', 'Porter', 'Prentice', 'Prescot', 'Prescott', 'Preston', 'Quentin', 'Quenton', 'Quillan', 'Quincy', 'Quinlan', 'Quinn', 'Rad', 'Radcliffe', 'Radman', 'Rafael', 'Rafferty', 'Ragnar', 'Raidon', 'Raleigh', 'Ralph', 'Ramiro', 'Ramon', 'Ramsay', 'Ramsey', 'Ranard', 'Rance', 'Randall', 'Randolph', 'Ranen', 'Ranger', 'Rankin', 'Raoul', 'Raphael', 'Raul', 'Ravi', 'Ravi', 'Ravid', 'Ray', 'Raymond', 'Raynor', 'Reade', 'Redford', 'Redmond', 'Reed', 'Reese', 'Reeve', 'Regan', 'Reginald', 'Regis', 'Remington', 'Renaldo', 'Rendor', 'Renfry', 'Renny', 'Reuben', 'Rex', 'Reyhan', 'Rhett', 'Rhett', 'Rhys', 'Ricardo', 'Richard', 'Richter', 'Rico', 'Rider', 'Ridgley', 'Rigby', 'Riley', 'Rimon', 'Ringo', 'Ringo', 'Riodan', 'Riordan', 'Roarke', 'Robert', 'Roberto', 'Robi', 'Rockwell', 'Rod', 'Roderick', 'Rodman', 'Rodney', 'Rodrigo', 'Roger', 'Roi', 'Roland', 'Roldan', 'Rolf', 'Ronald', 'Ronan', 'Rooney', 'Rory', 'Roscoe', 'Ross', 'Roth', 'Rowan', 'Rowland', 'Roy', 'Royce', 'Ruben', 'Rudd', 'Rudi', 'Rudyard', 'Rufus', 'Runako', 'Ruskin', 'Russ', 'Russell', 'Rusty', 'Rutherford', 'Rutledge', 'Ryan', 'Ryder', 'Rylan', 'Sahale', 'Sahen', 'Salim', 'Saloman', 'Sam', 'Samien', 'Sammon', 'Samson', 'Samuel', 'Sanders', 'Sandon', 'Sandor', 'Sanford', 'Sargent', 'Sarngin', 'Sarojin', 'Saul', 'Saunders', 'Sawyer', 'Saxon', 'Schuyler', 'Scott', 'Sean', 'Sebastian', 'Sebastien', 'Seif', 'Selby', 'Senon', 'Sergio', 'Seth', 'Seung', 'Severin', 'Sevilin', 'Seward', 'Seymour', 'Shane', 'Shawn', 'Shea', 'Sheffield', 'Sheldon', 'Shen', 'Sheridan', 'Sherman', 'Sherwin', 'Sherwood', 'Shing', 'Shunnar', 'Sidney', 'Siegfried', 'Silas', 'Simon', 'Sivan', 'Skip', 'Skyler', 'Slade', 'Slevin', 'Smith', 'Solomon', 'Sorgan', 'Soterios', 'Spalding', 'Spencer', 'Spenser', 'Standford', 'Stanley', 'Stanton', 'Stasio', 'Stefan', 'Stephan', 'Stephen', 'Sterling', 'Stevan', 'Steve', 'Steven', 'Stewart', 'Stoke', 'Stoyan', 'Strom', 'Stuart', 'Subrey', 'Sulaiman', 'Sullican', 'Sumner', 'Sutherland', 'Sutton', 'Sven', 'Sylvester', 'Tab', 'Tabari', 'Tad', 'Tadi', 'Tai', 'Tajo', 'Talbart', 'Talbot', 'Talman', 'Talos', 'Tanek', 'Tanner', 'Tano', 'Taro', 'Tate', 'Taurin', 'Taylor', 'Tem', 'Terence', 'Terrence', 'Terrill', 'Terry', 'Thaddeus', 'Thai', 'Thaman', 'Thane', 'Thanos', 'Theobald', 'Theodore', 'Theron', 'Thierry', 'Thomas', 'Thorpe', 'Thurston', 'Thurston', 'Tibalt', 'Tiernan', 'Timothy', 'Titus', 'Tobias', 'Toby', 'Tod', 'Todd', 'Tomas', 'Tong', 'Tor', 'Torin', 'Torrance', 'Townsend', 'Travers', 'Travis', 'Tremain', 'Tremaine', 'Trent', 'Trevor', 'Trey', 'Tristan', 'Troy', 'Tryon', 'Tucker', 'Tully', 'Tyee', 'Tyler', 'Tymon', 'Tyrone', 'Upton', 'Uriah', 'Urian', 'Van', 'Vance', 'Vaughn', 'Vern', 'Vernon', 'Victor', 'Vincent', 'Vinson', 'Virgil', 'Vito', 'Vlad', 'Vladimir', 'Vokes', 'Volf', 'Wade', 'Wagner', 'Walden', 'Waldo', 'Walker', 'Wallace', 'Wally', 'Walter', 'Ward', 'Warner', 'Warren', 'Watson', 'Waylan', 'Wayland', 'Waylon', 'Wayne', 'Webb', 'Webster', 'Wendell', 'Wesley', 'Weston', 'Weylin', 'Whitaker', 'Wilfen', 'Will', 'Willard', 'Willem', 'William', 'Wilson', 'Winston', 'Winthrop', 'Wlby', 'Woody', 'Wyatt', 'Xavier', 'Xenos', 'Xerxes', 'Ximen', 'Yakecan', 'Yale', 'Yancey', 'Yardley', 'Yarin', 'Yerik', 'Yero', 'Yervant', 'York', 'Yusuf', 'Yves', 'Zachariah', 'Zachary', 'Zackery', 'Zaid', 'Zaide', 'Zane', 'Zaniel', 'Zann', 'Zared', 'Zarek', 'Zeke', 'Zenon', 'Zion', 'Ziven', 'Zorn'];
 $names = count($name)-1;
-return $name[mt_rand(0,$names)];
+return $name[mt_rand(0, max((int)(0), (int)($names)))];
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 function humanFemaleName()
 {
-$name = array('Aba', 'Abby', 'Abella', 'Abey', 'Abigail', 'Abina', 'Abiona', 'Abira', 'Abra', 'Abrah', 'Absinthe', 'Acacia', 'Acanit', 'Acantha', 'Accalia', 'Acelin', 'Achen', 'Ada', 'Adalia', 'Adara', 'Addi', 'Adelaide', 'Adele', 'Adelia', 'Adeline', 'Adelle', 'Adena', 'Aderes', 'Adesina', 'Adie', 'Adimina', 'Adiva', 'Adoncia', 'Adonia', 'Adora', 'Adrienne', 'Aelina', 'Afina', 'Afra', 'Afrika', 'Afton', 'Agate', 'Agatha', 'Agnes', 'Ahara', 'Ahave', 'Ahimsa', 'Aida', 'Aiella', 'Aiko', 'Aila', 'Aileen', 'Ailsa', 'Aimee', 'Ain', 'Aina', 'Ainhoa', 'Ainsley', 'Aintzane', 'Airlia', 'Aisling', 'Aislinn', 'Aithne', 'Aiyana', 'Ajara', 'Ajay', 'Ajinora', 'Akako', 'Akala', 'Akanke', 'Akasma', 'Akela', 'Akilah', 'Akili', 'Akilina', 'Akina', 'Alaina', 'Alake', 'Alala', 'Alamanada', 'Alana', 'Alani', 'Alanna', 'Alaqua', 'Alavda', 'Alazne', 'Alberta', 'Albinka', 'Alcina', 'Aldea', 'Aldercy', 'Aleka', 'Alenne', 'Alesia', 'Alessa', 'Alethea', 'Alexa', 'Alexandra', 'Alexandria', 'Alexandrina', 'Alexis', 'Ali', 'Alia', 'Alice', 'Alicia', 'Alida', 'Alike', 'Alima', 'Alina', 'Alison', 'Alita', 'Alix', 'Aliz', 'Aliza', 'Allele', 'Alligra', 'Allinora', 'Allison', 'Allyn', 'Alma', 'Alodie', 'Aloysia', 'Althea', 'Alula', 'Alumit', 'Alvina', 'Alvita', 'Alysa', 'Alyssa', 'Alyssand', 'Alzena', 'Ama', 'Amabel', 'Amadi', 'Amadika', 'Amadis', 'Amaia', 'Amala', 'Amalia', 'Amanda', 'Amandine', 'Amara', 'Amarande', 'Amarante', 'Amaris', 'Amata', 'Ambar', 'Amber', 'Ambika', 'Ambis', 'Ameerah', 'Amelia', 'Amelina', 'Amethyst', 'Amie', 'Amiella', 'Amina', 'Aminta', 'Amissa', 'Amita', 'Amity', 'Amoke', 'Amy', 'Ananda', 'Anastasia', 'Ancelin', 'Andi', 'Andra', 'Andraianna', 'Andras', 'Andrea', 'Andromeda', 'Aneida', 'Anella', 'Anemone', 'Anezka', 'Angela', 'Angelica', 'Angeline', 'Angelique', 'Angeni', 'Ani', 'Anica', 'Anieli', 'Anisa', 'Anita', 'Anke', 'Ann', 'Anna', 'Annabel', 'Annabelle', 'Annamarie', 'Anne', 'Annette', 'Annikka', 'Annora', 'Anorah', 'Anoush', 'Ansreana', 'Anteia', 'Anthea', 'Antje', 'Antoinette', 'Antonia', 'Aolani', 'Apara', 'Apirka', 'Apolline', 'Apolloina', 'Aponi', 'April', 'Aprille', 'Aprille', 'Aqua', 'Aquene', 'Ara', 'Arabella', 'Arabelle', 'Araceli', 'Araminta', 'Araxie', 'Arcadia', 'Ardath', 'Ardelia', 'Arden', 'Ardis', 'Ardith', 'Areiela', 'Arella', 'Aretha', 'Aretina', 'Ariadne', 'Ariana', 'Aricia', 'Ariel', 'Ariene', 'Arista', 'Arlene', 'Arlinda', 'Armina', 'Arminda', 'Artemisia', 'Aruna', 'Arziki', 'Asaria', 'Asenka', 'Ash', 'Asha', 'Ashlan', 'Ashleigh', 'Ashley', 'Asia', 'Asisa', 'Aslinda', 'Aspasia', 'Asta', 'Aster', 'Astera', 'Astra', 'Astrea', 'Astrid', 'Atalanta', 'Atara', 'Atenne', 'Ateri', 'Athalia', 'Athena', 'Athla', 'Atifa', 'Atta', 'Aubrey', 'Auda', 'Audny', 'Audrey', 'Audrianna', 'Audun', 'Augustina', 'Aura', 'Aure', 'Aurelia', 'Aurilia', 'Aurina', 'Aurkene', 'Aurora', 'Autumn', 'Ava', 'Avana', 'Avasa', 'Avella', 'Avena', 'Avie', 'Avis', 'Aviva', 'Axella', 'Aya', 'Ayaluna', 'Ayame', 'Ayana', 'Ayasha', 'Aydee', 'Ayela', 'Ayiana', 'Ayila', 'Ayisha', 'Ayita', 'Ayla', 'Aynora', 'Ayuna', 'Azaleah', 'Azalia', 'Azarael', 'Azera', 'Azha', 'Azilea', 'Azina', 'Azize', 'Azora', 'Azura', 'Babette', 'Bacia', 'Bacia', 'Baka', 'Baka', 'Bakarne', 'Balayna', 'Balea', 'Balia', 'Bambi', 'Banan', 'Banella', 'Bara', 'Barbara', 'Barika', 'Basha', 'Basha', 'Basia', 'Basimah', 'Batakah', 'Bathsheba', 'Batya', 'Bay', 'Bayana', 'Bayo', 'Bayta', 'Bea', 'Beatrice', 'Beatrix', 'Beauina', 'Becca', 'Becky', 'Bedelia', 'Bel', 'Belana', 'Belina', 'Belinda', 'Belita', 'Bellanca', 'Belle', 'Belora', 'Bente', 'Beradine', 'Berilla', 'Berit', 'Bernadette', 'Bernice', 'Beryl', 'Bess', 'Bessine', 'Beta', 'Beth', 'Bethana', 'Bethany', 'Betony', 'Betty', 'Beulah', 'Beverly', 'Bevin', 'Bian', 'Bianca', 'Billie', 'Bina', 'Bindy', 'Binti', 'Birdie', 'Birkita', 'Bixenta', 'Blanche', 'Blanda', 'Blenda', 'Bliss', 'Bly', 'Blythe', 'Bo', 'Bohdana', 'Bonamy', 'Bonita', 'Bonnie', 'Bonny', 'Borgny', 'Braina', 'Brandi', 'Brandy', 'Bren', 'Brenda', 'Brenna', 'Bretta', 'Bridget', 'Bridget', 'Brie', 'Brier', 'Brietta', 'Brigit', 'Brigitte', 'Brina', 'Brina', 'Briona', 'Briony', 'Brites', 'Britta', 'Brittany', 'Bronwyn', 'Brooke', 'Brynn', 'Bucia', 'Cadence', 'Caimile', 'Caitlin', 'Caitrin', 'Cala', 'Calandia', 'Calandra', 'Calendonia', 'Caley', 'Calida', 'Calista', 'Calla', 'Callan', 'Callia', 'Callidora', 'Callie', 'Caltha', 'Calypso', 'Cam', 'Camelia', 'Camilia', 'Camille', 'Canace', 'Candace', 'Candida', 'Candide', 'Candra', 'Cantara', 'Caoimhe', 'Capri', 'Caprice', 'Cara', 'Caradoc', 'Caresse', 'Cari', 'Carina', 'Carine', 'Carissa', 'Carita', 'Carla', 'Carleen', 'Carlen', 'Carling', 'Carlota', 'Carly', 'Carma', 'Carmel', 'Carmelina', 'Carmen', 'Carna', 'Carnelian', 'Carol', 'Carolina', 'Caroline', 'Carolyn', 'Caron', 'Carrie', 'Caryn', 'Casey', 'Casilda', 'Cassandra', 'Cassia', 'Casta', 'Castalia', 'Catalina', 'Catava', 'Caterina', 'Catherine', 'Cathleen', 'Cathy', 'Catriona', 'Cayla', 'Ceara', 'Cecania', 'Cecilia', 'Celandine', 'Celeste', 'Celia', 'Celina', 'Celina', 'Cellia', 'Cerelia', 'Chaitra', 'Chanah', 'Chanda', 'Chandi', 'Chandra', 'Chane', 'Chanel', 'Channa', 'Chantal', 'Charis', 'Charissa', 'Charity', 'Charlotte', 'Charmaine', 'Chastity', 'Chava', 'Chaviva', 'Chay', 'Chaya', 'Chelsea', 'Chenoa', 'Cherica', 'Cherice', 'Cherie', 'Cheryl', 'Chesna', 'Chiara', 'Chika', 'Chilali', 'Chimlis', 'Chipo', 'Chloe', 'Chloris', 'Cho', 'Christa', 'Christable', 'Christina', 'Christine', 'Christy', 'Chyou', 'Cia', 'Ciannait', 'Ciar', 'Cicely', 'Cindy', 'Claire', 'Clara', 'Clarinda', 'Clarissa', 'Claudette', 'Claudia', 'Claudine', 'Clementina', 'Clementine', 'Cliantha', 'Clorinda', 'Clorinda', 'Clover', 'Cochiti', 'Coleene', 'Colette', 'Connie', 'Constance', 'Constanza', 'Consuela', 'Cora', 'Coralie', 'Corazon', 'Corbey', 'Cordeali', 'Coretta', 'Cori', 'Corinna', 'Coris', 'Corliss', 'Corrine', 'Cortney', 'Crescent', 'Cressida', 'Crystal', 'Cybele', 'Cybil', 'Cynthia', 'Cyprien', 'Cyrene', 'Cyrilla', 'Cytheria', 'Dabria', 'Dacey', 'Dacia', 'Dacie', 'Dacio', 'Dae', 'Dagmar', 'Dagna', 'Dai', 'Daily', 'Daisel', 'Daisy', 'Dakota', 'Dale', 'Dalila', 'Dalilia', 'Damara', 'Damitri', 'Dana', 'Danett', 'Dania', 'Daniella', 'Danyelle', 'Daphene', 'Daphne', 'Daphnie', 'Dar', 'Dara', 'Daralis', 'Darby', 'Daria', 'Darla', 'Darlene', 'Dasha', 'Dasha', 'Davene', 'Davine', 'Davita', 'Dawn', 'Daya', 'Dayna', 'Deana', 'Deana', 'Deandra', 'Deb', 'Debra', 'Dede', 'Dee', 'Deedee', 'Deianira', 'Deiene', 'Deirdre', 'Delana', 'Delaney', 'Delbin', 'Delia', 'Delicia', 'Delilia', 'Della', 'Delphina', 'Dembe', 'Demi', 'Demitria', 'Dena', 'Denby', 'Denice', 'Deva', 'Devaki', 'Deval', 'Devi', 'Devin', 'Devnet', 'Devon', 'Diamanta', 'Diane', 'Dianthe', 'Diedre', 'Diella', 'Dillian', 'Dilly', 'Dilys', 'Dinah', 'Dionne', 'Disa', 'Dita', 'diti', 'Dixie', 'Dodie', 'Dolores', 'Dominique', 'Dona', 'Donata', 'Donielle', 'Donner', 'Dooriya', 'Dophina', 'Dora', 'Doreen', 'Dorinda', 'Doris', 'Dorithy', 'Dory', 'Drew', 'Drina', 'Drucilla', 'Dulcie', 'Dulcinea', 'Dusty', 'Dyan', 'Dyani', 'Dymphna', 'Dyna', 'Eartha', 'Easter', 'Ebony', 'Echo', 'Edana', 'Edie', 'Edith', 'Edlyn', 'Edna', 'Edolie', 'Edria', 'Edwina', 'Efia', 'Eileen', 'Eirene', 'Elaine', 'Elana', 'Eleora', 'Elianor', 'Elina', 'Elina', 'Elisa', 'Elise', 'Eliska', 'Elissa', 'Elita', 'Eliza', 'Elizabeeth', 'Elke', 'Ella', 'Elle', 'Ellen', 'Elly', 'Elodie', 'Eloise', 'Elsa', 'Elsie', 'Elynor', 'Elyse', 'Elysia', 'Ema', 'Emajane', 'Emalia', 'Ember', 'Emelie', 'Emelyne', 'Emily', 'Emma', 'Endora', 'Engracia', 'Enid', 'Enola', 'Enye', 'Erasma', 'Erianthe', 'Erica', 'Erin', 'Erlina', 'Erwand', 'Eskarne', 'Esmerelda', 'Esperanza', 'Esta', 'Estelle', 'Esther', 'Estu', 'Etain', 'Etaina', 'Etaina', 'Etanthe', 'Etta', 'Eudocia', 'Eugenia', 'Eulalia', 'Eustacia', 'Eva', 'Evacsa', 'Evadine', 'Evadne', 'Evangeline', 'Evanthe', 'Eve', 'Evelyn', 'Evita', 'Evonne', 'Eyota', 'Fabienne', 'Faifuza', 'Fainche', 'Faith', 'Faizah', 'Fallon', 'Fantine', 'Farha', 'Farima', 'Farrah', 'Fatin', 'Fawne', 'Fay', 'Faye', 'Fayina', 'Fayme', 'Felcia', 'Felicite', 'Felicity', 'Femi', 'Feridwyn', 'Fern', 'Feronia', 'Filinda', 'Fina', 'Finola', 'Fiona', 'Fiorenza', 'Flavia', 'Fleta', 'Flora', 'Florence', 'Frances', 'Francesca', 'Francine', 'Francisca', 'Freda', 'Frederica', 'Freya', 'Frida', 'Frieda', 'Fuscienne', 'Gabriella', 'Gabrielle', 'Gaia', 'Gail', 'Galatea', 'Gali', 'Galina', 'Galya', 'Gana', 'Ganesa', 'Gauri', 'Gaye', 'Gayle', 'Gelasia', 'Gemma', 'Genevieve', 'Geogia', 'Georgeanne', 'Georgetta', 'Georgette', 'Georgiana', 'Geradline', 'Geraldine', 'Gerda', 'Gerri', 'Gertrude', 'Geva', 'Ghislaine', 'Giacinta', 'Gianina', 'Gigi', 'Gilana', 'Gilda', 'Gilen', 'Gillian', 'Gin', 'Gina', 'Ginger', 'Giselle', 'Gitana', 'Githa', 'Gizane', 'Gleda', 'Glenna', 'Glennys', 'Golda', 'Goldie', 'Gotzone', 'Grace', 'Gracie', 'Grainne', 'Grazia', 'Grear', 'Greta', 'Gretchen', 'Grette', 'Gwen', 'Gwendolyn', 'Gweneth', 'Gwynne', 'Gytha', 'Hadara', 'Hadassa', 'Hadiya', 'Haidee', 'Hailey', 'Haimi', 'Haldis', 'Hale', 'Haley', 'Hali', 'Hali', 'Halima', 'Halle', 'Hallie', 'Hana', 'Hanan', 'Hannah', 'Hanne', 'Harmoni', 'Harriet', 'Hasna', 'Hava', 'Haya', 'Haylee', 'Hazel', 'Hea', 'Heather', 'Hei', 'Heidi', 'Heldegarde', 'Helen', 'Helena', 'Helene', 'Helki', 'Henka', 'Henrietta', 'Hesper', 'Hester', 'Hilary', 'Hilda', 'Hinda', 'Hisa', 'Holly', 'Hope', 'Hoshi', 'Hyacinth', 'Hye', 'Hypatia', 'Ianthe', 'Ida', 'Idola', 'Idonia', 'Ilene', 'Ilona', 'Iman', 'Imogene', 'India', 'Indira', 'Indra', 'Ines', 'Inez', 'Inga', 'Ingrid', 'Iolana', 'Iolanthe', 'Iona', 'Iratze', 'Irena', 'Irene', 'Iris', 'Irma', 'Isabeau', 'Isabel', 'Isabella', 'Isadora', 'Isaura', 'Isis', 'Isleta', 'Isobel', 'Isoke', 'Istas', 'Ivana', 'Ivory', 'Ivy', 'Jacelyn', 'Jacinda', 'Jacinthe', 'Jada', 'Jael', 'Jaen', 'Jaimie', 'Jaione', 'Jakinda', 'Jala', 'Jamie', 'Jamila', 'Jamilah', 'Jan', 'Jana', 'Jane', 'Janelle', 'Janet', 'Janice', 'Janis', 'Janna', 'Jannelle', 'Jardena', 'Jarvia', 'Jarvinia', 'Jasmine', 'Jaya', 'Jayne', 'Jean', 'Jean', 'Jeanette', 'Jeanine', 'Jelena', 'Jena', 'Jenay', 'Jendayi', 'Jendyose', 'Jenica', 'Jennettia', 'Jennifer', 'Jensine', 'Jerrilyn', 'Jessica', 'Jewel', 'Jezebel', 'Jihan', 'Jillian', 'Jin', 'Jina', 'Jinny', 'Jinx', 'Joakima', 'Joan', 'Joanne', 'Jobey', 'Jobihna', 'Jocasa', 'Jocelyn', 'Jodi', 'Jody', 'Joelle', 'Joelliane', 'Johanna', 'Joia', 'Jolan', 'Jolanta', 'Jolene', 'Jolie', 'Joline', 'Jonina', 'Jora', 'Jordane', 'Josephine', 'Josie', 'Jotha', 'Joy', 'Joyce', 'Joye', 'Juanita', 'Judith', 'Juditha', 'Julia', 'Juliana', 'Juliane', 'Julie', 'Julietta', 'Julinka', 'Jumoke', 'Jun', 'June', 'Justine', 'Kaatje', 'Kachine', 'Kaclyn', 'Kaede', 'Kaethe', 'Kai', 'Kaia', 'Kaie', 'Kaili', 'Kaimi', 'Kairos', 'Kaiya', 'Kakra', 'Kala', 'Kalama', 'Kalanit', 'Kalare', 'Kalea', 'Kali', 'Kalika', 'Kalila', 'Kalinda', 'Kalle', 'Kalli', 'Kalonice', 'Kalyca', 'Kama', 'Kamala', 'Kamali', 'Kamaria', 'Kambo', 'Kameko', 'Kamilah', 'Kamilia', 'Kanda', 'Kane', 'Kanene', 'Kanika', 'Kantha', 'Kanya', 'Kapera', 'Kara', 'Karan', 'Karayan', 'Karel', 'Karen', 'Karida', 'Karimah', 'Karisa', 'Karka', 'Karla', 'Karlenne', 'Karli', 'Karlyn', 'Karmina', 'Karol', 'Karylin', 'Karyn', 'Kasa', 'Kasen', 'Kasia', 'Kasinda', 'Kassia', 'Kate', 'Katherine', 'Kathleen', 'Katja', 'Katoka', 'Katrien', 'Katrina', 'Kaula', 'Kaveri', 'Kavindra', 'Kay', 'Kaya', 'Kaye', 'Kayla', 'Kaysa', 'Kazia', 'Keara', 'Keelin', 'Keely', 'Kefira', 'Kehinde', 'Kei', 'Keiko', 'Keisha', 'Kelda', 'Kelia', 'Kelley', 'Kelli', 'Kellie', 'Kelly', 'Kelsey', 'Kendra', 'Kennis', 'Kenyangi', 'Kepa', 'Kerani', 'Kerensa', 'Kerstan', 'Kesare', 'Kesi', 'Kesia', 'Kessie', 'Keturah', 'Ketzia', 'Khalida', 'Kichi', 'Kiele', 'Kim', 'Kimberly', 'Kimmie', 'Kimmy', 'Kineta', 'Kiona', 'Kira', 'Kiran', 'Kirby', 'Kirima', 'Kirsten', 'Kirti', 'Kisa', 'Kiska', 'Kismet', 'Kissa', 'Kita', 'Kohana', 'Kolina', 'Koren', 'Koressa', 'Kristen', 'Kyly', 'Kyna', 'Kynthia', 'Kyoko', 'Lacey', 'Lacie', 'Laila', 'Lailie', 'Lakeisha', 'Lala', 'Lalasa', 'Lan', 'Lana', 'Landra', 'Lane', 'Lani', 'Lara', 'Laraine', 'Laralee', 'Lari', 'Larissa', 'Lark', 'Latika', 'Latonia', 'Laura', 'Laurana', 'Laurel', 'Laurie', 'Laurinda', 'Lauryn', 'Laveda', 'Lavern', 'Laverne', 'Lavinia', 'Lea', 'Leah', 'Leah', 'Leala', 'Leandra', 'Leba', 'Ledah', 'Lee', 'Leigh', 'Leiko', 'Leila', 'Leilana', 'Lena', 'Lene', 'Lenor', 'Lenora', 'Lenore', 'Leona', 'Leora', 'Leslie', 'Letha', 'Letitia', 'Levana', 'Lexine', 'Lia', 'Liadan', 'Lian', 'Liana', 'Liane', 'Libby', 'Lien', 'Lila', 'Lilith', 'Lillian', 'Lillie', 'Lily', 'Limber', 'Lina', 'Linda', 'Lindsay', 'Lindsey', 'Linette', 'Linnae', 'Linnea', 'Lisa', 'Lisette', 'Litsa', 'Liv', 'Liza', 'Lois', 'Lokelani', 'Lola', 'Loni', 'Lora', 'Lore', 'Lorelei', 'Lorelle', 'Loretta', 'Lori', 'Lorraine', 'Lotus', 'Louise', 'Lucille', 'Lucine', 'Lucretia', 'Lucy', 'Ludia', 'Luela', 'Luisa', 'Lukene', 'Lukina', 'Lulu', 'Luna', 'Lydia', 'Lynda', 'Lynelle', 'Lynn', 'Lynnda', 'Lynnette', 'Lyris', 'Lysel', 'Lysnadra', 'Mabel', 'Macaria', 'Machi', 'Maddy', 'Madelaine', 'Madelina', 'Madeline', 'Madelon', 'Madelyn', 'Mady', 'Mae', 'Magan', 'Magara', 'Magdalen', 'Magdalena', 'Magdaline', 'Magena', 'Magenta', 'Maggie', 'Mahala', 'Mahalia', 'Mai', 'Maia', 'Maida', 'Maisie', 'Maitane', 'Maizah', 'Maj', 'Malaya', 'Malila', 'Malina', 'Malinda', 'Malka', 'Mallory', 'Malu', 'Mamie', 'Manda', 'Mandara', 'Mandisa', 'Mandy', 'Mangena', 'Manon', 'Mansi', 'Manya', 'Mara', 'Marcella', 'Marcia', 'Marcy', 'Maren', 'Margaret', 'Margaret', 'Margarita', 'Margo', 'Margot', 'Marguirte', 'Maria', 'Mariah', 'Mariam', 'Mariama', 'Marian', 'Mariana', 'Marianna', 'Marianne', 'Maribel', 'Marie', 'Mariel', 'Marietta', 'Marily', 'Marilyn', 'Marina', 'Maris', 'Marisa', 'Marisha', 'Marissa', 'Marjani', 'Marjeta', 'Marjorie', 'Marlene', 'Marlo', 'Marmara', 'Marnie', 'Marnina', 'Marsha', 'Marta', 'Martha', 'Marti', 'Martina', 'Mary', 'Maryann', 'Marybeth', 'Marylou', 'Marzia', 'Matana', 'Mathea', 'Matilda', 'Matrika', 'Maud', 'Maura', 'Maureen', 'Maurita', 'Mavis', 'Maxine', 'May', 'Maya', 'Meara', 'Meara', 'Meda', 'Medea', 'Meg', 'Megan', 'Megara', 'Meghan', 'Mei', 'Meira', 'Mela', 'Melanie', 'Melantha', 'Melba', 'Melia', 'Melian', 'Melina', 'Melinda', 'Melisenda', 'Melissa', 'Mellinio', 'Melodie', 'Melody', 'Melosa', 'Melva', 'Mercedes', 'Meredith', 'Merele', 'Mesha', 'Meta', 'Mia', 'Miakoda', 'Michaela', 'Michele', 'Michelle', 'Midori', 'Migina', 'Mignon', 'Mika', 'Millicent', 'Millie', 'Min', 'Mina', 'Minda', 'Mindel', 'Mindy', 'Minerva', 'Minka', 'Minna', 'Minnie', 'Mira', 'Miranda', 'Mirem', 'Miremba', 'Mireya', 'Miriam', 'Mirielle', 'Missy', 'Misty', 'Mitena', 'Mitexi', 'Mitzi', 'Moira', 'Mollie', 'Molly', 'Mona', 'Monique', 'Moon', 'Morena', 'Morgan', 'Morgana', 'Morgance', 'Moria', 'Moriah', 'Muriel', 'Myra', 'Nada', 'Nadia', 'Nadine', 'Nadya', 'Naia', 'Nailah', 'Naimah', 'Nalini', 'Namazzi', 'Nami', 'Nan', 'Nana', 'Nancy', 'Nanette', 'Nantale', 'Naomi', 'Napea', 'Nara', 'Narda', 'Narmada', 'Nasiche', 'Nastassia', 'Natalie', 'Natane', 'Natasha', 'Natesa', 'Naysa', 'Nazirqah', 'Neala', 'Neci', 'Nediva', 'Neely', 'Nekane', 'Nell', 'Neola', 'Neoma', 'Neona', 'Neria', 'Nerine', 'Nerissa', 'Netti', 'Neva', 'Nevada', 'Neysa', 'Nicia', 'Nicola', 'Nicole', 'Nicolette', 'Nika', 'Nikki', 'Nimah', 'Nina', 'Niobe', 'Niola', 'Nira', 'Nirvelli', 'Nissa', 'Nita', 'Nitara', 'Nixie', 'Noel', 'Noelani', 'Noella', 'Nolita', 'Nona', 'Nona', 'Nora', 'Norah', 'Noreen', 'Nori', 'Noriko', 'Norma', 'Nydia', 'Nyrna', 'Nyssa', 'Obelia', 'Octavia', 'Odelia', 'Odelia', 'Odera', 'Odessa', 'Odetta', 'Odette', 'Odile', 'Ohanna', 'Okelani', 'Olathe', 'Olayinka', 'Olesia', 'Olga', 'Oliana', 'Olinda', 'Olivette', 'Olivia', 'Ona', 'Onida', 'Opal', 'Ophelia', 'Oralie', 'Orane', 'Orenda', 'Oriana', 'Orianna', 'Oriel', 'Oriole', 'Orlantha', 'Ornidaa', 'Paige', 'Pakuna', 'Palmiera', 'Paloma', 'Pamela', 'Pandita', 'Pandora', 'Panthea', 'Pantzike', 'Panya', 'Panyin', 'Pascale', 'Patia', 'Patience', 'Patricia', 'Patsy', 'Paula', 'Paulette', 'Pauline', 'Pavla', 'Pazia', 'Pearl', 'Peg', 'Peggy', 'Pelagia', 'Pemba', 'Penda', 'Penelope', 'Peninna', 'Penny', 'Penthea', 'Peony', 'Perdita', 'Perouze', 'Persis', 'Petra', 'Phaedra', 'Phedra', 'Philomena', 'Phoebe', 'Phylis', 'Phyllis', 'Pia', 'Pier', 'Pila', 'Piper', 'Polly', 'Poloma', 'Porche', 'Portia', 'Priscilla', 'Prudence', 'Prudy', 'Pyrena', 'Pythia', 'Qamra', 'Queena', 'Quella', 'Quenby', 'Quintina', 'Quiterie', 'Rachel', 'Radella', 'Radinka', 'Rae', 'Rai', 'Raizel', 'Ramla', 'Ramona', 'Ramya', 'Randie', 'Rane', 'Ranee', 'Rani', 'Raquel', 'Rashida', 'Rasine', 'Ratri', 'Raven', 'Rawnie', 'Rayna', 'Raynell', 'Raziya', 'Reba', 'Rebecca', 'Regan', 'Regina', 'Reidun', 'Remy', 'Rena', 'Renata', 'Rene', 'Renee', 'Rhea', 'Rhiamon', 'Rhianne', 'Rhiannon', 'Rhoda', 'Rhodanthe', 'Rhonda', 'Rhonna', 'Rhyssa', 'Ria', 'Riane', 'Rica', 'Rihana', 'Rikki', 'Rio', 'Risa', 'Rita', 'Riva', 'Roanna', 'Roberta', 'Robin', 'Robyn', 'Rochelle', 'Rohanna', 'Rona', 'Rorie', 'Rosa', 'Rosalind', 'Rosalinda', 'Rosalinde', 'Rosaline', 'Rosanne', 'Rose', 'Roseanne', 'Rosemarie', 'Rosemary', 'Rowena', 'Roxana', 'Roxanne', 'Ruby', 'Rumer', 'Ruth', 'Ruthann', 'Ryann', 'Ryanne', 'Ryba', 'Ryssa', 'Saba', 'Sabina', 'Sabiny', 'Sabirah', 'Sabra', 'Sabrina', 'Sacha', 'Sachi', 'Sade', 'Sadira', 'Saffi', 'Safiya', 'Sagara', 'Saidah', 'Sakari', 'Sakinah', 'Sakti', 'Sakura', 'Salihah', 'Salimah', 'Salina', 'Sally', 'Salome', 'Samantha', 'Samara', 'Samirah', 'Sancia', 'Sandia', 'Sandra', 'Sandrine', 'Sandya', 'Sara', 'Sarah', 'Sarai', 'Saraid', 'Saree', 'Sarena', 'Sari', 'Sarisha', 'Sasha', 'Sashenka', 'Satinka', 'Savanna', 'Saxon', 'Scotia', 'Searlait', 'Season', 'Sebasten', 'Seema', 'Sela', 'Selena', 'Selina', 'Selma', 'Semele', 'Senta', 'Serafina', 'Serilda', 'Sesha', 'Shaine', 'Shakira', 'Shako', 'Shammara', 'Shana', 'Shanata', 'Shandra', 'Shandy', 'Shani', 'Shanley', 'Shanna', 'Shannon', 'Shantay', 'Shantha', 'Sharman', 'Sharon', 'Sharri', 'Shashi', 'Shawn', 'Shayndel', 'Sheba', 'Sheena', 'Sheila', 'Shela', 'Shelby', 'Shelley', 'Shelly', 'Sherri', 'Shika', 'Shin', 'Shina', 'Shira', 'Shirley', 'Shobi', 'Shoshana', 'Sibley', 'Sibongile', 'Sibyl', 'Sidonia', 'Sidra', 'Sierra', 'Sigourney', 'Siham', 'Sileas', 'Silva', 'Silvia', 'Simba', 'Simone', 'Sine', 'Sinead', 'Siobhan', 'Siran', 'Sirena', 'Siroun', 'Sitara', 'Sitembile', 'Siv', 'Sive', 'Skyler', 'Sofi', 'Solana', 'Solange', 'Soledad', 'Solita', 'Sondra', 'Sonia', 'Sonja', 'Sonya', 'Sophia', 'Sophie', 'Sophronia', 'Spica', 'Stacey', 'Stacia', 'Stacy', 'Stefania', 'Stella', 'Stephani', 'Stephanie', 'Ster', 'Stesha', 'Stockard', 'Storm', 'Sukatai', 'Suki', 'Sumi', 'Summer', 'Sun', 'Susan', 'Susanna', 'Suzanne', 'Svetlana', 'Sybil', 'Sydelle', 'Sydney', 'Syeira', 'Sylvia', 'Syna', 'Synia', 'Tabitha', 'Taci', 'Tacita', 'Tadi', 'Taffy', 'Tahirah', 'Tai', 'Taima', 'Tainn', 'Taipa', 'Taite', 'Taka', 'Takara', 'Takiyah', 'Takoda', 'Talasi', 'Tale', 'Talia', 'Talia', 'Talitha', 'Tallulah', 'Tam', 'Tama', 'Tamara', 'Tamary', 'Tamma', 'Tammy', 'Tanaka', 'Tani', 'Tansy', 'Tanya', 'Tao', 'Tara', 'Tate', 'Tatyana', 'Tawnie', 'Tawny', 'Tayce', 'Taylor', 'Teague', 'Tehya', 'Tekla', 'Temina', 'Terentia', 'Terese', 'Terrilyn', 'Tertia', 'Teryn', 'Tesia', 'Tess', 'Tessa', 'Thadea', 'Thais', 'Thalassa', 'Thalia', 'Than', 'Thana', 'Thara', 'Thea', 'Thekla', 'Thelma', 'Theodosia', 'Theone', 'Thera', 'Thirza', 'Thora', 'Thyra', 'Tia', 'Tiara', 'Tienette', 'Tierney', 'Tierra', 'Tiffany', 'Tilda', 'Timandra', 'Tina', 'Tiponya', 'Tirza', 'Tivona', 'Tobey', 'Tola', 'Tora', 'Tori', 'Tory', 'Tosia', 'Tove', 'Tracey', 'Tracy', 'Treasa', 'Tresa', 'Treva', 'Trianon', 'Tricia', 'Trilby', 'Trina', 'Trind', 'Trish', 'Trisha', 'Trudy', 'Tryne', 'Tryphena', 'Tyne', 'Ula', 'Ulani', 'Ultima', 'Uma', 'Una', 'Undine', 'Undine', 'Urania', 'Uriana', 'Ursula', 'Uta', 'Vala', 'Valentina', 'Valeria', 'Valerie', 'Valeska', 'Valonia', 'Valora', 'Vanda', 'Vanessa', 'Vanora', 'Vanya', 'Vashti', 'Veda', 'Velika', 'Velma', 'Venesssa', 'Vera', 'Verena', 'Verity', 'Veronica', 'Vesta', 'Vevila', 'Victoria', 'Vidonia', 'Violet', 'Violet', 'Violetta', 'Virginia', 'Viridis', 'Viveka', 'Vivian', 'Voleta', 'Vrinda', 'Wakanda', 'Wanda', 'Waneta', 'Wendy', 'Whilhelmina', 'Whitney', 'Wijdan', 'Willow', 'Wilma', 'Wilona', 'Winda', 'Winema', 'Winifred', 'Winna', 'Winona', 'Wynee', 'Wynn', 'Wynona', 'Xanthe', 'Xaveria', 'Xaviera', 'Xena', 'Xenia', 'Ximena', 'Xylia', 'Xylona', 'Yachne', 'Yanice', 'Yarmilla', 'Yasmeen', 'Yasmin', 'Yelinda', 'Yenene', 'Yesmina', 'Yetta', 'Yeva', 'Yokiko', 'Yolanda', 'Yolie', 'Yonina', 'Yovela', 'Yvella', 'Yvette', 'Yvonne', 'Zada', 'Zahara', 'Zahirah', 'Zahra', 'Zakia', 'Zalea', 'Zalika', 'Zaltana', 'Zandra', 'Zara', 'Zarah', 'Zaza', 'Zehava', 'Zelda', 'Zelenka', 'Zelia', 'Zella', 'Zena', 'Zenaide', 'Zenia', 'Zerlinda', 'Zeva', 'Zevida', 'Zia', 'Ziazan', 'Zigana', 'Zila', 'Zina', 'Zinnia', 'Zita', 'Zoe', 'Zola', 'Zona', 'Zora', 'Zorah', 'Zorda', 'Zosia', 'Zuleika', 'Zulema', 'Zuza', 'Zuzanny');
+$name = ['Aba', 'Abby', 'Abella', 'Abey', 'Abigail', 'Abina', 'Abiona', 'Abira', 'Abra', 'Abrah', 'Absinthe', 'Acacia', 'Acanit', 'Acantha', 'Accalia', 'Acelin', 'Achen', 'Ada', 'Adalia', 'Adara', 'Addi', 'Adelaide', 'Adele', 'Adelia', 'Adeline', 'Adelle', 'Adena', 'Aderes', 'Adesina', 'Adie', 'Adimina', 'Adiva', 'Adoncia', 'Adonia', 'Adora', 'Adrienne', 'Aelina', 'Afina', 'Afra', 'Afrika', 'Afton', 'Agate', 'Agatha', 'Agnes', 'Ahara', 'Ahave', 'Ahimsa', 'Aida', 'Aiella', 'Aiko', 'Aila', 'Aileen', 'Ailsa', 'Aimee', 'Ain', 'Aina', 'Ainhoa', 'Ainsley', 'Aintzane', 'Airlia', 'Aisling', 'Aislinn', 'Aithne', 'Aiyana', 'Ajara', 'Ajay', 'Ajinora', 'Akako', 'Akala', 'Akanke', 'Akasma', 'Akela', 'Akilah', 'Akili', 'Akilina', 'Akina', 'Alaina', 'Alake', 'Alala', 'Alamanada', 'Alana', 'Alani', 'Alanna', 'Alaqua', 'Alavda', 'Alazne', 'Alberta', 'Albinka', 'Alcina', 'Aldea', 'Aldercy', 'Aleka', 'Alenne', 'Alesia', 'Alessa', 'Alethea', 'Alexa', 'Alexandra', 'Alexandria', 'Alexandrina', 'Alexis', 'Ali', 'Alia', 'Alice', 'Alicia', 'Alida', 'Alike', 'Alima', 'Alina', 'Alison', 'Alita', 'Alix', 'Aliz', 'Aliza', 'Allele', 'Alligra', 'Allinora', 'Allison', 'Allyn', 'Alma', 'Alodie', 'Aloysia', 'Althea', 'Alula', 'Alumit', 'Alvina', 'Alvita', 'Alysa', 'Alyssa', 'Alyssand', 'Alzena', 'Ama', 'Amabel', 'Amadi', 'Amadika', 'Amadis', 'Amaia', 'Amala', 'Amalia', 'Amanda', 'Amandine', 'Amara', 'Amarande', 'Amarante', 'Amaris', 'Amata', 'Ambar', 'Amber', 'Ambika', 'Ambis', 'Ameerah', 'Amelia', 'Amelina', 'Amethyst', 'Amie', 'Amiella', 'Amina', 'Aminta', 'Amissa', 'Amita', 'Amity', 'Amoke', 'Amy', 'Ananda', 'Anastasia', 'Ancelin', 'Andi', 'Andra', 'Andraianna', 'Andras', 'Andrea', 'Andromeda', 'Aneida', 'Anella', 'Anemone', 'Anezka', 'Angela', 'Angelica', 'Angeline', 'Angelique', 'Angeni', 'Ani', 'Anica', 'Anieli', 'Anisa', 'Anita', 'Anke', 'Ann', 'Anna', 'Annabel', 'Annabelle', 'Annamarie', 'Anne', 'Annette', 'Annikka', 'Annora', 'Anorah', 'Anoush', 'Ansreana', 'Anteia', 'Anthea', 'Antje', 'Antoinette', 'Antonia', 'Aolani', 'Apara', 'Apirka', 'Apolline', 'Apolloina', 'Aponi', 'April', 'Aprille', 'Aprille', 'Aqua', 'Aquene', 'Ara', 'Arabella', 'Arabelle', 'Araceli', 'Araminta', 'Araxie', 'Arcadia', 'Ardath', 'Ardelia', 'Arden', 'Ardis', 'Ardith', 'Areiela', 'Arella', 'Aretha', 'Aretina', 'Ariadne', 'Ariana', 'Aricia', 'Ariel', 'Ariene', 'Arista', 'Arlene', 'Arlinda', 'Armina', 'Arminda', 'Artemisia', 'Aruna', 'Arziki', 'Asaria', 'Asenka', 'Ash', 'Asha', 'Ashlan', 'Ashleigh', 'Ashley', 'Asia', 'Asisa', 'Aslinda', 'Aspasia', 'Asta', 'Aster', 'Astera', 'Astra', 'Astrea', 'Astrid', 'Atalanta', 'Atara', 'Atenne', 'Ateri', 'Athalia', 'Athena', 'Athla', 'Atifa', 'Atta', 'Aubrey', 'Auda', 'Audny', 'Audrey', 'Audrianna', 'Audun', 'Augustina', 'Aura', 'Aure', 'Aurelia', 'Aurilia', 'Aurina', 'Aurkene', 'Aurora', 'Autumn', 'Ava', 'Avana', 'Avasa', 'Avella', 'Avena', 'Avie', 'Avis', 'Aviva', 'Axella', 'Aya', 'Ayaluna', 'Ayame', 'Ayana', 'Ayasha', 'Aydee', 'Ayela', 'Ayiana', 'Ayila', 'Ayisha', 'Ayita', 'Ayla', 'Aynora', 'Ayuna', 'Azaleah', 'Azalia', 'Azarael', 'Azera', 'Azha', 'Azilea', 'Azina', 'Azize', 'Azora', 'Azura', 'Babette', 'Bacia', 'Bacia', 'Baka', 'Baka', 'Bakarne', 'Balayna', 'Balea', 'Balia', 'Bambi', 'Banan', 'Banella', 'Bara', 'Barbara', 'Barika', 'Basha', 'Basha', 'Basia', 'Basimah', 'Batakah', 'Bathsheba', 'Batya', 'Bay', 'Bayana', 'Bayo', 'Bayta', 'Bea', 'Beatrice', 'Beatrix', 'Beauina', 'Becca', 'Becky', 'Bedelia', 'Bel', 'Belana', 'Belina', 'Belinda', 'Belita', 'Bellanca', 'Belle', 'Belora', 'Bente', 'Beradine', 'Berilla', 'Berit', 'Bernadette', 'Bernice', 'Beryl', 'Bess', 'Bessine', 'Beta', 'Beth', 'Bethana', 'Bethany', 'Betony', 'Betty', 'Beulah', 'Beverly', 'Bevin', 'Bian', 'Bianca', 'Billie', 'Bina', 'Bindy', 'Binti', 'Birdie', 'Birkita', 'Bixenta', 'Blanche', 'Blanda', 'Blenda', 'Bliss', 'Bly', 'Blythe', 'Bo', 'Bohdana', 'Bonamy', 'Bonita', 'Bonnie', 'Bonny', 'Borgny', 'Braina', 'Brandi', 'Brandy', 'Bren', 'Brenda', 'Brenna', 'Bretta', 'Bridget', 'Bridget', 'Brie', 'Brier', 'Brietta', 'Brigit', 'Brigitte', 'Brina', 'Brina', 'Briona', 'Briony', 'Brites', 'Britta', 'Brittany', 'Bronwyn', 'Brooke', 'Brynn', 'Bucia', 'Cadence', 'Caimile', 'Caitlin', 'Caitrin', 'Cala', 'Calandia', 'Calandra', 'Calendonia', 'Caley', 'Calida', 'Calista', 'Calla', 'Callan', 'Callia', 'Callidora', 'Callie', 'Caltha', 'Calypso', 'Cam', 'Camelia', 'Camilia', 'Camille', 'Canace', 'Candace', 'Candida', 'Candide', 'Candra', 'Cantara', 'Caoimhe', 'Capri', 'Caprice', 'Cara', 'Caradoc', 'Caresse', 'Cari', 'Carina', 'Carine', 'Carissa', 'Carita', 'Carla', 'Carleen', 'Carlen', 'Carling', 'Carlota', 'Carly', 'Carma', 'Carmel', 'Carmelina', 'Carmen', 'Carna', 'Carnelian', 'Carol', 'Carolina', 'Caroline', 'Carolyn', 'Caron', 'Carrie', 'Caryn', 'Casey', 'Casilda', 'Cassandra', 'Cassia', 'Casta', 'Castalia', 'Catalina', 'Catava', 'Caterina', 'Catherine', 'Cathleen', 'Cathy', 'Catriona', 'Cayla', 'Ceara', 'Cecania', 'Cecilia', 'Celandine', 'Celeste', 'Celia', 'Celina', 'Celina', 'Cellia', 'Cerelia', 'Chaitra', 'Chanah', 'Chanda', 'Chandi', 'Chandra', 'Chane', 'Chanel', 'Channa', 'Chantal', 'Charis', 'Charissa', 'Charity', 'Charlotte', 'Charmaine', 'Chastity', 'Chava', 'Chaviva', 'Chay', 'Chaya', 'Chelsea', 'Chenoa', 'Cherica', 'Cherice', 'Cherie', 'Cheryl', 'Chesna', 'Chiara', 'Chika', 'Chilali', 'Chimlis', 'Chipo', 'Chloe', 'Chloris', 'Cho', 'Christa', 'Christable', 'Christina', 'Christine', 'Christy', 'Chyou', 'Cia', 'Ciannait', 'Ciar', 'Cicely', 'Cindy', 'Claire', 'Clara', 'Clarinda', 'Clarissa', 'Claudette', 'Claudia', 'Claudine', 'Clementina', 'Clementine', 'Cliantha', 'Clorinda', 'Clorinda', 'Clover', 'Cochiti', 'Coleene', 'Colette', 'Connie', 'Constance', 'Constanza', 'Consuela', 'Cora', 'Coralie', 'Corazon', 'Corbey', 'Cordeali', 'Coretta', 'Cori', 'Corinna', 'Coris', 'Corliss', 'Corrine', 'Cortney', 'Crescent', 'Cressida', 'Crystal', 'Cybele', 'Cybil', 'Cynthia', 'Cyprien', 'Cyrene', 'Cyrilla', 'Cytheria', 'Dabria', 'Dacey', 'Dacia', 'Dacie', 'Dacio', 'Dae', 'Dagmar', 'Dagna', 'Dai', 'Daily', 'Daisel', 'Daisy', 'Dakota', 'Dale', 'Dalila', 'Dalilia', 'Damara', 'Damitri', 'Dana', 'Danett', 'Dania', 'Daniella', 'Danyelle', 'Daphene', 'Daphne', 'Daphnie', 'Dar', 'Dara', 'Daralis', 'Darby', 'Daria', 'Darla', 'Darlene', 'Dasha', 'Dasha', 'Davene', 'Davine', 'Davita', 'Dawn', 'Daya', 'Dayna', 'Deana', 'Deana', 'Deandra', 'Deb', 'Debra', 'Dede', 'Dee', 'Deedee', 'Deianira', 'Deiene', 'Deirdre', 'Delana', 'Delaney', 'Delbin', 'Delia', 'Delicia', 'Delilia', 'Della', 'Delphina', 'Dembe', 'Demi', 'Demitria', 'Dena', 'Denby', 'Denice', 'Deva', 'Devaki', 'Deval', 'Devi', 'Devin', 'Devnet', 'Devon', 'Diamanta', 'Diane', 'Dianthe', 'Diedre', 'Diella', 'Dillian', 'Dilly', 'Dilys', 'Dinah', 'Dionne', 'Disa', 'Dita', 'diti', 'Dixie', 'Dodie', 'Dolores', 'Dominique', 'Dona', 'Donata', 'Donielle', 'Donner', 'Dooriya', 'Dophina', 'Dora', 'Doreen', 'Dorinda', 'Doris', 'Dorithy', 'Dory', 'Drew', 'Drina', 'Drucilla', 'Dulcie', 'Dulcinea', 'Dusty', 'Dyan', 'Dyani', 'Dymphna', 'Dyna', 'Eartha', 'Easter', 'Ebony', 'Echo', 'Edana', 'Edie', 'Edith', 'Edlyn', 'Edna', 'Edolie', 'Edria', 'Edwina', 'Efia', 'Eileen', 'Eirene', 'Elaine', 'Elana', 'Eleora', 'Elianor', 'Elina', 'Elina', 'Elisa', 'Elise', 'Eliska', 'Elissa', 'Elita', 'Eliza', 'Elizabeeth', 'Elke', 'Ella', 'Elle', 'Ellen', 'Elly', 'Elodie', 'Eloise', 'Elsa', 'Elsie', 'Elynor', 'Elyse', 'Elysia', 'Ema', 'Emajane', 'Emalia', 'Ember', 'Emelie', 'Emelyne', 'Emily', 'Emma', 'Endora', 'Engracia', 'Enid', 'Enola', 'Enye', 'Erasma', 'Erianthe', 'Erica', 'Erin', 'Erlina', 'Erwand', 'Eskarne', 'Esmerelda', 'Esperanza', 'Esta', 'Estelle', 'Esther', 'Estu', 'Etain', 'Etaina', 'Etaina', 'Etanthe', 'Etta', 'Eudocia', 'Eugenia', 'Eulalia', 'Eustacia', 'Eva', 'Evacsa', 'Evadine', 'Evadne', 'Evangeline', 'Evanthe', 'Eve', 'Evelyn', 'Evita', 'Evonne', 'Eyota', 'Fabienne', 'Faifuza', 'Fainche', 'Faith', 'Faizah', 'Fallon', 'Fantine', 'Farha', 'Farima', 'Farrah', 'Fatin', 'Fawne', 'Fay', 'Faye', 'Fayina', 'Fayme', 'Felcia', 'Felicite', 'Felicity', 'Femi', 'Feridwyn', 'Fern', 'Feronia', 'Filinda', 'Fina', 'Finola', 'Fiona', 'Fiorenza', 'Flavia', 'Fleta', 'Flora', 'Florence', 'Frances', 'Francesca', 'Francine', 'Francisca', 'Freda', 'Frederica', 'Freya', 'Frida', 'Frieda', 'Fuscienne', 'Gabriella', 'Gabrielle', 'Gaia', 'Gail', 'Galatea', 'Gali', 'Galina', 'Galya', 'Gana', 'Ganesa', 'Gauri', 'Gaye', 'Gayle', 'Gelasia', 'Gemma', 'Genevieve', 'Geogia', 'Georgeanne', 'Georgetta', 'Georgette', 'Georgiana', 'Geradline', 'Geraldine', 'Gerda', 'Gerri', 'Gertrude', 'Geva', 'Ghislaine', 'Giacinta', 'Gianina', 'Gigi', 'Gilana', 'Gilda', 'Gilen', 'Gillian', 'Gin', 'Gina', 'Ginger', 'Giselle', 'Gitana', 'Githa', 'Gizane', 'Gleda', 'Glenna', 'Glennys', 'Golda', 'Goldie', 'Gotzone', 'Grace', 'Gracie', 'Grainne', 'Grazia', 'Grear', 'Greta', 'Gretchen', 'Grette', 'Gwen', 'Gwendolyn', 'Gweneth', 'Gwynne', 'Gytha', 'Hadara', 'Hadassa', 'Hadiya', 'Haidee', 'Hailey', 'Haimi', 'Haldis', 'Hale', 'Haley', 'Hali', 'Hali', 'Halima', 'Halle', 'Hallie', 'Hana', 'Hanan', 'Hannah', 'Hanne', 'Harmoni', 'Harriet', 'Hasna', 'Hava', 'Haya', 'Haylee', 'Hazel', 'Hea', 'Heather', 'Hei', 'Heidi', 'Heldegarde', 'Helen', 'Helena', 'Helene', 'Helki', 'Henka', 'Henrietta', 'Hesper', 'Hester', 'Hilary', 'Hilda', 'Hinda', 'Hisa', 'Holly', 'Hope', 'Hoshi', 'Hyacinth', 'Hye', 'Hypatia', 'Ianthe', 'Ida', 'Idola', 'Idonia', 'Ilene', 'Ilona', 'Iman', 'Imogene', 'India', 'Indira', 'Indra', 'Ines', 'Inez', 'Inga', 'Ingrid', 'Iolana', 'Iolanthe', 'Iona', 'Iratze', 'Irena', 'Irene', 'Iris', 'Irma', 'Isabeau', 'Isabel', 'Isabella', 'Isadora', 'Isaura', 'Isis', 'Isleta', 'Isobel', 'Isoke', 'Istas', 'Ivana', 'Ivory', 'Ivy', 'Jacelyn', 'Jacinda', 'Jacinthe', 'Jada', 'Jael', 'Jaen', 'Jaimie', 'Jaione', 'Jakinda', 'Jala', 'Jamie', 'Jamila', 'Jamilah', 'Jan', 'Jana', 'Jane', 'Janelle', 'Janet', 'Janice', 'Janis', 'Janna', 'Jannelle', 'Jardena', 'Jarvia', 'Jarvinia', 'Jasmine', 'Jaya', 'Jayne', 'Jean', 'Jean', 'Jeanette', 'Jeanine', 'Jelena', 'Jena', 'Jenay', 'Jendayi', 'Jendyose', 'Jenica', 'Jennettia', 'Jennifer', 'Jensine', 'Jerrilyn', 'Jessica', 'Jewel', 'Jezebel', 'Jihan', 'Jillian', 'Jin', 'Jina', 'Jinny', 'Jinx', 'Joakima', 'Joan', 'Joanne', 'Jobey', 'Jobihna', 'Jocasa', 'Jocelyn', 'Jodi', 'Jody', 'Joelle', 'Joelliane', 'Johanna', 'Joia', 'Jolan', 'Jolanta', 'Jolene', 'Jolie', 'Joline', 'Jonina', 'Jora', 'Jordane', 'Josephine', 'Josie', 'Jotha', 'Joy', 'Joyce', 'Joye', 'Juanita', 'Judith', 'Juditha', 'Julia', 'Juliana', 'Juliane', 'Julie', 'Julietta', 'Julinka', 'Jumoke', 'Jun', 'June', 'Justine', 'Kaatje', 'Kachine', 'Kaclyn', 'Kaede', 'Kaethe', 'Kai', 'Kaia', 'Kaie', 'Kaili', 'Kaimi', 'Kairos', 'Kaiya', 'Kakra', 'Kala', 'Kalama', 'Kalanit', 'Kalare', 'Kalea', 'Kali', 'Kalika', 'Kalila', 'Kalinda', 'Kalle', 'Kalli', 'Kalonice', 'Kalyca', 'Kama', 'Kamala', 'Kamali', 'Kamaria', 'Kambo', 'Kameko', 'Kamilah', 'Kamilia', 'Kanda', 'Kane', 'Kanene', 'Kanika', 'Kantha', 'Kanya', 'Kapera', 'Kara', 'Karan', 'Karayan', 'Karel', 'Karen', 'Karida', 'Karimah', 'Karisa', 'Karka', 'Karla', 'Karlenne', 'Karli', 'Karlyn', 'Karmina', 'Karol', 'Karylin', 'Karyn', 'Kasa', 'Kasen', 'Kasia', 'Kasinda', 'Kassia', 'Kate', 'Katherine', 'Kathleen', 'Katja', 'Katoka', 'Katrien', 'Katrina', 'Kaula', 'Kaveri', 'Kavindra', 'Kay', 'Kaya', 'Kaye', 'Kayla', 'Kaysa', 'Kazia', 'Keara', 'Keelin', 'Keely', 'Kefira', 'Kehinde', 'Kei', 'Keiko', 'Keisha', 'Kelda', 'Kelia', 'Kelley', 'Kelli', 'Kellie', 'Kelly', 'Kelsey', 'Kendra', 'Kennis', 'Kenyangi', 'Kepa', 'Kerani', 'Kerensa', 'Kerstan', 'Kesare', 'Kesi', 'Kesia', 'Kessie', 'Keturah', 'Ketzia', 'Khalida', 'Kichi', 'Kiele', 'Kim', 'Kimberly', 'Kimmie', 'Kimmy', 'Kineta', 'Kiona', 'Kira', 'Kiran', 'Kirby', 'Kirima', 'Kirsten', 'Kirti', 'Kisa', 'Kiska', 'Kismet', 'Kissa', 'Kita', 'Kohana', 'Kolina', 'Koren', 'Koressa', 'Kristen', 'Kyly', 'Kyna', 'Kynthia', 'Kyoko', 'Lacey', 'Lacie', 'Laila', 'Lailie', 'Lakeisha', 'Lala', 'Lalasa', 'Lan', 'Lana', 'Landra', 'Lane', 'Lani', 'Lara', 'Laraine', 'Laralee', 'Lari', 'Larissa', 'Lark', 'Latika', 'Latonia', 'Laura', 'Laurana', 'Laurel', 'Laurie', 'Laurinda', 'Lauryn', 'Laveda', 'Lavern', 'Laverne', 'Lavinia', 'Lea', 'Leah', 'Leah', 'Leala', 'Leandra', 'Leba', 'Ledah', 'Lee', 'Leigh', 'Leiko', 'Leila', 'Leilana', 'Lena', 'Lene', 'Lenor', 'Lenora', 'Lenore', 'Leona', 'Leora', 'Leslie', 'Letha', 'Letitia', 'Levana', 'Lexine', 'Lia', 'Liadan', 'Lian', 'Liana', 'Liane', 'Libby', 'Lien', 'Lila', 'Lilith', 'Lillian', 'Lillie', 'Lily', 'Limber', 'Lina', 'Linda', 'Lindsay', 'Lindsey', 'Linette', 'Linnae', 'Linnea', 'Lisa', 'Lisette', 'Litsa', 'Liv', 'Liza', 'Lois', 'Lokelani', 'Lola', 'Loni', 'Lora', 'Lore', 'Lorelei', 'Lorelle', 'Loretta', 'Lori', 'Lorraine', 'Lotus', 'Louise', 'Lucille', 'Lucine', 'Lucretia', 'Lucy', 'Ludia', 'Luela', 'Luisa', 'Lukene', 'Lukina', 'Lulu', 'Luna', 'Lydia', 'Lynda', 'Lynelle', 'Lynn', 'Lynnda', 'Lynnette', 'Lyris', 'Lysel', 'Lysnadra', 'Mabel', 'Macaria', 'Machi', 'Maddy', 'Madelaine', 'Madelina', 'Madeline', 'Madelon', 'Madelyn', 'Mady', 'Mae', 'Magan', 'Magara', 'Magdalen', 'Magdalena', 'Magdaline', 'Magena', 'Magenta', 'Maggie', 'Mahala', 'Mahalia', 'Mai', 'Maia', 'Maida', 'Maisie', 'Maitane', 'Maizah', 'Maj', 'Malaya', 'Malila', 'Malina', 'Malinda', 'Malka', 'Mallory', 'Malu', 'Mamie', 'Manda', 'Mandara', 'Mandisa', 'Mandy', 'Mangena', 'Manon', 'Mansi', 'Manya', 'Mara', 'Marcella', 'Marcia', 'Marcy', 'Maren', 'Margaret', 'Margaret', 'Margarita', 'Margo', 'Margot', 'Marguirte', 'Maria', 'Mariah', 'Mariam', 'Mariama', 'Marian', 'Mariana', 'Marianna', 'Marianne', 'Maribel', 'Marie', 'Mariel', 'Marietta', 'Marily', 'Marilyn', 'Marina', 'Maris', 'Marisa', 'Marisha', 'Marissa', 'Marjani', 'Marjeta', 'Marjorie', 'Marlene', 'Marlo', 'Marmara', 'Marnie', 'Marnina', 'Marsha', 'Marta', 'Martha', 'Marti', 'Martina', 'Mary', 'Maryann', 'Marybeth', 'Marylou', 'Marzia', 'Matana', 'Mathea', 'Matilda', 'Matrika', 'Maud', 'Maura', 'Maureen', 'Maurita', 'Mavis', 'Maxine', 'May', 'Maya', 'Meara', 'Meara', 'Meda', 'Medea', 'Meg', 'Megan', 'Megara', 'Meghan', 'Mei', 'Meira', 'Mela', 'Melanie', 'Melantha', 'Melba', 'Melia', 'Melian', 'Melina', 'Melinda', 'Melisenda', 'Melissa', 'Mellinio', 'Melodie', 'Melody', 'Melosa', 'Melva', 'Mercedes', 'Meredith', 'Merele', 'Mesha', 'Meta', 'Mia', 'Miakoda', 'Michaela', 'Michele', 'Michelle', 'Midori', 'Migina', 'Mignon', 'Mika', 'Millicent', 'Millie', 'Min', 'Mina', 'Minda', 'Mindel', 'Mindy', 'Minerva', 'Minka', 'Minna', 'Minnie', 'Mira', 'Miranda', 'Mirem', 'Miremba', 'Mireya', 'Miriam', 'Mirielle', 'Missy', 'Misty', 'Mitena', 'Mitexi', 'Mitzi', 'Moira', 'Mollie', 'Molly', 'Mona', 'Monique', 'Moon', 'Morena', 'Morgan', 'Morgana', 'Morgance', 'Moria', 'Moriah', 'Muriel', 'Myra', 'Nada', 'Nadia', 'Nadine', 'Nadya', 'Naia', 'Nailah', 'Naimah', 'Nalini', 'Namazzi', 'Nami', 'Nan', 'Nana', 'Nancy', 'Nanette', 'Nantale', 'Naomi', 'Napea', 'Nara', 'Narda', 'Narmada', 'Nasiche', 'Nastassia', 'Natalie', 'Natane', 'Natasha', 'Natesa', 'Naysa', 'Nazirqah', 'Neala', 'Neci', 'Nediva', 'Neely', 'Nekane', 'Nell', 'Neola', 'Neoma', 'Neona', 'Neria', 'Nerine', 'Nerissa', 'Netti', 'Neva', 'Nevada', 'Neysa', 'Nicia', 'Nicola', 'Nicole', 'Nicolette', 'Nika', 'Nikki', 'Nimah', 'Nina', 'Niobe', 'Niola', 'Nira', 'Nirvelli', 'Nissa', 'Nita', 'Nitara', 'Nixie', 'Noel', 'Noelani', 'Noella', 'Nolita', 'Nona', 'Nona', 'Nora', 'Norah', 'Noreen', 'Nori', 'Noriko', 'Norma', 'Nydia', 'Nyrna', 'Nyssa', 'Obelia', 'Octavia', 'Odelia', 'Odelia', 'Odera', 'Odessa', 'Odetta', 'Odette', 'Odile', 'Ohanna', 'Okelani', 'Olathe', 'Olayinka', 'Olesia', 'Olga', 'Oliana', 'Olinda', 'Olivette', 'Olivia', 'Ona', 'Onida', 'Opal', 'Ophelia', 'Oralie', 'Orane', 'Orenda', 'Oriana', 'Orianna', 'Oriel', 'Oriole', 'Orlantha', 'Ornidaa', 'Paige', 'Pakuna', 'Palmiera', 'Paloma', 'Pamela', 'Pandita', 'Pandora', 'Panthea', 'Pantzike', 'Panya', 'Panyin', 'Pascale', 'Patia', 'Patience', 'Patricia', 'Patsy', 'Paula', 'Paulette', 'Pauline', 'Pavla', 'Pazia', 'Pearl', 'Peg', 'Peggy', 'Pelagia', 'Pemba', 'Penda', 'Penelope', 'Peninna', 'Penny', 'Penthea', 'Peony', 'Perdita', 'Perouze', 'Persis', 'Petra', 'Phaedra', 'Phedra', 'Philomena', 'Phoebe', 'Phylis', 'Phyllis', 'Pia', 'Pier', 'Pila', 'Piper', 'Polly', 'Poloma', 'Porche', 'Portia', 'Priscilla', 'Prudence', 'Prudy', 'Pyrena', 'Pythia', 'Qamra', 'Queena', 'Quella', 'Quenby', 'Quintina', 'Quiterie', 'Rachel', 'Radella', 'Radinka', 'Rae', 'Rai', 'Raizel', 'Ramla', 'Ramona', 'Ramya', 'Randie', 'Rane', 'Ranee', 'Rani', 'Raquel', 'Rashida', 'Rasine', 'Ratri', 'Raven', 'Rawnie', 'Rayna', 'Raynell', 'Raziya', 'Reba', 'Rebecca', 'Regan', 'Regina', 'Reidun', 'Remy', 'Rena', 'Renata', 'Rene', 'Renee', 'Rhea', 'Rhiamon', 'Rhianne', 'Rhiannon', 'Rhoda', 'Rhodanthe', 'Rhonda', 'Rhonna', 'Rhyssa', 'Ria', 'Riane', 'Rica', 'Rihana', 'Rikki', 'Rio', 'Risa', 'Rita', 'Riva', 'Roanna', 'Roberta', 'Robin', 'Robyn', 'Rochelle', 'Rohanna', 'Rona', 'Rorie', 'Rosa', 'Rosalind', 'Rosalinda', 'Rosalinde', 'Rosaline', 'Rosanne', 'Rose', 'Roseanne', 'Rosemarie', 'Rosemary', 'Rowena', 'Roxana', 'Roxanne', 'Ruby', 'Rumer', 'Ruth', 'Ruthann', 'Ryann', 'Ryanne', 'Ryba', 'Ryssa', 'Saba', 'Sabina', 'Sabiny', 'Sabirah', 'Sabra', 'Sabrina', 'Sacha', 'Sachi', 'Sade', 'Sadira', 'Saffi', 'Safiya', 'Sagara', 'Saidah', 'Sakari', 'Sakinah', 'Sakti', 'Sakura', 'Salihah', 'Salimah', 'Salina', 'Sally', 'Salome', 'Samantha', 'Samara', 'Samirah', 'Sancia', 'Sandia', 'Sandra', 'Sandrine', 'Sandya', 'Sara', 'Sarah', 'Sarai', 'Saraid', 'Saree', 'Sarena', 'Sari', 'Sarisha', 'Sasha', 'Sashenka', 'Satinka', 'Savanna', 'Saxon', 'Scotia', 'Searlait', 'Season', 'Sebasten', 'Seema', 'Sela', 'Selena', 'Selina', 'Selma', 'Semele', 'Senta', 'Serafina', 'Serilda', 'Sesha', 'Shaine', 'Shakira', 'Shako', 'Shammara', 'Shana', 'Shanata', 'Shandra', 'Shandy', 'Shani', 'Shanley', 'Shanna', 'Shannon', 'Shantay', 'Shantha', 'Sharman', 'Sharon', 'Sharri', 'Shashi', 'Shawn', 'Shayndel', 'Sheba', 'Sheena', 'Sheila', 'Shela', 'Shelby', 'Shelley', 'Shelly', 'Sherri', 'Shika', 'Shin', 'Shina', 'Shira', 'Shirley', 'Shobi', 'Shoshana', 'Sibley', 'Sibongile', 'Sibyl', 'Sidonia', 'Sidra', 'Sierra', 'Sigourney', 'Siham', 'Sileas', 'Silva', 'Silvia', 'Simba', 'Simone', 'Sine', 'Sinead', 'Siobhan', 'Siran', 'Sirena', 'Siroun', 'Sitara', 'Sitembile', 'Siv', 'Sive', 'Skyler', 'Sofi', 'Solana', 'Solange', 'Soledad', 'Solita', 'Sondra', 'Sonia', 'Sonja', 'Sonya', 'Sophia', 'Sophie', 'Sophronia', 'Spica', 'Stacey', 'Stacia', 'Stacy', 'Stefania', 'Stella', 'Stephani', 'Stephanie', 'Ster', 'Stesha', 'Stockard', 'Storm', 'Sukatai', 'Suki', 'Sumi', 'Summer', 'Sun', 'Susan', 'Susanna', 'Suzanne', 'Svetlana', 'Sybil', 'Sydelle', 'Sydney', 'Syeira', 'Sylvia', 'Syna', 'Synia', 'Tabitha', 'Taci', 'Tacita', 'Tadi', 'Taffy', 'Tahirah', 'Tai', 'Taima', 'Tainn', 'Taipa', 'Taite', 'Taka', 'Takara', 'Takiyah', 'Takoda', 'Talasi', 'Tale', 'Talia', 'Talia', 'Talitha', 'Tallulah', 'Tam', 'Tama', 'Tamara', 'Tamary', 'Tamma', 'Tammy', 'Tanaka', 'Tani', 'Tansy', 'Tanya', 'Tao', 'Tara', 'Tate', 'Tatyana', 'Tawnie', 'Tawny', 'Tayce', 'Taylor', 'Teague', 'Tehya', 'Tekla', 'Temina', 'Terentia', 'Terese', 'Terrilyn', 'Tertia', 'Teryn', 'Tesia', 'Tess', 'Tessa', 'Thadea', 'Thais', 'Thalassa', 'Thalia', 'Than', 'Thana', 'Thara', 'Thea', 'Thekla', 'Thelma', 'Theodosia', 'Theone', 'Thera', 'Thirza', 'Thora', 'Thyra', 'Tia', 'Tiara', 'Tienette', 'Tierney', 'Tierra', 'Tiffany', 'Tilda', 'Timandra', 'Tina', 'Tiponya', 'Tirza', 'Tivona', 'Tobey', 'Tola', 'Tora', 'Tori', 'Tory', 'Tosia', 'Tove', 'Tracey', 'Tracy', 'Treasa', 'Tresa', 'Treva', 'Trianon', 'Tricia', 'Trilby', 'Trina', 'Trind', 'Trish', 'Trisha', 'Trudy', 'Tryne', 'Tryphena', 'Tyne', 'Ula', 'Ulani', 'Ultima', 'Uma', 'Una', 'Undine', 'Undine', 'Urania', 'Uriana', 'Ursula', 'Uta', 'Vala', 'Valentina', 'Valeria', 'Valerie', 'Valeska', 'Valonia', 'Valora', 'Vanda', 'Vanessa', 'Vanora', 'Vanya', 'Vashti', 'Veda', 'Velika', 'Velma', 'Venesssa', 'Vera', 'Verena', 'Verity', 'Veronica', 'Vesta', 'Vevila', 'Victoria', 'Vidonia', 'Violet', 'Violet', 'Violetta', 'Virginia', 'Viridis', 'Viveka', 'Vivian', 'Voleta', 'Vrinda', 'Wakanda', 'Wanda', 'Waneta', 'Wendy', 'Whilhelmina', 'Whitney', 'Wijdan', 'Willow', 'Wilma', 'Wilona', 'Winda', 'Winema', 'Winifred', 'Winna', 'Winona', 'Wynee', 'Wynn', 'Wynona', 'Xanthe', 'Xaveria', 'Xaviera', 'Xena', 'Xenia', 'Ximena', 'Xylia', 'Xylona', 'Yachne', 'Yanice', 'Yarmilla', 'Yasmeen', 'Yasmin', 'Yelinda', 'Yenene', 'Yesmina', 'Yetta', 'Yeva', 'Yokiko', 'Yolanda', 'Yolie', 'Yonina', 'Yovela', 'Yvella', 'Yvette', 'Yvonne', 'Zada', 'Zahara', 'Zahirah', 'Zahra', 'Zakia', 'Zalea', 'Zalika', 'Zaltana', 'Zandra', 'Zara', 'Zarah', 'Zaza', 'Zehava', 'Zelda', 'Zelenka', 'Zelia', 'Zella', 'Zena', 'Zenaide', 'Zenia', 'Zerlinda', 'Zeva', 'Zevida', 'Zia', 'Ziazan', 'Zigana', 'Zila', 'Zina', 'Zinnia', 'Zita', 'Zoe', 'Zola', 'Zona', 'Zora', 'Zorah', 'Zorda', 'Zosia', 'Zuleika', 'Zulema', 'Zuza', 'Zuzanny'];
 $names = count($name)-1;
-return $name[mt_rand(0,$names)];
+return $name[mt_rand(0, max((int)(0), (int)($names)))];
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -855,7 +855,7 @@ function MaleName()
 {
 	if (mt_rand(1,3) == 1)
 	{
-		$name = array('Ache', 'Bower', 'Dwarf', 'Fowl', 'Groan', 'Kin', 'Moat', 'Pori', 'Rush', 'Tort', 
+		$name = ['Ache', 'Bower', 'Dwarf', 'Fowl', 'Groan', 'Kin', 'Moat', 'Pori', 'Rush', 'Tort', 
 			'Aim', 'Churl', 'Dwar', 'Card', 'Haft', 'Kit', 'Mould', 'Quid', 'Scoff', 'Twig', 
 			'Bald', 'Com', 'Ebb', 'Gay', 'Hale', 'Lank', 'Muff', 'Rau', 'Skew', 'Twit', 
 			'Bear', 'Cuff', 'El', 'Gilt', 'Hawk', 'Leaf', 'Muse', 'Red', 'Sky', 'Vain', 
@@ -865,10 +865,10 @@ function MaleName()
 			'Boil', 'Dross', 'Fay', 'Gold', 'Hoof', 'Man', 'Ooze', 'Rud', 'Steed', 'War', 
 			'Boni', 'Dupe', 'Fell', 'Gorge', 'Hook', 'Mars', 'Ox', 'Ruff', 'Swat', 'Whip', 
 			'Boy', 'Dusk', 'Fly', 'Grey', 'Hom', 'Meed', 'Pale', 'Run', 'Thor', 'Wise', 
-			'Wonn', 'Yip');
+			'Wonn', 'Yip'];
 		$names = count($name)-1;
-		$namer = $name[mt_rand(0,$names)];
-		$name = array('ander', 'vid', 'thur', 'sard', 'red', 'mund', 'lard', 'gurd', 'fird', 'cester', 
+		$namer = $name[mt_rand(0, max((int)(0), (int)($names)))];
+		$name = ['ander', 'vid', 'thur', 'sard', 'red', 'mund', 'lard', 'gurd', 'fird', 'cester', 
 			'ard', 'vred', 'ton', 'shan', 'rence', 'nald', 'ley', 'gus', 'ford', 'colt', 
 			'bald', 'wald', 'tor', 'shaw', 'reth', 'nard', 'lisle', 'ham', 'fram', 'dane', 
 			'ban', 'wallader', 'tran', 'son', 'rick', 'nath', 'loch', 'hard', 'fred', 'dard', 
@@ -877,13 +877,13 @@ function MaleName()
 			'brand', 'wig', 'vald', 'ter', 'ron', 'pold', 'mas', 'home', 'gal', 'don', 
 			'cas', 'win', 'van', 'than', 'rone', 'rad', 'mon', 'isler', 'gard', 'doric', 
 			'cent', 'wood', 'vard', 'ther', 'roth', 'ram', 'mond', 'kild', 'gemon', 'dower', 
-			'cent', 'yard', 'ven', 'thon', 'sander', 'rard', 'mour', 'ian', 'gill', 'dred');
+			'cent', 'yard', 'ven', 'thon', 'sander', 'rard', 'mour', 'ian', 'gill', 'dred'];
 		$names = count($name)-1;
-		return $namer . $name[mt_rand(0,$names)];
+		return $namer . $name[mt_rand(0, max((int)(0), (int)($names)))];
 	}
 	else
 	{
-		$name = array('Aaby', 'Arkwright', 'Blasco', 'Dagmar', 'Elsdon', 'Gladstone', 'Hultz', 'March', 'Prichard', 'Theodric', 
+		$name = ['Aaby', 'Arkwright', 'Blasco', 'Dagmar', 'Elsdon', 'Gladstone', 'Hultz', 'March', 'Prichard', 'Theodric', 
 			'Aage', 'Arlo', 'Bledsoe', 'Damian', 'Elswyth', 'Glassford', 'Humbert', 'Markahm', 'Proctor', 'Thorburn', 
 			'Aanon', 'Armand', 'Blount', 'Damon', 'Elton', 'Glendower', 'Hunter', 'Marques', 'Pue', 'Thordarson', 
 			'Aarlen', 'Armar', 'Bo', 'Dana', 'Elvin', 'Glover', 'Hurd', 'Marsden', 'Pulteney', 'Thorkild', 
@@ -982,16 +982,16 @@ function MaleName()
 			'Arder', 'Bjornstem', 'Cylarus', 'Elinor', 'Ghislain', 'Hrodnovar', 'Malhar', 'Pomeroy', 'Taurus', 'Zadock', 
 			'Aretas', 'Blackwood', 'Eyriel', 'Ellingwood', 'Gholson', 'Hudleston', 'Malvin', 'Prafulla', 'Tell', 'Zebulon', 
 			'Ariad', 'Blaine', 'Cyrillus', 'Ellwood', 'Gibbon', 'Huffam', 'Manfred', 'Pendergast', 'Tench', 'Zenon', 
-			'Arian', 'Blair', 'Cyryl', 'Elrad', 'Gildersleeve', 'Hulbeart', 'Mankey', 'Preston', 'Thacker', 'Zoltan');
+			'Arian', 'Blair', 'Cyryl', 'Elrad', 'Gildersleeve', 'Hulbeart', 'Mankey', 'Preston', 'Thacker', 'Zoltan'];
 		$names = count($name)-1;
-		return $name[mt_rand(0,$names)];
+		return $name[mt_rand(0, max((int)(0), (int)($names)))];
 	}
 }
 function FemaleName()
 {
 	if (mt_rand(1,3) == 1)
 	{
-		$name = array('Angel', 'Tru', 'Snow', 'Rich', 'Nag', 'Life', 'Jade', 'Glow', 'Foal', 'Ewe', 'Dale', 
+		$name = ['Angel', 'Tru', 'Snow', 'Rich', 'Nag', 'Life', 'Jade', 'Glow', 'Foal', 'Ewe', 'Dale', 
 			'Anim', 'Tyr', 'Soft', 'Rose', 'Noble', 'Love', 'Joy', 'Gob', 'Fond', 'Fairy', 'Dark', 
 			'Bear', 'Ven', 'Solar', 'Rud', 'Nob', 'Lune', 'Just', 'Gold', 'Free', 'Fair', 'Dawn', 
 			'Bless', 'Venus', 'Sol', 'Sacre', 'Pale', 'Lynx', 'Kind', 'Grey', 'Fur', 'Fate', 'Doe', 
@@ -1001,10 +1001,10 @@ function FemaleName()
 			'Boun', 'Wave', 'Sweet', 'Silven', 'Pearl', 'Mild', 'Law', 'Honor', 'Glad', 'Fiend', 'Dusk', 
 			'Claw', 'Wite', 'Sword', 'Sky', 'Queen', 'Milk', 'Leaf', 'Hope', 'Glen', 'Flaxen', 'Eagle', 
 			'Cloud', 'Wild', 'Thor', 'Snowy', 'Red', 'Moon', 'Lewd', 'Horse', 'Glor', 'Flax', 'Elf', 
-			'El');
+			'El'];
 		$names = count($name)-1;
-		$namer = $name[mt_rand(0,$names)];
-		$name = array('a', 'ula', 'sey', 'onia', 'line', 'len', 'ethe', 'drede', 'ata', 'anca', 
+		$namer = $name[mt_rand(0, max((int)(0), (int)($names)))];
+		$name = ['a', 'ula', 'sey', 'onia', 'line', 'len', 'ethe', 'drede', 'ata', 'anca', 
 			'acey', 'usia', 'silla', 'ora', 'ly', 'ienna', 'etta', 'een', 'berla', 'anda', 
 			'ache', 'va', 'sola', 'phne', 'lyn', 'ika', 'elle', 'elan', 'beth', 'ance', 
 			'ada', 'vere', 'strella', 'reda', 'ma', 'inda', 'farah', 'elia', 'bia', 'anche', 
@@ -1013,13 +1013,13 @@ function FemaleName()
 			'al', 'vina', 'thia', 'rifa', 'mina', 'itta', 'herita', 'elot', 'cia', 'aria', 
 			'alia', 'vita', 'thora', 'rina', 'mira', 'la', 'ia', 'enlia', 'da', 'asia', 
 			'alie', 'wig', 'titia', 'rine', 'nah', 'laide', 'icenl', 'esa', 'dicla', 'asla', 
-			'alia', 'wina', 'tola', 'rota', 'natta', 'lene', 'ie', 'esca', 'dida', 'asta');
+			'alia', 'wina', 'tola', 'rota', 'natta', 'lene', 'ie', 'esca', 'dida', 'asta'];
 		$names = count($name)-1;
-		return $namer . $name[mt_rand(0,$names)];
+		return $namer . $name[mt_rand(0, max((int)(0), (int)($names)))];
 	}
 	else
 	{
-		$name = array('Aasta', 'Almira', 'Ellin', 'Fenella', 'Grazia', 'Hrefna', 'Nada', 'Olga', 'Sceanb', 'Ulrica', 
+		$name = ['Aasta', 'Almira', 'Ellin', 'Fenella', 'Grazia', 'Hrefna', 'Nada', 'Olga', 'Sceanb', 'Ulrica', 
 			'Acadia', 'Alvina', 'Elmira', 'Fial', 'Grian', 'Hulda', 'Nadia', 'Oona', 'Scena', 'Una', 
 			'Ada', 'Amalina', 'Eloisa', 'Findbec', 'Grima', 'Lana', 'Natalia', 'Orah', 'Seang', 'Undine', 
 			'Adelaide', 'Amelia', 'Elsa', 'Fingalla', 'Guida', 'Ida', 'Nathalia', 'Oriana', 'Selema', 'Unelma', 
@@ -1068,9 +1068,9 @@ function FemaleName()
 			'Aline', 'Aurora', 'Fanchon', 'Gotelind', 'Hertha', 'Karelia', 'Nunila', 'Rufina', 'Triana', 'Zita', 
 			'Alison', 'Avon', 'Fand', 'Graine', 'Hilda', 'Karine', 'Oda', 'Runa', 'Tuage', 'Zoe', 
 			'Allene', 'Avril', 'Fawn', 'Grainne', 'Hildegarde', 'Karitsa', 'Odile', 'Sadb', 'Uathach', 'Zona', 
-			'Almas', 'Ayame', 'Fea', 'Crania', 'Hortensia', 'Katerina', 'Odilia', 'Samhair', 'Ula', 'Zora');
+			'Almas', 'Ayame', 'Fea', 'Crania', 'Hortensia', 'Katerina', 'Odilia', 'Samhair', 'Ula', 'Zora'];
 		$names = count($name)-1;
-		return $name[mt_rand(0,$names)];
+		return $name[mt_rand(0, max((int)(0), (int)($names)))];
 	}
 }
 
@@ -1078,7 +1078,7 @@ function FemaleName()
 
 function wolfName($type)
 {
-	$name = array('Achacky', 'Aidys', 'Aryt', 'Augha', 'Belvorar', 'Charise', 'Darvoro', 'Dynestea', 'Eeineis', 'Emi', 'Ero', 'Eula', 'Gah', 'Iacay', 'Ieinaia', 'Ili', 'Iriney', 'Ivon', 'Lai', 'Mooeta', 'Nyseldu', 'Oepoe', 'Olte', 'Orenar', 'Oughrayo', 'Quaug', 'Rayormal', 'Rynar', 'Shykeli', 'Taiau', 'Tiatina', 'Uburu', 'Uqal', 'Vera', 'Yachi', 
+	$name = ['Achacky', 'Aidys', 'Aryt', 'Augha', 'Belvorar', 'Charise', 'Darvoro', 'Dynestea', 'Eeineis', 'Emi', 'Ero', 'Eula', 'Gah', 'Iacay', 'Ieinaia', 'Ili', 'Iriney', 'Ivon', 'Lai', 'Mooeta', 'Nyseldu', 'Oepoe', 'Olte', 'Orenar', 'Oughrayo', 'Quaug', 'Rayormal', 'Rynar', 'Shykeli', 'Taiau', 'Tiatina', 'Uburu', 'Uqal', 'Vera', 'Yachi', 
 	'Ache', 'Aiphai', 'Asdarai', 'Auro', 'Be', 'Cheenei', 'Daryr', 'Dyni', 'Eerda', 'Emoj', 'Erul', 'Euly', 'Garmosi', 'Iadany', 'Ielma', 'Ima', 'Irkinu', 'Iwa', 'La', 'Morathir', 'Nysim', 'Oeraya', 'Olu', 'Orin', 'Oughtore', 'Queeti', 'Reaimy', 'Ryna', 'Shyo', 'Taio', 'Tiay', 'Udor', 'Urada', 'Veraughey', 'Yathyl', 
 	'Achi', 'Aiusti', 'Asea', 'Autano', 'Beynali', 'Cherayay', 'Delae', 'Dynskelyl', 'Eille', 'Enda', 'Eryl', 'Eumy', 'Ghaughet', 'Iado', 'Ieno', 'Imi', 'Irrae', 'Joe', 'Leiriluk', 'Mosatha', 'Nysmosel', 'Oeshe', 'Olyn', 'Ormelma', 'Ouiti', 'Queloru', 'Reeoma', 'Rynawey', 'Shyuska', 'Taisero', 'Tine', 'Uiacku', 'Urer', 'Vessayo', 'Ycka', 
 	'Ackel', 'Aive', 'Ashau', 'Auvero', 'Biaryw', 'Chetinyl', 'Dele', 'Ealob', 'Einnoe', 'Endey', 'Essa', 'Eunta', 'Ghau', 'Iagei', 'Ientha', 'Inaee', 'Isay', 'Jy', 'Leral', 'Mosinai', 'Ny', 'Oestiw', 'Omi', 'Orme', 'Ouny', 'Queoe', 'Reulere', 'Ryne', 'Skelal', 'Tanradi', 'Tinetoe', 'Uildun', 'Urndrau', 'Vieeru', 'Yerkinu', 
@@ -1098,19 +1098,19 @@ function wolfName($type)
 	'Aghay', 'Ardkali', 'Atholdi', 'Bane', 'Ceron', 'Danir', 'Du', 'Echtasu', 'Ememir', 'Eran', 'Eudenet', 'Folyear', 'Hooanee', 'Iealdor', 'Ildrode', 'Ipero', 'Itu', 'Kun', 'Lyeos', 'Nynale', 'Oeiao', 'Olly', 'Orar', 'Otinui', 'Quacky', 'Raya', 'Rothesty', 'Seru', 'Sweachi', 'Tiaineul', 'Turalee', 'Untrothy', 'Utaiol', 'Wiolda', 'Zaiustui', 
 	'Agir', 'Ardradaf', 'Athy', 'Bani', 'Chaea', 'Dany', 'Dyelme', 'Ede', 'Emia', 'Era', 'Eueldir', 'Fom', 'Ho', 'Iecheo', 'Ildtaio', 'Ipheu', 'Iva', 'Lae', 'Ly', 'Nyn', 'Oeisser', 'Oloi', 'Orathui', 'Otui', 'Quaen', 'Rayechy', 'Rothrodo', 'Sery', 'Swiyerir', 'Tiaingi', 'Uathau', 'Untvesar', 'Vae', 'Wora', 'Zha', 
 	'Aicka', 'Arre', 'Atinge', 'Belengu', 'Chao', 'Dardanon', 'Dynageen', 'Edy', 'Emissas', 'Eria', 'Euinay', 'Foo', 'Hy', 'Ieckoi', 'Ildu', 'Ire', 'Ivi', 'Lahini', 'Me', 'Nyr', 'Oemol', 'Oloral', 'Oraugher', 'Ouenthun', 'Quaod', 'Raye', 'Rou', 'Shepola', 'Taiase', 'Tia', 'Ube', 'Upem', 'Verah', 'Worym', 'Zhat', 
-	'Ziahono', 'Zoightu');
+	'Ziahono', 'Zoightu'];
 	$names = count($name)-1;
-	$first = $name[mt_rand(0,$names)];
+	$first = $name[mt_rand(0, max((int)(0), (int)($names)))];
 
-	$end = array('gar', 'wur', 'rog', 'mug', 
+	$end = ['gar', 'wur', 'rog', 'mug', 
 	'gor', 'bur', 'rag', 'gug', 
 	'gur', 'bar', 'mar', 'wug', 
 	'war', 'bor', 'mor', 'bug', 
-	'wor', 'rug', 'mur', 'gurg');
+	'wor', 'rug', 'mur', 'gurg'];
 	$ends = count($end)-1;
-	$second = $end[mt_rand(0,$ends)];
+	$second = $end[mt_rand(0, max((int)(0), (int)($ends)))];
 
-	$pfx = array('Ancient', 'Cry', 'Gold', 'Lone', 'Run', 'Summer', 
+	$pfx = ['Ancient', 'Cry', 'Gold', 'Lone', 'Run', 'Summer', 
 	'Autumn', 'Deep', 'Grey', 'Moss', 'Scout', 'Trail', 
 	'Back', 'Drift', 'Hazel', 'Old', 'Seek', 'Walk', 
 	'Bane', 'Ebony', 'Heart', 'One', 'Silent', 'Watch', 
@@ -1119,11 +1119,11 @@ function wolfName($type)
 	'Bold', 'First', 'Ivory', 'Pass', 'Spring', 'White', 
 	'Brave', 'Frisk', 'Last', 'Proud', 'Sprint', 'Winter', 
 	'Bristle', 'Furry', 'Little', 'Prowl', 'Stalk', 
-	'Crimson', 'Gaze', 'Lone', 'Red', 'Storm');
+	'Crimson', 'Gaze', 'Lone', 'Red', 'Storm'];
 	$pfxs = count($pfx)-1;
-	$third = $pfx[mt_rand(0,$pfxs)];
+	$third = $pfx[mt_rand(0, max((int)(0), (int)($pfxs)))];
 
-	$sfx = array('Ash', 'Crest', 'Elk', 'Fox', 'Mane', 'Rip', 'Spirit', 'War', 
+	$sfx = ['Ash', 'Crest', 'Elk', 'Fox', 'Mane', 'Rip', 'Spirit', 'War', 
 	'Bear', 'Crow', 'End', 'Frost', 'Mist', 'Rock', 'Star', 'Wind', 
 	'Blade', 'Dark', 'Eyes', 'Grim', 'Moon', 'Run', 'Stone', 'Wood', 
 	'Blaze', 'Dawn', 'Fair', 'Grizzle', 'Night', 'Sable', 'Sun', 
@@ -1132,9 +1132,9 @@ function wolfName($type)
 	'Breath', 'Dream', 'Fierce', 'Keeper', 'Rain', 'Shadow', 'Talon', 
 	'Bright', 'Dusk', 'Fire', 'Leaf', 'Raven', 'Shard', 'Thorn', 
 	'Claw', 'Dust', 'Flame', 'Light', 'Razor', 'Shine', 'Thunder', 
-	'Cloud', 'Earth', 'Foot', 'Loner', 'Rest', 'Snow', 'Traveler');
+	'Cloud', 'Earth', 'Foot', 'Loner', 'Rest', 'Snow', 'Traveler'];
 	$sfxs = count($sfx)-1;
-	$fourth = $sfx[mt_rand(0,$sfxs)];
+	$fourth = $sfx[mt_rand(0, max((int)(0), (int)($sfxs)))];
 	$fourth = strtolower($fourth);
 
 	if (($type == 1) || (mt_rand(1,3) == 1)){$final_name = $first . $second; }
@@ -1147,7 +1147,7 @@ function wolfName($type)
 
 function goblinName()
 {
-	$name = array('Bdukx', 'Ber', 'Badm', 'Bkem', 'Bosegx', 'Bsem', 'Bgotas', 'Bedorx', 'Bez', 'Bok', 'Bor', 
+	$name = ['Bdukx', 'Ber', 'Badm', 'Bkem', 'Bosegx', 'Bsem', 'Bgotas', 'Bedorx', 'Bez', 'Bok', 'Bor', 
 		'Bgem', 'Brek', 'Bosz', 'Bsanuz', 'Dexk', 'But', 'Bnars', 'Bezogx', 'Bguzak', 'Btum', 'Dbozan', 
 		'Buk', 'Brok', 'Bsen', 'Dkasz', 'Kmug', 'Damukx', 'Drutz', 'Bom', 'Bsuxod', 'Dasobn', 'Dnuzs', 
 		'Bxerz', 'Dkan', 'Demt', 'Dnemag', 'Kosx', 'Dgox', 'Dxokt', 'Brekm', 'Dketax', 'Gasx', 'Dorant', 
@@ -1196,9 +1196,9 @@ function goblinName()
 		'Zedumk', 'Txuzn', 'Xazetk', 'Xotd', 'Xugz', 'Xsokg', 'Taxd', 'Ton', 'Xbozs', 'Sukn', 'Xketaz', 
 		'Zguxad', 'Xbur', 'Xeb', 'Zgunr', 'Zesm', 'Xusamb', 'Tmub', 'Xsoz', 'Xgust', 'Tuzoxk', 'Xukazm', 
 		'Zmated', 'Zadk', 'Xem', 'Ztur', 'Zosk', 'Zenutk', 'Xokg', 'Zbasr', 'Xmab', 'Xebr', 'Zabd', 
-		'Zumb', 'Zroxd', 'Zemots', 'Zubk', 'Zust', 'Znuk', 'Xubn', 'Zmeds', 'Zags', 'Xezugn', 'Znemd');
+		'Zumb', 'Zroxd', 'Zemots', 'Zubk', 'Zust', 'Znuk', 'Xubn', 'Zmeds', 'Zags', 'Xezugn', 'Znemd'];
 	$names = count($name)-1;
-	return $name[mt_rand(0,$names)];
+	return $name[mt_rand(0, max((int)(0), (int)($names)))];
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1216,7 +1216,7 @@ function catName($type)
 	}
 	if ($type == "male")
 	{
-		$name = array('Ab`ar', 'Ab`bar', 'Ab`bil', 'Ab`der', 'Ab`dul', 'Ab`gh', 'Ab`ir', 'Ab`kir', 'Ab`med', 'Ab`nir', 'Ab`noud', 'Ab`sien', 'Ab`soud', 'Ab`taba', 'Ab`tabe', 'Ab`urabi', 
+		$name = ['Ab`ar', 'Ab`bar', 'Ab`bil', 'Ab`der', 'Ab`dul', 'Ab`gh', 'Ab`ir', 'Ab`kir', 'Ab`med', 'Ab`nir', 'Ab`noud', 'Ab`sien', 'Ab`soud', 'Ab`taba', 'Ab`tabe', 'Ab`urabi', 
 		'Ak`ar', 'Ak`bar', 'Ak`bil', 'Ak`der', 'Ak`dul', 'Ak`gh', 'Ak`ir', 'Ak`kir', 'Ak`med', 'Ak`nir', 'Ak`noud', 'Ak`sien', 'Ak`soud', 'Ak`taba', 'Ak`tabe', 'Ak`urabi', 
 		'Akh`ar', 'Akh`bar', 'Akh`bil', 'Akh`der', 'Akh`dul', 'Akh`gh', 'Akh`ir', 'Akh`kir', 'Akh`med', 'Akh`nir', 'Akh`noud', 'Akh`sien', 'Akh`soud', 'Akh`taba', 'Therris', 'Zoaraym', 
 		'Amar', 'Ambar', 'Ambil', 'Amder', 'Amdul', 'Amgh', 'Amir', 'Amkir', 'Ammed', 'Amnir', 'Amnoud', 'Amsien', 'Amsoud', 'Amtaba', 'Amtabe', 'Amurabi', 
@@ -1238,11 +1238,11 @@ function catName($type)
 		'Ra`Tesh', 'Ra`Virr', 'Ra`Zahr', 'Ra`Zhid', 'Ri`Darsha', 'Ri`Dumiwa', 'Ri`Shajirr', 'Ri`Vassa', 'Ri`Zaadha', 'S`Bakha', 'Sholani', 'S`Radirr', 'S`Rava', 'Urjabhi', 'Dro`marash', 'J`darr', 
 		'S`Raverr', 'S`Renji', 'S`Vandra', 'S`virr', 'Thengil', 'Urjorad', 'Wadarkhu', 'Bhisha', 'Dahlima', 'Dro`shanji', 'Hassiri', 'J`baana', 'J`Baasha', 'J`bari', 'S`razirr', 'S`shani', 
 		'J`Ghasta', 'J`mhad', 'J`riska', 'J`skar', 'J`zidzo', 'J`zin-Dar', 'Ja`Fazir', 'K`Sharr', 'M`aiq', 'Ma`Raska', 'Ma`zaddha', 'M`dasha', 'M`desi', 'M`dirr', 'S`drassa', 'S`rathad', 
-		'M`raaj-Dar', 'Qa-Dar', 'Ranarr-Jo', 'R`vanni', 'Ra`dirsha', 'Ra`Jahirr', 'Ra`Jhan', 'Ra`jhera', 'Ra`jiradh', 'Ri`Bassa', 'Ri`Jirr', 'Ri`Zakar');
+		'M`raaj-Dar', 'Qa-Dar', 'Ranarr-Jo', 'R`vanni', 'Ra`dirsha', 'Ra`Jahirr', 'Ra`Jhan', 'Ra`jhera', 'Ra`jiradh', 'Ri`Bassa', 'Ri`Jirr', 'Ri`Zakar'];
 	}
 	else if ($type == "female")
 	{
-		$name = array('Aahin', 'Aahni', 'Afeliz', 'Ahana', 'Aheh', 'Ahrazad', 'Ajjan', 'Akhtar', 'Anita', 'Araya', 'Ariba', 'Ashima', 'Asrin', 'Atima', 'Azita',
+		$name = ['Aahin', 'Aahni', 'Afeliz', 'Ahana', 'Aheh', 'Ahrazad', 'Ajjan', 'Akhtar', 'Anita', 'Araya', 'Ariba', 'Ashima', 'Asrin', 'Atima', 'Azita',
 		'Aziahin', 'Aziahni', 'Azifeliz', 'Azihana', 'Aziheh', 'Azihrazad', 'Azijjan', 'Azikhtar', 'Azinita', 'Aziraya', 'Aziriba', 'Azishima', 'Azisrin', 'Azitima', 'Azizita',
 		'Elaahin', 'Elaahni', 'Elafeliz', 'Elahana', 'Elaheh', 'Elahrazad', 'Elajjan', 'Elakhtar', 'Elanita', 'Elaraya', 'Elariba', 'Elashima', 'Elasrin', 'Elatima', 'Elazita',
 		'Faahin', 'Faahni', 'Fafeliz', 'Fahana', 'Faheh', 'Fahrazad', 'Fajjan', 'Fakhtar', 'Fanita', 'Faraya', 'Fariba', 'Fashima', 'Fasrin', 'Fatima', 'Fazita',
@@ -1263,11 +1263,11 @@ function catName($type)
 		'Nisaba', 'Rabinna', 'Shaba', 'Shivani', 'Shotherra', 'Shunari', 'Tsabhi', 'Tsajadhi', 'Tsalani', 'Tsani', 'Tsiya', 'Tsrazami', 'Ubaasi', 'Udarra', 'Tsrasuna',
 		'Unjara', 'Vanjirra', 'Zahraji', 'Abhuki', 'Ahdarji', 'Ahjazda', 'Ashni', 'Atahba', 'Atrabhi', 'Ayisha', 'Dro`Nahrahe', 'Kishashi', 'Nahsi', 'S`fara', 'Tsavani',
 		'S`jirra', 'S`kasha', 'S`Krivva', 'S`mirra', 'S`thasa', 'Shamada', 'Shomara', 'Shuravi', 'Talasma', 'Tsalajma', 'Tsarrina', 'Tsavi', 'Tsramla', 'Tsrava', 'Shavari',
-		'Vajhira', 'Yushi', 'Zabhila', 'Zahrasha', 'Ahkari', 'Ahjisi', 'Atahbah', 'Khayla', 'Ra`zhinda');
+		'Vajhira', 'Yushi', 'Zabhila', 'Zahrasha', 'Ahkari', 'Ahjisi', 'Atahbah', 'Khayla', 'Ra`zhinda'];
 	}
 	else
 	{
-		$name = array('Anich', 'Aligirby', 'Cabyakou', 'Bine', 'Aomitha', 'Alekanxi', 'Byaoua', 'Chaon', 'Akine', 'Abelig', 'Arrska', 'Arrazes', 'Angab', 'Anelli', 'Attattja', 'Bysin', 'Aligua', 'Bendo', 
+		$name = ['Anich', 'Aligirby', 'Cabyakou', 'Bine', 'Aomitha', 'Alekanxi', 'Byaoua', 'Chaon', 'Akine', 'Abelig', 'Arrska', 'Arrazes', 'Angab', 'Anelli', 'Attattja', 'Bysin', 'Aligua', 'Bendo', 
 		'Athi', 'Byand', 'Calima', 'Catangum', 'Beoh', 'Bigat', 'Cabya', 'Chiowesh', 'Atic', 'Akiat', 'Cali', 'Ataleol', 'Bysiang', 'Athiotoo', 'Atzeh', 'Calingh', 'Atiama', 'Byallion', 
 		'Caskomar', 'Bysiako', 'Ckanis', 'Chiaowen', 'Ckin', 'Caysses', 'Cakisi', 'Ckan', 'Calit', 'Catian', 'Cangich', 'Canowene', 'Changao', 'Bysick', 'Chical', 'Candim', 'Biwes', 'Canim', 
 		'Cathi', 'Chialim', 'Ckinoowe', 'Diaru', 'Dialeru', 'Cking', 'Ckatta', 'Ckoykini', 'Catu', 'Fendia', 'Diacaoyk', 'Chatt', 'Fesi', 'Cabersi', 'Dirssh', 'Caneoto', 'Chatoura', 'Chia', 
@@ -1303,18 +1303,18 @@ function catName($type)
 		'Raibiri', 'Raibus', 'Raidavi', 'Raihan', 'Raihir', 'Raikar', 'Raimanni', 'Raimnin', 'Rainai', 'Raioni', 'Rairabi', 'Raispoor', 'Raistae', 'Raitani', 'Raivandi', 'Solhan', 'Solhir', 'Solkar', 
 		'Robiri', 'Robus', 'Rodavi', 'Rohan', 'Rohir', 'Rokar', 'Romanni', 'Romnin', 'Ronai', 'Rooni', 'Rorabi', 'Rospoor', 'Rostae', 'Rotani', 'Rovandi', 'Solbiri', 'Solbus', 'Soldavi', 
 		'Sabiri', 'Sabus', 'Sadavi', 'Sahan', 'Sahir', 'Sakar', 'Samanni', 'Samnin', 'Sanai', 'Saoni', 'Sarabi', 'Saspoor', 'Sastae', 'Satani', 'Savandi', 'Sistae', 'Sitani', 'Sivandi', 
-		'Sibiri', 'Sibus', 'Sidavi', 'Sihan', 'Sihir', 'Sikar', 'Simanni', 'Simnin', 'Sinai', 'Sioni', 'Sirabi', 'Sispoor');
+		'Sibiri', 'Sibus', 'Sidavi', 'Sihan', 'Sihir', 'Sikar', 'Simanni', 'Simnin', 'Sinai', 'Sioni', 'Sirabi', 'Sispoor'];
 	}
 
 	$names = count($name)-1;
-	return $name[mt_rand(0,$names)];
+	return $name[mt_rand(0, max((int)(0), (int)($names)))];
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 function orcName()
 {
-	$name = array('Abghat', 'Adgulg', 'Aghed', 'Agugh', 'Aguk', 'Almthu', 'Alog', 'Ambilge', 'Apaugh', 'Argha', 
+	$name = ['Abghat', 'Adgulg', 'Aghed', 'Agugh', 'Aguk', 'Almthu', 'Alog', 'Ambilge', 'Apaugh', 'Argha', 
 		'Argigoth', 'Argug', 'Arpigig', 'Auhgan', 'Azhug', 'Bagdud', 'Baghig', 'Bahgigoth', 'Bahgigoth', 'Bandagh', 'Barfu', 
 		'Bargulg', 'Baugh', 'Bidgug', 'Bildud', 'Bilge', 'Bog', 'Boghat', 'Bogugh', 'Borgan', 'Borug', 'Braugh', 'Brougha', 
 		'Brugagh', 'Bruigig', 'Buadagh', 'Buggug', 'Builge', 'Buimghig', 'Bulgan', 'Bumhug', 'Buomaugh', 'Buordud', 'Burghed', 
@@ -1389,16 +1389,16 @@ function orcName()
 		'Zeakgu', 'Zguk', 'Zildud', 'Zilge', 'Zilug', 'Zinsbog', 'Zlapdud', 'Zlog', 'Zlughig', 'Zodagh', 'Zog', 
 		'Zogugbu', 'Zogugh', 'Zombilge', 'Zonagh', 'Zorfu', 'Zorgulg', 'Zorhgigoth', 'Zornaraugh', 'Zoughat', 
 		'Zudagog', 'Zugarod', 'Zugbu', 'Zugorim', 'Zuhgan', 'Zulgha', 'Zulmthu', 'Zumhug', 'Zunodagh', 'Zunuguk', 
-		'Zupaugh', 'Zupgugh', 'Zurbag', 'Zurgha', 'Zurghed', 'Zurgug', 'Zurpigig');
+		'Zupaugh', 'Zupgugh', 'Zurbag', 'Zurgha', 'Zurghed', 'Zurgug', 'Zurpigig'];
 	$names = count($name)-1;
-	return $name[mt_rand(0,$names)];
+	return $name[mt_rand(0, max((int)(0), (int)($names)))];
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 function ratmanName()
 {
-	$name = array('Eyetail', 'Gloomquiver', 'Rhotrot', 'Foulcloud', 'Skulcrawler', 'Palemuck', 
+	$name = ['Eyetail', 'Gloomquiver', 'Rhotrot', 'Foulcloud', 'Skulcrawler', 'Palemuck', 
 		'Foulmaw', 'Graystench', 'Kilrott', 'Stankcrawl', 'Soulgnawer', 'Whiteclaw', 'Graygnaw', 'Twoas', 
 		'Koktooth', 'Skulclaw', 'Rottooth', 'Kilcloud', 'Quivermuck', 'Kithom', 'Skulpad', 'Skrmwhisker', 
 		'Quiveras', 'Stalemaw', 'Eyequiver', 'Stankwhisper', 'Kicraw', 'Kirmred', 'Clawquiver', 
@@ -1437,16 +1437,16 @@ function ratmanName()
 		'Tidetckuki', 'Tikckek', 'Tikickeki', 'Titchaki', 'Tituki', 'Tukckaki', 'Tukitiki', 'Tukituki', 
 		'Vachichak', 'Vackuk', 'Vactak', 'Vaveckaki', 'Vechoki', 'Vectaki', 'Vevactak', 'Vevitavi', 
 		'Vitavi', 'Vitchak', 'Vitituki', 'Vivackuk', 'Vivitchak', 'Vovechoki', 'Warek', 'Warreki', 
-		'Wecckak', 'Weckaki', 'Wedachek', 'Wikchichoki', 'Wochickeki');
+		'Wecckak', 'Weckaki', 'Wedachek', 'Wikchichoki', 'Wochickeki'];
 	$names = count($name)-1;
-	return $name[mt_rand(0,$names)];
+	return $name[mt_rand(0, max((int)(0), (int)($names)))];
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 function lizardmanName()
 {
-	$name = array('As`syrik', 'Addir', 'Rilik', 'Akro', 'Fangiss', 
+	$name = ['As`syrik', 'Addir', 'Rilik', 'Akro', 'Fangiss', 
 		'Kalaw', 'Predat', 'T`ayil', 'Angura', 'Anol', 'Bacha`lisk', 'Bas`silisk', 'Bas`keen', 'Basak', 
 		'Ber`zerik', 'Jowah', 'Bramak', 'Chi`karik', 'Chi`tin', 'Des`serret', 'Dor`sal', 'Drakkon', 
 		'Du`lap', 'Thirim', 'Eldar', 'Ferat', 'Fas`ol', 'Fik`rik', 'Filesh', 'Firin`zi', 'Furak', 
@@ -1495,16 +1495,16 @@ function lizardmanName()
 		'Tysycieth', 'Yciethhlyly', 'Yisasshmyss', 'Yisstisthh', 'Yllith', 'Ylsthy', 'Yraaathlythi', 
 		'Ysahlith', 'Ysasth', 'Ysath', 'Yscesth', 'Yshmissa', 'Yshtsi', 'Ysilsia', 'Yslish', 'Yssasisth', 
 		'Ysssal', 'Yssthih', 'Yssths', 'Yssthy', 'Ystasah', 'Ysthsith', 'Ystsy', 'Ythals', 'Ythssysh', 
-		'Ytlilh', 'Ytlish', 'Ytsais', 'Ytssysh', 'Ytsthih');
+		'Ytlilh', 'Ytlish', 'Ytsais', 'Ytssysh', 'Ytsthih'];
 	$names = count($name)-1;
-	return $name[mt_rand(0,$names)];
+	return $name[mt_rand(0, max((int)(0), (int)($names)))];
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 function impName()
 {
-	$name = array('Kaltivel', 'Anshu', 'Maliel', 'Baratoz', 'Almonjin', 'Ataxharos', 'Iroxlenia', 'Dlipahox', 'Ropapon', 'Lisexunm', 
+	$name = ['Kaltivel', 'Anshu', 'Maliel', 'Baratoz', 'Almonjin', 'Ataxharos', 'Iroxlenia', 'Dlipahox', 'Ropapon', 'Lisexunm', 
 		'Ansiraal', 'Aurlem', 'Betra', 'Draxsom', 'Fodus', 'Forbrak', 'ForLem', 'Horffe', 'Inforlem', 'Invis', 'Ahannapoi', 'Etsool', 'Rustheh', 'Apael', 'Hsalet', 
 		'Laplem', 'Naxator', 'Quaeven', 'Sarpling', 'Silamo', 'Tereg', 'Volesh', 'Vraal', 'WisSur', 'Mazuh', 'Ranruhuos', 'Uhsah', 'Rneramat', 'Rozax', 
 		'Aamon', 'Agalierept', 'Agares', 'Aglasis', 'Aiwaz', 'Astaroth', 'Ayperos', 'Elubapt', 'Asanir', 'Sahapirael', 'Amisenon', 'Suslorpabon', 
@@ -1535,16 +1535,16 @@ function impName()
 		'Nirahon', 'Sazroneot', 'Psapinal', 'Emhdep', 'Araznipus', 'Lrekip', 'Paton', 'Hobasalon', 'Sanetorael', 'Oratum', 
 		'Rlueheliel', 'Lunlder', 'Tasiliel', 'Renepoipsil', 'Szetac', 'Ehtapit', 'Uhamirp', 'Padoh', 'Xaddetposon', 'Pesin', 
 		'Tatrros', 'Esizar', 'Urrosit', 'Luzuherp', 'Apuond', 'Amahap', 'Pahralabon', 'Aparoh', 'Apnapuos', 'Tasohom', 
-		'Natir', 'Resolael', 'Otepnelas', 'Ssuatohiel', 'Maot', 'Enilasp', 'Sarahahemiel', 'Heposon', 'Aptpeh', 'Dihoraz');
+		'Natir', 'Resolael', 'Otepnelas', 'Ssuatohiel', 'Maot', 'Enilasp', 'Sarahahemiel', 'Heposon', 'Aptpeh', 'Dihoraz'];
 	$names = count($name)-1;
-	return $name[mt_rand(0,$names)];
+	return $name[mt_rand(0, max((int)(0), (int)($names)))];
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 function elfName()
 {
-	$name = array('Ath', 'Balmonth', 'Baranth', 'Bralmuth', 'Briarananth', 'Bucarth', 'Bullinth', 'Camalanth', 
+	$name = ['Ath', 'Balmonth', 'Baranth', 'Bralmuth', 'Briarananth', 'Bucarth', 'Bullinth', 'Camalanth', 
 		'Carmath', 'Caroth', 'Cath', 'Chaneth', 'Charanuth', 'Chatianth', 'Colareth', 'Coliath', 'Craillanth', 'Craimath', 
 		'Crairenarth', 'Duvenath', 'Emaleth', 'Esianth', 'Fith', 'Galzieth', 'Gamiath', 'Gatianth', 'Gebeth', 'Gith', 
 		'Giyeth', 'Glanarth', 'Glath', 'Gorianth', 'Hallath', 'Halzanth', 'Iacanth', 'Iasiluth', 'Jemiath', 'Jenith', 
@@ -1627,16 +1627,16 @@ function elfName()
 		'Kobti', 'Sirical', 'Elidov', 'Okiid', 'Anamirud', 
 		'Kufry', 'Tala', 'Erecolat', 'Oreki', 'Avead', 
 		'Lecebada', 'Utari', 'Halek', 'Oxafovac', 'Ayinolak', 
-		'Monoyoze', 'Valanez', 'Idiar', 'Rari', 'Disehnok');
+		'Monoyoze', 'Valanez', 'Idiar', 'Rari', 'Disehnok'];
 	$names = count($name)-1;
-	return $name[mt_rand(0,$names)];
+	return $name[mt_rand(0, max((int)(0), (int)($names)))];
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 function elfgirlName()
 {
-	$name = array('Yathvarae', 'Inuraiiel', 'Marna', 'Finarwen', 'Enasuithiel', 'Solorduriel', 'Tarien', 'Finlintha', 
+	$name = ['Yathvarae', 'Inuraiiel', 'Marna', 'Finarwen', 'Enasuithiel', 'Solorduriel', 'Tarien', 'Finlintha', 
 		'Saidoliel', 'Amariel', 'Melethiel', 'Quanuraiiel', 'Quaneruanna', 'Aliel', 'Cirlondiel', 'Gabanniel', 
 		'Limoladhiel', 'Mereruae', 'Aliel', 'Arwen', 'Araya', 'Erdathsta', 'Rosbreththenniel', 'Erteruiel', 
 		'Ahdadolwen', 'Caltimiel', 'Morthonthae', 'Ilgaladnel', 'Mellondiel', 'Daerlathwen', 'Mencassiel', 'Anauraiiel', 
@@ -1673,16 +1673,16 @@ function elfgirlName()
 		'Laurtirawen', 'Ainerinsinwen', 'Anwen', 'Anesmordeth', 'Narilla', 'Meldiliel', 'Mordiliel', 'Maedathiel', 
 		'Solorlaiiel', 'Lostananniel', 'Talawen', 'Cabannwen', 'Caunanna', 'Vaniraniel', 'Eruraiiel', 'Medmaiviel', 
 		'Laurendolwen', 'Nariel', 'Adanna', 'Adonpantna', 'Tirvaiel', 'Janwen', 'Eruima', 'Verisima', 
-		'Bronadhiel', 'Turladhima', 'Eruwen', 'Vaniraniel');
+		'Bronadhiel', 'Turladhima', 'Eruwen', 'Vaniraniel'];
 	$names = count($name)-1;
-	return $name[mt_rand(0,$names)];
+	return $name[mt_rand(0, max((int)(0), (int)($names)))];
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 function elfboyName()
 {
-	$name = array('Habrision', 'Turyonaion', 'Aranar', 'Tatardien', 'Aeimon', 'Aefaradron', 'Rimeluion', 'Hoththil', 
+	$name = ['Habrision', 'Turyonaion', 'Aranar', 'Tatardien', 'Aeimon', 'Aefaradron', 'Rimeluion', 'Hoththil', 
 		'Sidhohien', 'Eruanbelithon', 'Laiquamelthor', 'Elastdal', 'Utirphendon', 'Breglasson', 'Valannoion', 'Horthar', 
 		'Galandur', 'Armaeion', 'Aranron', 'Airdor', 'Lairanede', 'Taenton', 'Cereyonil', 'Menamaeas', 
 		'Meridasion', 'Revthal', 'Elfaradien', 'Rission', 'Castien', 'Rochenan', 'Thanion', 'Aethaadorien', 
@@ -1719,16 +1719,16 @@ function elfboyName()
 		'Talfadorren', 'Alyathandon', 'Aranost', 'Mintalen', 'Aranion', 'Vermornon', 'Galeniaddur', 'Bellminathor', 
 		'Tabadad', 'Laththanon', 'Limaias', 'Voronion', 'Lanlassion', 'Sidhthas', 'Dosanien', 'Sadron', 
 		'Aemoron', 'Nithwe', 'Aelaerdur', 'Caunmarnon', 'Talmelon', 'Tidurethon', 'Urvdur', 'Erubaradion', 
-		'Daerdaugidan', 'Galanien', 'Armornion', 'Drathraion');
+		'Daerdaugidan', 'Galanien', 'Armornion', 'Drathraion'];
 	$names = count($name)-1;
-	return $name[mt_rand(0,$names)];
+	return $name[mt_rand(0, max((int)(0), (int)($names)))];
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 function authorName()
 {
-	$name = array('Kaltivel', 'Anshu', 'Maliel', 'Baratoz', 'Almonjin', 'Pariah', 'Ydoc', 'Llessue', 'Zhaan', 'Lorbna', 'Gragok', 'Thranger', 'Krygar', 'Grothelfiend', 'Centibis', 'Farthak', 'Laitesach', 'Crenabil', 
+	$name = ['Kaltivel', 'Anshu', 'Maliel', 'Baratoz', 'Almonjin', 'Pariah', 'Ydoc', 'Llessue', 'Zhaan', 'Lorbna', 'Gragok', 'Thranger', 'Krygar', 'Grothelfiend', 'Centibis', 'Farthak', 'Laitesach', 'Crenabil', 
 		'Krullus', 'Legron', 'Noirkrach', 'Blassarrabb', 'Gragragron', 'Vendodroth', 'Flaggroth', 'Vilithrar', 'Po-Kor', 'Manglar', 'Verolyn', 'Gathfe', 'Skred', 'Flandrith', 'Stavinfeks', 'Steelbane', 'Crarigor', 
 		'Empalk', 'Perfus', 'Cassiel', 'Magor', 'Xtul', 'Vladeer', 'Scrill', 'Slix', 'Ix', 'Selminus', 'Victux', 'Hrallath', 'Heksen', 'Peinsluth', 'Keelus', 'Kra`an', 'Ankou', 'Turi`el', 'Azazel', 'Armarus', 'Grigorus', 
 		'Ga`ahp', 'Therion', 'Peirazo', 'Ponerus', 'Arhaios', 'Ophis', 'Vairocan', 'Arsat', 'Karnax', 'Taet', 'Nu`uhn', 'Oghmus', 'Arametheus', 'Terxor', 'Erdok', 'Archatrix', 'Jonar', 'Marth`Fador', 'Helzigar', 
@@ -1782,27 +1782,27 @@ function authorName()
 		'Phienuebeb', 'Phonu', 'Ralus', 'Rcanoluele', 'Rcivamah', 'Rdenaro', 'Rdeth', 'Relelete', 'Rnara', 'Rores', 'Rorngane', 'Saiabelel', 'Sameti', 'Santise', 'Sareva', 'Sasai', 'Serantivet', 'Sezarnti', 'Smanda', 
 		'Smelieli', 'Smetenelul', 'Stiulenet', 'Taleluso', 'Tenda', 'Tharanasan', 'Thararin', 'Thialardrd', 'Tiusa', 'Ucalelen', 'Uchenter', 'Uetrdrd', 'Ulelen', 'Ulerosh', 'Uleseles', 'Urndern', 'Usant', 'Usavamam', 
 		'Usonicar', 'Usoris', 'Vamorchine', 'Vanebr', 'Vargatu', 'Vatielucac', 'Velurelu', 'Venez', 'Vicav', 'Viust', 'Vondr', 'Vorntes', 'Vosthel', 'Xacagalela', 'Xaiel', 'Xanismis', 'Xarlic', 'Xarnieta', 'Zalebesan', 
-		'Zalemeta', 'Zamint', 'Zanabal', 'Zanamai', 'Zandoni', 'Zaraluc', 'Zaror', 'Zatesor');
+		'Zalemeta', 'Zamint', 'Zanabal', 'Zanamai', 'Zandoni', 'Zaraluc', 'Zaror', 'Zatesor'];
 $names = count($name)-1;
-return $name[mt_rand(0,$names)];
+return $name[mt_rand(0, max((int)(0), (int)($names)))];
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 function alienName()
 {
-	$name = array('aba', 'abbe', 'achko', 'acno', 'acu', 'ada', 'addo', 'ade', 'afthu', 'agha', 'aghu', 'agi', 'agnu', 'aha', 'aho', 'ahtho', 'ahvi', 'akwa', 'alhe', 'alo', 'amgi', 'amlhe', 'ani', 'ape', 'apho', 'aphvu', 'aqde', 'aqi', 'aqja', 'ari', 'arwa', 'asfa', 'ashe', 'ashgho', 'aszi', 'ata', 'ate', 'athca', 'athhi', 'athpi', 'atpi', 'avdo', 'avha', 'awi', 'awja', 'awyu', 'axphu', 'aya', 'ayo', 'aze', 'azhi', 'azhja', 'azho', 'bab', 'baih', 'baph', 'bej', 'biozh', 'bith', 'buoc', 'bus', 'caeg', 'calh', 'cap', 'cev', 'cew', 'chaaw', 'chak', 'chek', 'chew', 'chiel', 'chiet', 'chit', 'choav', 'choeq', 'choeth', 'choop', 'chuev', 'chuey', 'chug', 'chup', 'cir', 'coad', 'coor', 'couf', 'cuf', 'daax', 'dad', 'dap', 'den', 'deuth', 'dieph', 'diuy', 'doay', 'duox', 'duph', 'ebgu', 'echa', 'echi', 'echzhi', 'ecjo', 'eclho', 'ecwi', 'eda', 'edfo', 'edna', 'egha', 'eghbi', 'eghe', 'egi', 'ehfe', 'ehno', 'ejno', 'ele', 'elhe', 'elhno', 'elho', 'eli', 'emche', 'enje', 'enphu', 'epha', 'eqi', 'eru', 'esgho', 'eshe', 'eshi', 'ethho', 'ethu', 'ethxi', 'eti', 'etzho', 'eve', 'evi', 'evlhe', 'ewla', 'ewme', 'ewu', 'exa', 'exba', 'exsi', 'exu', 'eye', 'eyi', 'eyu', 'ezchi', 'ezhi', 'ezhva', 'ezo', 'ezsa', 'ezu', 'faup', 'fef', 'fep', 'foam', 'foos', 'foth', 'fov', 'fum', 'fun', 'gach', 'gaph', 'geolh', 'ghah', 'ghaih', 'gham', 'ghaut', 'ghegh', 'gheuh', 'ghiom', 'ghiuh', 'ghoish', 'ghoup', 'ghoy', 'ghuer', 'ghuk', 'ghuoc', 'ghuv', 'giey', 'giub', 'giugh', 'goof', 'goox', 'guix', 'guj', 'guth', 'guum', 'hah', 'haph', 'hech', 'heezh', 'hiam', 'hich', 'hiep', 'hizh', 'huij', 'huop', 'ibe', 'ibke', 'ibu', 'ibwi', 'ica', 'icfi', 'ichwo', 'ici', 'icu', 'idlho', 'ifphe', 'ighpho', 'ihku', 'ihze', 'ijfe', 'iji', 'iju', 'ike', 'ikma', 'iko', 'ikxi', 'ile', 'ilhchi', 'ilhe', 'ilhga', 'ilhghe', 'ilho', 'ilhtha', 'imo', 'imsha', 'imthu', 'imu', 'ina', 'innu', 'iphke', 'ipi', 'iplha', 'ipo', 'ipu', 'iqshe', 'iqthe', 'iro', 'isghu', 'ishi', 'isla', 'itca', 'ite', 'itu', 'iva', 'iwi', 'iwje', 'iwso', 'ixa', 'ixi', 'iyge', 'izbe', 'izha', 'izhu', 'japh', 'jiolh', 'jogh', 'joish', 'jot', 'juiy', 'juut', 'kaip', 'kaux', 'kax', 'kech', 'ked', 'keoz', 'kip', 'kiq', 'kith', 'kiux', 'kox', 'kued', 'laeth', 'lauf', 'law', 'leiq', 'lhaop', 'lhauh', 'lhech', 'lheol', 'lhesh', 'lhet', 'lhezh', 'lhis', 'lhoc', 'lhoog', 'loas', 'log', 'lom', 'luus', 'maos', 'moen', 'mol', 'molh', 'muc', 'naf', 'neep', 'nef', 'nialh', 'nic', 'nigh', 'nilh', 'noet', 'obde', 'obyu', 'ochghe', 'oco', 'octi', 'odci', 'odli', 'odo', 'odya', 'ofe', 'ofro', 'ofu', 'oghi', 'oju', 'ojwi', 'ole', 'olha', 'olhce', 'olhtha', 'olji', 'omfi', 'omi', 'onli', 'onqi', 'onta', 'onu', 'opa', 'opgho', 'ophu', 'oppe', 'oqi', 'oqu', 'ore', 'orgi', 'orma', 'oshi', 'oshki', 'oshla', 'ostho', 'othe', 'othfo', 'otho', 'othu', 'otu', 'ovqo', 'ovyu', 'owi', 'owu', 'owvu', 'oya', 'oyi', 'ozhi', 'ozhsu', 'ozhu', 'peac', 'peeb', 'pem', 'phaav', 'phep', 'pher', 'phez', 'phich', 'phiip', 'phij', 'phoish', 'phoix', 'photh', 'phov', 'phoy', 'phuay', 'pic', 'pieth', 'pik', 'pin', 'piq', 'poac', 'poc', 'poen', 'poey', 'pof', 'pouv', 'pul', 'puz', 'qab', 'qauth', 'qeux', 'qiej', 'qiesh', 'qior', 'qix', 'qoad', 'qoc', 'qor', 'raax', 'raesh', 'raez', 'raf', 'raow', 'rich', 'roov', 'ruid', 'ruov', 'ruuch', 'saey', 'sej', 'sek', 'sen', 'shat', 'shauw', 'sheop', 'shiech', 'shiin', 'shil', 'shilh', 'shoig', 'shoiz', 'shuen', 'shuev', 'shuth', 'siaq', 'sigh', 'siit', 'siv', 'sogh', 'sooz', 'suet', 'sush', 'tas', 'tek', 'tex', 'thaith', 'thax', 'theer', 'theeth', 'thef', 'thelh', 'thet', 'thiux', 'thoc', 'thosh', 'thox', 'thueph', 'tiev', 'tiib', 'toib', 'toim', 'tuun', 'uba', 'ubpu', 'uce', 'ucha', 'uchghi', 'uchi', 'uchno', 'uco', 'ude', 'ufe', 'ufghe', 'ufta', 'ufzhi', 'uggo', 'ugha', 'ughqa', 'ughu', 'ugzo', 'uha', 'uhlhu', 'ukdu', 'ulhji', 'ulho', 'ullu', 'ulo', 'ulu', 'umxe', 'untu', 'upfa', 'upho', 'uqte', 'uqtha', 'urgu', 'usha', 'ushko', 'utda', 'uthro', 'uthu', 'utlu', 'utxi', 'uva', 'uvru', 'uwu', 'uxo', 'uyo', 'uzha', 'uzhe', 'uzhi', 'uzhwi', 'vazh', 'vik', 'voat', 'voez', 'vog', 'vot', 'waugh', 'wauph', 'weoq', 'wid', 'wium', 'wot', 'wuc', 'wuur', 'xaef', 'xam', 'xion', 'xit', 'xiut', 'xoch', 'xoy', 'xuph', 'yach', 'yaugh', 'yauth', 'yeez', 'yeor', 'yeq', 'yius', 'yoz', 'yuaj', 'yuar', 'yuot', 'yuus', 'zaf', 'zaoy', 'zap', 'zat', 'zaz', 'zes', 'zhah', 'zheuc', 'zhik', 'zhish', 'zhooy', 'ziegh', 'zoch', 'zom', 'zoux', 'zueh', 'zuj', 'zun');
+	$name = ['aba', 'abbe', 'achko', 'acno', 'acu', 'ada', 'addo', 'ade', 'afthu', 'agha', 'aghu', 'agi', 'agnu', 'aha', 'aho', 'ahtho', 'ahvi', 'akwa', 'alhe', 'alo', 'amgi', 'amlhe', 'ani', 'ape', 'apho', 'aphvu', 'aqde', 'aqi', 'aqja', 'ari', 'arwa', 'asfa', 'ashe', 'ashgho', 'aszi', 'ata', 'ate', 'athca', 'athhi', 'athpi', 'atpi', 'avdo', 'avha', 'awi', 'awja', 'awyu', 'axphu', 'aya', 'ayo', 'aze', 'azhi', 'azhja', 'azho', 'bab', 'baih', 'baph', 'bej', 'biozh', 'bith', 'buoc', 'bus', 'caeg', 'calh', 'cap', 'cev', 'cew', 'chaaw', 'chak', 'chek', 'chew', 'chiel', 'chiet', 'chit', 'choav', 'choeq', 'choeth', 'choop', 'chuev', 'chuey', 'chug', 'chup', 'cir', 'coad', 'coor', 'couf', 'cuf', 'daax', 'dad', 'dap', 'den', 'deuth', 'dieph', 'diuy', 'doay', 'duox', 'duph', 'ebgu', 'echa', 'echi', 'echzhi', 'ecjo', 'eclho', 'ecwi', 'eda', 'edfo', 'edna', 'egha', 'eghbi', 'eghe', 'egi', 'ehfe', 'ehno', 'ejno', 'ele', 'elhe', 'elhno', 'elho', 'eli', 'emche', 'enje', 'enphu', 'epha', 'eqi', 'eru', 'esgho', 'eshe', 'eshi', 'ethho', 'ethu', 'ethxi', 'eti', 'etzho', 'eve', 'evi', 'evlhe', 'ewla', 'ewme', 'ewu', 'exa', 'exba', 'exsi', 'exu', 'eye', 'eyi', 'eyu', 'ezchi', 'ezhi', 'ezhva', 'ezo', 'ezsa', 'ezu', 'faup', 'fef', 'fep', 'foam', 'foos', 'foth', 'fov', 'fum', 'fun', 'gach', 'gaph', 'geolh', 'ghah', 'ghaih', 'gham', 'ghaut', 'ghegh', 'gheuh', 'ghiom', 'ghiuh', 'ghoish', 'ghoup', 'ghoy', 'ghuer', 'ghuk', 'ghuoc', 'ghuv', 'giey', 'giub', 'giugh', 'goof', 'goox', 'guix', 'guj', 'guth', 'guum', 'hah', 'haph', 'hech', 'heezh', 'hiam', 'hich', 'hiep', 'hizh', 'huij', 'huop', 'ibe', 'ibke', 'ibu', 'ibwi', 'ica', 'icfi', 'ichwo', 'ici', 'icu', 'idlho', 'ifphe', 'ighpho', 'ihku', 'ihze', 'ijfe', 'iji', 'iju', 'ike', 'ikma', 'iko', 'ikxi', 'ile', 'ilhchi', 'ilhe', 'ilhga', 'ilhghe', 'ilho', 'ilhtha', 'imo', 'imsha', 'imthu', 'imu', 'ina', 'innu', 'iphke', 'ipi', 'iplha', 'ipo', 'ipu', 'iqshe', 'iqthe', 'iro', 'isghu', 'ishi', 'isla', 'itca', 'ite', 'itu', 'iva', 'iwi', 'iwje', 'iwso', 'ixa', 'ixi', 'iyge', 'izbe', 'izha', 'izhu', 'japh', 'jiolh', 'jogh', 'joish', 'jot', 'juiy', 'juut', 'kaip', 'kaux', 'kax', 'kech', 'ked', 'keoz', 'kip', 'kiq', 'kith', 'kiux', 'kox', 'kued', 'laeth', 'lauf', 'law', 'leiq', 'lhaop', 'lhauh', 'lhech', 'lheol', 'lhesh', 'lhet', 'lhezh', 'lhis', 'lhoc', 'lhoog', 'loas', 'log', 'lom', 'luus', 'maos', 'moen', 'mol', 'molh', 'muc', 'naf', 'neep', 'nef', 'nialh', 'nic', 'nigh', 'nilh', 'noet', 'obde', 'obyu', 'ochghe', 'oco', 'octi', 'odci', 'odli', 'odo', 'odya', 'ofe', 'ofro', 'ofu', 'oghi', 'oju', 'ojwi', 'ole', 'olha', 'olhce', 'olhtha', 'olji', 'omfi', 'omi', 'onli', 'onqi', 'onta', 'onu', 'opa', 'opgho', 'ophu', 'oppe', 'oqi', 'oqu', 'ore', 'orgi', 'orma', 'oshi', 'oshki', 'oshla', 'ostho', 'othe', 'othfo', 'otho', 'othu', 'otu', 'ovqo', 'ovyu', 'owi', 'owu', 'owvu', 'oya', 'oyi', 'ozhi', 'ozhsu', 'ozhu', 'peac', 'peeb', 'pem', 'phaav', 'phep', 'pher', 'phez', 'phich', 'phiip', 'phij', 'phoish', 'phoix', 'photh', 'phov', 'phoy', 'phuay', 'pic', 'pieth', 'pik', 'pin', 'piq', 'poac', 'poc', 'poen', 'poey', 'pof', 'pouv', 'pul', 'puz', 'qab', 'qauth', 'qeux', 'qiej', 'qiesh', 'qior', 'qix', 'qoad', 'qoc', 'qor', 'raax', 'raesh', 'raez', 'raf', 'raow', 'rich', 'roov', 'ruid', 'ruov', 'ruuch', 'saey', 'sej', 'sek', 'sen', 'shat', 'shauw', 'sheop', 'shiech', 'shiin', 'shil', 'shilh', 'shoig', 'shoiz', 'shuen', 'shuev', 'shuth', 'siaq', 'sigh', 'siit', 'siv', 'sogh', 'sooz', 'suet', 'sush', 'tas', 'tek', 'tex', 'thaith', 'thax', 'theer', 'theeth', 'thef', 'thelh', 'thet', 'thiux', 'thoc', 'thosh', 'thox', 'thueph', 'tiev', 'tiib', 'toib', 'toim', 'tuun', 'uba', 'ubpu', 'uce', 'ucha', 'uchghi', 'uchi', 'uchno', 'uco', 'ude', 'ufe', 'ufghe', 'ufta', 'ufzhi', 'uggo', 'ugha', 'ughqa', 'ughu', 'ugzo', 'uha', 'uhlhu', 'ukdu', 'ulhji', 'ulho', 'ullu', 'ulo', 'ulu', 'umxe', 'untu', 'upfa', 'upho', 'uqte', 'uqtha', 'urgu', 'usha', 'ushko', 'utda', 'uthro', 'uthu', 'utlu', 'utxi', 'uva', 'uvru', 'uwu', 'uxo', 'uyo', 'uzha', 'uzhe', 'uzhi', 'uzhwi', 'vazh', 'vik', 'voat', 'voez', 'vog', 'vot', 'waugh', 'wauph', 'weoq', 'wid', 'wium', 'wot', 'wuc', 'wuur', 'xaef', 'xam', 'xion', 'xit', 'xiut', 'xoch', 'xoy', 'xuph', 'yach', 'yaugh', 'yauth', 'yeez', 'yeor', 'yeq', 'yius', 'yoz', 'yuaj', 'yuar', 'yuot', 'yuus', 'zaf', 'zaoy', 'zap', 'zat', 'zaz', 'zes', 'zhah', 'zheuc', 'zhik', 'zhish', 'zhooy', 'ziegh', 'zoch', 'zom', 'zoux', 'zueh', 'zuj', 'zun'];
 
 	$aliens = count($name)-1;
 
-	return $name[mt_rand(0,$aliens)];
+	return $name[mt_rand(0, max((int)(0), (int)($aliens)))];
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 function speciesName()
 {
-	$name = array('Abe', 'Otha', 'Oda', 'Udae', 'Aenae', 'Oepa', 'Awa', 'Ixo', 'Ofo', 'Aethae', 'Oebae', 'Oshae', 
+	$name = ['Abe', 'Otha', 'Oda', 'Udae', 'Aenae', 'Oepa', 'Awa', 'Ixo', 'Ofo', 'Aethae', 'Oebae', 'Oshae', 
 		'Acae', 'Uhoe', 'Ava', 'Ozo', 'Eshu', 'Aetha', 'One', 'Iko', 'Oewae', 'Oto', 'Ewu', 'Akoe', 
 		'Ade', 'Oho', 'Oevoe', 'Ovoe', 'Ovu', 'Oeda', 'Abo', 'Oha', 'Upu', 'Oeze', 'Aethi', 'Olu', 
 		'Aeco', 'Oxe', 'Oyo', 'Ithi', 'Iha', 'Oecae', 'Umoe', 'Oeshi', 'Uto', 'Atho', 'Oeva', 'Egae', 
@@ -2161,16 +2161,16 @@ function speciesName()
 		'Zih', 'Naq', 'Raesp', 'Hux', 'Loesh', 'Vaeth', 'Vaer', 'Xaez', 'Zoth', 'Teg', 'Poq', 'Vos', 
 		'Zoex', 'Jesp', 'Zib', 'Yoq', 'Maew', 'Laeq', 'Thix', 'Vos', 'Yish', 'Sos', 'Kaek', 'Caq', 
 		'Zoy', 'Wesh', 'Vay', 'Gaeh', 'Wih', 'Wod', 'Hej', 'Miz', 'Zih', 'Gosh', 'Taek', 'Pup', 
-		'Zur', 'Zoex', 'Yon', 'Thosp', 'Cesh', 'Sper', 'Low', 'Zol', 'Soeth', 'Shum', 'Shob', 'Niw');
+		'Zur', 'Zoex', 'Yon', 'Thosp', 'Cesh', 'Sper', 'Low', 'Zol', 'Soeth', 'Shum', 'Shob', 'Niw'];
 $names = count($name)-1;
-return $name[mt_rand(0,$names)];
+return $name[mt_rand(0, max((int)(0), (int)($names)))];
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 function mutantName()
 {
-	$name = array('Ache', 'Achle', 'Acho', 'Achxe', 'Adhu', 'Adi', 'Adi', 'Afla', 'Afza', 'Agho', 
+	$name = ['Ache', 'Achle', 'Acho', 'Achxe', 'Adhu', 'Adi', 'Adi', 'Afla', 'Afza', 'Agho', 
 		'Agi', 'Agji', 'Agne', 'Agye', 'Ahda', 'Akme', 'Aku', 'Albi', 'Alhe', 'Alhe', 'Alwe', 'Amda', 
 		'Amgu', 'Ami', 'Amlhe', 'Amlhe', 'Amu', 'Ane', 'Anu', 'Apu', 'Aqe', 'Arghe', 'Ari', 'Ashfe', 
 		'Ashi', 'Ashte', 'Atgo', 'Atha', 'Ave', 'Avo', 'Avu', 'Awi', 'Awi', 'Awu', 'Aya', 'Ayi', 'Ayu', 
@@ -2219,17 +2219,17 @@ function mutantName()
 		'Wat', 'Wauq', 'Weel', 'Weex', 'Weoj', 'Wiph', 'Woim', 'Wuup', 'Xaef', 'Xeh', 'Xeth', 'Xeul', 
 		'Xey', 'Xon', 'Xoz', 'Xuav', 'Xuigh', 'Yagh', 'Yead', 'Yilh', 'Yiuk', 'Yoec', 'Yuh', 'Yux', 
 		'Zad', 'Zaigh', 'Zauf', 'Zeaw', 'Zeev', 'Zham', 'Zhaot', 'Zhauj', 'Zhaw', 'Zheed', 'Zhef', 
-		'Zheix', 'Zheoc', 'Zhin', 'Zhualh', 'Ziep', 'Zioch', 'Zoolh', 'Zoup', 'Zud', 'Zuok');
+		'Zheix', 'Zheoc', 'Zhin', 'Zhualh', 'Ziep', 'Zioch', 'Zoolh', 'Zoup', 'Zud', 'Zuok'];
 	$mutant = count($name)-1;
 
-	return $name[mt_rand(0,$mutant)];
+	return $name[mt_rand(0, max((int)(0), (int)($mutant)))];
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 function villageName()
 {
-	$name = array('amble', 'flying', 'nomad', 'vow', 'back', 'glen', 'ridge', 'cape', 'infested', 'seekers', 'devils', 'mount', 'tower', 
+	$name = ['amble', 'flying', 'nomad', 'vow', 'back', 'glen', 'ridge', 'cape', 'infested', 'seekers', 'devils', 'mount', 'tower', 
 		'auld', 'fire', 'north', 'war', 'bid', 'god', 'right', 'cold', 'infant', 'slave', 'dour', 'marble', 'trusted', 
 		'acre', 'fond', 'night', 'work', 'burnt', 'great', 'rain', 'close', 'javelin', 'slaves', 'den', 'maple', 'tunnel', 
 		'abbots', 'free', 'near', 'white', 'bond', 'guild', 'raining', 'cave', 'jade', 'silent', 'dove', 'mate', 'troubled', 
@@ -2265,11 +2265,11 @@ function villageName()
 		'brink', 'granite', 'quick', 'wayfaring', 'charl', 'iron', 'sylvan', 'duck', 'late', 'saffron', 'boon', 'gruesome', 'rising', 
 		'bloom', 'gas', 'quiet', 'wayside', 'can', 'icy', 'spider', 'dripping', 'luck', 'saint', 'baron', 'guardian', 'rogue', 
 		'buck', 'good', 'quarry', 'wayward', 'cam', 'ice', 'sleeping', 'damp', 'last', 'saints', 'barren', 'garth', 'rogues', 
-		'bliss', 'glory', 'queen', 'wizard', 'creak', 'ivy', 'spotted', 'dray', 'lewd', 'sailor', 'wedge', 'zealous', 'yard');
+		'bliss', 'glory', 'queen', 'wizard', 'creak', 'ivy', 'spotted', 'dray', 'lewd', 'sailor', 'wedge', 'zealous', 'yard'];
 	$names = count($name)-1;
-	$first_part = ucfirst($name[mt_rand(0,$names)]);
+	$first_part = ucfirst($name[mt_rand(0, max((int)(0), (int)($names)))]);
 
-	$name = array('abbey', 'berg', 'cent', 'crew', 'ditch', 'field', 'graves', 'hound', 'just', 'larva', 'mat', 'night', 'pan', 'quack', 'ring', 'shore', 'sun', 'vagabond', 'ville', 'wistle', 
+	$name = ['abbey', 'berg', 'cent', 'crew', 'ditch', 'field', 'graves', 'hound', 'just', 'larva', 'mat', 'night', 'pan', 'quack', 'ring', 'shore', 'sun', 'vagabond', 'ville', 'wistle', 
 		'able', 'berry', 'center', 'crook', 'dock', 'fields', 'greave', 'hour', 'kame', 'las', 'mate', 'nil', 'parade', 'quad', 'rite', 'shroud', 'sur', 'vale', 'vin', 'witch', 
 		'abyss', 'birth', 'chain', 'crossing', 'dog', 'fight', 'green', 'house', 'kan', 'latch', 'math', 'nob', 'park', 'quail', 'road', 'side', 'swamp', 'valley', 'vineyard', 'wolf', 
 		'ace', 'bill', 'cham', 'crown', 'dome', 'fin', 'grey', 'hovel', 'kangaroo', 'late', 'mead', 'noble', 'pass', 'quake', 'roar', 'siege', 'swing', 'valon', 'violet', 'woman', 
@@ -2308,9 +2308,9 @@ function villageName()
 		'bear', 'cat', 'crawl', 'ding', 'fall', 'grade', 'holt', 'juggler', 'language', 'mark', 'news', 'paddle', 'praise', 'right', 'shine', 'stream', 'up', 'vigor', 'win', 'zole', 
 		'beck', 'cate', 'creature', 'dingle', 'falls', 'grail', 'hook', 'jump', 'lantern', 'market', 'nibble', 'pair', 'puddle', 'rill', 'ship', 'strike', 'urn', 'villa', 'wing', 'zone', 
 		'bend', 'cave', 'creek', 'dip', 'fast', 'gram', 'horn', 'junct', 'lar', 'mart', 'niche', 'pall', 'pura', 'rills', 'shire', 'strip', 'user', 'village', 'wish', 'zote', 
-		'bere', 'cene', 'crest', 'disease', 'fellow', 'grave', 'hot', 'jure', 'lark', 'mass', 'nickle', 'palm', 'python', 'rine', 'shoe', 'strut', 'usher', 'villain', 'wisper');
+		'bere', 'cene', 'crest', 'disease', 'fellow', 'grave', 'hot', 'jure', 'lark', 'mass', 'nickle', 'palm', 'python', 'rine', 'shoe', 'strut', 'usher', 'villain', 'wisper'];
 	$names = count($name)-1;
-	$last_part = $name[mt_rand(0,$names)];
+	$last_part = $name[mt_rand(0, max((int)(0), (int)($names)))];
 
 	if (mt_rand(1,2) == 1)
 	{
@@ -2347,7 +2347,7 @@ function villageName()
 
 function tavernName()
 {
-	$bar_adjvective = array('Aulden', 'West', 'Sleeping', 'Brown', 'Eight', 'Golden', 'Iron', 'Little', 'North', 'Royal', 
+	$bar_adjvective = ['Aulden', 'West', 'Sleeping', 'Brown', 'Eight', 'Golden', 'Iron', 'Little', 'North', 'Royal', 
 		'Ashen', 'White', 'Slippery', 'Burly', 'Fell', 'Brand', 'Ivory', 'Lone', 'Odd', 'Ruddy', 
 		'Bald', 'Wild', 'Small', 'Buxom', 'Fiery', 'Green', 'Ivy', 'Long', 'Old', 'Running', 
 		'Bandy', 'Windy', 'Smoky', 'Copper', 'Five', 'Grey', 'Jade', 'Lucky', 'Olden', 'Savage', 
@@ -2356,12 +2356,12 @@ function tavernName()
 		'Blue', 'Worthy', 'Tiny', 'Dark', 'Four', 'Happy', 'Joyful', 'Muddy', 'Raucous', 'Seven', 
 		'Bonny', 'Ye', 'True', 'Dead', 'Frosty', 'Hearty', 'Lame', 'Murky', 'Red', 'Silver', 
 		'Brass', 'Ye Olde', 'Two', 'Dirty', 'Gay', 'Homely', 'Large', 'Nine', 'Rising', 'Singing', 
-		'Bronze', 'Yodeling', 'Twin', 'Dour', 'Giddy', 'Howling', 'Leaping', 'Noble', 'Roaring', 'Six');
+		'Bronze', 'Yodeling', 'Twin', 'Dour', 'Giddy', 'Howling', 'Leaping', 'Noble', 'Roaring', 'Six'];
 	$bar_adjvectives = count($bar_adjvective)-1;
-	$inn_adjvective = $bar_adjvective[mt_rand(0,$bar_adjvectives)];
-	$inn_adjvective2 = $bar_adjvective[mt_rand(0,$bar_adjvectives)];
+	$inn_adjvective = $bar_adjvective[mt_rand(0, max((int)(0), (int)($bar_adjvectives)))];
+	$inn_adjvective2 = $bar_adjvective[mt_rand(0, max((int)(0), (int)($bar_adjvectives)))];
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	$bar_person = array('Vicar', 'Archer', 'Beggar', 'Demon', 'Friend', 'Highwayman', 'Maiden', 'Ore', 'Sailor', 'Sheperd', 
+	$bar_person = ['Vicar', 'Archer', 'Beggar', 'Demon', 'Friend', 'Highwayman', 'Maiden', 'Ore', 'Sailor', 'Sheperd', 
 		'Wanderer', 'Angel', 'Buffoon', 'Devil', 'Ghost', 'Hobbit', 'Man', 'Paladin', 'Sage', 'Titan', 
 		'Werewolf', 'Baker', 'Blacksmith', 'Duke', 'Giant', 'Hangman', 'Mason', 'Pikeman', 'Sergeant', 'Tailor', 
 		'Windwalker', 'Barbarian', 'Copper', 'Dwarf', 'Golem', 'Imp', 'Merman', 'Pirate', 'Squire', 'Thief', 
@@ -2370,67 +2370,67 @@ function tavernName()
 		'Warrior', 'Berserker', 'Champion', 'Fishwife', 'Heroine', 'King', 'Nomad', 'Prince', 'Seaman', 'Traveler', 
 		'Yeti', 'Brewer', 'Churl', 'Flogger', 'Huntsman', 'Knave', 'Nobleman', 'Queen', 'Saint', 'Vampire', 
 		'Yachtsman', 'Brigand', 'Chief', 'Freemason', 'Hunter', 'Knight', 'Nymph', 'Rogue', 'Sheriff', 'Veteran', 
-		'Zombie', 'Baron', 'Dancer', 'Friar', 'Hag', 'Leprechaun', 'Ogre', 'Ruler', 'Shipwright', 'Vixen');
+		'Zombie', 'Baron', 'Dancer', 'Friar', 'Hag', 'Leprechaun', 'Ogre', 'Ruler', 'Shipwright', 'Vixen'];
 	$bar_persons = count($bar_person)-1;
-	$inn_person = $bar_person[mt_rand(0,$bar_persons)];
-	$inn_person2 = $bar_person[mt_rand(0,$bar_persons)];
+	$inn_person = $bar_person[mt_rand(0, max((int)(0), (int)($bar_persons)))];
+	$inn_person2 = $bar_person[mt_rand(0, max((int)(0), (int)($bar_persons)))];
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	while ($i != 1) :
 		$animal_roll = mt_rand(1,6);
 		if ($animal_roll == 1)
 		{
-			$bar_aircreature = array('Swallow', 'Bee', 'Partridge', 'Hawk', 'Duck', 
+			$bar_aircreature = ['Swallow', 'Bee', 'Partridge', 'Hawk', 'Duck', 
 				'Thursh', 'Buzzard', 'Pelican', 'Heron', 'Eagle', 
 				'Turkey', 'Chicken', 'Quail', 'Kestrel', 'Falcon', 
-				'Vulture', 'Dragon', 'Sparrow', 'Parrot', 'Gull');
+				'Vulture', 'Dragon', 'Sparrow', 'Parrot', 'Gull'];
 			$bar_aircreatures = count($bar_aircreature)-1;
-			$inn_aircreature = $bar_aircreature[mt_rand(0,$bar_aircreatures)];
+			$inn_aircreature = $bar_aircreature[mt_rand(0, max((int)(0), (int)($bar_aircreatures)))];
 
-			$bar_airmonster = array('Beak', 'Egg', 'Flesh', 'Mouth', 'Talon', 
+			$bar_airmonster = ['Beak', 'Egg', 'Flesh', 'Mouth', 'Talon', 
 				'Bone', 'Eye', 'Flight', 'Nest', 'Tongue', 
 				'Call', 'Feather', 'Landing', 'Perch', 'Voice', 
-				'Claw', 'Feet', 'Leg', 'Roost', 'Wing');
+				'Claw', 'Feet', 'Leg', 'Roost', 'Wing'];
 			$bar_airmonsters = count($bar_airmonster)-1;
-			$inn_airmonster = $bar_airmonster[mt_rand(0,$bar_airmonsters)];
+			$inn_airmonster = $bar_airmonster[mt_rand(0, max((int)(0), (int)($bar_airmonsters)))];
 			$inn_animal = $inn_aircreature . " " . $inn_airmonster;
 		}
 		else if ($animal_roll == 2)
 		{
-			$bar_watercreature = array('Squid', 'Eel', 'Narwhal', 'Seahorse', 'Barracuda', 
+			$bar_watercreature = ['Squid', 'Eel', 'Narwhal', 'Seahorse', 'Barracuda', 
 				'Clam', 'Fish', 'Oyster', 'Shark', 'Trout', 
 				'Coral', 'Flounder', 'Sea Serpent', 'Shrimp', 'Turtle', 
-				'Dolphin', 'Marlin', 'Sea Monster', 'Siren', 'Whale');
+				'Dolphin', 'Marlin', 'Sea Monster', 'Siren', 'Whale'];
 			$bar_watercreatures = count($bar_watercreature)-1;
-			$inn_watercreature = $bar_watercreature[mt_rand(0,$bar_watercreatures)];
+			$inn_watercreature = $bar_watercreature[mt_rand(0, max((int)(0), (int)($bar_watercreatures)))];
 
-			$bar_watermonster = array('Body', 'Egg', 'Head', 'Reef', 'Sea', 
+			$bar_watermonster = ['Body', 'Egg', 'Head', 'Reef', 'Sea', 
 				'Bone', 'Eye', 'Lair', 'Rib', 'Shell', 
 				'Cave', 'Fin', 'Mouth', 'Scale', 'Tail', 
-				'Cove', 'Gill', 'Ocean', 'Wave', 'Bite');
+				'Cove', 'Gill', 'Ocean', 'Wave', 'Bite'];
 			$bar_watermonsters = count($bar_watermonster)-1;
-			$inn_watermonster = $bar_watermonster[mt_rand(0,$bar_watermonsters)];
+			$inn_watermonster = $bar_watermonster[mt_rand(0, max((int)(0), (int)($bar_watermonsters)))];
 			$inn_animal = $inn_watercreature . " " . $inn_watermonster;
 		}
 		else if ($animal_roll == 3)
 		{
-			$bar_landcreature = array('Bear', 'Deer', 'Hart', 'Mouse', 'Sheep', 
+			$bar_landcreature = ['Bear', 'Deer', 'Hart', 'Mouse', 'Sheep', 
 				'Boar', 'Dog', 'Horse', 'Panther', 'Steer', 
 				'Cat', 'Elk', 'Lion', 'Ram', 'Tiger', 
-				'Cow', 'Goat', 'Moose', 'Rat', 'Unicorn');
+				'Cow', 'Goat', 'Moose', 'Rat', 'Unicorn'];
 			$bar_landcreatures = count($bar_landcreature)-1;
-			$inn_landcreature = $bar_landcreature[mt_rand(0,$bar_landcreatures)];
+			$inn_landcreature = $bar_landcreature[mt_rand(0, max((int)(0), (int)($bar_landcreatures)))];
 
-			$bar_landmonster = array('Bone', 'Feed', 'Hair', 'Jaw', 'Mouth', 'Run', 'Voice', 
+			$bar_landmonster = ['Bone', 'Feed', 'Hair', 'Jaw', 'Mouth', 'Run', 'Voice', 
 				'Ear', 'Feet', 'Head', 'Leg', 'Neck', 'Tail', 
 				'Blood', 'Fur', 'Spit', 'Meat', 'Heart', 'Bite', 
-				'Eye', 'Track', 'Trap', 'Mane', 'Rib', 'Tongue');
+				'Eye', 'Track', 'Trap', 'Mane', 'Rib', 'Tongue'];
 			$bar_landmonsters = count($bar_landmonster)-1;
-			$inn_landmonster = $bar_landmonster[mt_rand(0,$bar_landmonsters)];
+			$inn_landmonster = $bar_landmonster[mt_rand(0, max((int)(0), (int)($bar_landmonsters)))];
 			$inn_animal = $inn_landcreature . " " . $inn_landmonster;
 		}
 		else
 		{
-			$bar_animal = array('Antelope', 'Boar', 'Dinosaur', 'Elk', 'Gander', 'Hog', 'Lobster', 'Owl', 'Roc', 'Swan', 
+			$bar_animal = ['Antelope', 'Boar', 'Dinosaur', 'Elk', 'Gander', 'Hog', 'Lobster', 'Owl', 'Roc', 'Swan', 
 				'Baboon', 'Camel', 'Doe', 'Elephant', 'Goat', 'Horse', 'Lynx', 'Peccary', 'Roe', 'Tiger', 
 				'Badger', 'Cat', 'Dog', 'Falcon', 'Goose', 'Hound', 'Mare', 'Troll', 'Scorpion', 'Toad', 
 				'Ogre', 'Chimera', 'Dolphin', 'Fawn', 'Greyhound', 'Hyena', 'Mastadon', 'Pheasant', 'Seagull', 'Trout', 
@@ -2439,9 +2439,9 @@ function tavernName()
 				'Beaver', 'Cougar', 'Duck', 'Foal', 'Hart', 'Jaguar', 'Nag', 'Rabbit', 'Sphinx', 'Warthog', 
 				'Beetle', 'Crocodile', 'Dove', 'Fowl', 'Harpy', 'Lamb', 'Naga', 'Racehorse', 'Squid', 'Whale', 
 				'Boar', 'Crab', 'Eagle', 'Frog', 'Hawk', 'Leech', 'Squid', 'Ram', 'Stag', 'Wolf', 
-				'Bullfrog', 'Crow', 'Eel', 'Gazelle', 'Hippogriff', 'Lizard', 'Otter', 'Rat', 'Swallow', 'Wolverine');
+				'Bullfrog', 'Crow', 'Eel', 'Gazelle', 'Hippogriff', 'Lizard', 'Otter', 'Rat', 'Swallow', 'Wolverine'];
 			$bar_animals = count($bar_animal)-1;
-			$inn_animal = $bar_animal[mt_rand(0,$bar_animals)];
+			$inn_animal = $bar_animal[mt_rand(0, max((int)(0), (int)($bar_animals)))];
 		}
 
 		if ($inn_animal1 == ""){$inn_animal1 = $inn_animal;}
@@ -2449,7 +2449,7 @@ function tavernName()
 
 	endwhile;
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	$bar_items = array('Ale', 'Bottle', 'City', 'Fiddle', 'Goblet', 'Jersey', 'Net', 'Rod', 'Sun', 'Village', 
+	$bar_items = ['Ale', 'Bottle', 'City', 'Fiddle', 'Goblet', 'Jersey', 'Net', 'Rod', 'Sun', 'Village', 
 		'Anchor', 'Bow', 'Coach', 'Flagon', 'Grape', 'Jug', 'Oak', 'Rose', 'Sword', 'Vine', 
 		'Arrow', 'Brew', 'Copperpiece', 'Flail', 'Grove', 'Key', 'Olivebranch', 'Sceptre', 'Tankard', 'Wagon', 
 		'Bacon', 'Bridge', 'Crown', 'Flask', 'Goldpiece', 'Lantern', 'Pillar', 'Saddle', 'Thistle', 'Wand', 
@@ -2458,15 +2458,15 @@ function tavernName()
 		'Barrel', 'Bush', 'Dagger', 'Foam', 'Horn', 'Mead', 'Post', 'Silverpiece', 'Tumbler', 'Wheatsheaf', 
 		'Battle Axe', 'Canteen', 'Dock', 'Stone', 'Horseshoe', 'Moat', 'Pot', 'Spear', 'Turf', 'Willow', 
 		'Beehive', 'Cart', 'Elm', 'Globe', 'Ivy', 'Moon', 'Quiver', 'Staff', 'Vault', 'Wheel', 
-		'Boot', 'Cask', 'Ferry', 'Glove', 'Jerkin', 'Mug', 'Rock', 'Star', 'Vessel', 'Yew Tree');
+		'Boot', 'Cask', 'Ferry', 'Glove', 'Jerkin', 'Mug', 'Rock', 'Star', 'Vessel', 'Yew Tree'];
 	$bar_itemss = count($bar_items)-1;
-	$inn_items = $bar_items[mt_rand(0,$bar_itemss)];
-	$inn_items2 = $bar_items[mt_rand(0,$bar_itemss)];
+	$inn_items = $bar_items[mt_rand(0, max((int)(0), (int)($bar_itemss)))];
+	$inn_items2 = $bar_items[mt_rand(0, max((int)(0), (int)($bar_itemss)))];
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	$bar_ending = array('Alehouse', 'Cellar', 'Club', 'Guesthouse', 'House', 
-		'Inn', 'Lodge', 'Meadhall', 'Resthouse', 'Tavern');
+	$bar_ending = ['Alehouse', 'Cellar', 'Club', 'Guesthouse', 'House', 
+		'Inn', 'Lodge', 'Meadhall', 'Resthouse', 'Tavern'];
 	$bar_endings = count($bar_ending)-1;
-	$inn_ending = $bar_ending[mt_rand(0,$bar_endings)];
+	$inn_ending = $bar_ending[mt_rand(0, max((int)(0), (int)($bar_endings)))];
 
 	if (mt_rand(1,12) == 1)
 	{
@@ -2532,7 +2532,7 @@ function tavernName()
 
 function todayLastName()
 {
-$name = array(
+$name = [
 'Smith', 
 'Johnson', 
 'Williams', 
@@ -21372,14 +21372,14 @@ $name = array(
 'Allbright', 
 'Aikin', 
 'Acres'
-);
+];
 $names = count($name)-1;
-return $name[mt_rand(0,$names)];
+return $name[mt_rand(0, max((int)(0), (int)($names)))];
 }
 
 function todayManName()
 {
-$name = array(
+$name = [
 'Austin', 
 'Stuart', 
 'Fredrick', 
@@ -22599,13 +22599,13 @@ $name = array(
 'Enrique', 
 'Freddie', 
 'Wade'
-);
+];
 $names = count($name)-1;
-return $name[mt_rand(0,$names)];
+return $name[mt_rand(0, max((int)(0), (int)($names)))];
 }
 function todayGirlName()
 {
-$name = array(
+$name = [
 'Aaron', 
 'Abbey', 
 'Abbie', 
@@ -26881,8 +26881,8 @@ $name = array(
 'Zula', 
 'Zulema', 
 'Zulma'
-);
+];
 $names = count($name)-1;
-return $name[mt_rand(0,$names)];
+return $name[mt_rand(0, max((int)(0), (int)($names)))];
 }
 ?>

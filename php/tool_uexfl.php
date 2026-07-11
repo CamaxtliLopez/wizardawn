@@ -342,7 +342,7 @@ else
 	}
 }
 
-$x_area = stripslashes($_POST['x_area']);
+$x_area = stripslashes((string) $_POST['x_area']);
    if ($x_area == ""){$x_area = $x_mappack;}
 
 $x_enemy_1 = $_POST['x_enemy_1'];
@@ -355,8 +355,8 @@ $x_main_chance_2 = $_POST['x_main_chance_2'];
 $x_rigged_chance = $_POST['x_rigged_chance'];
 $x_adjust = $_POST['x_adjust'];
 $x_outside = $_POST['x_outside'];
-$x_level = $_POST['x_level']+0;
-$x_characters = $_POST['x_characters']+0;
+$x_level = num($_POST['x_level']);
+$x_characters = num($_POST['x_characters']);
 $x_cut = $_POST['x_cut'];
 $x_low_tech = $_POST['x_low_tech'];
 $x_mixup = $_POST['x_mixup'];
@@ -377,22 +377,22 @@ $x_might2 = 8;
 $x_c_c = $_POST['x_c_c']; // ENEMY
 $x_c_c_min = $_POST['x_c_c_min']; // MIN
 $x_c_c_max = $_POST['x_c_c_max']; // MAX
-$x_c_c_low = 0 + $_POST['x_c_c_low']; // LOW
+$x_c_c_low = num($_POST['x_c_c_low'] ?? 0); // LOW
 	if ($x_c_c_min > $x_c_c_max){$x_c_c_min = $x_c_c_max;}
 $x_t_c = $_POST['x_t_c']; // TRAP
 $x_t_c_min = $_POST['x_t_c_min']; // MIN
 $x_t_c_max = $_POST['x_t_c_max']; // MAX
-$x_t_c_low = 0 + $_POST['x_t_c_low']; // LOW
+$x_t_c_low = num($_POST['x_t_c_low'] ?? 0); // LOW
 	if ($x_t_c_min > $x_t_c_max){$x_t_c_min = $x_t_c_max;}
 $x_u_c = $_POST['x_u_c']; // DECO
 $x_u_c_min = $_POST['x_u_c_min']; // MIN
 $x_u_c_max = $_POST['x_u_c_max']; // MAX
-$x_u_c_low = 0 + $_POST['x_u_c_low']; // LOW
+$x_u_c_low = num($_POST['x_u_c_low'] ?? 0); // LOW
 	if ($x_u_c_min > $x_u_c_max){$x_u_c_min = $x_u_c_max;}
 $x_l_c = $_POST['x_l_c']; // LOOT
 $x_l_c_min = $_POST['x_l_c_min']; // MIN
 $x_l_c_max = $_POST['x_l_c_max']; // MAX
-$x_l_c_low = 0 + $_POST['x_l_c_low']; // LOW
+$x_l_c_low = num($_POST['x_l_c_low'] ?? 0); // LOW
 	if ($x_l_c_min > $x_l_c_max){$x_l_c_min = $x_l_c_max;}
 
 $map_wide = $_POST['map_wide'];
@@ -570,10 +570,10 @@ while ($key > 0) :
 			{
 				include("functions/stat_blocks.php");
 				echo $monster_info . "<br>";
-				if ($ary[creator] == "MF"){ $x_might1=$ary[m_hp_min]; $x_might2=$ary[m_hp_max]; echo PAcalculateLife($x_level,$x_characters,'Mutant Future',$ary[hd],$ary[difficulty],$x_might1,$x_might2,$v_scare,$how_many_monsters) . "<br>"; }
-				else { echo calculateLife($x_level,$x_characters,$ary[m_app_min],$ary[m_app_max],$ary[m_hp_min],$ary[m_hp_max],$ary[m_hp_mod],$x_game,0,0,0,0,0) . "<br>"; }
-				$cmd_villain = $cmd_villain . " AND id!=" . $ary[id];
-				if ($ary[difficulty] > $level_of_monster){$level_of_monster = $ary[difficulty];}
+				if ($ary['creator'] == "MF"){ $x_might1=$ary['m_hp_min']; $x_might2=$ary['m_hp_max']; echo PAcalculateLife($x_level,$x_characters,'Mutant Future',$ary['hd'],$ary['difficulty'],$x_might1,$x_might2,$v_scare,$how_many_monsters) . "<br>"; }
+				else { echo calculateLife($x_level,$x_characters,$ary['m_app_min'],$ary['m_app_max'],$ary['m_hp_min'],$ary['m_hp_max'],$ary['m_hp_mod'],$x_game,0,0,0,0,0) . "<br>"; }
+				$cmd_villain = $cmd_villain . " AND id!=" . $ary['id'];
+				if ($ary['difficulty'] > $level_of_monster){$level_of_monster = $ary['difficulty'];}
 			}
 
 	    endwhile;
@@ -592,7 +592,7 @@ while ($key > 0) :
 		echo "<hr align='center' size='1'>";
 
 	    while ($max_of_traps > 0) :
-		$this_trap = PAtrapMaker($x_level,room,$x_game,$x_mutants,$x_might1,$x_might2,$v_tech,$v_scare);
+		$this_trap = PAtrapMaker($x_level,'room',$x_game,$x_mutants,$x_might1,$x_might2,$v_tech,$v_scare);
 		if (mt_rand(1,100) <= $roll_for_trap){ echo $this_trap[0] . "<br>"; }
 		$min_of_traps = $min_of_traps - 1;
 			if ($min_of_traps > 0){$roll_for_trap = 100;}
@@ -625,7 +625,7 @@ while ($key > 0) :
 
 	if (($x_rigged_chance >= mt_rand(1,100)) && ($tbox != "lying about"))
 	{
-		$picked_trap = PAtrapMaker($treasure_level,box,$x_game,$x_mutants,$x_might1,$x_might2,$v_tech,$v_scare);
+		$picked_trap = PAtrapMaker($treasure_level,'box',$x_game,$x_mutants,$x_might1,$x_might2,$v_tech,$v_scare);
 		$treasure_chest = substr($treasure_chest, 0, -5) . ".<br><b>TRAPPED:</b>&nbsp;" . $picked_trap[0] . "<br>";
 	}
 		if ($level_of_monster > 0){$loot_adjust = $treasure_level * $x_adjust;} else {$loot_adjust = 0;}
@@ -658,7 +658,7 @@ while ($key > 0) :
 
 						if (($chesty[3] > 0) && ($x_rigged_chance >= mt_rand(1,100)))
 						{
-							$picked_trap = PAtrapMaker($treasure_level,box,$x_game,$x_mutants,$x_might1,$x_might2,$v_tech,$v_scare);
+							$picked_trap = PAtrapMaker($treasure_level,'box',$x_game,$x_mutants,$x_might1,$x_might2,$v_tech,$v_scare);
 							$trap_zap = "-&nbsp;TRAPPED:&nbsp;" . $picked_trap[0];
 						} else {$trap_zap = "";}
 						$chest = "&nbsp;(<i> Located " . $chesty[1] . " the " . $my_box[0] . "&nbsp;" . $trap_zap . "</i>)";
@@ -669,7 +669,7 @@ while ($key > 0) :
 				}
 				if (mt_rand(1,100) <= $roll_for_loot){
 					if ($bags_of_coins > 0){$ghrz = 91;} else {$ghrz = 1;}
-					$my_reward = mt_rand($ghrz,100);
+					$my_reward = mt_rand($ghrz, max((int)($ghrz), (int)(100)));
 					if ($my_reward < 91){$my_prize = PAcurrencyBuilder($treasure_level,$loot_size,0,$x_cut,1,$x_money,$x_mappack);	$bags_of_coins = 1;}
 					else if ($my_reward < 96)
 					{
@@ -681,7 +681,7 @@ while ($key > 0) :
 						$my_prize = makeMFLLItem($treasure_level,$loot_size,$x_money,1);
 						$my_list_of_wonders = $my_prize . "^" . $room . "___" . $my_list_of_wonders;
 					}
-					else {$my_prize = ucfirst(PAmakeNormalItem(1,1,$x_money,$v_tech,$x_game));}
+					else {$my_prize = ucfirst((string) PAmakeNormalItem(1,1,$x_money,$v_tech,$x_game));}
 						echo $my_prize . " " . $chest . "<br>";
 				}
 				$hide_it = $hide_it + 1;
@@ -692,7 +692,7 @@ while ($key > 0) :
 				{
 					if ($sayit != 1){if ($hide_it > 0){echo "<hr align='center' size='1'>";} echo $treasure_chest; $sayit = 1;}	
 					if ($sack_of_coins > 0){$ghrz = 91;} else {$ghrz = 1;}
-					$my_reward = mt_rand($ghrz,100);
+					$my_reward = mt_rand($ghrz, max((int)($ghrz), (int)(100)));
 					if ($my_reward < 91){$my_prize = PAcurrencyBuilder($treasure_level,$loot_size,1,$x_cut,1,$x_money,$x_mappack);	$sack_of_coins = 1;}
 					else if ($my_reward < 96)
 					{
@@ -704,7 +704,7 @@ while ($key > 0) :
 						$my_prize = makeMFLLItem($treasure_level,$loot_size,$x_money,1);
 						$my_list_of_wonders = $my_prize . "^" . $room . "___" . $my_list_of_wonders;
 					}
-					else {$my_prize = ucfirst(PAmakeNormalItem(1,1,$x_money,$v_tech,$x_game));}
+					else {$my_prize = ucfirst((string) PAmakeNormalItem(1,1,$x_money,$v_tech,$x_game));}
 						echo $my_prize . "<br>";
 				}
 			}
@@ -736,7 +736,7 @@ endwhile;
 
 	if (($x_enemy_1 > 0) || ($x_enemy_2 > 0))
 	{
-		$mqry = "INSERT INTO $xtable SELECT * FROM $table WHERE m_no_dungeon=0 AND (id=($x_enemy_1+0) OR id=($x_enemy_2+0))";
+		$mqry = "INSERT INTO $xtable SELECT * FROM $table WHERE m_no_dungeon=0 AND (id=(num($x_enemy_1)) OR id=(num($x_enemy_2)))";
 		mysqli_query( $connection, $mqry ); /*mqry2*/
 	}
 

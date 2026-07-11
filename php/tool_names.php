@@ -156,14 +156,14 @@ $n_delf_f = $_POST['n_delf_f'];
 	if ($n_delf_f > 0)
 	{
 		$listing = $listing . "<p><u><font size='4'>Dark Elf Female Names</font></u>"; while ($i < $amount):
-			$name_pick = DarkElfName(female);
+			$name_pick = DarkElfName('female');
 		$listing = $listing . "<br>&nbsp;-&nbsp;" . $name_pick; $i=$i+1; endwhile; $i=0; $listing = $listing . "</p>";
 	}
 $n_delf_m = $_POST['n_delf_m'];
 	if ($n_delf_m > 0)
 	{
 		$listing = $listing . "<p><u><font size='4'>Dark Elf Male Names</font></u>"; while ($i < $amount):
-			$name_pick = DarkElfName(male);
+			$name_pick = DarkElfName('male');
 		$listing = $listing . "<br>&nbsp;-&nbsp;" . $name_pick; $i=$i+1; endwhile; $i=0; $listing = $listing . "</p>";
 	}
 $n_fairy = $_POST['n_fairy'];
@@ -183,7 +183,7 @@ $n_catf = $_POST['n_catf'];
 		$listing = $listing . "<p><u><font size='4'>Feline Humanoid - Female Names</font></u>"; while ($i < $amount):
 			switch (mt_rand(0,1))
 			{
-				case 0:	$name_pick = catName(female);	break;
+				case 0:	$name_pick = catName('female');	break;
 				case 1:	$name_pick = catName('');			break;
 			}
 		$listing = $listing . "<br>&nbsp;-&nbsp;" . $name_pick; $i=$i+1; endwhile; $i=0; $listing = $listing . "</p>";
@@ -194,7 +194,7 @@ $n_catm = $_POST['n_catm'];
 		$listing = $listing . "<p><u><font size='4'>Feline Humanoid - Male Names</font></u>"; while ($i < $amount):
 			switch (mt_rand(0,1))
 			{
-				case 0:	$name_pick = catName(male);	break;
+				case 0:	$name_pick = catName('male');	break;
 				case 1:	$name_pick = catName('');		break;
 			}
 		$listing = $listing . "<br>&nbsp;-&nbsp;" . $name_pick; $i=$i+1; endwhile; $i=0; $listing = $listing . "</p>";
@@ -219,9 +219,9 @@ $n_gnome = $_POST['n_gnome'];
 $n_goblin = $_POST['n_goblin'];
 	if ($n_goblin > 0){$listing = $listing . "<p><u><font size='4'>Goblin Names</font></u>"; while ($i < $amount): $listing = $listing . "<br>&nbsp;-&nbsp;" . goblinName(); $i=$i+1; endwhile; $i=0; $listing = $listing . "</p>";}
 $n_holm_f = $_POST['n_holm_f'];
-	if ($n_holm_f > 0){$listing = $listing . "<p><u><font size='4'>Holmesian Female Names</font></u>"; while ($i < $amount): $listing = $listing . "<br>&nbsp;-&nbsp;" . holmesName(female,0); $i=$i+1; endwhile; $i=0; $listing = $listing . "</p>";}
+	if ($n_holm_f > 0){$listing = $listing . "<p><u><font size='4'>Holmesian Female Names</font></u>"; while ($i < $amount): $listing = $listing . "<br>&nbsp;-&nbsp;" . holmesName('female',0); $i=$i+1; endwhile; $i=0; $listing = $listing . "</p>";}
 $n_holm_m = $_POST['n_holm_m'];
-	if ($n_holm_m > 0){$listing = $listing . "<p><u><font size='4'>Holmesian Male Names</font></u>"; while ($i < $amount): $listing = $listing . "<br>&nbsp;-&nbsp;" . holmesName(male,0); $i=$i+1; endwhile; $i=0; $listing = $listing . "</p>";}
+	if ($n_holm_m > 0){$listing = $listing . "<p><u><font size='4'>Holmesian Male Names</font></u>"; while ($i < $amount): $listing = $listing . "<br>&nbsp;-&nbsp;" . holmesName('male',0); $i=$i+1; endwhile; $i=0; $listing = $listing . "</p>";}
 $n_human_f = $_POST['n_human_f'];
 	if ($n_human_f > 0){$listing = $listing . "<p><u><font size='4'>Human Female Names</font></u>"; while ($i < $amount): $listing = $listing . "<br>&nbsp;-&nbsp;" . humanFemaleName(); $i=$i+1; endwhile; $i=0; $listing = $listing . "</p>";}
 $n_human_m = $_POST['n_human_m'];
@@ -245,17 +245,17 @@ $n_wizard = $_POST['n_wizard'];
 $n_wolf = $_POST['n_wolf'];
 	if ($n_wolf > 0){$listing = $listing . "<p><u><font size='4'>Wolfen Humanoid Names</font></u>"; while ($i < $amount): $listing = $listing . "<br>&nbsp;-&nbsp;" . wolfName(''); $i=$i+1; endwhile; $i=0; $listing = $listing . "</p>";}
 $n_hb_aqm = $_POST['n_hb_aqm'];
-	if ($n_hb_aqm > 0){$listing = $listing . "<p><u><font size='4'>Hyborian Names - Aquilonian - Male</font></u>"; while ($i < $amount): $listing = $listing . "<br>&nbsp;-&nbsp;" . ConanName(Aquilonian,male); $i=$i+1; endwhile; $i=0; $listing = $listing . "</p>";}
+	if ($n_hb_aqm > 0){$listing = $listing . "<p><u><font size='4'>Hyborian Names - Aquilonian - Male</font></u>"; while ($i < $amount): $listing = $listing . "<br>&nbsp;-&nbsp;" . ConanName('Aquilonian','male'); $i=$i+1; endwhile; $i=0; $listing = $listing . "</p>";}
 $n_hb_aqf = $_POST['n_hb_aqf'];
-	if ($n_hb_aqf > 0){$listing = $listing . "<p><u><font size='4'>Hyborian Names - Aquilonian - Female</font></u>"; while ($i < $amount): $listing = $listing . "<br>&nbsp;-&nbsp;" . ConanName(Aquilonian,female); $i=$i+1; endwhile; $i=0; $listing = $listing . "</p>";}
+	if ($n_hb_aqf > 0){$listing = $listing . "<p><u><font size='4'>Hyborian Names - Aquilonian - Female</font></u>"; while ($i < $amount): $listing = $listing . "<br>&nbsp;-&nbsp;" . ConanName('Aquilonian','female'); $i=$i+1; endwhile; $i=0; $listing = $listing . "</p>";}
 $n_hb_cim = $_POST['n_hb_cim'];
-	if ($n_hb_cim > 0){$listing = $listing . "<p><u><font size='4'>Hyborian Names - Cimmerian - Male</font></u>"; while ($i < $amount): $listing = $listing . "<br>&nbsp;-&nbsp;" . ConanName(Cimmerian,male); $i=$i+1; endwhile; $i=0; $listing = $listing . "</p>";}
+	if ($n_hb_cim > 0){$listing = $listing . "<p><u><font size='4'>Hyborian Names - Cimmerian - Male</font></u>"; while ($i < $amount): $listing = $listing . "<br>&nbsp;-&nbsp;" . ConanName('Cimmerian','male'); $i=$i+1; endwhile; $i=0; $listing = $listing . "</p>";}
 $n_hb_cif = $_POST['n_hb_cif'];
-	if ($n_hb_cif > 0){$listing = $listing . "<p><u><font size='4'>Hyborian Names - Cimmerian - Female</font></u>"; while ($i < $amount): $listing = $listing . "<br>&nbsp;-&nbsp;" . ConanName(Cimmerian,female); $i=$i+1; endwhile; $i=0; $listing = $listing . "</p>";}
+	if ($n_hb_cif > 0){$listing = $listing . "<p><u><font size='4'>Hyborian Names - Cimmerian - Female</font></u>"; while ($i < $amount): $listing = $listing . "<br>&nbsp;-&nbsp;" . ConanName('Cimmerian','female'); $i=$i+1; endwhile; $i=0; $listing = $listing . "</p>";}
 $n_hb_stm = $_POST['n_hb_stm'];
-	if ($n_hb_stm > 0){$listing = $listing . "<p><u><font size='4'>Hyborian Names - Stygian - Male</font></u>"; while ($i < $amount): $listing = $listing . "<br>&nbsp;-&nbsp;" . ConanName(Stygian,male); $i=$i+1; endwhile; $i=0; $listing = $listing . "</p>";}
+	if ($n_hb_stm > 0){$listing = $listing . "<p><u><font size='4'>Hyborian Names - Stygian - Male</font></u>"; while ($i < $amount): $listing = $listing . "<br>&nbsp;-&nbsp;" . ConanName('Stygian','male'); $i=$i+1; endwhile; $i=0; $listing = $listing . "</p>";}
 $n_hb_stf = $_POST['n_hb_stf'];
-	if ($n_hb_stf > 0){$listing = $listing . "<p><u><font size='4'>Hyborian Names - Stygian - Female</font></u>"; while ($i < $amount): $listing = $listing . "<br>&nbsp;-&nbsp;" . ConanName(Stygian,female); $i=$i+1; endwhile; $i=0; $listing = $listing . "</p>";}
+	if ($n_hb_stf > 0){$listing = $listing . "<p><u><font size='4'>Hyborian Names - Stygian - Female</font></u>"; while ($i < $amount): $listing = $listing . "<br>&nbsp;-&nbsp;" . ConanName('Stygian','female'); $i=$i+1; endwhile; $i=0; $listing = $listing . "</p>";}
 
 ?>
 <div align="center">

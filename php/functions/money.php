@@ -5,7 +5,7 @@ function PAcurrencyBuilder($level,$size,$where,$cut,$bagged,$money,$map)
 	$coins = mt_rand(1,90);
 
 	if ($size == 1){$coins = mt_rand(1,65);} else if ($size == 2){$coins = mt_rand(1,80);}
-	if (($level + 0) < 1){$level = 1;}
+	if ((num($level)) < 1){$level = 1;}
 	if ($coins < 36){$copper = (500 * $level);}
 	else if ($coins < 66){$copper = (1000 * $level);}
 	else if ($coins < 81){$copper = (2000 * $level);}
@@ -17,8 +17,8 @@ function PAcurrencyBuilder($level,$size,$where,$cut,$bagged,$money,$map)
 
 	if ($bagged == 1)
 	{
-		if (($where != 1) || (mt_rand(1,100) > 70)){$words = "A " . strtoupper(PAbagCreator($map)) . " CONTAINING: ";}
-		else {$words = "A PILE OF " . strtoupper($money) . ": ";}
+		if (($where != 1) || (mt_rand(1,100) > 70)){$words = "A " . strtoupper((string) PAbagCreator($map)) . " CONTAINING: ";}
+		else {$words = "A PILE OF " . strtoupper((string) $money) . ": ";}
 	}
 	$words = $words . "" . number_format($copper) . " " . $money;
 
@@ -30,7 +30,7 @@ function PAcurrencyBuilder($level,$size,$where,$cut,$bagged,$money,$map)
 function currencyBuilder($level,$size,$where,$cut,$bagged,$game)
 {
 	if ($size == 1){$varx = 80;} else if ($size == 2){$varx = 50;} else {$varx = 0;}
-	if (($level + 0) < 1){$level = 1;}
+	if ((num($level)) < 1){$level = 1;}
 	$coins = mt_rand(1,90);
 	if ($coins < 36){$copper = (1500 * $level);}
 	else if ($coins < 66){$copper = (7500 * $level);}
@@ -48,19 +48,19 @@ function currencyBuilder($level,$size,$where,$cut,$bagged,$game)
 	{
 		if ((mt_rand(1,100) > (90-$varx)) && ($game != "Swords & Wizardry") && ($game != "Tunnels & Trolls 5th Edition") 
 																			&& ($game != "Tunnels & Trolls 7th Edition") 
-																			&& ($game != "Tunnels & Trolls Deluxe")){			$pp = 500;	$ppp = floor($copper/$pp);	if ($ppp > 0){$platinum = mt_rand(1,$ppp);}	$copper = $copper - ($platinum * $pp);}
-		   if (mt_rand(1,100) > (70-$varx)){																					$gp = 100;	$gpp = floor($copper/$gp);	if ($gpp > 0){$gold = mt_rand(1,$gpp);}		$copper = $copper - ($gold * $gp);}
+																			&& ($game != "Tunnels & Trolls Deluxe")){			$pp = 500;	$ppp = floor($copper/$pp);	if ($ppp > 0){$platinum = mt_rand(1, max((int)(1), (int)($ppp)));}	$copper = $copper - ($platinum * $pp);}
+		   if (mt_rand(1,100) > (70-$varx)){																					$gp = 100;	$gpp = floor($copper/$gp);	if ($gpp > 0){$gold = mt_rand(1, max((int)(1), (int)($gpp)));}		$copper = $copper - ($gold * $gp);}
 			  if ((mt_rand(1,100) > (60-$varx)) && ($game != "Swords & Wizardry") 
 												&& ($game != "Tunnels & Trolls 5th Edition") 
 												&& ($game != "Tunnels & Trolls 7th Edition") 
-												&& ($game != "Tunnels & Trolls Deluxe")){										$ep = 50;	$epp = floor($copper/$ep);	if ($epp > 0){$electrum = mt_rand(1,$epp);}	$copper = $copper - ($electrum * $ep);}
-				 if (mt_rand(1,100) > (30-$varx)){																				$sp = 20;	$spp = floor($copper/$sp);	if ($spp > 0){$silver = mt_rand(1,$spp);}	$copper = $copper - ($silver * $sp);}
+												&& ($game != "Tunnels & Trolls Deluxe")){										$ep = 50;	$epp = floor($copper/$ep);	if ($epp > 0){$electrum = mt_rand(1, max((int)(1), (int)($epp)));}	$copper = $copper - ($electrum * $ep);}
+				 if (mt_rand(1,100) > (30-$varx)){																				$sp = 20;	$spp = floor($copper/$sp);	if ($spp > 0){$silver = mt_rand(1, max((int)(1), (int)($spp)));}	$copper = $copper - ($silver * $sp);}
 					if ($copper > 0){$copper = $copper;}
 	}
 
 	if ($bagged == 1)
 	{
-		if (($where != 1) || (mt_rand(1,100) > 70)){$words = "A " . strtoupper(bagCreator()) . " CONTAINING: ";}
+		if (($where != 1) || (mt_rand(1,100) > 70)){$words = "A " . strtoupper((string) bagCreator()) . " CONTAINING: ";}
 		else {$words = "A PILE OF COINS CONTAINING: ";}
 	}
 	if ($platinum > 0){$words = $words . "" . number_format($platinum) . "pp&nbsp;/&nbsp;";}
@@ -102,7 +102,7 @@ function coinBuilder($value,$game,$size)
 
 	if ($bagged == 1)
 	{
-		if (($where != 1) || (mt_rand(1,100) > 70)){$words = "A " . strtoupper(bagCreator()) . " CONTAINING: ";}
+		if (($where != 1) || (mt_rand(1,100) > 70)){$words = "A " . strtoupper((string) bagCreator()) . " CONTAINING: ";}
 		else {$words = "A PILE OF COINS CONTAINING: ";}
 	}
 	if ($platinum > 0){$words = $words . "" . number_format($platinum) . "pp&nbsp;/&nbsp;";}

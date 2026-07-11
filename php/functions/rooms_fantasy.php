@@ -20,10 +20,10 @@ function tortureMaker($game,$cut,$type)
 {
 	switch (mt_rand(0,3))
 	{
-		case 0:	$device = "a torture rack made mostly of " . conditionType(wood) . "" . woodenType();	$where = "lying on";	break;
-		case 1:	$device = "an iron maiden made mostly of " . conditionType(iron) . "" . steelMaker();	$where = "inside";		break;
-		case 2:	$device = "a spiked torture chair made mostly of " . conditionType(wood) . "" . woodenType() . " with " . steelMaker() . " spikes on it";	$where = "sitting in";	break;
-		case 3:	$device = "a pillory made mostly of " . conditionType(wood) . "" . woodenType();	$where = "locked in";	break;
+		case 0:	$device = "a torture rack made mostly of " . conditionType('wood') . "" . woodenType();	$where = "lying on";	break;
+		case 1:	$device = "an iron maiden made mostly of " . conditionType('iron') . "" . steelMaker();	$where = "inside";		break;
+		case 2:	$device = "a spiked torture chair made mostly of " . conditionType('wood') . "" . woodenType() . " with " . steelMaker() . " spikes on it";	$where = "sitting in";	break;
+		case 3:	$device = "a pillory made mostly of " . conditionType('wood') . "" . woodenType();	$where = "locked in";	break;
 	}
 	if ($type != 1)
 	{
@@ -55,9 +55,9 @@ function ashMaker($game)
 	}
 	switch (mt_rand(0,8))
 	{
-		case 0:	$value = " with a " . conditionType(iron) . "" . steelMaker() . " helmet lying on top of it";		break;
-		case 1:	$value = " with a " . conditionType(cloth) . "" . $hat . " lying on top of it";	break;
-		case 2:	$value = " with a " . conditionType(iron) . "" . steelMaker() . " shield next to it";			break;
+		case 0:	$value = " with a " . conditionType('iron') . "" . steelMaker() . " helmet lying on top of it";		break;
+		case 1:	$value = " with a " . conditionType('cloth') . "" . $hat . " lying on top of it";	break;
+		case 2:	$value = " with a " . conditionType('iron') . "" . steelMaker() . " shield next to it";			break;
 		case 3:	$value = " with a " . normalWeapons(1,3,$game) . " next to it";							break;
 		case 4:	$value = " with a " . preciousChooser() . " amulet (worth " . mt_rand(2,100) . " " . coinMaker($game) . ") lying on top of it";					break;
 		case 5:	$value = " with a humanoid skull lying on top of it";							break;
@@ -314,7 +314,7 @@ function altarMaker($cut,$game,$extra)
 	{
 		case 0:	$look = "crystal";				break;
 		case 1:	$look = "glass";				break;
-		case 2:	$look = materialType(wood);			break;
+		case 2:	$look = materialType('wood');			break;
 		case 3:	$look = "brass";				break;
 		case 4:	$look = "wood bound with metal";		break;
 		case 5:	$look = "rusted iron";				break;
@@ -331,7 +331,7 @@ function altarMaker($cut,$game,$extra)
 		case 16:$look = "granite";				break;
 	}
 	$deco = "various carvings";
-	$gem = ucwords(gemCreator($cut));
+	$gem = ucwords((string) gemCreator($cut));
 	switch (mt_rand(0,30))
 	{
 		case 0:	$deco = "a gong";						break;
@@ -345,40 +345,40 @@ function altarMaker($cut,$game,$extra)
 		case 8:	$deco = "chains";						break;
 		case 9:	$deco = "ropes";						break;
 		case 10:$deco = mt_rand(2,8) . " " . candleColor(0) . " candles on it";	break;
-		case 11:$deco = "a holy symbol made of " . materialType(iron);		break;
+		case 11:$deco = "a holy symbol made of " . materialType('iron');		break;
 		case 12:$deco = "a small bell";						break;
 		case 13:$deco = "a large bell";						break;
 		case 14:$deco = "a incense bowl";					break;
 		case 15:$deco = "various plants and flowers";				break;
-		case 16:$deco = "covered in " . materialType(leather) . " skins";	break;
+		case 16:$deco = "covered in " . materialType('leather') . " skins";	break;
 		case 17:
-			if (($game == "Tunnels & Trolls 5th Edition") || ($game == "Tunnels & Trolls 7th Edition") || ($game == "Tunnels & Trolls Deluxe")){$deco = "decorated with " . mt_rand(10,50) . " gems " . $gem . " that require a L" . mt_rand(1,5) . "SR vs. " . abilityTranslate($game,STR) . " to pry off each one.";}
+			if (($game == "Tunnels & Trolls 5th Edition") || ($game == "Tunnels & Trolls 7th Edition") || ($game == "Tunnels & Trolls Deluxe")){$deco = "decorated with " . mt_rand(10,50) . " gems " . $gem . " that require a L" . mt_rand(1,5) . "SR vs. " . abilityTranslate($game,'STR') . " to pry off each one.";}
 			else {$deco = "decorated with " . mt_rand(10,50) . " gems " . $gem . " that require a major strength test to pry off each one.";}
 			break;
-		case 18:$deco = "a goblet made of " . materialType(iron);		break;
+		case 18:$deco = "a goblet made of " . materialType('iron');		break;
 		case 19:$deco = "a sacrificial knife";	if (mt_rand(1,100)>80){$deco = $deco . " with dried blood";}	break;
 		case 20:$deco = "the " . corpseMaker(). " " . makeNormalItem(5,3,1,$game,$cut,0);	break;
 	}
 	$effect = "";
-	$trap = trapMaker(mt_rand(1,20),idol,$game,$extra,0);
+	$trap = trapMaker(mt_rand(1,20),'idol',$game,$extra,0);
 	switch (mt_rand(0,20))
 	{
 		case 0:	$effect = "..grants good luck to anyone who gives an offering...giving them a 1 bonus to die rolls [lasts for a single day].";		break;
 		case 1:	$effect = "..causes anyone that touches it to become " . $chg . ".";									break;
-		case 2: $effect = "..it is cursed where the " . curseType(mt_rand(1,20),toucher,item,$game) . ".";							break;
+		case 2: $effect = "..it is cursed where the " . curseType(mt_rand(1,20),'toucher','item',$game) . ".";							break;
 		case 3:	$effect = "..any food or water placed on it will be purified.";										break;
 		case 4:	$effect = "..any magic items set on it will be disenchanted.";										break;
 		case 5:	$effect = "..any magic items set on it needing charges will be recharged.";								break;
 		case 6:	$effect = "..any metal items set on it turn to gold.";											break;
 		case 7:	$effect = "..touching it triggers a trap [" . $trap[0] . "].";							break;
 		case 8:	$effect = "..anyone examing it will find a hidden opening with " . currencyBuilder(mt_rand(3,10),1,1,$cut,1,$game) . ".";				break;
-		case 9: $effect = "..any container of water placed on it will be turned into a type " . strtolower(makeMagicItem(mt_rand(1,5),0,1,$game,$extra,$cut)) . ".";	break;
+		case 9: $effect = "..any container of water placed on it will be turned into a type " . strtolower((string) makeMagicItem(mt_rand(1,5),0,1,$game,$extra,$cut)) . ".";	break;
 		case 10:$effect = "..will resurrect the recently dead once per " . timesMaker() .".";								break;
 		case 11:
 				if (($game == "Swords & Six-Siders") || ($game == "Tunnels & Trolls 5th Edition") || ($game == "Tunnels & Trolls 7th Edition") || ($game == "Tunnels & Trolls Deluxe")){$effect = "..anyone who touches it experiences great pain where they suffer " . mt_rand(1,4) . "d6 damage.";}
 				else {$effect = "..anyone who touches it experiences great pain where they suffer " . mt_rand(1,4) . "d" . (2*mt_rand(2,6)) ." damage.";}
 			break;
-		case 12:$effect = "..causes a curse if touched where the " . curseType(mt_rand(1,20),toucher,item,$game) . ".";					break;
+		case 12:$effect = "..causes a curse if touched where the " . curseType(mt_rand(1,20),'toucher','item',$game) . ".";					break;
 	}
 	return "made of " . $look . " and has " . $deco . " on it." . $effect;
 }
@@ -440,12 +440,12 @@ function circleMaker($cut,$game,$extra)
 		case 8: $deco = "animal bones among it.";						break;
 		case 9: $deco = "a couple of chains connected to the floor.";				break;
 		case 10:$deco = "a incense bowl in the center.";					break;
-		case 11:$deco = "a bowl made of " . materialType(iron) . " lying in the middle.";	break;
+		case 11:$deco = "a bowl made of " . materialType('iron') . " lying in the middle.";	break;
 		case 12:$deco = "various plants and flowers scattered around it.";			break;
 		case 13:$deco = "a sacrificial knife";	if (mt_rand(1,100)>80){$deco = $deco . " with dried blood among it.";}	break;
 	}
 	$effect = "";
-	$trap = trapMaker(mt_rand(1,20),circle,$game,$extra,0);
+	$trap = trapMaker(mt_rand(1,20),'circle',$game,$extra,0);
 	switch (mt_rand(0,20))
 	{
 		case 0:	$effect = "..anyone that enters the shape and speaks the proper magic word will be teleported to another location.";		$words = 1;	break;
@@ -458,7 +458,7 @@ function circleMaker($cut,$game,$extra)
 		case 7:	$effect = "..speaking the magic word produces a cloud of " . fogColor() . " smoke that will " . $vision . ".";			$words = 1;	break;
 		case 8: $effect = "..speaking the magic word will summon a demon that will do one task for the summoner before leaving this plane.";	$words = 1;	break;
 		case 9: $effect = "..any magic item put in it will be identified by a demonic voice if one speaks the magic word.";			$words = 1;	break;
-		case 10:$effect = "..anyone that enters the shape is cursed where the " . curseType(mt_rand(1,20),trespasser,item,$game) . ". The curse can be removed if one speaks the magic word.";	$words = 1;	break;
+		case 10:$effect = "..anyone that enters the shape is cursed where the " . curseType(mt_rand(1,20),'trespasser','item',$game) . ". The curse can be removed if one speaks the magic word.";	$words = 1;	break;
 		case 11:$effect = "..anyone that enters the shape suffers " . mt_rand(1,4) . "d" . (2*mt_rand(2,6)) ." damage.";					break;
 	}
 	if ($words == 1)
@@ -470,24 +470,24 @@ function circleMaker($cut,$game,$extra)
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
 function idolMaker($small,$large,$magic,$cut,$game,$extra)
 {
-	$height = mt_rand($small,$large);
-	$gem = ucwords(gemCreator($cut));
+	$height = mt_rand($small, max((int)($small), (int)($large)));
+	$gem = ucwords((string) gemCreator($cut));
 
 	$statue = statueMake();
 
-	$carve = array('Angel', 'Ant', 'Ape', 'Badger', 'Basilisk', 'Bat', 'Bear', 'Beetle', 'Boar', 'Buffalo', 'Bull', 'Cat', 'Centaur', 'Cerberus', 'Cheetah', 'Chimera', 'Cobra', 'Crab', 'Cricket', 'Crocodile', 'Cyclops', 'Demon', 'Devil', 'Dog', 'Dolphin', 'Dragon', 'Dwarf', 'Eagle', 'Elephant', 'Elf', 'Ettin', 'Falcon', 'Fish', 'Frog', 'Gargoyle', 'Giant', 'Gnome', 'Goat', 'Griffin', 'Harpy', 'Hawk', 'Hippogriff', 'Hippopotamus', 'Hobbit', 'Horse', 'Human', 'Hydra', 'Jaguar', 'Kelpie', 'Leopard', 'Leprechaun', 'Lion', 'Lizard', 'Mammoth', 'Manticore', 'Medusa', 'Minotaur', 'Monkey', 'Ogre', 'Otter', 'Owl', 'Pegasus', 'Pixie', 'Ram', 'Rat', 'Rhinoceros', 'Satyr', 'Scorpion', 'Snake', 'Spider', 'Squirrel', 'Stag', 'Succubus', 'Tiger', 'Titan', 'Toad', 'Troll', 'Turtle', 'Unicorn', 'Weasel', 'Whale', 'Wolf ', 'Wolverine', 'Worm', 'Wyrm', 'Wyvern');
+	$carve = ['Angel', 'Ant', 'Ape', 'Badger', 'Basilisk', 'Bat', 'Bear', 'Beetle', 'Boar', 'Buffalo', 'Bull', 'Cat', 'Centaur', 'Cerberus', 'Cheetah', 'Chimera', 'Cobra', 'Crab', 'Cricket', 'Crocodile', 'Cyclops', 'Demon', 'Devil', 'Dog', 'Dolphin', 'Dragon', 'Dwarf', 'Eagle', 'Elephant', 'Elf', 'Ettin', 'Falcon', 'Fish', 'Frog', 'Gargoyle', 'Giant', 'Gnome', 'Goat', 'Griffin', 'Harpy', 'Hawk', 'Hippogriff', 'Hippopotamus', 'Hobbit', 'Horse', 'Human', 'Hydra', 'Jaguar', 'Kelpie', 'Leopard', 'Leprechaun', 'Lion', 'Lizard', 'Mammoth', 'Manticore', 'Medusa', 'Minotaur', 'Monkey', 'Ogre', 'Otter', 'Owl', 'Pegasus', 'Pixie', 'Ram', 'Rat', 'Rhinoceros', 'Satyr', 'Scorpion', 'Snake', 'Spider', 'Squirrel', 'Stag', 'Succubus', 'Tiger', 'Titan', 'Toad', 'Troll', 'Turtle', 'Unicorn', 'Weasel', 'Whale', 'Wolf ', 'Wolverine', 'Worm', 'Wyrm', 'Wyvern'];
 	$carve = $carve[mt_rand(0,85)];
 	$effect = "";
-	$trap = trapMaker(mt_rand(1,20),idol,$game,$extra,0);
+	$trap = trapMaker(mt_rand(1,20),'idol',$game,$extra,0);
 	if ($magic == 1)
 	{
 	    switch (mt_rand(0,20))
 	    {
 		case 0:	$effect = "..grants good luck to anyone who touches it giving them a 1 bonus to die rolls [lasts for a single day].";				break;
 		case 1:	$effect = "..contains an intelligent spirit that will attempt to answer " . mt_rand(2,6) . " questions about the area in return for a favor.";	break;
-		case 2: $effect = "..it is cursed where the " . curseType(mt_rand(1,20),toucher,item,$game) . ".";								break;
+		case 2: $effect = "..it is cursed where the " . curseType(mt_rand(1,20),'toucher','item',$game) . ".";								break;
 		case 3:
-				if (($game == "Tunnels & Trolls 5th Edition") || ($game == "Tunnels & Trolls 7th Edition") || ($game == "Tunnels & Trolls Deluxe")){$effect = "..anyone who touches will be bitten by it and killed unless they can make a L" . mt_rand(1,5) . "SR vs " . abilityTranslate($game,LCK) . " or " . abilityTranslate($game,CON) . ".";}
+				if (($game == "Tunnels & Trolls 5th Edition") || ($game == "Tunnels & Trolls 7th Edition") || ($game == "Tunnels & Trolls Deluxe")){$effect = "..anyone who touches will be bitten by it and killed unless they can make a L" . mt_rand(1,5) . "SR vs " . abilityTranslate($game,'LCK') . " or " . abilityTranslate($game,'CON') . ".";}
 				else {$effect = "..anyone who touches will be bitten by it and killed unless they can save for poison.";}
 			break;
 		case 4:	$effect = "..any magic items that touch it will be disenchanted.";										break;
@@ -495,7 +495,7 @@ function idolMaker($small,$large,$magic,$cut,$game,$extra)
 		case 6:	$effect = "..it points toward a secret door, clue, or treasure.";										break;
 		case 7:	$effect = "..touching it triggers a trap [" . $trap[0] . "].";								break;
 		case 8:	$effect = "..anyone examing it will find a hidden opening with " . currencyBuilder(mt_rand(3,10),1,1,$cut,1,$game) . ".";					break;
-		case 9: $effect = "..anyone who touches it will notice it is dispensing a liquid " . strtolower(makeMagicItem(mt_rand(1,5),0,1,$game,$extra,$cut)) . " out of the mouth.";		break;
+		case 9: $effect = "..anyone who touches it will notice it is dispensing a liquid " . strtolower((string) makeMagicItem(mt_rand(1,5),0,1,$game,$extra,$cut)) . " out of the mouth.";		break;
 		case 10:$effect = "..contains an intelligent spirit that will identify magic items in return for a favor.";						break;
 		case 11:
 				if (($game == "Swords & Six-Siders") || ($game == "Tunnels & Trolls 5th Edition") || ($game == "Tunnels & Trolls 7th Edition") || ($game == "Tunnels & Trolls Deluxe")){$effect = "..anyone who touches it experiences great pain where they suffer " . mt_rand(1,4) . "d6 damage.";}
@@ -511,10 +511,10 @@ function idolMaker($small,$large,$magic,$cut,$game,$extra)
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
 function mouthMaker($cut,$room_min,$room_max,$game,$extra)
 {
-	$job = array('wizard', 'mage', 'sage', 'magician', 'priest', 'conjurer', 'medium', 'necromancer', 'shaman', 'seer', 'occultist');
+	$job = ['wizard', 'mage', 'sage', 'magician', 'priest', 'conjurer', 'medium', 'necromancer', 'shaman', 'seer', 'occultist'];
 	$job = ucfirst($job[mt_rand(0,10)]);
 
-	$room = mt_rand($room_min,$room_max);
+	$room = mt_rand($room_min, max((int)($room_min), (int)($room_max)));
 
 	if (mt_rand(1,2) == 1){$gender = "her";} else {$gender = "him";}
 
@@ -545,7 +545,7 @@ function mouthMaker($cut,$room_min,$room_max,$game,$extra)
 	else
 	{
 		if (mt_rand(1,2) == 1){$itum = "a magic item";} else {$itum = "some coins";}
-		$trap = trapMaker(mt_rand(1,20),room,$game,$extra,0); $found = "It is really a trick that springs a trap. " . $trap[0];
+		$trap = trapMaker(mt_rand(1,20),'room',$game,$extra,0); $found = "It is really a trick that springs a trap. " . $trap[0];
 	}
 
 	switch (mt_rand(0,13))
@@ -608,7 +608,7 @@ function fountainMaker($cut,$game,$extra)
 		case 0:	$contents = "is filled with a clear liquid";					$props = 1;		break;
 		case 1:	$contents = "is filled with blood";						$props = 1;		break;
 		case 2:	$contents = "is filled with blood and bones";					$props = 1;		break;
-		case 3:	$contents = "is full " . strtolower(makeMagicItem(mt_rand(1,5),0,1,$game,$extra,$cut));					break;
+		case 3:	$contents = "is full " . strtolower((string) makeMagicItem(mt_rand(1,5),0,1,$game,$extra,$cut));					break;
 		case 4:	$contents = "is filled with " . slimeColor() . " slime";			$props = 1;		break;
 		case 5:	$contents = "is filled with " . slimeColor() . " oil";				$props = 1;		break;
 		case 6:	$contents = "is filled with an odd " . slimeColor() . " liquid";		$props = 1;		break;
@@ -628,7 +628,7 @@ function fountainMaker($cut,$game,$extra)
 		case 1:	$effect = "..contains an elemental type creature that will emerge and attack.";				break;
 		case 2:	$effect = "..contains an intelligent spirit that will attempt to answer " . mt_rand(2,6) . " questions about the area.";				break;
 		case 3:
-				if (($game == "Tunnels & Trolls 5th Edition") || ($game == "Tunnels & Trolls 7th Edition") || ($game == "Tunnels & Trolls Deluxe")){$effect = "..anyone who drinks it will be killed unless they can make a L" . mt_rand(1,5) . "SR vs " . abilityTranslate($game,LCK) . " or " . abilityTranslate($game,CON) . ".";}
+				if (($game == "Tunnels & Trolls 5th Edition") || ($game == "Tunnels & Trolls 7th Edition") || ($game == "Tunnels & Trolls Deluxe")){$effect = "..anyone who drinks it will be killed unless they can make a L" . mt_rand(1,5) . "SR vs " . abilityTranslate($game,'LCK') . " or " . abilityTranslate($game,'CON') . ".";}
 				else {$effect = "..anyone who drinks it will be killed unless they can save for poison.";}
 			break;
 		case 4:	$effect = "..anything that gets put in it will be eaten away by a powerful acid.";			break;
@@ -639,7 +639,7 @@ function fountainMaker($cut,$game,$extra)
 		case 9:	$effect = "..anyone looking in it can see various places in the area.";					break;
 		case 10:$effect = "..anyone looking in it can see the past for the area.";					break;
 		case 11:$effect = "..any magic item put in it will be identified by a haunting voice.";				break;
-		case 12:$effect = "..liquid is cursed where the " . curseType(mt_rand(1,20),$doit,item,$game) . ".";			break;
+		case 12:$effect = "..liquid is cursed where the " . curseType(mt_rand(1,20),$doit,'item',$game) . ".";			break;
 		case 13:$effect = "..liquid is painful where the " . $doit . " suffers " . mt_rand(1,4) . "d" . (2*mt_rand(2,6)) ." damage.";					break;
 		case 14:$effect = "..liquid is healing where the " . $doit . " is fully refreshed and healed.";			break;
 		case 15:$effect = "..liquid is medicinal where the " . $doit . " fully recovers from disease and poisons.";	break;
@@ -695,7 +695,7 @@ function cauldronMaker($game,$extra,$cut)
 		case 3:	$pot = "full of blood";						break;
 		case 4:	$pot = "full of blood and bones";				break;
 		case 5:	$pot = "full of bones";						break;
-		case 6:	$pot = "full " . strtolower(makeMagicItem(mt_rand(1,5),0,1,$game,$extra,$cut));	break;
+		case 6:	$pot = "full " . strtolower((string) makeMagicItem(mt_rand(1,5),0,1,$game,$extra,$cut));	break;
 	}
 	if ($make = "broken"){$pot = "";}
 	return $make . " cauldron " . $pot;
@@ -703,7 +703,7 @@ function cauldronMaker($game,$extra,$cut)
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
 function figureMaker()
 {
-	$figure = array('ape', 'badger', 'bat', 'bear', 'beaver', 'bird', 'boar', 'buffalo', 'bull', 'camel', 'cat', 'cheetah', 'crab', 'dog', 'dolphin', 'eagle', 'elephant', 'falcon', 'frog', 'goat', 'gorilla', 'hawk', 'hippopotamus', 'horse', 'hyena', 'jackal', 'jaguar', 'leopard', 'lion', 'mammoth', 'mule', 'otter', 'owl', 'pony', 'ram', 'rat', 'rhinoceros', 'squirrel', 'stag', 'tiger', 'toad', 'turtle', 'vulture', 'weasel', 'whale', 'wolf', 'wolverine');
+	$figure = ['ape', 'badger', 'bat', 'bear', 'beaver', 'bird', 'boar', 'buffalo', 'bull', 'camel', 'cat', 'cheetah', 'crab', 'dog', 'dolphin', 'eagle', 'elephant', 'falcon', 'frog', 'goat', 'gorilla', 'hawk', 'hippopotamus', 'horse', 'hyena', 'jackal', 'jaguar', 'leopard', 'lion', 'mammoth', 'mule', 'otter', 'owl', 'pony', 'ram', 'rat', 'rhinoceros', 'squirrel', 'stag', 'tiger', 'toad', 'turtle', 'vulture', 'weasel', 'whale', 'wolf', 'wolverine'];
 	return $figure[mt_rand(0,46)];
 }
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -728,7 +728,7 @@ function kegFiller($item,$game,$extra,$cut)
 	else if ($filler < 75){$contents = " of ale";}
 	else if ($filler < 90){$contents = " of wine";}
 	else if ($filler < 95){$contents = " of contaminated water";}
-	else {$contents = " " . strtolower(makeMagicItem(mt_rand(1,5),0,1,$game,$extra,$cut));}
+	else {$contents = " " . strtolower((string) makeMagicItem(mt_rand(1,5),0,1,$game,$extra,$cut));}
 
 	return $fill . " " . $item . "" . $contents;
 }
@@ -781,12 +781,12 @@ function cageMaker()
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
 function carpetMaker($condition)
 {
-	$size = array('small', 'large', 'medium-sized');	$size = $size[mt_rand(0,2)];
-	$shape = array('square', 'rectangular', 'round');	$shape = $shape[mt_rand(0,2)];
-	$name = array('rug', 'carpet');				$name = $name[mt_rand(0,1)];
+	$size = ['small', 'large', 'medium-sized'];	$size = $size[mt_rand(0,2)];
+	$shape = ['square', 'rectangular', 'round'];	$shape = $shape[mt_rand(0,2)];
+	$name = ['rug', 'carpet'];				$name = $name[mt_rand(0,1)];
 
 	if (mt_rand(1,100) > 50){$design = " with a dark " . candleColor(1) . " design on it";}
-	if ($condition == 1){$look = array(' worn', ' ruined', ' badly worn', ' rotten', ' moldy', ' torn', ' wet', '', '');	$look = $look[mt_rand(0,8)];}
+	if ($condition == 1){$look = [' worn', ' ruined', ' badly worn', ' rotten', ' moldy', ' torn', ' wet', '', ''];	$look = $look[mt_rand(0,8)];}
 
 	if ($condition == 2){$rug = $size . "" . $look . " " . candleColor(0) . " " . $name . "" . $design;}
 	else {$rug = "a " . $size . "" . $look . " " . candleColor(0) . " " . $name . "" . $design;}
@@ -796,7 +796,7 @@ function carpetMaker($condition)
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
 function headMount()
 {
-	$mount = array('bear', 'lion', 'tiger', 'deer', 'boar', 'tiger', 'polar bear', 'dragon', 'ogre', 'giant', 'cougar', 'grizzly bear', 'deer', 'elk', 'moose', 'antelope');
+	$mount = ['bear', 'lion', 'tiger', 'deer', 'boar', 'tiger', 'polar bear', 'dragon', 'ogre', 'giant', 'cougar', 'grizzly bear', 'deer', 'elk', 'moose', 'antelope'];
 	$mounted = $mount[mt_rand(0,15)];
 
 	if ($mounted == "dragon")
@@ -821,7 +821,7 @@ function headMount()
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
 function furnitureMake()
 {
-	$make = array('wooden', 'stone', 'oak', 'granite', 'marble', 'iron', 'steel', 'maple', 'broken wood', 'broken stone', 'rotting wood', 'warped wood', 'crumbling stone', 'cracked granite', 'ruined wood', 'rusty iron');
+	$make = ['wooden', 'stone', 'oak', 'granite', 'marble', 'iron', 'steel', 'maple', 'broken wood', 'broken stone', 'rotting wood', 'warped wood', 'crumbling stone', 'cracked granite', 'ruined wood', 'rusty iron'];
 	return $make[mt_rand(0,15)];
 }
 ?>
