@@ -179,7 +179,10 @@ if ($process_4 > 0)
 
 				$x_val_treasure = str_replace("'", " feet", $x_treasure[0]);
 				$x_val_treasure = str_replace('"', ' inches', $x_val_treasure);
-				$qry_treasure = "INSERT INTO $gable_treasure VALUES ('$x_val_treasure', '$x_treasure[1]', '0', '$x_treasure[2]')";
+				$x_val_treasure = mysqli_real_escape_string($connection, $x_val_treasure);
+				$x_val_chance   = mysqli_real_escape_string($connection, $x_treasure[1]);
+				$x_val_sublist  = mysqli_real_escape_string($connection, $x_treasure[2]);
+				$qry_treasure   = "INSERT INTO $gable_treasure VALUES ('$x_val_treasure', '$x_val_chance', '0', '$x_val_sublist')";
 				mysqli_query( $connection, $qry_treasure ); /* qry_treasure. */
 
 				$cycle = $cycle - 1;
@@ -221,7 +224,10 @@ if ($process_4 > 0)
                 $val_1 = trim($x_treasure[1]) === '' ? 0 : $x_treasure[1];
                 $val_2 = trim($x_treasure[2]) === '' ? 0 : $x_treasure[2];
 
-                $qry_treasure = "INSERT INTO $gable_treasure VALUES ('$x_val_treasure', '$val_1', '$loot_listing', '$val_2')";
+                $x_val_treasure = mysqli_real_escape_string($connection, $x_val_treasure);
+                $x_val_chance   = mysqli_real_escape_string($connection, $x_treasure[1]);
+                $x_val_sublist  = mysqli_real_escape_string($connection, $x_treasure[2]);
+                $qry_treasure   = "INSERT INTO $gable_treasure VALUES ('$x_val_treasure', '$x_val_chance', '0', '$x_val_sublist')";
                 mysqli_query( $connection, $qry_treasure ); /* qry_treasure. */
 
 			}

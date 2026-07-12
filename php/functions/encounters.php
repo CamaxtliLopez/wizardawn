@@ -115,7 +115,7 @@ function calculateLife($level,$heroes,$m_app_min,$m_app_max,$m_hp_min,$m_hp_max,
 		if ($heroes < 1){$heroes = mt_rand(4,8);}							// IF NO HEROES...SET A NUMBER
 		$character_life = (6 * $level) * $heroes;							// (6 x 3) x 5 = 120hp
 		$monster_life = $m_hp_max;											// 				   8hp
-		$monsters_here = round($character_life / $monster_life);			//	120hp / 8hp = 15 monsters
+		$monsters_here = ($monster_life > 0) ? round($character_life / $monster_life) : 0;			//	120hp / 8hp = 15 monsters
 			if ($monster_life < 1){$monsters_here = 1;}						// FOR THE MOLDS AND PHANTOMS
 
             if ($monsters_here > $m_app_max){$monsters_here = $m_app_max;}
@@ -154,7 +154,7 @@ function calculateLife($level,$heroes,$m_app_min,$m_app_max,$m_hp_min,$m_hp_max,
 		if ($heroes < 1){$heroes = mt_rand(4,8);}							// IF NO HEROES...SET A NUMBER
 		$character_life = (6 * $level) * $heroes;							// (6 x 3) x 5 = 120hp
 		$monster_life = $m_hp_max;											// 				   8hp
-		$monsters_here = round($character_life / $monster_life);			//	120hp / 8hp = 15 monsters
+		$monsters_here = ($monster_life > 0) ? round($character_life / $monster_life) : 0;			//	120hp / 8hp = 15 monsters
 			if ($monster_life < 1){$monsters_here = 1;}						// FOR THE MOLDS AND PHANTOMS
 			if ($monsters_here > $m_app_max){$monsters_here = $m_app_max;}
 
@@ -189,7 +189,7 @@ function calculateLife($level,$heroes,$m_app_min,$m_app_max,$m_hp_min,$m_hp_max,
 		if ($heroes < 1){$heroes = mt_rand(4,8);}							// IF NO HEROES...SET A NUMBER
 		$character_life = (6 * $level) * $heroes;							// (6 x 3) x 5 = 120hp
 		$monster_life = ($monster_hit_dice * $m_hp_max) + $m_hp_mod;		// 				   8hp
-		$monsters_here = round($character_life / $monster_life);			//	120hp / 8hp = 15 monsters
+		$monsters_here = ($monster_life > 0) ? round($character_life / $monster_life) : 0;			//	120hp / 8hp = 15 monsters
 			if ($monster_life < 1){$monsters_here = 1;}						// FOR THE MOLDS AND PHANTOMS
 			if ($monsters_here > $m_app_max){$monsters_here = $m_app_max;}
 

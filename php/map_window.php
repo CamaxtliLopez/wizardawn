@@ -12,6 +12,7 @@ $color = $_GET['cl'];
 $map_wide = $_GET['mw'];
 $map_high = $_GET['mh'];
 
+$code = mysqli_real_escape_string($connection, $code);
 $qry = mysqli_query( $connection, "SELECT * FROM maps_created WHERE mc_code='$code'");
 $num = mysqli_num_rows($qry);
 $ary = mysqli_fetch_assoc($qry);
