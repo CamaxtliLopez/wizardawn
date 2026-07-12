@@ -1,5 +1,3 @@
-<html>
-<head>
-<meta http-equiv="REFRESH" content="0; URL=http:../">
-</head>
-</html>
+<?php
+header("Location: ../", true, 302);
+exit;
