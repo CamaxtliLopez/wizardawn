@@ -13,14 +13,14 @@ $database = 'wizardawn';       // the database name you imported the SQL dump in
 
 // Host (and optional port) portion of the site URL, used by some pages/links.
 // e.g. 'www.example.com'
-$webdir = 'localhost:808';
+$webdir = 'localhost:8000';
 
 // Public base URL of the site (used to build links). No trailing behaviour changes;
 // set this to your live domain, e.g. 'https://www.example.com/'
 $webadd = 'http://' . $webdir . '/';
 
 // Base URL used for license/notice pages
-$webnot = 'http://localhost:808/lic/';
+$webnot = 'http://localhost:8000/lic/';
 
 // Filesystem path to htdocs (kept for backward compatibility with existing code)
 $webfld = __DIR__ . '/';
